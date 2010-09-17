@@ -10,6 +10,7 @@
 #      make install  - will copy sym links to user directory
 #      make bashrc   - will add the source command to the end
 #                      of your .bashrc file (only do this once!)
+#      make apt      - will install the packages listed in apt.sh
 #
 ###################################################################
 
@@ -28,9 +29,9 @@ LNK_FILES += vimoutlinerrc
 LNK_FILES += screenrc
 LNK_FILES += bashrc.public
 LNK_FILES += gitconfig
-LNK_FILES += rtorrent.rc
-LNK_FILES += irssi
-LNK_FILES += snownews
+#LNK_FILES += rtorrent.rc
+#LNK_FILES += irssi
+#LNK_FILES += snownews
 
 # Files to copy
 CP_FILES += bashrc.private
@@ -79,8 +80,6 @@ install: $(DOT_LNK_FILES) $(DOT_CP_FILES) bashrc
 		fi ; \
 	done
 
-
-
 # Add entry to ~/.bashrc
 #
 .PHONY: bashrc
@@ -99,4 +98,10 @@ bashrc: bashrc.include Makefile
 clean:
 	rm -f $(DOT_LNK_FILES)
 	rm -f $(DOT_CP_FILES)
+
+# Install all aptitude packages
+#
+.PHONY: apt
+apt:
+	sudo sh apt.sh
 
