@@ -1,10 +1,6 @@
-#!/bin/bash
 #
-# List of aptitude commands that will be issued when this script runs.
-
-# First update, then upgrade
-#aptitude update
-#aptitude safe-upgrade
+# List of packages that will be installed in response to setup.py
+#
 
 # Obvious packages
 gimp
