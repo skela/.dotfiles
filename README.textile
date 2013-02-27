@@ -1,1 +1,4 @@
-Config files and initial setup for fresh machines! :D
+Config files and initial setup for fresh machines!
+Just run the setup.sh file ;)
+
+
