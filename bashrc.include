@@ -1,5 +1,0 @@
-
-# Source custom bash profile
-if [ -f ~/.bashrc.public ]; then
-    source ~/.bashrc.public
-fi
