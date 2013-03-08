@@ -1,0 +1,9 @@
+[user]
+	name = Alek Slater
+	email = slayte@gmail.com
+
+[color]
+        branch = auto
+        diff = auto
+        interactive = auto
+        status = auto

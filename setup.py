@@ -20,6 +20,13 @@ def install_package_manager():
     if sys.platform == "darwin":
         install_brew()
 
+def linkup(filename):
+    #os.system('ln -s ~/.dotfiles/bash_profile ~/.bash_profile')
+    src = '~/.dotfiles/'+filename
+    dst = '~/.'+filename
+    cmd = 'ln -s ' +src + ' ' + dst
+    os.system(cmd)
+
 def has_app(app): # app = "brew"
     try: 
         ret = subprocess.check_output(app)
@@ -36,9 +43,10 @@ def install_brew():
         os.system(brew_cmd)
     else:
         log("skipping instalation of brew [Already Installed]")
-    
-# Link up bash_profile
-os.system('ln -s ~/.dotfiles/bash_profile ~/.bash_profile')
+
+# Link up files
+linkup('bash_profile')
+linkup('gitconfig')
 
 install_package_manager()
 
