@@ -20,6 +20,9 @@ def install_package_manager():
     if sys.platform == "darwin":
         install_brew()
 
+def install_packages(packages):
+    print 'TODO: Fill in this function (install_packages)'
+
 def linkup(filename):
     #os.system('ln -s ~/.dotfiles/bash_profile ~/.bash_profile')
     src = '~/.dotfiles/'+filename
@@ -51,5 +54,13 @@ linkup('screenrc')
 
 install_package_manager()
 
-#packages = get_packages()
-#print packages
+packages = get_packages()
+print packages
+
+r = raw_input("Would you like to install these packages? (y/n)")
+if r == 'y':
+    install_packages(packages)
+elif r == 'n':
+    print 'Ok, as you wish'
+else:
+    print 'Err... ok ? (Unknown input)'
