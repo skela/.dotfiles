@@ -3,8 +3,15 @@ import os
 import sys
 import subprocess
 
+# Future Proofing
+
 def log(msg):
     print msg
+
+def get_input(msg):
+    return raw_input(msg)
+
+# Packages
 
 def get_packages():
     f = open('packages.list')
@@ -21,7 +28,9 @@ def install_package_manager():
         install_brew()
 
 def install_packages(packages):
-    print 'TODO: Fill in this function (install_packages)'
+    log('TODO: Fill in this function (install_packages)')
+
+# Utils
 
 def linkup(filename):
     #os.system('ln -s ~/.dotfiles/bash_profile ~/.bash_profile')
@@ -52,12 +61,11 @@ linkup('bash_profile')
 linkup('gitconfig')
 linkup('screenrc')
 
+# Packages
 install_package_manager()
-
 packages = get_packages()
-print packages
-
-r = raw_input("Would you like to install these packages? (y/n)")
+log(str(packages))
+r = get_input("Would you like to install these packages? (y/n)")
 if r == 'y':
     install_packages(packages)
 elif r == 'n':
