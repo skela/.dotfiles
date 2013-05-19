@@ -47,6 +47,7 @@ def install_brew():
 # Link up files
 linkup('bash_profile')
 linkup('gitconfig')
+linkup('screenrc')
 
 install_package_manager()
 

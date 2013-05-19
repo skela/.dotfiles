@@ -16,6 +16,13 @@ alias simple_web_service="sh ~/Dropbox/Scripts/simple_web_service.sh"
 
 alias gitch="git diff > ~/Desktop/gitch ; mate ~/Desktop/gitch"
 
+alias yt="youtube-dl"
+
+alias vlc='/Applications/VLC.app/Contents/MacOS/VLC -I rc'
+
+alias mine1="sh ~/Applications/DiabloMiner/DiabloMiner-OSX.sh --url http://skela_worker1:2vf8IYjhaBa2uJ@us2.eclipsemc.com:8337/ -w 64";
+alias mine2="sh ~/Applications/DiabloMiner/DiabloMiner-OSX.sh --url http://skela_worker2:sUTD4b2oYFSxa6@us2.eclipsemc.com:8337/ -w 64";
+
 function ff { osascript -e 'tell application "Finder"'\
  -e "if (${1-1} <= (count Finder windows)) then"\
  -e "get POSIX path of (target of window ${1-1} as alias)"\
@@ -32,3 +39,4 @@ function cdff { cd "`ff $@`"; };
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # Finished adapting your PATH environment variable for use with MacPorts.
 
+export PATH=$PATH:/Users/skela/Applications/Play
