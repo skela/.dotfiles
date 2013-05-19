@@ -11,6 +11,8 @@ def log(msg):
 def get_input(msg):
     return raw_input(msg)
 
+package_managers = ["apt-get","yum"]
+
 # Packages
 
 def get_packages():
@@ -24,16 +26,30 @@ def get_packages():
     return packages
 
 def install_package_manager():
-    if sys.platform == "darwin":
+    p = sys.platform
+    if p == "darwin":
+        # TODO: Replace brew with macports
         install_brew()
+    if p == "linux2" or p == "linux":
+        check_package_managers()
+    if p == "win32" or p == "win64":
+        log("The F***?")
 
-def install_packages(packages):
-    log('TODO: Fill in this function (install_packages)')
+def install_packages():
+    install_package_manager()
+    packages = get_packages()
+    log(str(packages))
+    r = get_input("Would you like to install these packages? (y/n) ")
+    if r == 'y':
+        log('TODO: Fill in this function (install_packages)')
+    elif r == 'n':
+        log('Ok, as you wish')
+    else:
+        log('Err... ok ? (Unknown input)')
 
 # Utils
 
 def linkup(filename,destfilename=None):
-    #os.system('ln -s ~/.dotfiles/bash_profile ~/.bash_profile')
     dstname = filename
     if destfilename is not None:
         dstname = destfilename
@@ -59,6 +75,16 @@ def install_brew():
     else:
         log("skipping instalation of brew [Already Installed]")
 
+def check_package_managers():
+    for pm in package_managers:
+        if has_app(pm):
+            log("This system has " + pm + " installed.")
+            return
+    log("Warning, failed to identify the package manager for this system.")
+
+# Check arguments
+should_install_packages = 'install' in sys.argv
+
 # Link up files
 linkup('bash_profile')
 linkup('bash_profile','bashrc')
@@ -66,13 +92,5 @@ linkup('gitconfig')
 linkup('screenrc')
 
 # Packages
-install_package_manager()
-packages = get_packages()
-log(str(packages))
-r = get_input("Would you like to install these packages? (y/n)")
-if r == 'y':
-    install_packages(packages)
-elif r == 'n':
-    print 'Ok, as you wish'
-else:
-    print 'Err... ok ? (Unknown input)'
+if should_install_packages:
+    install_packages()
