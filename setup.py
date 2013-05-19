@@ -32,10 +32,13 @@ def install_packages(packages):
 
 # Utils
 
-def linkup(filename):
+def linkup(filename,destfilename=None):
     #os.system('ln -s ~/.dotfiles/bash_profile ~/.bash_profile')
+    dstname = filename
+    if destfilename is not None:
+        dstname = destfilename
     src = '~/.dotfiles/'+filename
-    dst = '~/.'+filename
+    dst = '~/.'+dstname
     cmd = 'ln -s ' +src + ' ' + dst
     os.system(cmd)
 
@@ -58,6 +61,7 @@ def install_brew():
 
 # Link up files
 linkup('bash_profile')
+linkup('bash_profile','bashrc')
 linkup('gitconfig')
 linkup('screenrc')
 

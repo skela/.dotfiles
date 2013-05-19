@@ -2,13 +2,16 @@
 # List of packages that will be installed in response to setup.py
 #
 
+# CLI
+rtorrent
+irssi
+youtube-dl
+
 # Obvious packages
 gimp
 inkscape
 guake
 parcellite
-rtorrent
-irssi
 
 # Programming Utilities
 spe
@@ -17,5 +20,3 @@ spe
 audacity
 arista-gtk
 vlc
-youtube-dl
-
