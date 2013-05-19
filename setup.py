@@ -28,8 +28,7 @@ def get_packages():
 def install_package_manager():
     p = sys.platform
     if p == "darwin":
-        # TODO: Replace brew with macports
-        install_brew()
+        install_ports()
     if p == "linux2" or p == "linux":
         check_package_managers()
     if p == "win32" or p == "win64":
@@ -74,6 +73,15 @@ def install_brew():
         os.system(brew_cmd)
     else:
         log("skipping instalation of brew [Already Installed]")
+
+def install_ports():
+    if not has_app("port"):
+        port_cmd = 'open http://www.macports.org/install.php'
+        log("Please install ports manually.")
+        os.system(port_cmd)
+        get_input("Input anything to continue. ")
+    else:
+        log("skipping instalation of ports [Already Installed]")
 
 def check_package_managers():
     for pm in package_managers:
