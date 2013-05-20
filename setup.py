@@ -98,6 +98,8 @@ linkup('bash_profile')
 linkup('bash_profile','bashrc')
 linkup('gitconfig')
 linkup('screenrc')
+linkup('vimrc')
+linkup('vim')
 
 # Packages
 if should_install_packages:
