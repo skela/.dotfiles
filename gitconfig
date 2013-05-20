@@ -7,3 +7,5 @@
         diff = auto
         interactive = auto
         status = auto
+[merge]
+	tool = opendiff
