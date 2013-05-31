@@ -15,8 +15,11 @@ package_managers = ["apt-get","yum"]
 
 # Packages
 
-def get_packages():
-    f = open('packages.list')
+def get_packages(server_packages):
+    s = 'packages.list'
+    if server_packages:
+        s = 'packages_server.list'
+    f = open(s)
     packs_raw = f.read()
     f.close()
     packages = []
@@ -34,9 +37,9 @@ def install_package_manager():
     if p == "win32" or p == "win64":
         log("The F***?")
 
-def install_packages():
+def install_packages(server_packages=False):
     install_package_manager()
-    packages = get_packages()
+    packages = get_packages(server_packages)
     log(str(packages))
     r = get_input("Would you like to install these packages? (y/n) ")
     if r == 'y':
@@ -57,9 +60,12 @@ def linkup(filename,destfilename=None):
     cmd = 'ln -s ' +src + ' ' + dst
     os.system(cmd)
 
-def has_app(app): # app = "brew"
-    try: 
-        ret = subprocess.check_output(app)
+def has_app(app,arg=None): # app = "brew"
+    try:
+        if arg is None:
+            ret = subprocess.check_output(app)
+        else:
+            ret = subprocess.check_output([app,arg])
         return True
     except subprocess.CalledProcessError,e:
         return True
@@ -75,7 +81,7 @@ def install_brew():
         log("skipping instalation of brew [Already Installed]")
 
 def install_ports():
-    if not has_app("port"):
+    if not has_app("port",'version'):
         port_cmd = 'open http://www.macports.org/install.php'
         log("Please install ports manually.")
         os.system(port_cmd)
@@ -92,6 +98,15 @@ def check_package_managers():
 
 # Check arguments
 should_install_packages = 'install' in sys.argv
+should_install_server_packages = 'install_server' in sys.argv
+should_show_help = 'help' in sys.argv
+
+if should_show_help:
+    log("Possible arguments are: help, install, install_server")
+    exit()
+
+if should_install_server_packages:
+    should_install_packages = False
 
 # Link up files
 linkup('bash_profile')
@@ -104,3 +119,6 @@ linkup('vim')
 # Packages
 if should_install_packages:
     install_packages()
+elif should_install_server_packages:
+    install_packages(server_packages=True)
+

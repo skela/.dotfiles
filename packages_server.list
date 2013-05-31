@@ -1,0 +1,9 @@
+#
+# List of packages that will be installed in response to setup.py
+#
+
+# CLI
+rtorrent
+irssi
+youtube-dl
+
