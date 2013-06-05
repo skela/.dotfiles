@@ -2,6 +2,9 @@
 	name = Alek Slater
 	email = slayte@gmail.com
 
+[alias]
+	pom = push origin master
+
 [color]
         branch = auto
         diff = auto
