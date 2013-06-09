@@ -11,8 +11,33 @@ defscrollback 10000
 caption always "%{= bb}%{+b w}%n %t %h %=%l %H %c"
 hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
 
+# Session
+chdir
+chdir Code/Intro/ios
+screen -t app
+chdir
+chdir Code/Intro/android
+screen -t android
+chdir
+chdir Code/Intro/site
+screen -t site
+chdir
+chdir Code/Intro/server
+screen -t server
+chdir
+chdir Code/SpreadCo/dev/spreadco
+screen -t spreadco
+chdir
+screen -t global
+
+# Key shortcuts
+bind ',' prev
+bind '.' next
+#bindkey "^[Od" prev  # change window with ctrl-left
+#bindkey "^[Oc" next  # change window with ctrl-right
+
 # shell:  Default process started in screen's windows.
 # Makes it possible to use a different shell inside screen
 # than is set as the default login shell.
 # If begins with a '-' character, the shell will be started as a login shell.
-  shell -$SHELL
+shell -$SHELL

@@ -57,3 +57,6 @@ set incsearch
 set ignorecase
 set smartcase
 
+" Python 
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+
