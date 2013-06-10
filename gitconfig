@@ -4,6 +4,7 @@
 
 [alias]
 	pom = push origin master
+    pot = push origin --tags
 
 [color]
         branch = auto

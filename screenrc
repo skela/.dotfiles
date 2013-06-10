@@ -29,6 +29,8 @@ chdir Code/SpreadCo/dev/spreadco
 screen -t spreadco
 chdir
 screen -t global
+chdir Desktop/
+screen -t web
 
 # Key shortcuts
 bind ',' prev
