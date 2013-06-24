@@ -35,6 +35,7 @@ alias simple_web_service="sh ~/Dropbox/Scripts/simple_web_service.sh"
 
 alias gitch="git diff > ~/Desktop/gitch ; mate ~/Desktop/gitch"
 
+
 alias yt="youtube-dl"
 
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC -I rc'

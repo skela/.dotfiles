@@ -3,8 +3,9 @@
 	email = slayte@gmail.com
 
 [alias]
-	pom = push origin master
+    pom = push origin master
     pot = push origin --tags
+    taglist = log --tags --simplify-by-decoration --pretty='format:%ai %d'
 
 [color]
         branch = auto
