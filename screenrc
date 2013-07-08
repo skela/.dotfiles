@@ -38,6 +38,8 @@ bind '.' next
 #bindkey "^[Od" prev  # change window with ctrl-left
 #bindkey "^[Oc" next  # change window with ctrl-right
 
+termcapinfo xterm-color|xterm|xterms|xs|rxvt ti@:te@
+
 # shell:  Default process started in screen's windows.
 # Makes it possible to use a different shell inside screen
 # than is set as the default login shell.
