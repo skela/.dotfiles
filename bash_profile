@@ -75,4 +75,5 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 export PATH=$PATH:/Users/skela/Applications/Play
+export PATH=$PATH:/Volumes/Terra/apps/Android/platform-tools
 
