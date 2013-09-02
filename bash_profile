@@ -37,6 +37,7 @@ alias simple_web_service="sh ~/Dropbox/Scripts/simple_web_service.sh"
 
 alias gitch="git diff > ~/Desktop/gitch ; mate ~/Desktop/gitch"
 
+alias rmtrash="rm -rdf ~/.Trash/*"
 
 alias yt="youtube-dl"
 
