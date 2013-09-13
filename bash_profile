@@ -41,6 +41,8 @@ alias rmtrash="rm -rdf ~/.Trash/*"
 
 alias yt="youtube-dl"
 
+alias gits="git status"
+
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC -I rc'
 
 alias mine1="sh ~/Applications/DiabloMiner/DiabloMiner-OSX.sh --url http://skela_worker1:2vf8IYjhaBa2uJ@us2.eclipsemc.com:8337/ -w 64";

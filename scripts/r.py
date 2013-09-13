@@ -68,6 +68,19 @@ class R:
         cmd = '{} -background transparent -flatten -scale {}x{} "{}"'.format(cmd,w,h,out_file)
         os.system(cmd)
 
+    def xcf2pdf(self,width,height,out_file,in_file):
+        w = width
+        h = height
+    
+        if not isinstance(width,str):
+            w = str(width)
+        if not isinstance(height,str):
+            h = str(height)
+        
+        cmd = self.path_convert + ' "' + in_file + '"'
+        cmd = '{} -background transparent -flatten -scale {}x{} "{}"'.format(cmd,w,h,out_file)
+        os.system(cmd)
+
     def xcf2pngR2(self,width2x,height2x,out_file,in_file):
         width1x = width2x/2
         height1x = height2x/2    
