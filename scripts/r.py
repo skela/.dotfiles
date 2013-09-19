@@ -108,3 +108,25 @@ class R:
         out_file2x = out_file.replace('.png','@2x.png')    
         self.svg2png(width1x,height1x,out_file,in_file)
         self.svg2png(width2x,height2x,out_file2x,in_file)
+        
+        
+    def svg2icns(self,icon_svg,icon_icns):
+        icon_sizes = [16,32,32,64,128,256,256,512,512,1024]
+        icon_names = ['16x16','16x16@2x','32x32','32x32@2x','128x128','128x128@2x','256x256','256x256@2x','512x512','512x512@2x']
+
+        tmp_folder = '/tmp/r_icon.iconset/'
+
+        os.mkdir(tmp_folder)
+
+        i=0
+        for icon_size in icon_sizes:
+            icon_name=icon_names[i]    
+            icon_size=str(icon_size)
+            self.svg2png(icon_size,icon_size,tmp_folder+'icon_'+icon_name+'.png',icon_svg)
+            i=i+1
+
+        cmd = 'iconutil -c icns ' + tmp_folder + ' --output ' + icon_icns
+        os.system(cmd)
+
+        cmd = 'rm -fdr '+tmp_folder
+        os.system(cmd)
