@@ -82,3 +82,9 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export PATH=$PATH:/Users/skela/Applications/Play
 export PATH=$PATH:/Volumes/Terra/apps/Android/platform-tools
 
+
+export NARWHAL_ENGINE=jsc
+
+export PATH="/usr/local/narwhal/bin:$PATH"
+
+export CAPP_BUILD="/Users/skela/Build"

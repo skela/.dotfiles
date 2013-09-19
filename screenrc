@@ -30,7 +30,7 @@ screen -t spreadco
 chdir
 screen -t global
 chdir Desktop/
-screen -t web
+screen -t desktop
 
 # Key shortcuts
 bind ',' prev
