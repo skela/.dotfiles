@@ -134,10 +134,9 @@ class R:
 
         cmd = 'rm -fdr '+tmp_folder
         os.system(cmd)
-        
-    # Note currently for ipad, needs to be updated for universal
+
     def svg2appiconset(self,icon_svg,destination,ios5_destination=None):
-        icon_sizes = [29,40,50,72,76]
+        icon_sizes = [(29,"iphone"),(40,"iphone"),(57,"iphone"),(60,"iphone"),(29,"ipad"),(40,"ipad"),(50,"ipad"),(72,"ipad"),(76,"ipad")]
 
         tmp_root_folder = '/tmp/r_icon.xcassets/'
         tmp_folder = tmp_root_folder + 'AppIcon.appiconset/'
@@ -150,19 +149,23 @@ class R:
         d = {"images":[],"info":{"version":1,"author":"xcode"}}        
         
         images = []
-        idiom = "ipad"
-        legacyNames = {"57":"Icon.png","114":"Icon@2x.png","72":"Icon-72.png","144":"Icon-72@2x.png"}        
-        for icon_size in icon_sizes:            
+        legacyNames = {"57":"Icon.png","114":"Icon@2x.png","72":"Icon-72.png","144":"Icon-72@2x.png"}
+        banList = ["iphone-40","iphone-60"]        
+        for ics in icon_sizes:            
+            
+            icon_size = ics[0]
+            idiom = ics[1]
             
             dim_string = "%dx%d" % (icon_size,icon_size)                        
             wh = icon_size
             wh2 = wh*2
             
-            fileName = "icon_%s-%s-1x.png" % (idiom,dim_string)
-            if str(wh) in legacyNames:
-                fileName = legacyNames[str(wh)]            
-            self.svg2png(wh,wh,tmp_folder+fileName,icon_svg)
-            images.append({"size":dim_string,"idiom":idiom,"filename":fileName,"scale":"1x"})
+            if not "%s-%d" % (idiom,icon_size) in banList:
+                fileName = "icon_%s-%s-1x.png" % (idiom,dim_string)
+                if str(wh) in legacyNames:
+                    fileName = legacyNames[str(wh)]            
+                self.svg2png(wh,wh,tmp_folder+fileName,icon_svg)
+                images.append({"size":dim_string,"idiom":idiom,"filename":fileName,"scale":"1x"})
 
             fileName = "icon_%s-%s-2x.png" % (idiom,dim_string)
             if str(wh2) in legacyNames:
