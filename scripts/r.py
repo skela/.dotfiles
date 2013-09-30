@@ -152,7 +152,7 @@ class R:
         legacyNames = {"57":"Icon.png","114":"Icon@2x.png","72":"Icon-72.png","144":"Icon-72@2x.png"}
         banList = ["iphone-40","iphone-60"]        
         for ics in icon_sizes:            
-            
+
             icon_size = ics[0]
             idiom = ics[1]
             
@@ -192,9 +192,62 @@ class R:
             cmd = "mv %s %s" % (tmp_root_folder,destFolder)
             os.system(cmd)
         
+        
+        '''
+        {
+          "orientation" : "portrait",
+          "idiom" : "iphone",
+          "extent" : "full-screen",
+          "minimum-system-version" : "7.0",
+          "scale" : "2x"
+        },
+        {
+          "orientation" : "portrait",
+          "idiom" : "iphone",
+          "extent" : "full-screen",
+          "minimum-system-version" : "7.0",
+          "subtype" : "retina4",
+          "scale" : "2x"
+        },
+    
+   
+        {
+          "orientation" : "portrait",
+          "idiom" : "iphone",
+          "extent" : "full-screen",
+          "scale" : "1x"
+        },
+        {
+          "orientation" : "portrait",
+          "idiom" : "iphone",
+          "extent" : "full-screen",
+          "scale" : "2x"
+        },
+        {
+          "orientation" : "portrait",
+          "idiom" : "iphone",
+          "extent" : "full-screen",
+          "subtype" : "retina4",
+          "scale" : "2x"
+        },
+        
+        '''
+        
+
+
+        
     # Note currently for ipad, needs to be updated for universal
     def svg2launchimage(self,launch_svg,destination):
-        icon_sizes = [(768,1024,"portrait","full-screen"),(1024,768,"landscape","full-screen"),(768,1004,"portrait","to-status-bar"),(1024,748,"landscape","to-status-bar")]
+        icon_sizes = [
+        (320,568,"portrait","iphone",{"extent":"full-screen","minimum-system-version":"7.0","subtype":"retina4"}),
+        (320,480,"portrait","iphone",{"extent":"full-screen","minimum-system-version":"7.0"}),        
+        (320,568,"portrait","iphone",{"extent":"full-screen","subtype":"retina4"}),
+        (320,480,"portrait","iphone",{"extent":"full-screen"}),
+        (768,1024,"portrait","ipad",{"extent":"full-screen","minimum-system-version":"7.0"}),
+        (1024,768,"landscape","ipad",{"extent":"full-screen","minimum-system-version":"7.0"}),
+        (768,1004,"portrait","ipad",{"extent":"to-status-bar"}),
+        (1024,748,"landscape","ipad",{"extent":"to-status-bar"})
+        ]
 
         tmp_root_folder = '/tmp/r_icon.xcassets/'
         tmp_folder = tmp_root_folder + 'LaunchImage.launchimage/'
@@ -207,30 +260,35 @@ class R:
         d = {"images":[],"info":{"version":1,"author":"xcode"}}        
         
         images = []
-        idiom = "ipad"
         for icon_size in icon_sizes:            
             w = icon_size[0]
             h = icon_size[1]
             o = icon_size[2]
-            e = icon_size[3]
+            idiom = icon_size[3]                        
+            aux = icon_size[4]
+            e = aux["extent"]
+            
             w2 = w * 2
             h2 = h * 2
             dim_string = "%dx%d" % (w,h)
-
-            icon_name = "%s-%s-%s-%s-1x" % (idiom,o,e,dim_string)
-            fileName = 'launchimg_'+icon_name+'.png'
-            self.svg2png(w,h,tmp_folder+fileName,launch_svg)
-            img = {"size":dim_string,"idiom":idiom,"filename":fileName,"scale":"1x","orientation":o,"extent":e}
-            if e == "full-screen":
-                img["minimum-system-version"] = "7.0"
-            images.append(img)
+            
+            skip1x = False
+            if idiom == "iphone" and (h == 568 or h==480):
+                skip1x = True
+            
+            if skip1x is False:
+                icon_name = "%s-%s-%s-%s-1x" % (idiom,o,e,dim_string)
+                fileName = 'launchimg_'+icon_name+'.png'
+                self.svg2png(w,h,tmp_folder+fileName,launch_svg)
+                img = {"size":dim_string,"idiom":idiom,"filename":fileName,"scale":"1x","orientation":o,"extent":e}
+                img = dict(img.items() + aux.items())
+                images.append(img)
             
             icon_name = "%s-%s-%s-%s-2x" % (idiom,o,e,dim_string)
             fileName = 'launchimg_'+icon_name+'.png'
             self.svg2png(w2,h2,tmp_folder+fileName,launch_svg)            
             img = {"size":dim_string,"idiom":idiom,"filename":fileName,"scale":"2x","orientation":o,"extent":e}
-            if e == "full-screen":
-                img["minimum-system-version"] = "7.0"
+            img = dict(img.items() + aux.items())            
             images.append(img)
 
         d["images"] = images
