@@ -136,7 +136,7 @@ class R:
         os.system(cmd)
         
     # Note currently for ipad, needs to be updated for universal
-    def svg2appiconset(self,icon_svg,destination):
+    def svg2appiconset(self,icon_svg,destination,ios5_destination=None):
         icon_sizes = [29,40,50,72,76]
 
         tmp_root_folder = '/tmp/r_icon.xcassets/'
@@ -151,20 +151,23 @@ class R:
         
         images = []
         idiom = "ipad"
+        legacyNames = {"57":"Icon.png","114":"Icon@2x.png","72":"Icon-72.png","144":"Icon-72@2x.png"}        
         for icon_size in icon_sizes:            
             
-            dim_string = "%dx%d" % (icon_size,icon_size)
+            dim_string = "%dx%d" % (icon_size,icon_size)                        
+            wh = icon_size
+            wh2 = wh*2
             
-            icon_size_1x = icon_size
-            icon_name_1x = "%s-%s-1x" % (idiom,dim_string)
-            fileName = 'icon_'+icon_name_1x+'.png'
-            self.svg2png(icon_size_1x,icon_size_1x,tmp_folder+fileName,icon_svg)
+            fileName = "icon_%s-%s-1x.png" % (idiom,dim_string)
+            if str(wh) in legacyNames:
+                fileName = legacyNames[str(wh)]            
+            self.svg2png(wh,wh,tmp_folder+fileName,icon_svg)
             images.append({"size":dim_string,"idiom":idiom,"filename":fileName,"scale":"1x"})
-            
-            icon_size_2x = icon_size*2
-            icon_name_2x = "%s-%s-2x" % (idiom,dim_string)
-            fileName = 'icon_'+icon_name_2x+'.png'
-            self.svg2png(icon_size_2x,icon_size_2x,tmp_folder+fileName,icon_svg)
+
+            fileName = "icon_%s-%s-2x.png" % (idiom,dim_string)
+            if str(wh2) in legacyNames:
+                fileName = legacyNames[str(wh2)]            
+            self.svg2png(wh2,wh2,tmp_folder+fileName,icon_svg)
             images.append({"size":dim_string,"idiom":idiom,"filename":fileName,"scale":"2x"})
 
         d["images"] = images
@@ -173,6 +176,18 @@ class R:
         js = json.dumps(d)
         f.write(js)
         f.close()
+        
+        destFolder = os.path.join(destination,'Images.xcassets')
+        
+        if os.path.isdir(destFolder):
+            destFolder = destFolder + '/'
+            if os.path.isdir(destFolder+'AppIcon.appiconset/'):
+                os.system('rm -fdr '+destFolder+'AppIcon.appiconset/')
+            cmd = "mv %s %s" % (tmp_folder,destFolder)
+            os.system(cmd)
+        else:
+            cmd = "mv %s %s" % (tmp_root_folder,destFolder)
+            os.system(cmd)
         
     # Note currently for ipad, needs to be updated for universal
     def svg2launchimage(self,launch_svg,destination):
