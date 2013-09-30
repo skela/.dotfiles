@@ -5,6 +5,7 @@
 
 import sys
 import os
+import json
 
 class R:
     
@@ -116,6 +117,9 @@ class R:
 
         tmp_folder = '/tmp/r_icon.iconset/'
 
+        cmd = 'rm -fdr '+tmp_folder
+        os.system(cmd)
+
         os.mkdir(tmp_folder)
 
         i=0
@@ -130,3 +134,55 @@ class R:
 
         cmd = 'rm -fdr '+tmp_folder
         os.system(cmd)
+        
+    # Note currently for ipad, needs to be updated for universal
+    def svg2appiconset(self,icon_svg,destination):
+        icon_sizes = [29,40,50,72,76]
+
+        tmp_root_folder = '/tmp/r_icon.xcassets/'
+        tmp_folder = tmp_root_folder + 'AppIcon.appiconset/'
+
+        os.system('rm -fdr '+tmp_root_folder)
+        
+        os.mkdir(tmp_root_folder)
+        os.mkdir(tmp_folder)
+        
+        d = {"images":[],"info":{"version":1,"author":"xcode"}}        
+        
+        images = []
+        idiom = "ipad"
+        for icon_size in icon_sizes:            
+            
+            dim_string = "%dx%d" % (icon_size,icon_size)
+            
+            icon_size_1x = icon_size
+            icon_name_1x = "%s-%s-1x" % (idiom,dim_string)
+            fileName = 'icon_'+icon_name_1x+'.png'
+            self.svg2png(icon_size_1x,icon_size_1x,tmp_folder+fileName,icon_svg)
+            images.append({"size":dim_string,"idiom":idiom,"filename":fileName,"scale":"1x"})
+            
+            icon_size_2x = icon_size*2
+            icon_name_2x = "%s-%s-2x" % (idiom,dim_string)
+            fileName = 'icon_'+icon_name_2x+'.png'
+            self.svg2png(icon_size_2x,icon_size_2x,tmp_folder+fileName,icon_svg)
+            images.append({"size":dim_string,"idiom":idiom,"filename":fileName,"scale":"2x"})
+
+        d["images"] = images
+        
+        f = file(tmp_folder+'Contents.json',"w")
+        js = json.dumps(d)
+        f.write(js)
+        f.close()
+        
+        destFolder = os.path.join(destination,'Images.xcassets')
+        
+        if os.path.isdir(destFolder):
+            destFolder = destFolder + '/'
+            if os.path.isdir(destFolder+'AppIcon.appiconset/'):
+                os.system('rm -fdr '+destFolder+'AppIcon.appiconset/')
+            cmd = "mv %s %s" % (tmp_folder,destFolder)
+            os.system(cmd)
+        else:
+            cmd = "mv %s %s" % (tmp_root_folder,destFolder)
+            os.system(cmd)
+        
