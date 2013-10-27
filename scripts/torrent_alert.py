@@ -5,7 +5,7 @@ import json
 from emailer import Emailer
 
 torrent_name=""
-if len(sys.argv)>2:
+if len(sys.argv)>1:
     torrent_name = sys.argv[1]
 
 if len(torrent_name)==0:
