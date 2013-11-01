@@ -82,6 +82,26 @@ class R:
         cmd = '{} -background transparent -flatten -scale {}x{} "{}"'.format(cmd,w,h,out_file)
         os.system(cmd)
 
+    def png2png(self,width,height,out_file,in_file):
+        w = width
+        h = height
+
+        if not isinstance(width,str):
+            w = str(width)
+        if not isinstance(height,str):
+            h = str(height)
+        
+        cmd = self.path_convert + ' ' + in_file
+        cmd = '{} -scale {}x{} {}'.format(cmd,w,h,out_file)
+        os.system(cmd)
+
+    def png2pngs(self,width2x,height2x,out_file,in_file):
+        width1x = width2x/2
+        height1x = height2x/2    
+        out_file2x = out_file.replace('.png','@2x.png')    
+        self.png2png(width1x,height1x,out_file,in_file)
+        self.png2png(width2x,height2x,out_file2x,in_file)
+
     def xcf2pngR2(self,width2x,height2x,out_file,in_file):
         width1x = width2x/2
         height1x = height2x/2    
@@ -95,7 +115,10 @@ class R:
         out_file2x = out_file.replace('.png','@2x.png')    
         self.xcf2png(width1x,height1x,out_file,in_file)
         self.xcf2png(width2x,height2x,out_file2x,in_file)
-
+    
+    def xcf2pngs(self,width1x,height1x,out_file,in_file):
+        self.xcf2pngR(width1x,height1x,out_file,in_file)
+    
     def svg2pngR2(self,width2x,height2x,out_file,in_file):
         width1x = width2x/2
         height1x = height2x/2    
@@ -109,7 +132,9 @@ class R:
         out_file2x = out_file.replace('.png','@2x.png')    
         self.svg2png(width1x,height1x,out_file,in_file)
         self.svg2png(width2x,height2x,out_file2x,in_file)
-        
+    
+    def svg2pngs(self,width1x,height1x,out_file,in_file):
+        self.svg2pngR(width1x,height1x,out_file,in_file)
         
     def svg2icns(self,icon_svg,icon_icns):
         icon_sizes = [16,32,32,64,128,256,256,512,512,1024]
