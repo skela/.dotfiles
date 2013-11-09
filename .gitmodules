@@ -1,0 +1,3 @@
+[submodule "libs/r"]
+	path = libs/r
+	url = git@github.com:skela/r.git
