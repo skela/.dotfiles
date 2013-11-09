@@ -12,3 +12,5 @@
         diff = auto
         interactive = auto
         status = auto
+[core]
+	editor = /usr/bin/vim

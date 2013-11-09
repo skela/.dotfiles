@@ -88,3 +88,12 @@ export NARWHAL_ENGINE=jsc
 export PATH="/usr/local/narwhal/bin:$PATH"
 
 export CAPP_BUILD="/Users/skela/Build"
+
+##
+# Your previous /Users/skela/.bash_profile file was backed up as /Users/skela/.bash_profile.macports-saved_2013-11-02_at_03:05:27
+##
+
+# MacPorts Installer addition on 2013-11-02_at_03:05:27: adding an appropriate PATH variable for use with MacPorts.
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+# Finished adapting your PATH environment variable for use with MacPorts.
+
