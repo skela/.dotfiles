@@ -25,7 +25,7 @@ chdir
 chdir Code/Intro/server
 screen -t server
 chdir
-chdir Code/SpreadCo/dev/spreadco
+chdir Code/SpreadCo/dev
 screen -t spreadco
 chdir
 screen -t global
