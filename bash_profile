@@ -45,9 +45,6 @@ alias gits="git status"
 
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC -I rc'
 
-alias mine1="sh ~/Applications/DiabloMiner/DiabloMiner-OSX.sh --url http://skela_worker1:2vf8IYjhaBa2uJ@us2.eclipsemc.com:8337/ -w 64";
-alias mine2="sh ~/Applications/DiabloMiner/DiabloMiner-OSX.sh --url http://skela_worker2:sUTD4b2oYFSxa6@us2.eclipsemc.com:8337/ -w 64";
-
 alias vtf="open ~/.dotfiles/res/vi-vim-cheat-sheet.gif"
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -80,8 +77,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 export PATH=$PATH:/Users/skela/Applications/Play
-export PATH=$PATH:/Volumes/Terra/apps/Android/platform-tools
-
+export PATH=$PATH:/Volumes/Terra/Applications/Android/platform-tools
 
 export NARWHAL_ENGINE=jsc
 

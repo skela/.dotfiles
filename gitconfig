@@ -14,3 +14,6 @@
         status = auto
 [core]
 	editor = /usr/bin/vim
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
