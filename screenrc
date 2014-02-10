@@ -12,25 +12,17 @@ caption always "%{= bb}%{+b w}%n %t %h %=%l %H %c"
 hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
 
 # Session
-chdir
-chdir Code/Intro/ios
-screen -t app
-chdir
-chdir Code/Intro/android
-screen -t android
-chdir
-chdir Code/Intro/site
-screen -t site
-chdir
-chdir Code/Intro/server
-screen -t server
-chdir
-chdir Code/SpreadCo/dev
-screen -t spreadco
-chdir
-screen -t global
-chdir Desktop/
-screen -t desktop
+source "$HOME/.screen_profile"
+
+# Example of what goes in a .screen_profile file
+#chdir
+#chdir Code/Terra/Davincium/Apps
+#screen -t apps
+#chdir
+#chdir Desktop/
+#screen -t desktop
+#chdir
+#screen -t global
 
 # Key shortcuts
 bind ',' prev
