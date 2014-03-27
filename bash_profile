@@ -47,6 +47,8 @@ alias vlc='/Applications/VLC.app/Contents/MacOS/VLC -I rc'
 
 alias vtf="open ~/.dotfiles/res/vi-vim-cheat-sheet.gif"
 
+alias edit="/usr/bin/subl"
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='python ~/.dotfiles/scripts/alert.py "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
