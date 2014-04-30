@@ -12,6 +12,7 @@
         diff = auto
         interactive = auto
         status = auto
+	ui = 1
 [core]
 	editor = /usr/bin/vim
 [filter "media"]
