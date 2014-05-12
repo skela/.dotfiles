@@ -38,6 +38,7 @@ alias vtf="open ~/.dotfiles/res/vi-vim-cheat-sheet.gif"
 alias edit="/usr/bin/subl"
 alias locate='python ~/.dotfiles/scripts/locate.py $1'
 alias itunes-helper='python /Volumes/Terra/code/itunes-helper/itunes-helper.py $1'
+alias sweep='python ~/.dotfiles/scripts/sweep.py'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

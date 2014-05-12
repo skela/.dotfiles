@@ -1,3 +1,6 @@
 [submodule "libs/r"]
 	path = libs/r
 	url = git@github.com:skela/r.git
+[submodule "libs/pysweep"]
+	path = libs/pysweep
+	url = git@github.com:skela/index-pysweep.git
