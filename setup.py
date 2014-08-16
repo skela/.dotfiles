@@ -115,6 +115,8 @@ linkup('gitconfig')
 linkup('screenrc')
 linkup('vimrc')
 linkup('vim')
+linkup('private/irssiconfig','irssi/config')
+linkup('private/irssitheme','irssi/default.theme')
 
 # Packages
 if should_install_packages:

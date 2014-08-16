@@ -4,3 +4,6 @@
 [submodule "libs/pysweep"]
 	path = libs/pysweep
 	url = git@github.com:skela/index-pysweep.git
+[submodule "private"]
+	path = private
+	url = git@bitbucket.org:skela/pdotfiles.git
