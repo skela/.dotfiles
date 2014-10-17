@@ -40,6 +40,7 @@ alias locate='python ~/.dotfiles/scripts/locate.py $1'
 alias itunes-helper='python /Volumes/Terra/code/itunes-helper/itunes-helper.py $1'
 alias sweep='python ~/.dotfiles/scripts/sweep.py'
 alias android-screenshot='adb shell /system/bin/screencap -p /sdcard/screenshot.png ; adb pull /sdcard/screenshot.png $1'
+alias rod='python ~/.dotfiles/libs/r/rod.py'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
