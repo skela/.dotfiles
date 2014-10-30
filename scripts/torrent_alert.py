@@ -22,9 +22,10 @@ d = json.loads(s)
 
 sender=d['email']
 pwd = d['pwd']
+recipient = d'recipient']
 
 msg = "The file %s has finished."%torrent_name
 
 subject = "Transmission Complete (%s)"%torrent_name
 
-Emailer().send_email(sender,pwd,subject,msg,"skela@davincium.com")
+Emailer().send_email(sender,pwd,subject,msg,recipient)
