@@ -45,5 +45,6 @@ d = json.loads(s)
 
 sender=d['email']
 pwd = d['pwd']
+recipient = d'recipient']
 
-Emailer().send_email(sender,pwd,app + " has finished",msg,"skela@davincium.com")
+Emailer().send_email(sender,pwd,app + " has finished",msg,recipient)
