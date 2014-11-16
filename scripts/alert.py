@@ -3,13 +3,14 @@ import os
 import json
 
 from emailer import Emailer
+from messenger import Messenger
 
 home_path = os.path.expanduser("~")
 df_path = home_path + '/.dotfiles/'
 snd_finished_path = df_path+'res/finished.aiff'
 
 def play_sound(sound_file):
-    cmd = 'play -V1 ' + sound_file    
+    cmd = 'play -V1 ' + sound_file
     #os.system(cmd)
 
 print sys.argv
@@ -25,9 +26,11 @@ cmd = None
 
 p = sys.platform
 if p == "darwin":
+    bmsg = msg
     msg = '"' + msg + '"'
     cmd = df_path + 'bin/terminal-notifier.app/Contents/MacOS/terminal-notifier -title "%s" -message %s'%(app,msg)
 if p == "linux2" or p == "linux":
+    bmsg = msg
     cmd = "notify-send --urgency=low -i "+msg
 
 if cmd is None:
@@ -46,5 +49,7 @@ d = json.loads(s)
 sender=d['email']
 pwd = d['pwd']
 recipient = d['recipient']
+icloud = d['icloud']
 
+Messenger().send_msg_to_buddy(bmsg, icloud)
 Emailer().send_email(sender,pwd,app + " has finished",msg,recipient)
