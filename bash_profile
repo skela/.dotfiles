@@ -26,7 +26,7 @@ alias l='ls -CF'
 
 alias poweroff="sudo shutdown -h now"
 alias aliases="cat ~/.bash_profile"
-alias inkscape="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
+#alias inkscape="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
 alias lt="/Applications/LightTable.app/Contents/MacOS/node-webkit"
 alias convertall_to_appletv="for f in *; do HandBrakeCLI -i "$f" -o "~/Desktop/$f.mp4" --preset="AppleTV"; done"
 alias gitch="git diff > ~/Desktop/gitch ; mate ~/Desktop/gitch"
