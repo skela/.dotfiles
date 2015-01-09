@@ -24,6 +24,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias adb="/Applications/Android/platform-tools/adb"
 alias poweroff="sudo shutdown -h now"
 alias aliases="cat ~/.bash_profile"
 #alias inkscape="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
@@ -71,4 +72,3 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # MacPorts Installer addition on 2014-11-10_at_14:24:09: adding an appropriate PATH variable for use with MacPorts.
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
-
