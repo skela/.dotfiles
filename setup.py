@@ -24,7 +24,7 @@ def get_packages(server_packages):
     f.close()
     packages = []
     for package in packs_raw.split('\n'):
-        if not package.startswith('#')  and len(package)>0: 
+        if not package.startswith('#')  and len(package)>0:
             packages.append(package)
     return packages
 
@@ -73,7 +73,7 @@ def has_app(app,arg=None): # app = "brew"
         log("failed to open "+app)
     return False
 
-def install_brew():    
+def install_brew():
     if not has_app("brew"):
         brew_cmd='ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"'
         os.system(brew_cmd)
@@ -113,6 +113,7 @@ linkup('bash_profile')
 linkup('bash_profile','bashrc')
 linkup('gitconfig')
 linkup('screenrc')
+linkup('tmux.conf')
 linkup('vimrc')
 linkup('vim')
 linkup('private/irssiconfig','irssi/config')
@@ -123,6 +124,3 @@ if should_install_packages:
     install_packages()
 elif should_install_server_packages:
     install_packages(server_packages=True)
-
-
-

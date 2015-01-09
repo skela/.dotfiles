@@ -24,6 +24,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias adb="/Applications/Android/platform-tools/adb"
 alias poweroff="sudo shutdown -h now"
 alias aliases="cat ~/.bash_profile"
 #alias inkscape="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
