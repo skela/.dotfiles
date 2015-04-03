@@ -20,3 +20,7 @@
 	smudge = git-media-smudge %f
 [push]
 	default = tracking
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
