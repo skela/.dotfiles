@@ -24,7 +24,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias adb="/Applications/Android/platform-tools/adb"
+#alias adb="/Applications/Android/platform-tools/adb"
 alias poweroff="sudo shutdown -h now"
 alias aliases="cat ~/.bash_profile"
 #alias inkscape="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
@@ -74,3 +74,4 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 export PATH=/usr/local/sbin:$PATH
+export PATH="/Volumes/Terra/Applications/Android/platform-tools":$PATH
