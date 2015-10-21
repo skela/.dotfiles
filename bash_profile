@@ -43,6 +43,7 @@ alias sweep='python ~/.dotfiles/scripts/sweep.py'
 alias android-screenshot='adb shell /system/bin/screencap -p /sdcard/screenshot.png ; adb pull /sdcard/screenshot.png $1'
 alias rod='python ~/.dotfiles/libs/r/rod.py'
 alias pycharm='/Applications/PyCharm.app/Contents/MacOS/pycharm'
+alias itm="/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/itms/bin/iTMSTransporter"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -64,6 +65,7 @@ export PATH=$PATH:/Users/skela/Applications/Play
 export PATH=$PATH:/Volumes/Terra/Applications/Android/platform-tools
 export PATH=$PATH:/Volumes/Terra/Applications/Android/build-tools/19.0.3
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+
 
 ##
 # Your previous /Users/skela/.bash_profile file was backed up as /Users/skela/.bash_profile.macports-saved_2014-11-10_at_14:24:09
