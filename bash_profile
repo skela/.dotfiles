@@ -38,7 +38,7 @@ alias vlc='/Applications/VLC.app/Contents/MacOS/VLC -I rc'
 alias vtf="open ~/.dotfiles/res/vi-vim-cheat-sheet.gif"
 alias edit="/usr/bin/subl"
 alias locate='python ~/.dotfiles/scripts/locate.py $1'
-alias itunes-helper='python /Volumes/Terra/code/itunes-helper/itunes-helper.py $1'
+alias itunes-helper='python /Volumes/Mercury/code/itunes-helper/itunes-helper.py $1'
 alias sweep='python ~/.dotfiles/scripts/sweep.py'
 alias android-screenshot='adb shell /system/bin/screencap -p /sdcard/screenshot.png ; adb pull /sdcard/screenshot.png $1'
 alias rod='python ~/.dotfiles/libs/r/rod.py'
@@ -62,8 +62,8 @@ function cdff { cd "`ff $@`"; };
 # Path Exports
 
 export PATH=$PATH:/Users/skela/Applications/Play
-export PATH=$PATH:/Volumes/Terra/Applications/Android/platform-tools
-export PATH=$PATH:/Volumes/Terra/Applications/Android/build-tools/19.0.3
+export PATH=$PATH:/Volumes/Mercury/Applications/Android/platform-tools
+export PATH=$PATH:/Volumes/Mercury/Applications/Android/build-tools/19.0.3
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
 
@@ -76,4 +76,4 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 export PATH=/usr/local/sbin:$PATH
-export PATH="/Volumes/Terra/Applications/Android/platform-tools":$PATH
+export PATH="/Volumes/Mercury/Applications/Android/platform-tools":$PATH

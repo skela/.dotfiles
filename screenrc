@@ -32,7 +32,8 @@ bind '.' next
 
 #termcapinfo xterm-color|xterm|xterms|xs|rxvt ti@:te@
 # Make xterm scrolling work properly with screen.
-termcapinfo xterm-256color|xterm-color|xterm|xterms|xs|rxvt ti@:te@
+#termcapinfo xterm-256color|xterm-color|xterm|xterms|xs|rxvt ti@:te@
+termcapinfo * ti@:te@
 
 # shell:  Default process started in screen's windows.
 # Makes it possible to use a different shell inside screen
