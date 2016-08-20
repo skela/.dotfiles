@@ -52,4 +52,4 @@ recipient = d['recipient']
 icloud = d['icloud']
 
 Messenger().send_msg_to_buddy(bmsg, icloud)
-Emailer().send_email(sender,pwd,app + " has finished",msg,recipient)
+#Emailer().send_email(sender,pwd,app + " has finished",msg,recipient)
