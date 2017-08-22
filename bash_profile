@@ -77,3 +77,6 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 export PATH=/usr/local/sbin:$PATH
 export PATH="/Volumes/Mercury/Applications/Android/platform-tools":$PATH
+
+export PATH="$HOME/.fastlane/bin:$PATH"
+
