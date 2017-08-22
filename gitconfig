@@ -6,25 +6,29 @@
     pom = push origin master
     pot = push origin --tags
     tags = log --tags --simplify-by-decoration --pretty='format:%ai %d'
-    shave = "!sh -c 'git checkout --orphan new-master master && git commit -m \"Initial commit for new root\" && git branch -D master && git branch --move new-master master && git reflog expire --all --expire=now && git gc --prune=now --aggressive'"
 
 [color]
-        branch = auto
-        diff = auto
-        interactive = auto
-        status = auto
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
 	ui = 1
+
 [core]
 	editor = /usr/bin/vim
+
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
+
 [push]
 	default = tracking
+
 [filter "hawser"]
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
 	required = true
+
 [filter "lfs"]
 	clean = git lfs clean %f
 	smudge = git lfs smudge %f

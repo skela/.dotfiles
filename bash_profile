@@ -44,6 +44,7 @@ alias android-screenshot='adb shell /system/bin/screencap -p /sdcard/screenshot.
 alias rod='python ~/.dotfiles/libs/r/rod.py'
 alias pycharm='/Applications/PyCharm.app/Contents/MacOS/pycharm'
 alias itm="/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/itms/bin/iTMSTransporter"
+alias objc2swift='java -jar /Volumes/Mercury/code/objc2swift/build/libs/objc2swift-1.0.jar'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -77,6 +78,7 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 export PATH=/usr/local/sbin:$PATH
 export PATH="/Volumes/Mercury/Applications/Android/platform-tools":$PATH
+eval $(/usr/libexec/path_helper -s)
 
 export PATH="$HOME/.fastlane/bin:$PATH"
 
