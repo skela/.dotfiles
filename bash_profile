@@ -24,6 +24,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias vstool="/Applications/Visual\ Studio.app/Contents/MacOS/vstool"
 #alias adb="/Applications/Android/platform-tools/adb"
 alias poweroff="sudo shutdown -h now"
 alias aliases="cat ~/.bash_profile"
