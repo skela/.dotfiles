@@ -89,6 +89,11 @@ def install_ports():
     else:
         log("skipping instalation of ports [Already Installed]")
 
+def install_oh_my_zsh():    
+    if not os.path.exists(os.path.expanduser('~/.oh-my-zsh')):
+        cmd = 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
+        os.system(cmd)        
+
 def check_package_managers():
     for pm in package_managers:
         if has_app(pm):
@@ -118,6 +123,9 @@ linkup('vimrc')
 linkup('vim')
 linkup('private/irssiconfig','irssi/config')
 linkup('private/irssitheme','irssi/default.theme')
+linkup('zshrc')
+
+install_oh_my_zsh()
 
 # Packages
 if should_install_packages:
