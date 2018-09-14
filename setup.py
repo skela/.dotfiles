@@ -113,6 +113,8 @@ if should_show_help:
 if should_install_server_packages:
     should_install_packages = False
 
+install_oh_my_zsh()
+
 # Link up files
 linkup('aliases')
 linkup('bash_profile')
@@ -125,8 +127,6 @@ linkup('vim')
 linkup('private/irssiconfig','irssi/config')
 linkup('private/irssitheme','irssi/default.theme')
 linkup('zshrc')
-
-install_oh_my_zsh()
 
 # Packages
 if should_install_packages:
