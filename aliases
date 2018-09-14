@@ -1,0 +1,2 @@
+alias gits='git status'
+alias rod='python ~/.dotfiles/libs/r/rod.py'

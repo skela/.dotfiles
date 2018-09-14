@@ -114,6 +114,7 @@ if should_install_server_packages:
     should_install_packages = False
 
 # Link up files
+linkup('aliases')
 linkup('bash_profile')
 linkup('bash_profile','bashrc')
 linkup('gitconfig')

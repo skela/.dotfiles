@@ -20,6 +20,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
+fi
+
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -34,7 +38,6 @@ alias convertall_to_appletv="for f in *; do HandBrakeCLI -i "$f" -o "~/Desktop/$
 alias gitch="git diff > ~/Desktop/gitch ; mate ~/Desktop/gitch"
 alias rmtrash="rm -rdf ~/.Trash/*"
 alias yt="youtube-dl"
-alias gits="git status"
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC -I rc'
 alias vtf="open ~/.dotfiles/res/vi-vim-cheat-sheet.gif"
 alias edit="/usr/bin/subl"
@@ -42,7 +45,6 @@ alias locate='python ~/.dotfiles/scripts/locate.py $1'
 alias itunes-helper='python /Volumes/Mercury/code/itunes-helper/itunes-helper.py $1'
 alias sweep='python ~/.dotfiles/scripts/sweep.py'
 alias android-screenshot='adb shell /system/bin/screencap -p /sdcard/screenshot.png ; adb pull /sdcard/screenshot.png $1'
-alias rod='python ~/.dotfiles/libs/r/rod.py'
 alias pycharm='/Applications/PyCharm.app/Contents/MacOS/pycharm'
 alias itm="/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/itms/bin/iTMSTransporter"
 alias objc2swift='java -jar /Volumes/Mercury/code/objc2swift/build/libs/objc2swift-1.0.jar'
