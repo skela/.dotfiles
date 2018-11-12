@@ -7,3 +7,6 @@
 [submodule "private"]
 	path = private
 	url = git@bitbucket.org:skela/pdotfiles.git
+[submodule "fonts"]
+	path = fonts
+	url = https://github.com/powerline/fonts.git
