@@ -10,6 +10,7 @@ defscrollback 10000
 # look and feel
 caption always "%{= RR}%{+b W}%n %t %h %=%l %H %c"
 hardstatus alwayslastline "%-Lw%{= RW}%50>%n%f* %t%{-}%+Lw%<"
+#hardstatus string "%{= KW} %H [%`] %{= Kw}|%{-} %-Lw%{= bW}%n%f %t%{-}%+Lw %=%C%a %Y-%M-%d"
 
 # Session
 source "$HOME/.screen_profile"
