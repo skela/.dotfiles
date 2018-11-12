@@ -8,8 +8,8 @@ startup_message off
 defscrollback 10000
 
 # look and feel
-caption always "%{= bb}%{+b w}%n %t %h %=%l %H %c"
-hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+caption always "%{= RR}%{+b W}%n %t %h %=%l %H %c"
+hardstatus alwayslastline "%-Lw%{= RW}%50>%n%f* %t%{-}%+Lw%<"
 
 # Session
 source "$HOME/.screen_profile"
