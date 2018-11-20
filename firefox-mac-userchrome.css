@@ -1,0 +1,30 @@
+/* @namespace "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
+
+@-moz-document url("chrome://browser/content/browser.xul") {
+    :root:not([tabsintitlebar]) #navigator-toolbox {
+        display: contents !important;
+    }
+
+    :root:not([tabsintitlebar]) #toolbar-menubar          { -moz-box-ordinal-group: 1 !important; }
+    :root:not([tabsintitlebar]) #nav-bar                  { -moz-box-ordinal-group: 2 !important; }
+    :root:not([tabsintitlebar]) #PersonalToolbar          { -moz-box-ordinal-group: 3 !important; }
+    :root:not([tabsintitlebar]) #navigator-toolbox::after { -moz-box-ordinal-group: 4 !important; }
+    :root:not([tabsintitlebar]) #content-deck             { -moz-box-ordinal-group: 5 !important; }
+    :root:not([tabsintitlebar]) #TabsToolbar              { -moz-box-ordinal-group: 6 !important; }
+} */
+
+/* #TabsToolbar
+{
+  position: fixed;
+  bottom: -0em;
+  width: 100%;
+}
+#tabbrowser-tabs { width: 96%; }
+#content-deck { margin-bottom: 0em; } */
+
+/* TabsToolbar:not([inFullscreen="true"]) {position:fixed; bottom:0em; width:100%;} */
+
+#tabbrowser-tabs
+{
+  --tab-line-color: red !important;
+}
