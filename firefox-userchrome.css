@@ -13,7 +13,7 @@
     :root:not([tabsintitlebar]) #TabsToolbar              { -moz-box-ordinal-group: 6 !important; }
 } */
 
-#TabsToolbar
+/* #TabsToolbar
 {
   position: fixed;
   bottom: -0em;
@@ -22,7 +22,7 @@
 #tabbrowser-tabs { width: 96%; }
 #content-deck { margin-bottom: 0em; }
 
-TabsToolbar:not([inFullscreen="true"]) {position:fixed; bottom:0em; width:100%;}
+TabsToolbar:not([inFullscreen="true"]) {position:fixed; bottom:0em; width:100%;} */
 
 #tabbrowser-tabs
 {
