@@ -1,0 +1,4 @@
+alias fixInkscape='wmctrl -r Inkscape -e 0,2560,1440,1200,700'
+alias fixInkscapeDocumentProperties='wmctrl -r Document\ Properties -e 0,2560,1440,1200,700'
+alias vscode="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+

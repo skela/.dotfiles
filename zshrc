@@ -107,3 +107,8 @@ source $ZSH/oh-my-zsh.sh
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
+
+if [ -f ~/.dotfiles/aliases ]; then
+    . ~/.dotfiles/aliases
+fi
+
