@@ -3,6 +3,8 @@
 
 export PATH="$HOME/.fastlane/bin:$PATH"
 
+export PATH="$PATH:$HOME/SDKs/flutter/bin"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
