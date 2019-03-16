@@ -1,0 +1,16 @@
+
+[*]
+indent_size = 4
+
+[*.ts]
+indent_style = tab
+
+[*.js]
+indent_style = tab
+
+[*.html]
+indent_style = tab
+
+[*.swift]
+indent_style = tab
+
