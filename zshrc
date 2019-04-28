@@ -70,7 +70,6 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  zsh-completions
 )
 
 autoload -U compinit && compinit
