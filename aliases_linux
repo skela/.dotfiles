@@ -1,2 +1,6 @@
 alias vscode="flatpak run com.visualstudio.code"
 
+ANDROID_HOME=/home/skela/files/sdks/Android/Sdk
+
+export PATH="$PATH:/home/skela/files/sdks/flutter/bin"
+export PATH="$PATH:/home/skela/files/sdks/Android/Sdk/platform-tools"
