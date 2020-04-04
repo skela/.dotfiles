@@ -112,4 +112,3 @@ fi
 if [ -f ~/.dotfiles/aliases ]; then
     . ~/.dotfiles/aliases
 fi
-
