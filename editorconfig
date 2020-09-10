@@ -6,6 +6,11 @@ curly_bracket_next_line = true
 [*.ts]
 indent_style = tab
 
+[*.dart]
+indent_style = tab
+indent_size = 2
+curly_bracket_next_line = true
+
 [*.js]
 indent_style = tab
 
@@ -17,4 +22,8 @@ indent_style = tab
 
 [*.yaml]
 indent_style = space
+indent_size = 2
+
+[*.hjson]
+indent_style = tab
 indent_size = 2
