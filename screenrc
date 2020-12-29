@@ -7,8 +7,10 @@ startup_message off
 # Change default scrollback value for new windows
 defscrollback 10000
 
+#backtick 1 60 60 $HOME/.dotfiles/scripts/get_pwd.py
+
 # look and feel (caption = bar, hardstatus = tab)
-caption always "%{= rr}%{+b W} %n %t %h %=%H %c "
+caption always "%{= rr}%{+b W} %n %t %=%H %c "
 hardstatus alwayslastline "%-Lw%{= rW}%50>%n%f* %t%{-}%+Lw%<"
 
 
