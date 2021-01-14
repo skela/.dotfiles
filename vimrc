@@ -45,11 +45,12 @@ syntax on
 set number	"show line numbers
 
 " Use spaces instead of TABs
+set autoindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set shiftround
-set expandtab
+set noexpandtab
 
 " Make search case insensitive
 set hlsearch

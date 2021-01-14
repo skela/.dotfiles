@@ -1,0 +1,27 @@
+{
+	"extensions": {
+		"unite@hardpixel.eu": {
+			"/org/gnome/shell/extensions/unite/": "[/]\ndesktop-name-text='Aurora'\nextend-left-box=false\ngreyscale-tray-icons=true\nhide-activities-button='auto'\nhide-app-menu-arrow=true\nhide-app-menu-icon=false\nhide-dropdown-arrows=true\nhide-window-titlebars='maximized'\nnotifications-position='center'\nreduce-panel-spacing=true\nshow-desktop-name=true\nshow-legacy-tray=true\nshow-window-buttons='never'"
+		},
+		"clipboard-indicator@tudmotu.com": {
+			"/org/gnome/shell/extensions/clipboard-indicator/": "[/]\ndisable-down-arrow=true\nhistory-size=20"
+		}
+	},
+	"keybindings": {
+		"/org/gnome/mutter/wayland/keybindings/": "[/]\nrestore-shortcuts=['']",
+		"/org/gnome/desktop/wm/keybindings/": "[/]\npanel-main-menu=['<Alt>F1']\nswitch-applications=['<Super>Tab']\nswitch-applications-backward=['<Shift><Super>Tab']\nswitch-windows=['<Alt>Tab']\nswitch-windows-backward=['<Shift><Alt>Tab']\ntoggle-fullscreen=['F11']",
+		"/org/gnome/settings-daemon/plugins/media-keys/": "[/]\ncustom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']\nscreensaver=['<Primary><Alt>q']\n\n[custom-keybindings/custom0]\nbinding='<Primary><Alt>t'\ncommand='alacritty'\nname='Open Terminal'\n\n[custom-keybindings/custom1]\nbinding='<Super>Return'\ncommand='alacritty'\nname='Alacritty'"
+	},
+	"tweaks": {
+		"/org/gnome/desktop/background/": "[/]\ncolor-shading-type='solid'\npicture-options='stretched'\npicture-uri='file:///usr/share/backgrounds/wallpapers-2018/abstract-1780241.jpg'\nprimary-color='#ffffff'\nsecondary-color='#000000'",
+		"/org/gnome/desktop/calendar/": "[/]\nshow-weekdate=true",
+		"/org/gnome/desktop/input-sources/": "[/]\nsources=[('xkb', 'gb'), ('xkb', 'no')]\nxkb-options=['lv3:ralt_switch']",
+		"/org/gnome/desktop/interface/": "[/]\ncursor-theme='Adwaita'\nenable-animations=false\ngtk-theme='Adwaita-dark'\nicon-theme='Papirus-Dark-Maia'\ntoolkit-accessibility=false",
+		"/org/gnome/desktop/peripherals/": "[keyboard]\nnumlock-state=true\n\n[touchpad]\ntwo-finger-scrolling-enabled=true",
+		"/org/gnome/desktop/screensaver/": "[/]\ncolor-shading-type='solid'\nlock-delay=uint32 0\npicture-options='stretched'\npicture-uri='file:///usr/share/backgrounds/wallpapers-2018/abstract-1780241.jpg'\nprimary-color='#ffffff'\nsecondary-color='#000000'",
+		"/org/gnome/desktop/sound/": "[/]\nevent-sounds=true\ntheme-name='freedesktop'",
+		"/org/gnome/desktop/wm/preferences/": "[/]\nbutton-layout=':minimize,maximize,close'\nfocus-mode='click'\nnum-workspaces=9",
+		"/org/gnome/mutter/": "[/]\ndynamic-workspaces=false\noverlay-key='Super_L'\nworkspaces-only-on-primary=true\n\n[wayland/keybindings]\nrestore-shortcuts=['']",
+		"/org/gnome/settings-daemon/plugins/xsettings/": "[/]\nhinting='slight'"
+	}
+}

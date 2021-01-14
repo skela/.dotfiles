@@ -13,6 +13,7 @@ defscrollback 10000
 caption always "%{= rr}%{+b W} %n %t %=%H %c "
 hardstatus alwayslastline "%-Lw%{= rW}%50>%n%f* %t%{-}%+Lw%<"
 
+rendition so =00
 
 # Session
 source "$HOME/.screen_profile"
@@ -38,7 +39,8 @@ bind R eval "source $HOME/.screenrc" "echo '.screenrc reloaded!'"
 # Make xterm scrolling work properly with screen.
 #termcapinfo xterm-256color|xterm-color|xterm|xterms|xs|rxvt ti@:te@
 #termcapinfo * ti@:te@
-termcapinfo $TERM ti@:te@
+#termcapinfo $TERM ti@:te@
+termcapinfo xterm|xterms|xs ti@:te=\E[2J
 
 # shell:  Default process started in screen's windows.
 # Makes it possible to use a different shell inside screen
