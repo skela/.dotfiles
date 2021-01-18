@@ -1,6 +1,22 @@
-alias vscode="flatpak run com.visualstudio.code"
+##alias vscode="flatpak run com.visualstudio.code"
+##alias adb="/home/skela/files/sdks/android/platform-tools/adb"
 
-ANDROID_HOME=/home/skela/files/sdks/Android/Sdk
+#ANDROID_HOME=/home/skela/files/sdks/Android/Sdk
 
-export PATH="$PATH:/home/skela/files/sdks/flutter/bin"
-export PATH="$PATH:/home/skela/files/sdks/Android/Sdk/platform-tools"
+#export PATH="$PATH:/home/skela/files/sdks/flutter/bin"
+#export PATH="$PATH:/home/skela/files/sdks/Android/Sdk/platform-tools"
+
+
+alias civ6="LD_PRELOAD=/usr/lib/libfreetype.so steam steam://rungameid/289070"
+alias vscode="code"
+alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
+alias inkscape="flatpak run --branch=beta org.inkscape.Inkscape"
+alias avdmanager="/home/skela/files/sdks/android/cmdline-tools/latest/bin/avdmanager"
+alias adb="/home/skela/files/sdks/android/platform-tools/adb"
+
+export ANDROID_SDK_ROOT="/home/skela/files/sdks/android"
+export ANDROID_HOME=$ANDROID_SDK_ROOT
+export FLUTTER_HOME="/home/skela/files/sdks/flutter"
+
+export PATH="$FLUTTER_HOME/bin:$PATH"
+export PATH="$ANDROID_HOME""tools:$ANDROID_HOME""tools/bin:$ANDROID_HOME""platform-tools:$PATH"
