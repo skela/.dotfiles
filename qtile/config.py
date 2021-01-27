@@ -36,7 +36,9 @@ from libqtile.utils import guess_terminal
 from libqtile import layout, bar, widget, hook
 
 mod = "mod4"
+alt = "mod1"
 terminal = "alacritty"
+launcher = "ulauncher --no-window-shadow"
 
 keys = [
 	# Switch between windows in current stack pane
@@ -104,6 +106,9 @@ keys = [
 	),
 	
 
+	Key([alt,"control"], "Down", lazy.screen.next_group()),
+	Key([alt,"control"], "Up", lazy.screen.prev_group()),
+
 	# Swap panes of split stack
 	Key([mod, "shift"], "space", lazy.layout.rotate(),
 		desc="Swap panes of split stack"),
@@ -116,15 +121,19 @@ keys = [
 		desc="Toggle between split and unsplit sides of stack"),
 	Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
 
+	# Key([mod], "/", lazy.spawn(launcher), desc="Launch launcher"),
+	Key([mod], "r", lazy.spawn(launcher), desc="Launch launcher"),
+	Key([mod], "space", lazy.spawn(launcher), desc="Launch launcher"),
+	# Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+
 	# Toggle between different layouts as defined below
-	Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
+	# Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
 	Key([mod, "shift"], "c",lazy.window.kill(),desc='Kill active window'),
 
 	Key([mod], "q", lazy.restart(), desc="Restart qtile"),
 	Key([mod, "shift"], "r", lazy.restart(), desc="Restart qtile"),
 
-	Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown qtile"),
-	Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+	Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown qtile"),	
 ]
 
 groups = [Group(i) for i in "asdfuiop"]
@@ -145,7 +154,7 @@ for i in groups:
 	])
 
 layout_theme = {
-	"border_width": 2,
+	"border_width": 1,
 	"margin": 6,
 	"border_focus": "C3242B",
 	"border_normal": "1D2330"
@@ -177,20 +186,20 @@ extension_defaults = widget_defaults.copy()
 screens = [
 	Screen(
 		top=bar.Bar(
-			[
-				widget.CurrentLayout(),
-				widget.GroupBox(),
-				widget.Prompt(),
+			[								
 				widget.WindowName(),
 				widget.Chord(
 					chords_colors={
 						'launch': ("#ff0000", "#ffffff"),
 					},
 					name_transform=lambda name: name.upper(),
-				),				
+				),
+				widget.Prompt(),				
+				widget.GroupBox(),
 				widget.Systray(),
-				widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
+				widget.Clock(format='%Y-%m-%d %a %H:%M'),
 				widget.QuickExit(),
+				widget.CurrentLayout(),
 			],
 			24,
 		),
@@ -226,7 +235,9 @@ floating_layout = layout.Floating(float_rules=[
 	{'wmclass': 'makebranch'},  # gitk
 	{'wmclass': 'maketag'},  # gitk
 	{'wname': 'branchdialog'},  # gitk
-	{'wname': 'pinentry'},  # GPG key password entry
+	{'wname': 'pinentry'},  # GPG key password entry,
+	{'wmclass': 'ulauncher'},
+	{'wname': 'Ulauncher'},
 	{'wmclass': 'ssh-askpass'},  # ssh-askpass
 ])
 auto_fullscreen = True

@@ -1,5 +1,5 @@
 #! /bin/bash 
-# lxsession &
+lxsession &
 picom --experimental-backends &
 nitrogen --restore &
 # urxvtd -q -o -f &
