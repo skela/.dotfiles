@@ -128,6 +128,7 @@ linkup('alacritty.yml','config/alacritty/alacritty.yml')
 linkup('private/irssiconfig','irssi/config')
 linkup('private/irssitheme','irssi/default.theme')
 linkup('zshrc')
+linkup('config.fish','config/fish/config.fish')
 linkup('qtile','config/qtile')
 
 # Packages

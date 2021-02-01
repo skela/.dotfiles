@@ -13,6 +13,7 @@ alias inkscape="flatpak run --branch=beta org.inkscape.Inkscape"
 alias avdmanager="/home/skela/files/sdks/android/cmdline-tools/latest/bin/avdmanager"
 alias adb="/home/skela/files/sdks/android/platform-tools/adb"
 alias cat="bat"
+alias camera="/home/skela/.dotfiles/scripts/camera.py"
 
 export ANDROID_SDK_ROOT="/home/skela/files/sdks/android"
 export ANDROID_HOME=$ANDROID_SDK_ROOT
