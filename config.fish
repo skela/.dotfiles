@@ -222,6 +222,9 @@ function hg_get_state -d "Get mercurial working directory state"
   end
 end
 
+function git_link -d "Get URL for commit"
+	git rev-parse HEAD
+end
 
 function prompt_git -d "Display the current git state"
   set -l ref
@@ -315,10 +318,16 @@ function fish_prompt
   prompt_finish
 end
 
-if [ -f ~/.aliases ]
-    . ~/.aliases
+function reload_aliases -d "Reload aliases"
+	if [ -f ~/.aliases ]
+		. ~/.aliases
+	end
+
+	if [ -f ~/.dotfiles/aliases ]
+		. ~/.dotfiles/aliases
+	end
 end
 
-if [ -f ~/.dotfiles/aliases ]
-    . ~/.dotfiles/aliases
+function reload -d "Reload Config"
+	reload_aliases
 end
