@@ -222,8 +222,14 @@ function hg_get_state -d "Get mercurial working directory state"
   end
 end
 
-function git_link -d "Get URL for commit"
-	git rev-parse HEAD
+function gitl -d "Get URL for commit"
+	begin
+		set GIT_COMMIT (git rev-parse HEAD)
+		set GIT_REMOTE_INFO (git remote show origin)
+		set GIT_HOST (echo $GIT_REMOTE_INFO | grep 'Fetch' | cut -d ':' -f2 | string replace --filter "git@" "" | string trim)
+		set GIT_REPO (echo $GIT_REMOTE_INFO | grep 'Fetch' | cut -d ':' -f3 | cut -d ' ' -f1 | string replace --filter ".git" "")
+		printf 'https://%s/%s/commit/%s ' $GIT_HOST $GIT_REPO $GIT_COMMIT		
+	end
 end
 
 function prompt_git -d "Display the current git state"
