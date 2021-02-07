@@ -225,9 +225,9 @@ end
 function gitl -d "Get URL for commit"
 	begin
 		set GIT_COMMIT (git rev-parse HEAD)
-		set GIT_REMOTE_INFO (git remote show origin)
-		set GIT_HOST (echo $GIT_REMOTE_INFO | grep 'Fetch' | cut -d ':' -f2 | string replace --filter "git@" "" | string trim)
-		set GIT_REPO (echo $GIT_REMOTE_INFO | grep 'Fetch' | cut -d ':' -f3 | cut -d ' ' -f1 | string replace --filter ".git" "")
+		set GIT_REMOTE_INFO (git remote get-url --all origin)
+		set GIT_HOST (echo $GIT_REMOTE_INFO | cut -d ':' -f1 | string replace --filter "git@" "" | string trim)
+		set GIT_REPO (echo $GIT_REMOTE_INFO | cut -d ':' -f2 | cut -d ' ' -f1 | string replace --filter ".git" "")
 		set GIT_LINK (printf 'https://%s/%s/commit/%s ' $GIT_HOST $GIT_REPO $GIT_COMMIT)
 		echo $GIT_LINK
 		echo $GIT_LINK | xclip -selection clipboard
