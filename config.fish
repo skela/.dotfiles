@@ -230,7 +230,12 @@ function gitl -d "Get URL for commit"
 		set GIT_REPO (echo $GIT_REMOTE_INFO | cut -d ':' -f2 | cut -d ' ' -f1 | string replace --filter ".git" "")
 		set GIT_LINK (printf 'https://%s/%s/commit/%s ' $GIT_HOST $GIT_REPO $GIT_COMMIT)
 		echo $GIT_LINK
-		echo $GIT_LINK | xclip -selection clipboard
+		switch (uname -s)
+		case Linux
+			echo $GIT_LINK | xclip -selection clipboard
+		case Darwin
+			echo $GIT_LINK | pbcopy
+		end
 	end
 end
 
