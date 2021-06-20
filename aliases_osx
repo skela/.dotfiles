@@ -1,10 +1,11 @@
 alias fixInkscape='wmctrl -r Inkscape -e 0,2560,1440,1200,700'
 alias fixInkscapeDocumentProperties='wmctrl -r Document\ Properties -e 0,2560,1440,1200,700'
 alias fastlane="/Users/skela/.gem/ruby/2.6.0/bin/fastlane"
-alias screen="/usr/local/bin/screen"
+#alias screen="/usr/local/bin/screen"
 export PATH="$PATH:/Users/skela/Files/SDKs/flutter/bin"
 export PATH="$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 #alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 
