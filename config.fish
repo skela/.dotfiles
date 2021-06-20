@@ -243,7 +243,12 @@ function gitc -d "Get commit id"
 	begin
 		set GIT_COMMIT (git rev-parse HEAD)
 		echo $GIT_COMMIT
-		echo $GIT_COMMIT | xclip -selection clipboard
+		switch (uname -s)
+		case Linux
+			echo $GIT_COMMIT | xclip -selection clipboard
+		case Darwin
+			echo $GIT_COMMIT | pbcopy
+		end
 	end
 end
 
