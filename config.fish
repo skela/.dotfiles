@@ -234,6 +234,14 @@ function gitl -d "Get URL for commit"
 	end
 end
 
+function gitc -d "Get commit id"
+	begin
+		set GIT_COMMIT (git rev-parse HEAD)
+		echo $GIT_COMMIT
+		echo $GIT_COMMIT | xclip -selection clipboard
+	end
+end
+
 function prompt_git -d "Display the current git state"
   set -l ref
   set -l dirty

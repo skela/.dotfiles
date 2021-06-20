@@ -1,5 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/skela/.dotfiles'
-let g:netrw_dirhist_2='/Users/skela/code/introlabs/constructor/download/appd'
-let g:netrw_dirhist_3='/Users/skela/.dotfiles/zsh_customizations/themes'
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/usr/share/applications'
