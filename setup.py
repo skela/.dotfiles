@@ -129,7 +129,7 @@ linkup('private/irssiconfig','irssi/config')
 linkup('private/irssitheme','irssi/default.theme')
 linkup('zshrc')
 linkup('config.fish','config/fish/config.fish')
-linkup('qtile','config/qtile')
+linkup('config/qtile','config/qtile')
 
 # Packages
 if should_install_packages:
