@@ -26,6 +26,8 @@
 
 import os
 import subprocess
+from os import path
+from settings.path import qtile_path
 
 from typing import List  # noqa: F401
 
@@ -37,8 +39,13 @@ from libqtile import layout, bar, widget, hook
 
 mod = "mod4"
 alt = "mod1"
+shift = "shift"
+control = "control"
+
 terminal = "alacritty"
+files = "nautilus"
 launcher = "ulauncher --no-window-shadow"
+lock_screen = 'betterlockscreen -l dim -t ":)" --off 5'
 
 keys = [
 	# Switch between windows in current stack pane
@@ -78,74 +85,115 @@ keys = [
 	# Move windows in current stack pane -> I'd like to have this, but
 	# move_* commands do not exist
 	Key(
-		[mod, "shift"], "Down",
+		[mod, shift], "Down",
 		lazy.layout.shuffle_down()
 	),
 	Key(
-		[mod, "shift"], "Up",
+		[mod, shift], "Up",
 		lazy.layout.shuffle_up()
 	),
 
 	Key(
-		[mod, "shift"], "Left",		
+		[mod, shift], "Left",		
 		lazy.layout.client_to_previous()
 	),
 	Key(
-		[mod, "shift"], "Right",
+		[mod, shift], "Right",
 		lazy.layout.client_to_next()
 	),
 
 	# Move windows up or down in current stack
 	Key(
-		[mod, "control"], "k",
+		[mod, control], "k",
 		lazy.layout.shuffle_down()
 	),
 	Key(
-		[mod, "control"], "j",
+		[mod, control], "j",
 		lazy.layout.shuffle_up()
 	),
 	
 
-	Key([alt,"control"], "Down", lazy.screen.next_group()),
-	Key([alt,"control"], "Up", lazy.screen.prev_group()),
+	Key([alt,control], "Down", lazy.screen.next_group()),
+	Key([alt,control], "Up", lazy.screen.prev_group()),
+	Key([alt,control], "Left", lazy.next_screen()),
+	Key([alt,control], "Right", lazy.prev_screen()),
 
 	# Swap panes of split stack
-	Key([mod, "shift"], "space", lazy.layout.rotate(),
+	Key([mod, shift], "space", lazy.layout.rotate(),
 		desc="Swap panes of split stack"),
 
 	# Toggle between split and unsplit sides of stack.
 	# Split = all windows displayed
 	# Unsplit = 1 window displayed, like Max layout, but still with
 	# multiple stack panes
-	Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
-		desc="Toggle between split and unsplit sides of stack"),
+	Key([mod, shift], "Return", lazy.layout.toggle_split(),desc="Toggle between split and unsplit sides of stack"),
 	Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
 
+	Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
+	Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
 	# Key([mod], "/", lazy.spawn(launcher), desc="Launch launcher"),
 	Key([mod], "r", lazy.spawn(launcher), desc="Launch launcher"),
 	Key([mod], "space", lazy.spawn(launcher), desc="Launch launcher"),
+	Key([mod], "n", lazy.spawn(files), desc="Launch file browser"),
 	# Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-
+    Key([alt,control],"q" , lazy.spawn(lock_screen), desc="Lock screen"),
 	# Toggle between different layouts as defined below
 	# Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
-	Key([mod, "shift"], "c",lazy.window.kill(),desc='Kill active window'),
+	Key([mod, shift], "c",lazy.window.kill(),desc='Kill active window'),
+	Key([mod], "q", lazy.window.kill(), desc="Kill active window"),
 
-	Key([mod], "q", lazy.restart(), desc="Restart qtile"),
-	Key([mod, "shift"], "r", lazy.restart(), desc="Restart qtile"),
+	Key([mod, shift], "r", lazy.restart(), desc="Restart qtile"),
 
-	Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown qtile"),	
+	Key([mod, shift], "q", lazy.shutdown(), desc="Shutdown qtile"),	
 ]
 
-groups = [Group(i) for i in "asdfuiop"]
+class Workspace(object):
 
-for i in groups:
+	def __init__(self,name:str,shortcut:str=None,layout:str="monadtall"):
+		self.name = name
+		self.layout = layout
+		self.shortcut = shortcut
+
+	def group(self):
+		return Group(self.name,layout=self.layout)
+
+workspaces = [
+	Workspace("1","1"),
+	Workspace("2","2"),
+	Workspace("3","3"),
+	Workspace("4","4"),
+	Workspace("5","5"),
+	Workspace("6","6"),
+	Workspace("gfx","7",layout="floating"),
+	Workspace("chat","8"),
+	Workspace("email","9"),
+	Workspace("web","0"),
+]
+
+groups = list()
+
+def go_to_group(group):
+	#lazy.group[group.name].toscreen()
+	def f(qtile):
+		if group.name == "0":
+			qtile.cmd_to_screen(0)
+			qtile.groupMap[group.name].cmd_toscreen()
+		else:
+			qtile.cmd_to_screen(1)
+			qtile.groupMap[group.name].cmd_toscreen()
+	return f
+
+for ws in workspaces:
+	i = ws.group()
+	groups.append(i)
+	if ws.shortcut is None:
+		continue
 	keys.extend([
 		# mod1 + letter of group = switch to group
-		Key([mod], i.name, lazy.group[i.name].toscreen(),
-			desc="Switch to group {}".format(i.name)),
+		Key([mod], ws.shortcut, lazy.group[i.name].toscreen(),desc="Switch to group {}".format(i.name)),
 
 		# mod1 + shift + letter of group = switch to & move focused window to group
-		Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
+		Key([mod, shift], ws.shortcut, lazy.window.togroup(i.name, switch_group=True),
 			desc="Switch to & move focused window to group {}".format(i.name)),
 		# Or, use below if you prefer not to switch to that group.
 		# # mod1 + shift + letter of group = move focused window to group
@@ -156,6 +204,8 @@ for i in groups:
 layout_theme = {
 	"border_width": 1,
 	"margin": 6,
+	"single_margin":0,
+	"single_border_width":0,	
 	"border_focus": "C3242B",
 	"border_normal": "1D2330"
 }
@@ -163,7 +213,8 @@ layout_theme = {
 layouts = [
 	layout.MonadTall(**layout_theme),
 	layout.Max(**layout_theme),
-	layout.Stack(num_stacks=2),	
+	layout.Stack(num_stacks=2),
+	layout.Floating(**layout_theme),
 	# Try more layouts by unleashing below layouts.
 	# layout.Bsp(),
 	# layout.Columns(),
@@ -183,27 +234,36 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-screens = [
+def sep():
+	return widget.Sep(padding=6,linewidth=1)
+
+screens = [	
 	Screen(
 		top=bar.Bar(
-			[								
-				widget.WindowName(),
-				widget.Chord(
-					chords_colors={
-						'launch': ("#ff0000", "#ffffff"),
-					},
-					name_transform=lambda name: name.upper(),
-				),
-				widget.Prompt(),				
+			[
 				widget.GroupBox(),
-				widget.Systray(),
-				widget.Clock(format='%Y-%m-%d %a %H:%M'),
-				widget.QuickExit(),
+				sep(),
+				widget.WindowName(),
+				widget.Prompt(),
+				widget.Clock(format='%H:%M (%a) %d-%m-%Y'),
+				sep(),
 				widget.CurrentLayout(),
+				widget.CurrentLayoutIcon(scale=0.6),
+				sep(),
+				widget.Volume(fmt="🔈{}"),
+				sep(),
+				widget.KeyboardLayout(configured_keyboards=["gb","no"]),
+				sep(),
+				widget.Systray(),
 			],
-			24,
+			size=24,
+			# background="#00ff0000",
+			# opacity=0
+			
+			
 		),
 	),
+	Screen(),	
 ]
 
 # Drag floating layouts.
@@ -244,9 +304,8 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 
 @hook.subscribe.startup_once
-def start_once():
-	home = os.path.expanduser('~')
-	subprocess.call([home + '/.config/qtile/startup.sh'])
+def autostart():	
+	subprocess.call([path.join(qtile_path, 'autostart.sh')])
 
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
