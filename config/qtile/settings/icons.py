@@ -3,18 +3,20 @@
 class Icons(object):
 
 	def __init__(self):
-		self.term = ""
+		self.term = ""
 		self.dev = "襁"
 		self.misc = ""
 		self.three_d = ""
-		self.gfx = ""
+		self.gfx = ""
 		self.games = ""
 		self.music = ""
 		self.chat = ""
 		self.email = ""
 		self.web = ""
 		self.cam = ""
-
+		
+		self.network = ""
+		self.clock = ""
 		self.volume = "墳"
 		self.keyboard = ""
 		self.battery = ""
