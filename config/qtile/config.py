@@ -39,6 +39,9 @@ from libqtile.utils import guess_terminal
 from libqtile import layout, bar, widget, hook, qtile
 from settings.icons import Icons
 
+# Required programs:
+# alacritty, flameshot, playerctl
+
 mod = "mod4"
 alt = "mod1"
 shift = "shift"
@@ -171,6 +174,9 @@ keys = [
 	# Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),	
 	Key([mod], "q", lazy.window.kill(), desc="Kill active window"),
 
+	Key([mod], "s", lazy.spawn("flameshot screen -p ~/"), desc="Take screenshot of current monitor"),
+	Key([mod,shift], "s", lazy.spawn("flameshot gui"), desc="Take screenshot (interactive)"),
+
 	Key([],"XF86AudioRaiseVolume", lazy.spawn(vol_up)),
 	Key([],"XF86AudioLowerVolume",lazy.spawn(vol_down)),
 	Key([],"XF86AudioMute",lazy.spawn(vol_mute)),
@@ -210,8 +216,8 @@ workspaces = [
 	Workspace("music","7",icon=icons.music),
 	Workspace("chat","8",icon=icons.chat,matches=[Match(wm_class="Slack")]),
 	Workspace("email","9",icon=icons.email,matches=[Match(wm_class="Thunderbird")]),
-	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="Firefox"),Match(wm_class="firefoxdeveloperedition")]),
 	Workspace("cam","c",icon=icons.cam,matches=[Match(wm_class="onvifviewer"),Match(wm_class="cctv-viewer")]),
+	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="Firefox"),Match(wm_class="firefoxdeveloperedition")]),	
 ]
 
 groups = list()
