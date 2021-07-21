@@ -28,7 +28,7 @@ import os
 import asyncio
 import subprocess
 from os import path
-from settings.path import qtile_path
+from settings.path import qtile_path, home_path
 
 from typing import List  # noqa: F401
 
@@ -169,12 +169,13 @@ keys = [
 	Key([mod], "space", lazy.spawn(launcher), desc="Launch launcher"),
 	Key([mod], "n", lazy.spawn(files), desc="Launch file browser"),
 	# Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+	
     Key([alt,control],"q" , lazy.spawn(lock_screen), desc="Lock screen"),
 	# Toggle between different layouts as defined below
 	# Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),	
 	Key([mod], "q", lazy.window.kill(), desc="Kill active window"),
 
-	Key([mod], "s", lazy.spawn("flameshot screen -p ~/"), desc="Take screenshot of current monitor"),
+	Key([mod], "s", lazy.spawn(f"flameshot screen -p {home_path}"), desc="Take screenshot of current monitor"),
 	Key([mod,shift], "s", lazy.spawn("flameshot gui"), desc="Take screenshot (interactive)"),
 
 	Key([],"XF86AudioRaiseVolume", lazy.spawn(vol_up)),
