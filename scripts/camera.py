@@ -8,6 +8,7 @@ import threading
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-n', '--names', help="The name(s) of the camera(s) (comma separated if multiple)")
+parser.add_argument('-i', '--ip', help="An ip address")
 args = parser.parse_args()
 
 class Camera(object):
@@ -61,12 +62,15 @@ class Cameras(object):
 						cameras.append(camera)
 				if len(cameras) > 0:
 					return cameras
-		return NOne
+		return None
 
 names = args.names
 chosen_cameras = list()
 
-names = names.split(",")
+if names is not None:
+	names = names.split(",")
+else:
+	names = []
 
 cameras = Cameras()
 for name in names:	
@@ -77,6 +81,9 @@ for name in names:
 		collection = cameras.get_collection(name)
 		if collection is not None:
 			chosen_cameras.extend(collection)
+
+if args.ip is not None:
+	chosen_cameras.append(Camera({"name":"temp","src":f"rtsp://{args.ip}/12:554"}))
 
 if len(chosen_cameras) == 0:
 	exit(f"No cameras found with the name {name}")	

@@ -204,13 +204,14 @@ workspaces = [
 	Workspace("term","1",icon=icons.term),
 	Workspace("dev","2",icon=icons.dev,matches=[Match(wm_class="code")]),
 	Workspace("misc","3",icon=icons.misc,matches=[Match(wm_class="Pamac-manager")]),
-	Workspace("3d","4",icon=icons.three_d,matches=[Match(wm_class="Blender"),Match(wm_class="cura")]),
+	Workspace("3d","4",icon=icons.three_d,matches=[Match(wm_class="Blender"),Match(wm_class="cura"),Match(title="Creality Slicer")]),
 	Workspace("gfx","5",layout="floating",icon=icons.gfx,matches=[Match(wm_class="Inkscape"),Match(title="GNU Image Manipulation Program")]),
 	Workspace("games","6",icon=icons.games,matches=[Match(wm_class="Steam")]),
 	Workspace("music","7",icon=icons.music),
 	Workspace("chat","8",icon=icons.chat,matches=[Match(wm_class="Slack")]),
 	Workspace("email","9",icon=icons.email,matches=[Match(wm_class="Thunderbird")]),
 	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="Firefox"),Match(wm_class="firefoxdeveloperedition")]),
+	Workspace("cam","c",icon=icons.cam,matches=[Match(wm_class="onvifviewer"),Match(wm_class="cctv-viewer")]),
 ]
 
 groups = list()
@@ -361,14 +362,10 @@ def check_window_name(window,name:str) -> bool:
 	return name == n
 
 @hook.subscribe.client_new
-async def client_new(window):	
-	if window.name.startswith("Creality"):
-		window.togroup("3d")
-	else:
-		await asyncio.sleep(0.02)
-		if check_window_name(window,"spotify") or check_window_name(window,"spotify premium"):
-			window.togroup("music")
-
+async def client_new(window):		
+	await asyncio.sleep(0.02)
+	if check_window_name(window,"spotify") or check_window_name(window,"spotify premium"):
+		window.togroup("music")
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
