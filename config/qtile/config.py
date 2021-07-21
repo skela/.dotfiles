@@ -25,6 +25,7 @@
 # SOFTWARE.
 
 import os
+import asyncio
 import subprocess
 from os import path
 from settings.path import qtile_path
@@ -32,10 +33,11 @@ from settings.path import qtile_path
 from typing import List  # noqa: F401
 
 from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Screen
+from libqtile.config import Click, Drag, Group, Key, Screen, Match
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from libqtile import layout, bar, widget, hook
+from libqtile import layout, bar, widget, hook, qtile
+from settings.icons import Icons
 
 mod = "mod4"
 alt = "mod1"
@@ -46,6 +48,20 @@ terminal = "alacritty"
 files = "nautilus"
 launcher = "ulauncher --no-window-shadow"
 lock_screen = 'betterlockscreen -l dim -t ":)" --off 5'
+
+vol_cur = "amixer -D pulse get Master"
+vol_up = "amixer -q -D pulse set Master 2%+"
+vol_down = "amixer -q -D pulse set Master 2%-"
+vol_mute = "amixer -q -D pulse set Master toggle"
+
+player_prev = "playerctl previous --player=spotify"
+player_next = "playerctl next --player=spotify"
+player_play_pause = "playerctl play-pause --player=spotify"
+player_stop = "playerctl stop --player=spotify"
+
+icons = Icons()
+
+# Keys
 
 keys = [
 	# Switch between windows in current stack pane
@@ -118,6 +134,21 @@ keys = [
 	Key([alt,control], "Left", lazy.next_screen()),
 	Key([alt,control], "Right", lazy.prev_screen()),
 
+	Key([mod], "minus",
+		lazy.layout.shrink(),
+		lazy.layout.decrease_nmaster(),
+		desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
+		),
+	Key([mod], "equal",
+		lazy.layout.grow(),
+		lazy.layout.increase_nmaster(),
+		desc='Expand window (MonadTall), increase number in master pane (Tile)'
+		),
+	Key([mod], "r",
+		lazy.layout.reset(),
+		desc='normalize window size ratios'
+		),
+
 	# Swap panes of split stack
 	Key([mod, shift], "space", lazy.layout.rotate(),
 		desc="Swap panes of split stack"),
@@ -131,17 +162,23 @@ keys = [
 
 	Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
 	Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
-	# Key([mod], "/", lazy.spawn(launcher), desc="Launch launcher"),
-	Key([mod], "r", lazy.spawn(launcher), desc="Launch launcher"),
+	# Key([mod], "/", lazy.spawn(launcher), desc="Launch launcher"),	
 	Key([mod], "space", lazy.spawn(launcher), desc="Launch launcher"),
 	Key([mod], "n", lazy.spawn(files), desc="Launch file browser"),
 	# Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([alt,control],"q" , lazy.spawn(lock_screen), desc="Lock screen"),
 	# Toggle between different layouts as defined below
-	# Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
-	Key([mod, shift], "c",lazy.window.kill(),desc='Kill active window'),
+	# Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),	
 	Key([mod], "q", lazy.window.kill(), desc="Kill active window"),
 
+	Key([],"XF86AudioRaiseVolume", lazy.spawn(vol_up)),
+	Key([],"XF86AudioLowerVolume",lazy.spawn(vol_down)),
+	Key([],"XF86AudioMute",lazy.spawn(vol_mute)),
+	Key([],"XF86AudioNext",lazy.spawn(player_next)),
+	Key([],"XF86AudioPrev",lazy.spawn(player_prev)),
+	Key([],"XF86AudioPlay",lazy.spawn(player_play_pause)),
+	Key([],"XF86AudioStop",lazy.spawn(player_stop)),
+	
 	Key([mod, shift], "r", lazy.restart(), desc="Restart qtile"),
 
 	Key([mod, shift], "q", lazy.shutdown(), desc="Shutdown qtile"),	
@@ -149,25 +186,31 @@ keys = [
 
 class Workspace(object):
 
-	def __init__(self,name:str,shortcut:str=None,layout:str="monadtall"):
+	def __init__(self,name:str,shortcut:str=None,layout:str="monadtall",icon:str=None,matches:list=None):
 		self.name = name
 		self.layout = layout
 		self.shortcut = shortcut
+		self.matches = matches
+		if icon is not None:
+			self.label = icon
+		else:
+			self.label = self.name
 
 	def group(self):
-		return Group(self.name,layout=self.layout)
+		return Group(self.name,layout=self.layout,label=self.label,matches=self.matches)
 
+# Use `xprop WM_CLASS` to find wm classes for a window
 workspaces = [
-	Workspace("1","1"),
-	Workspace("2","2"),
-	Workspace("3","3"),
-	Workspace("4","4"),
-	Workspace("5","5"),
-	Workspace("6","6"),
-	Workspace("gfx","7",layout="floating"),
-	Workspace("chat","8"),
-	Workspace("email","9"),
-	Workspace("web","0"),
+	Workspace("term","1",icon=icons.term),
+	Workspace("dev","2",icon=icons.dev,matches=[Match(wm_class="code")]),
+	Workspace("misc","3",icon=icons.misc,matches=[Match(wm_class="Pamac-manager")]),
+	Workspace("3d","4",icon=icons.three_d,matches=[Match(wm_class="Blender"),Match(wm_class="cura")]),
+	Workspace("gfx","5",layout="floating",icon=icons.gfx,matches=[Match(wm_class="Inkscape"),Match(title="GNU Image Manipulation Program")]),
+	Workspace("games","6",icon=icons.games,matches=[Match(wm_class="Steam")]),
+	Workspace("music","7",icon=icons.music),
+	Workspace("chat","8",icon=icons.chat,matches=[Match(wm_class="Slack")]),
+	Workspace("email","9",icon=icons.email,matches=[Match(wm_class="Thunderbird")]),
+	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="Firefox"),Match(wm_class="firefoxdeveloperedition")]),
 ]
 
 groups = list()
@@ -241,7 +284,13 @@ screens = [
 	Screen(
 		top=bar.Bar(
 			[
-				widget.GroupBox(),
+				widget.GroupBox(
+					highlight_method="line",
+					highlight_color=["000000","000000"],
+					this_current_screen_border="ff0000", # focus
+					this_screen_border="dddddd", # not focus
+					other_current_screen_border="ff0000", # focus
+				),
 				sep(),
 				widget.WindowName(),
 				widget.Prompt(),
@@ -250,10 +299,17 @@ screens = [
 				widget.CurrentLayout(),
 				widget.CurrentLayoutIcon(scale=0.6),
 				sep(),
-				widget.Volume(fmt="🔈{}"),
+				widget.Volume(fmt=icons.volume+"{}"),
 				sep(),
-				widget.KeyboardLayout(configured_keyboards=["gb","no"]),
+				widget.KeyboardLayout(fmt=icons.keyboard+" {}",configured_keyboards=["gb","no"]),
 				sep(),
+				widget.CheckUpdates(
+					update_interval = 1800,
+					distro = "Arch_checkupdates",
+					display_format = "{updates} Updates",					
+					mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},					
+					),
+
 				widget.Systray(),
 			],
 			size=24,
@@ -268,10 +324,8 @@ screens = [
 
 # Drag floating layouts.
 mouse = [
-	Drag([mod], "Button1", lazy.window.set_position_floating(),
-		 start=lazy.window.get_position()),
-	Drag([mod], "Button3", lazy.window.set_size_floating(),
-		 start=lazy.window.get_size()),
+	Drag([mod], "Button1", lazy.window.set_position_floating(),start=lazy.window.get_position()), # move
+	Drag([mod], "Button3", lazy.window.set_size_floating(),start=lazy.window.get_size()), # resize
 	Click([mod], "Button2", lazy.window.bring_to_front())
 ]
 
@@ -283,29 +337,37 @@ bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
 	# Run the utility of `xprop` to see the wm class and name of an X client.
-	{'wmclass': 'confirm'},
-	{'wmclass': 'dialog'},
-	{'wmclass': 'download'},
-	{'wmclass': 'error'},
-	{'wmclass': 'file_progress'},
-	{'wmclass': 'notification'},
-	{'wmclass': 'splash'},
-	{'wmclass': 'toolbar'},
-	{'wmclass': 'confirmreset'},  # gitk
-	{'wmclass': 'makebranch'},  # gitk
-	{'wmclass': 'maketag'},  # gitk
-	{'wname': 'branchdialog'},  # gitk
-	{'wname': 'pinentry'},  # GPG key password entry,
-	{'wmclass': 'ulauncher'},
-	{'wname': 'Ulauncher'},
-	{'wmclass': 'ssh-askpass'},  # ssh-askpass
+	*layout.Floating.default_float_rules,
+	Match(title="Qalculate!"),
+    Match(wm_class="kdenlive"),
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 
 @hook.subscribe.startup_once
 def autostart():	
-	subprocess.call([path.join(qtile_path, 'autostart.sh')])
+	subprocess.call([path.join(qtile_path, "autostart.sh")])
+
+def check_window_class(window,name:str) -> bool:
+	n = window.wm_class
+	if n is not None:		
+		n = n.lower()
+	return name == n
+
+def check_window_name(window,name:str) -> bool:
+	n = window.name
+	if n is not None:		
+		n = n.lower()
+	return name == n
+
+@hook.subscribe.client_new
+async def client_new(window):	
+	if window.name.startswith("Creality"):
+		window.togroup("3d")
+	else:
+		await asyncio.sleep(0.02)
+		if check_window_name(window,"spotify") or check_window_name(window,"spotify premium"):
+			window.togroup("music")
 
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
