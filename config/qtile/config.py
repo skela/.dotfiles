@@ -218,10 +218,10 @@ workspaces = [
 	Workspace("misc","3",icon=icons.misc,matches=[Match(wm_class="Pamac-manager")]),
 	Workspace("3d","4",icon=icons.three_d,matches=[Match(wm_class="Blender"),Match(wm_class="cura"),Match(title="Creality Slicer")]),
 	Workspace("gfx","5",layout="floating",icon=icons.gfx,matches=[Match(wm_class="Inkscape"),Match(title="GNU Image Manipulation Program")]),
-	Workspace("games","6",icon=icons.games,matches=[Match(wm_class="Steam")]),
-	Workspace("music","7",icon=icons.music),
-	Workspace("chat","8",icon=icons.chat,matches=[Match(wm_class="Slack")]),
-	Workspace("email","9",icon=icons.email,matches=[Match(wm_class="Thunderbird")]),
+	Workspace("chat","6",icon=icons.chat,matches=[Match(wm_class="Slack")]),
+	Workspace("email","7",icon=icons.email,matches=[Match(wm_class="Thunderbird")]),
+	Workspace("games","8",icon=icons.games,matches=[Match(wm_class="Steam")]),
+	Workspace("music","9",icon=icons.music),
 	Workspace("cam","c",icon=icons.cam,matches=[Match(wm_class="onvifviewer"),Match(wm_class="cctv-viewer")]),
 	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="Firefox"),Match(wm_class="firefoxdeveloperedition")]),	
 ]
@@ -304,6 +304,16 @@ screens = [
 					this_screen_border="dddddd", # not focus
 					other_current_screen_border="ff0000", # focus
 					font=icons.font
+				),
+				sep(),				
+				widget.TextBox(
+					text="Heim - Office ",
+					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn('sh ' + path.join(qtile_path, "office_lights.sh"))}
+				),
+				widget.TextBox(
+					text=icons.light,
+					font=icons.font,
+					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn('sh ' + path.join(qtile_path, "office_lights.sh"))}
 				),
 				sep(),
 				widget.CurrentLayoutIcon(scale=0.6),
