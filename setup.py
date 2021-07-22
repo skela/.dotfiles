@@ -2,6 +2,7 @@
 import os
 import sys
 import subprocess
+import argparse
 
 # Future Proofing
 
@@ -101,38 +102,37 @@ def check_package_managers():
 			return
 	log("Warning, failed to identify the package manager for this system.")
 
-# Check arguments
-should_install_packages = 'install' in sys.argv
-should_install_server_packages = 'install_server' in sys.argv
-should_show_help = 'help' in sys.argv
+parser = argparse.ArgumentParser()
+parser.add_argument("--install","-i", help="Install default programs", action="store_true", default=False)
+parser.add_argument("--install_server","-is", help="Install server programs", action="store_true", default=False)
+parser.add_argument("--setup_zsh","-zsh", help="Setup zsh", action="store_true", default=False)
+parser.add_argument("--linkup","-l", help="Link up (create symbolic links to config files)", action="store_true", default=False)
+args = parser.parse_args()
 
-if should_show_help:
-	log("Possible arguments are: help, install, install_server")
-	exit()
+if args.setup_zsh:
+	install_oh_my_zsh()
 
-if should_install_server_packages:
-	should_install_packages = False
-
-install_oh_my_zsh()
-
-# Link up files
-linkup('aliases')
-linkup('bash_profile')
-linkup('bash_profile','bashrc')
-linkup('gitconfig')
-linkup('screenrc')
-linkup('tmux.conf')
-linkup('vimrc')
-linkup('vim')
-linkup('alacritty.yml','config/alacritty/alacritty.yml')
-linkup('private/irssiconfig','irssi/config')
-linkup('private/irssitheme','irssi/default.theme')
-linkup('zshrc')
-linkup('config.fish','config/fish/config.fish')
-linkup('config/qtile','config/qtile')
-
-# Packages
-if should_install_packages:
+if args.install:
 	install_packages()
-elif should_install_server_packages:
+
+if args.install_server:
 	install_packages(server_packages=True)
+
+if args.linkup:	
+	linkup('aliases')
+	linkup('bash_profile')
+	linkup('bash_profile','bashrc')
+	linkup('gitconfig')
+	linkup('screenrc')
+	linkup('tmux.conf')
+	linkup('vimrc')
+	linkup('vim')
+	linkup('alacritty.yml','config/alacritty/alacritty.yml')
+	# linkup('private/irssiconfig','irssi/config')
+	# linkup('private/irssitheme','irssi/default.theme')
+	linkup('zshrc')
+	linkup('config.fish','config/fish/config.fish')
+	linkup('config/qtile','config/qtile')
+	linkup('config/flameshot/flameshot.ini','config/flameshot/flameshot.ini')
+	linkup('config/picom/picom.conf','config/picom/picom.conf')
+	
