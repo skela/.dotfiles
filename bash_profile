@@ -85,3 +85,4 @@ eval $(/usr/libexec/path_helper -s)
 
 export PATH="$HOME/.fastlane/bin:$PATH"
 
+. "$HOME/.cargo/env"
