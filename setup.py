@@ -61,6 +61,11 @@ def linkup(filename,destfilename=None):
 	cmd = 'ln -s ' +src + ' ' + dst
 	os.system(cmd)
 
+def mkdir_if_needed(folder:str):
+	dst = '~/.'+folder
+	cmd = f'mkdir -p {dst}'
+	os.system(cmd)
+
 def has_app(app,arg=None): # app = "brew"
 	try:
 		if arg is None:
@@ -127,12 +132,15 @@ if args.linkup:
 	linkup('tmux.conf')
 	linkup('vimrc')
 	linkup('vim')
+	mkdir_if_needed('config/alacritty')
 	linkup('alacritty.yml','config/alacritty/alacritty.yml')
 	# linkup('private/irssiconfig','irssi/config')
 	# linkup('private/irssitheme','irssi/default.theme')
-	linkup('zshrc')
+	linkup('zshrc')	
+	mkdir_if_needed('config/fish')
 	linkup('config.fish','config/fish/config.fish')
 	linkup('config/qtile','config/qtile')
+	mkdir_if_needed('config/flameshot')
 	linkup('config/flameshot/flameshot.ini','config/flameshot/flameshot.ini')
-	linkup('config/picom/picom.conf','config/picom/picom.conf')
+	linkup('config/picom','config/picom')
 	
