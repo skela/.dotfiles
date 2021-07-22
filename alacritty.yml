@@ -179,9 +179,9 @@ font:
 # Colors (Tomorrow Night)
 colors:
   # Default colors
-  #primary:
-  #  background: '#1d1f21'
-  #  foreground: '#c5c8c6'
+  primary:
+    background: '#000000'
+    foreground: '#c5c8c6'
 
     # Bright and dim foreground colors
     #
@@ -241,7 +241,8 @@ colors:
 
   # Normal colors
   normal:
-   black:   '#1d1f21'
+  #  black:   '#1d1f21'
+   black:   '#000000'
    red:     '#C3242B'
    green:   '#5B9B4B'
    yellow:  '#f0c674'
@@ -249,7 +250,7 @@ colors:
    magenta: '#b294bb'
    cyan:    '#8abeb7'
    white:   '#c5c8c6'
-
+     
   # Bright colors
   #bright:
   #  black:   '#666666'
@@ -330,7 +331,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 1.0
+background_opacity: 0.8
 
 # selection:
   # This string contains all characters that are used as separators for

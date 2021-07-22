@@ -106,23 +106,23 @@ keys = [
 
 	# Move windows in current stack pane -> I'd like to have this, but
 	# move_* commands do not exist
-	Key(
-		[mod, shift], "Down",
-		lazy.layout.shuffle_down()
-	),
-	Key(
-		[mod, shift], "Up",
-		lazy.layout.shuffle_up()
-	),
+	# Key(
+	# 	[mod, shift], "Down",
+	# 	lazy.layout.shuffle_down()
+	# ),
+	# Key(
+	# 	[mod, shift], "Up",
+	# 	lazy.layout.shuffle_up()
+	# ),
 
-	Key(
-		[mod, shift], "Left",		
-		lazy.layout.client_to_previous()
-	),
-	Key(
-		[mod, shift], "Right",
-		lazy.layout.client_to_next()
-	),
+	# Key(
+	# 	[mod, shift], "Left",		
+	# 	lazy.layout.client_to_previous()
+	# ),
+	# Key(
+	# 	[mod, shift], "Right",
+	# 	lazy.layout.client_to_next()
+	# ),
 
 	# Move windows up or down in current stack
 	Key(
@@ -134,11 +134,13 @@ keys = [
 		lazy.layout.shuffle_up()
 	),
 	
+	Key([control,alt], "Left", lazy.prev_group()),
+	Key([control,alt], "Right", lazy.next_group()),
+	Key([control,alt], "Up", lazy.prev_group()),
+	Key([control,alt], "Down", lazy.next_group()),
 
-	Key([alt,control], "Down", lazy.screen.next_group()),
-	Key([alt,control], "Up", lazy.screen.prev_group()),
-	Key([alt,control], "Left", lazy.next_screen()),
-	Key([alt,control], "Right", lazy.prev_screen()),
+	Key([alt,control,shift], "Left", lazy.next_screen()),
+	Key([alt,control,shift], "Right", lazy.prev_screen()),
 
 	Key([mod], "minus",
 		lazy.layout.shrink(),
@@ -211,7 +213,7 @@ class Workspace(object):
 
 # Use `xprop WM_CLASS` to find wm classes for a window
 workspaces = [
-	Workspace("term","1",icon=icons.term),
+	Workspace("home","1",icon=icons.home),
 	Workspace("dev","2",icon=icons.dev,matches=[Match(wm_class="code")]),
 	Workspace("misc","3",icon=icons.misc,matches=[Match(wm_class="Pamac-manager")]),
 	Workspace("3d","4",icon=icons.three_d,matches=[Match(wm_class="Blender"),Match(wm_class="cura"),Match(title="Creality Slicer")]),
@@ -301,20 +303,24 @@ screens = [
 					this_current_screen_border="ff0000", # focus
 					this_screen_border="dddddd", # not focus
 					other_current_screen_border="ff0000", # focus
+					font=icons.font
 				),
-				sep(),
-				widget.WindowName(),
-				widget.Prompt(),
-				widget.Net(fmt=icons.network + " {}",format="{down} ↓↑ {up}"),				
-				sep(),
-				widget.Clock(fmt=icons.clock + " {}",format='%H:%M (%a) %d-%m-%Y'),				
 				sep(),
 				widget.CurrentLayoutIcon(scale=0.6),
 				widget.CurrentLayout(),				
 				sep(),
-				widget.Volume(fmt=icons.volume+"{}"),
+				widget.WindowName(),
+				widget.Prompt(),
+				# widget.Net(fmt=icons.network + " {}",format="{down} ↓↑ {up}"),				
 				sep(),
-				widget.KeyboardLayout(fmt=icons.keyboard+" {}",configured_keyboards=["gb","no"]),
+				widget.TextBox(text=icons.clock,font=icons.font),
+				widget.Clock(format='%H:%M (%a) %d-%m-%Y'),				
+				sep(),
+				widget.TextBox(text=icons.volume,font=icons.font),
+				widget.Volume(),
+				sep(),
+				widget.TextBox(text=icons.keyboard,font=icons.font),
+				widget.KeyboardLayout(configured_keyboards=["gb","no"]),
 				sep(),
 				widget.CheckUpdates(
 					update_interval = 1800,
@@ -323,7 +329,8 @@ screens = [
 					mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},					
 					),
 
-				widget.Systray(),
+				widget.Systray(padding=8),
+				widget.Spacer(length=6),
 			],
 			size=24,
 			# background="#00ff0000",
