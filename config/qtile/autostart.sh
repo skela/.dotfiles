@@ -1,7 +1,6 @@
-#! /bin/bash 
+#! /bin/bash
+
+sh /home/skela/.screenlayout/layout.sh
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-# picom --experimental-backends &
+picom --experimental-backends &
 nitrogen --restore &
-# urxvtd -q -o -f &
-#volumeicon &
-# nm-applet &

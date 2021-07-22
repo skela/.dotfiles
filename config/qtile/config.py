@@ -64,6 +64,9 @@ player_stop = "playerctl stop --player=spotify"
 
 icons = Icons()
 
+margin = 6
+single_margin = 6
+
 # Keys
 
 keys = [
@@ -254,9 +257,9 @@ for ws in workspaces:
 
 layout_theme = {
 	"border_width": 1,
-	"margin": 6,
-	"single_margin":0,
-	"single_border_width":0,	
+	"margin": margin,
+	"single_margin": single_margin,
+	"single_border_width": 0,
 	"border_focus": "C3242B",
 	"border_normal": "1D2330"
 }
@@ -324,9 +327,8 @@ screens = [
 			],
 			size=24,
 			# background="#00ff0000",
-			# opacity=0
-			
-			
+			opacity = 0.8,
+			margin = [6,6,0,6], # [N E S W]	
 		),
 	),
 	Screen(),	
