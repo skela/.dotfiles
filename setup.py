@@ -143,4 +143,6 @@ if args.linkup:
 	mkdir_if_needed('config/flameshot')
 	linkup('config/flameshot/flameshot.ini','config/flameshot/flameshot.ini')
 	linkup('config/picom','config/picom')
-	
+	mkdir_if_needed('config/variety')
+	linkup('config/variety/variety.conf','config/variety/variety.conf')
+	linkup('config/variety/ui.conf','config/variety/ui.conf')
