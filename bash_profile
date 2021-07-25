@@ -80,9 +80,9 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 export PATH=/usr/local/sbin:$PATH
-export PATH="/Volumes/Mercury/Applications/Android/platform-tools":$PATH
-eval $(/usr/libexec/path_helper -s)
+#export PATH="/Volumes/Mercury/Applications/Android/platform-tools":$PATH
+#eval $(/usr/libexec/path_helper -s)
 
 export PATH="$HOME/.fastlane/bin:$PATH"
 
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"

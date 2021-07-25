@@ -146,3 +146,5 @@ if args.linkup:
 	mkdir_if_needed('config/variety')
 	linkup('config/variety/variety.conf','config/variety/variety.conf')
 	linkup('config/variety/ui.conf','config/variety/ui.conf')
+	mkdir_if_needed('config/sway')
+	linkup('config/sway/config','config/sway/config')
