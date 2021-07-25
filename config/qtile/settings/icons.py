@@ -29,7 +29,8 @@ class Icons(object):
 		self.ssh = ""
 		self.virtual = ""
 		self.updates = ""
-				
+		self.house = ""
+
 		self.max =""
 		self.monadtall = ""
 		self.treetab = ""

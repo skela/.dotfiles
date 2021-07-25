@@ -305,24 +305,29 @@ screens = [
 					other_current_screen_border="ff0000", # focus
 					font=icons.font
 				),
-				sep(),				
-				widget.TextBox(
-					text="Heim - Office ",
-					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn('sh ' + path.join(qtile_path, "office_lights.sh"))}
-				),
-				widget.TextBox(
-					text=icons.light,
-					font=icons.font,
-					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn('sh ' + path.join(qtile_path, "office_lights.sh"))}
-				),
-				sep(),
+				sep(),								
 				widget.CurrentLayoutIcon(scale=0.6),
 				widget.CurrentLayout(),				
 				sep(),
 				widget.WindowName(),
 				widget.Prompt(),
-				# widget.Net(fmt=icons.network + " {}",format="{down} ↓↑ {up}"),				
-				sep(),
+				# widget.Net(fmt=icons.network + " {}",format="{down} ↓↑ {up}"),
+				widget.WidgetBox(
+					text_closed = icons.house,
+					font=icons.font,
+					widgets=[
+						widget.TextBox(
+							text="Heim - Office ",
+							mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn('sh ' + path.join(qtile_path, "office_lights.sh"))}
+						),
+						widget.TextBox(
+							text=icons.light,
+							font=icons.font,
+							mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn('sh ' + path.join(qtile_path, "office_lights.sh"))}
+						),
+					]
+				),
+				sep(),				
 				widget.TextBox(text=icons.clock,font=icons.font),
 				widget.Clock(format='%H:%M (%a) %d-%m-%Y'),				
 				sep(),
