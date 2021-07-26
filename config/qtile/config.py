@@ -38,6 +38,7 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile import layout, bar, widget, hook, qtile
 from settings.icons import Icons
+from settings.keys import Keys
 
 # Required programs:
 # alacritty, flameshot, playerctl
@@ -63,6 +64,7 @@ player_play_pause = "playerctl play-pause --player=spotify"
 player_stop = "playerctl stop --player=spotify"
 
 icons = Icons()
+k = Keys()
 
 margin = 6
 single_margin = 6
@@ -71,117 +73,71 @@ single_margin = 6
 
 keys = [
 	# Switch between windows in current stack pane
-	Key([mod], "k", lazy.layout.down(),
+	Key([k.mod], "k", lazy.layout.down(),
 		desc="Move focus down in stack pane"),
-	Key([mod], "j", lazy.layout.up(),
+	Key([k.mod], "j", lazy.layout.up(),
 		desc="Move focus up in stack pane"),
 
 	# Move windows up or down in current stack
-	Key([mod, "control"], "k", lazy.layout.shuffle_down(),
+	Key([k.mod, k.control], "k", lazy.layout.shuffle_down(),
 		desc="Move window down in current stack "),
-	Key([mod, "control"], "j", lazy.layout.shuffle_up(),
+	Key([k.mod, k.control], "j", lazy.layout.shuffle_up(),
 		desc="Move window up in current stack "),
 
-	Key([mod, "shift"], "Right", lazy.layout.client_to_next(),
-		desc="Move window to next"),
+	Key([k.mod, k.shift], k.right, lazy.layout.client_to_next(),desc="Move window to next"),
 
 	# Switch between windows in current stack pane
-	Key(
-		[mod], "Down",
-		lazy.layout.down()
-	),
-	Key(
-		[mod], "Up",
-		lazy.layout.up()
-	),
-
-	Key(
-		[mod], "Left",
-		lazy.layout.previous()
-	),
-	Key(
-		[mod], "Right",
-		lazy.layout.next()
-	),
-
-	# Move windows in current stack pane -> I'd like to have this, but
-	# move_* commands do not exist
-	# Key(
-	# 	[mod, shift], "Down",
-	# 	lazy.layout.shuffle_down()
-	# ),
-	# Key(
-	# 	[mod, shift], "Up",
-	# 	lazy.layout.shuffle_up()
-	# ),
-
-	# Key(
-	# 	[mod, shift], "Left",		
-	# 	lazy.layout.client_to_previous()
-	# ),
-	# Key(
-	# 	[mod, shift], "Right",
-	# 	lazy.layout.client_to_next()
-	# ),
+	Key([k.mod], k.down,lazy.layout.down()),
+	Key([k.mod], k.up,lazy.layout.up()),
+	Key([k.mod], k.left,lazy.layout.previous()),
+	Key([k.mod], k.right,lazy.layout.next()),
 
 	# Move windows up or down in current stack
-	Key(
-		[mod, control], "k",
-		lazy.layout.shuffle_down()
-	),
-	Key(
-		[mod, control], "j",
-		lazy.layout.shuffle_up()
-	),
+	Key([k.mod, k.control], "k",lazy.layout.shuffle_down()),
+	Key([k.mod, k.control], "j",lazy.layout.shuffle_up()),
 	
-	Key([control,alt], "Left", lazy.prev_group()),
-	Key([control,alt], "Right", lazy.next_group()),
-	Key([control,alt], "Up", lazy.prev_group()),
-	Key([control,alt], "Down", lazy.next_group()),
+	Key([k.control,k.alt], k.left, lazy.screen.prev_group()),
+	Key([k.control,k.alt], k.right, lazy.screen.next_group()),
+	Key([k.control,k.alt], k.up, lazy.screen.prev_group()),
+	Key([k.control,k.alt], k.down, lazy.screen.next_group()),
 
-	Key([alt,control,shift], "Left", lazy.next_screen()),
-	Key([alt,control,shift], "Right", lazy.prev_screen()),
+	Key([k.alt,k.control,k.shift], k.left, lazy.next_screen()),
+	Key([k.alt,k.control,k.shift], k.right, lazy.prev_screen()),
+	Key([k.mod], k.period, lazy.next_screen()),
 
-	Key([mod], "minus",
+	Key([k.mod], "minus",
 		lazy.layout.shrink(),
 		lazy.layout.decrease_nmaster(),
 		desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
 		),
-	Key([mod], "equal",
+	Key([k.mod], "equal",
 		lazy.layout.grow(),
 		lazy.layout.increase_nmaster(),
 		desc='Expand window (MonadTall), increase number in master pane (Tile)'
 		),
-	Key([mod], "r",
-		lazy.layout.reset(),
-		desc='normalize window size ratios'
-		),
-
-	# Swap panes of split stack
-	Key([mod, shift], "space", lazy.layout.rotate(),
-		desc="Swap panes of split stack"),
+	Key([k.mod], "r",lazy.layout.reset(),desc='normalize window size ratios'),
 
 	# Toggle between split and unsplit sides of stack.
 	# Split = all windows displayed
 	# Unsplit = 1 window displayed, like Max layout, but still with
 	# multiple stack panes
-	Key([mod, shift], "Return", lazy.layout.toggle_split(),desc="Toggle between split and unsplit sides of stack"),
-	Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-
-	Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
-	Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
-	# Key([mod], "/", lazy.spawn(launcher), desc="Launch launcher"),	
-	Key([mod], "space", lazy.spawn(launcher), desc="Launch launcher"),
-	Key([mod], "n", lazy.spawn(files), desc="Launch file browser"),
-	# Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+	Key([k.mod, k.shift], "Return", lazy.layout.toggle_split(),desc="Toggle between split and unsplit sides of stack"),
 	
-    Key([alt,control],"q" , lazy.spawn(lock_screen), desc="Lock screen"),
-	# Toggle between different layouts as defined below
-	# Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),	
-	Key([mod], "q", lazy.window.kill(), desc="Kill active window"),
+	Key([k.mod], k.enter, lazy.spawn(terminal), desc="Launch terminal"),
+	Key([k.mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
+	Key([k.mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),	
+	Key([k.mod], k.space, lazy.spawn(launcher), desc="Launch launcher"),
+	Key([k.mod, k.shift], k.space, lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+	Key([k.mod], "n", lazy.spawn(files), desc="Launch file browser"),	
+	
+    Key([k.alt,k.control],"q" , lazy.spawn(lock_screen), desc="Lock screen"),
+		
+	Key([k.mod], k.tab, lazy.next_layout(), desc="Toggle between layouts"),
+	
+	Key([k.mod], "q", lazy.window.kill(), desc="Kill active window"),
 
-	Key([mod], "s", lazy.spawn(f"flameshot screen -p {home_path}"), desc="Take screenshot of current monitor"),
-	Key([mod,shift], "s", lazy.spawn("flameshot gui"), desc="Take screenshot (interactive)"),
+	Key([k.mod], "s", lazy.spawn(f"flameshot screen -p {home_path}"), desc="Take screenshot of current monitor"),
+	Key([k.mod,k.shift], "s", lazy.spawn("flameshot gui"), desc="Take screenshot (interactive)"),
 
 	Key([],"XF86AudioRaiseVolume", lazy.spawn(vol_up)),
 	Key([],"XF86AudioLowerVolume",lazy.spawn(vol_down)),
@@ -191,9 +147,9 @@ keys = [
 	Key([],"XF86AudioPlay",lazy.spawn(player_play_pause)),
 	Key([],"XF86AudioStop",lazy.spawn(player_stop)),
 	
-	Key([mod, shift], "r", lazy.restart(), desc="Restart qtile"),
+	Key([k.mod, k.shift], "r", lazy.restart(), desc="Restart qtile"),
 
-	Key([mod, shift], "q", lazy.shutdown(), desc="Shutdown qtile"),	
+	Key([k.mod, k.shift], "q", lazy.shutdown(), desc="Shutdown qtile"),	
 ]
 
 class Workspace(object):
@@ -293,6 +249,12 @@ extension_defaults = widget_defaults.copy()
 def sep():
 	return widget.Sep(padding=6,linewidth=1)
 
+# Office dimmer = 78
+# Hallway = 48
+# Family Lounge Dimmer = 81
+def toggle_lights(device_id:int):
+	return 'python ' + path.join(qtile_path, 'lights.py') + f' -d {device_id}'
+
 screens = [	
 	Screen(
 		top=bar.Bar(
@@ -317,13 +279,31 @@ screens = [
 					font=icons.font,
 					widgets=[
 						widget.TextBox(
-							text="Heim - Office ",
-							mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn('sh ' + path.join(qtile_path, "office_lights.sh"))}
+							text="Lights - Office ",
+							mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(78))}
 						),
 						widget.TextBox(
 							text=icons.light,
 							font=icons.font,
-							mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn('sh ' + path.join(qtile_path, "office_lights.sh"))}
+							mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(78))}
+						),
+						widget.TextBox(
+							text=", Family ",
+							mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(81))}
+						),
+						widget.TextBox(
+							text=icons.light,
+							font=icons.font,
+							mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(81))}
+						),
+						widget.TextBox(
+							text=", Hallway ",
+							mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(48))}
+						),
+						widget.TextBox(
+							text=icons.light,
+							font=icons.font,
+							mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(48))}
 						),
 					]
 				),
