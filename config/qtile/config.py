@@ -49,7 +49,7 @@ shift = "shift"
 control = "control"
 
 terminal = "alacritty"
-files = "nautilus"
+files = "thunar"
 launcher = "ulauncher --no-window-shadow"
 lock_screen = 'betterlockscreen -l dim -t ":)" --off 5'
 
