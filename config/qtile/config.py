@@ -72,17 +72,11 @@ single_margin = 6
 # Keys
 
 keys = [
-	# Switch between windows in current stack pane
-	Key([k.mod], "k", lazy.layout.down(),
-		desc="Move focus down in stack pane"),
-	Key([k.mod], "j", lazy.layout.up(),
-		desc="Move focus up in stack pane"),
 
-	# Move windows up or down in current stack
-	Key([k.mod, k.control], "k", lazy.layout.shuffle_down(),
-		desc="Move window down in current stack "),
-	Key([k.mod, k.control], "j", lazy.layout.shuffle_up(),
-		desc="Move window up in current stack "),
+	Key([k.mod, k.control], k.down, lazy.layout.shuffle_down(),desc="Move window down in current stack "),
+	Key([k.mod, k.control], k.up, lazy.layout.shuffle_up(),desc="Move window up in current stack "),
+	Key([k.mod, k.control], k.left, lazy.layout.shuffle_left(),desc="Move window left in current stack "),
+	Key([k.mod, k.control], k.right, lazy.layout.shuffle_right(),desc="Move window right in current stack "),
 
 	Key([k.mod, k.shift], k.right, lazy.layout.client_to_next(),desc="Move window to next"),
 
@@ -92,10 +86,7 @@ keys = [
 	Key([k.mod], k.left,lazy.layout.previous()),
 	Key([k.mod], k.right,lazy.layout.next()),
 
-	# Move windows up or down in current stack
-	Key([k.mod, k.control], "k",lazy.layout.shuffle_down()),
-	Key([k.mod, k.control], "j",lazy.layout.shuffle_up()),
-	
+	# Move windows in current stack pane	
 	Key([k.control,k.alt], k.left, lazy.screen.prev_group()),
 	Key([k.control,k.alt], k.right, lazy.screen.next_group()),
 	Key([k.control,k.alt], k.up, lazy.screen.prev_group()),
@@ -226,14 +217,14 @@ layouts = [
 	layout.MonadTall(**layout_theme),
 	layout.Max(**layout_theme),
 	layout.Stack(num_stacks=2),
+	layout.MonadWide(**layout_theme),
 	layout.Floating(**layout_theme),
 	# Try more layouts by unleashing below layouts.
 	# layout.Bsp(),
 	# layout.Columns(),
-	# layout.Matrix(),    
-	# layout.MonadWide(),
+	# layout.Matrix(),	
 	# layout.RatioTile(),
-	# layout.Tile(),
+	layout.Tile(**layout_theme),
 	# layout.TreeTab(),
 	# layout.VerticalTile(),
 	# layout.Zoomy(),
@@ -275,7 +266,7 @@ screens = [
 				widget.Prompt(),
 				# widget.Net(fmt=icons.network + " {}",format="{down} ↓↑ {up}"),
 				widget.WidgetBox(
-					text_closed = icons.house,
+					text_closed = f"{icons.house} ",
 					font=icons.font,
 					widgets=[
 						widget.TextBox(
@@ -332,6 +323,7 @@ screens = [
 			opacity = 0.8,
 			margin = [6,6,0,6], # [N E S W]	
 		),
+		# bottom=bar.Bar([widget.TextBox(text=icons.light,font=icons.font,)],size=24,),
 	),
 	Screen(),	
 ]
@@ -354,6 +346,7 @@ floating_layout = layout.Floating(float_rules=[
 	*layout.Floating.default_float_rules,
 	Match(title="Qalculate!"),
     Match(wm_class="kdenlive"),
+	Match(wm_class="Conky"),
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
