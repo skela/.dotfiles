@@ -108,6 +108,8 @@ keys = [
 		),
 	Key([k.mod], "r",lazy.layout.reset(),desc='normalize window size ratios'),
 
+	Key([k.mod], "b",lazy.hide_show_bar("top"),desc='toggle the display of the bar'),
+
 	# Toggle between split and unsplit sides of stack.
 	# Split = all windows displayed
 	# Unsplit = 1 window displayed, like Max layout, but still with
@@ -234,6 +236,7 @@ widget_defaults = dict(
 	font='Roboto Mono for Powerline',
 	fontsize=16,
 	padding=3,
+	background="#000000",	
 )
 extension_defaults = widget_defaults.copy()
 
@@ -258,13 +261,11 @@ screens = [
 					other_current_screen_border="ff0000", # focus
 					font=icons.font
 				),
-				sep(),								
-				widget.CurrentLayoutIcon(scale=0.6),
-				widget.CurrentLayout(),				
-				sep(),
-				widget.WindowName(),
-				widget.Prompt(),
+
+				widget.Spacer(width=bar.STRETCH,background="#00000000"),
 				# widget.Net(fmt=icons.network + " {}",format="{down} ↓↑ {up}"),
+
+				widget.Spacer(length=6),
 				widget.WidgetBox(
 					text_closed = f"{icons.house} ",
 					font=icons.font,
@@ -314,18 +315,33 @@ screens = [
 					display_format = "{updates} Updates",					
 					mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},					
 					),
-
+								
 				widget.Systray(padding=8),
+				sep(),
+				widget.CurrentLayoutIcon(scale=0.6),
+				widget.CurrentLayout(),				
 				widget.Spacer(length=6),
 			],
 			size=24,
-			# background="#00ff0000",
-			opacity = 0.8,
+			background="#00000000",
+			opacity = 1,
 			margin = [6,6,0,6], # [N E S W]	
 		),
 		# bottom=bar.Bar([widget.TextBox(text=icons.light,font=icons.font,)],size=24,),
 	),
-	Screen(),	
+	Screen(top=bar.Bar([
+			widget.Spacer(width=bar.STRETCH,background="#00000000"),
+			widget.Spacer(length=6),
+			widget.CurrentLayoutIcon(scale=0.6),
+			widget.CurrentLayout(),
+			widget.Spacer(length=6),
+		],
+		size=24,
+		opacity=1,
+		background="#00000000",
+		margin = [6,6,0,6], # [N E S W]
+		)
+	),
 ]
 
 # Drag floating layouts.
