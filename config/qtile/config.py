@@ -363,6 +363,7 @@ floating_layout = layout.Floating(float_rules=[
 	Match(title="Qalculate!"),
     Match(wm_class="kdenlive"),
 	Match(wm_class="Conky"),
+	Match(title="Android Emulator - *"),
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
