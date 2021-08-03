@@ -126,6 +126,7 @@ keys = [
     Key([k.alt,k.control],"q" , lazy.spawn(lock_screen), desc="Lock screen"),
 		
 	Key([k.mod], k.tab, lazy.next_layout(), desc="Toggle between layouts"),
+	Key([k.mod,k.shift], k.tab, lazy.prev_layout(), desc="Toggle between layouts"),
 	
 	Key([k.mod], "q", lazy.window.kill(), desc="Kill active window"),
 
@@ -165,10 +166,10 @@ workspaces = [
 	Workspace("home","1",icon=icons.home),
 	Workspace("dev","2",icon=icons.dev,matches=[Match(wm_class="code")]),
 	Workspace("misc","3",icon=icons.misc,matches=[Match(wm_class="Pamac-manager")]),
-	Workspace("3d","4",icon=icons.three_d,matches=[Match(wm_class="Blender"),Match(wm_class="cura"),Match(title="Creality Slicer")]),
-	Workspace("gfx","5",layout="floating",icon=icons.gfx,matches=[Match(wm_class="Inkscape"),Match(title="GNU Image Manipulation Program")]),
-	Workspace("chat","6",icon=icons.chat,matches=[Match(wm_class="Slack")]),
-	Workspace("email","7",icon=icons.email,matches=[Match(wm_class="Thunderbird")]),
+	Workspace("chat","4",icon=icons.chat,matches=[Match(wm_class="Slack")]),
+	Workspace("gfx","5",layout="floating",icon=icons.gfx,matches=[Match(wm_class="Inkscape"),Match(title="GNU Image Manipulation Program")]),	
+	Workspace("email","6",icon=icons.email,matches=[Match(wm_class="Thunderbird")]),
+	Workspace("3d","7",icon=icons.three_d,matches=[Match(wm_class="Blender"),Match(wm_class="cura"),Match(title="Creality Slicer")]),
 	Workspace("games","8",icon=icons.games,matches=[Match(wm_class="Steam")]),
 	Workspace("music","9",icon=icons.music),
 	Workspace("cam","c",icon=icons.cam,matches=[Match(wm_class="onvifviewer"),Match(wm_class="cctv-viewer")]),
@@ -180,7 +181,7 @@ groups = list()
 def go_to_group(group):
 	#lazy.group[group.name].toscreen()
 	def f(qtile):
-		if group.name == "0":
+		if group.name == "web":
 			qtile.cmd_to_screen(0)
 			qtile.groupMap[group.name].cmd_toscreen()
 		else:
