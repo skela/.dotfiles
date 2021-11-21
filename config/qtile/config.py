@@ -391,6 +391,13 @@ async def client_new(window):
 	if check_window_name(window,"spotify") or check_window_name(window,"spotify premium"):
 		window.togroup("music")
 
+# @hook.subscribe.startup
+# def dbus_register():
+# 	id = os.environ.get('DESKTOP_AUTOSTART_ID')
+# 	if not id:
+# 		return
+# 	subprocess.Popen(['dbus-send','--session','--print-reply','--dest=org.gnome.SessionManager','/org/gnome/SessionManager','org.gnome.SessionManager.RegisterClient','string:qtile','string:' + id])
+
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
 # mailing lists, GitHub issues, and other WM documentation that suggest setting

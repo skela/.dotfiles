@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.2"
+   viewBox="0 0 20 20"
+   width="48"
+   height="48"
+   id="svg8"
+   sodipodi:docname="en.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     showgrid="false"
+     inkscape:zoom="18.1875"
+     inkscape:cx="24"
+     inkscape:cy="23.972509"
+     inkscape:window-width="2558"
+     inkscape:window-height="1391"
+     inkscape:window-x="0"
+     inkscape:window-y="47"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <title
+     id="title2">english-svg</title>
+  <style
+     id="style4">tspan { white-space:pre }.shp0 { fill: #ffffff } </style>
+  <metadata
+     id="metadata829">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>english-svg</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g904"
+     transform="matrix(0.27272727,0,0,0.20668274,-7.2246506,4.2520419)">
+    <g
+       data-name="Calque 2"
+       id="g887"
+       transform="matrix(1,0,0,1.3195455,30.157053,-15.734464)"
+       style="fill:#ffffff;fill-opacity:1">
+      <g
+         data-name="Calque 1"
+         id="g885"
+         style="fill:#ffffff;fill-opacity:1">
+        <path
+           d="M 57.29,0 H 8.71 A 8.72,8.72 0 0 0 0,8.71 V 57.29 A 8.72,8.72 0 0 0 8.71,66 H 57.29 A 8.72,8.72 0 0 0 66,57.29 V 8.71 A 8.72,8.72 0 0 0 57.29,0 Z M 58,2 43.83,16.17 a 0.4,0.4 0 0 0 -0.13,0.31 v 5.77 Q 52.85,13.09 62,3.94 a 6.7,6.7 0 0 1 2,4.77 v 2.44 L 52.84,22.31 H 64 v 4.3 H 39.43 V 2 h 4.28 V 13.16 L 54.87,2 h 2.42 C 57.52,2 57.74,2 58,2 Z M 11.12,2 22.34,13.22 v 0 V 2 h 4.3 V 26.6 H 2 V 22.33 H 13.29 L 13.14,22.17 6.23,15.26 2,11 V 8.71 C 2,8.48 2,8.25 2,8 q 7.1,7.08 14.16,14.16 a 0.41,0.41 0 0 0 0.32,0.14 H 22.3 L 22.16,22.15 4,4 A 6.67,6.67 0 0 1 8.71,2 Z m -3,62 14.1,-14.17 a 0.42,0.42 0 0 0 0.14,-0.32 c 0,-1.88 0,-3.75 0,-5.63 0,-0.05 0,-0.1 0,-0.18 0,-0.08 -0.11,0.09 -0.15,0.14 L 4,62.05 A 6.68,6.68 0 0 1 2,57.29 V 55 L 13.17,43.79 13.28,43.67 H 2 V 39.39 H 26.63 V 64 H 22.36 V 52.73 L 22.2,52.89 15.79,59.3 11.08,64 H 8.71 Q 8.4,64 8.08,64 Z m 49.21,0 H 55 L 43.86,52.89 43.7,52.74 V 64 H 39.42 V 39.4 H 64 v 4.28 H 52.84 L 64,54.84 v 2.45 q 0,0.32 0,0.63 L 49.84,43.79 A 0.35,0.35 0 0 0 49.55,43.67 H 43.78 L 62.09,62 a 6.69,6.69 0 0 1 -4.8,2 z"
+           id="path883"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+    </g>
+  </g>
+</svg>
