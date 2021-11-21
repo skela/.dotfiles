@@ -29,7 +29,8 @@ Apps = {
   bluetooth_manager = "blueman-manager",
   screenshot        = "maim",
   file_browser      = "thunar",
-  lock_screen       = "betterlockscreen -l dim --off 5",
+--   lock_screen       = "betterlockscreen -l dim --off 5",
+  lock_screen       = "xlock", -- xlockmore
 }
 
 -- network interfaces
