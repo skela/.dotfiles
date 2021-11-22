@@ -2,4 +2,6 @@
 
 killall -q polybar
 
-polybar primary -r &
+polybar -r main >>/tmp/polybar1.log 2>&1 &
+
+echo "Polybar launched..."

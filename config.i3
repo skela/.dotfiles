@@ -10,18 +10,24 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $alt Mod1
+set $ctl Control
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 new_window pixel 1
 new_float normal
 
+client.focused #555555 #555555 #ffffff #2e9ef4 #CC0000
+
+for_window [title="^Android Emulator*"] floating enable
+
 # Hide borders
 hide_edge_borders none
 
 # change borders
-bindsym $mod+u border none
-bindsym $mod+y border pixel 1
-bindsym $mod+n border normal
+# bindsym $mod+u border none
+# bindsym $mod+y border pixel 1
+# bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -54,6 +60,15 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec alacritty
+
+# open files
+bindsym $mod+n exec thunar
+
+# open web browser
+bindsym $mod+b exec firefox-developer-edition
+
+# lockscreen
+bindsym $ctl+$alt+q exec "betterlockscreen -l dim --off 5"
 
 # kill focused window
 bindsym $mod+q kill
@@ -157,8 +172,9 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize 	w
 #window (you can also use the mouse for that)
@@ -193,6 +209,9 @@ bindsym $mod+r mode "resize"
 
 # Monitor Setup
 exec_always --no-startup-id $HOME/.dotfiles/monitors/aurora.sh
+
+set $secondary HDMI-1
+
 workspace 1 output primary
 workspace 2 output primary
 workspace 3 output primary
@@ -201,11 +220,11 @@ workspace 5 output primary
 workspace 6 output primary
 workspace 7 output primary
 workspace 8 output primary
-workspace 9 output primary
-workspace 10 output HDMI-1
+
+workspace 9 output $secondary
+workspace 10 output $secondary
 
 # Autostart applications
-exec_always --no-startup-id polybar -c $HOME/.config/polybar/launch.sh
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; picom --config ~/.config/picom/picom.conf
 exec --no-startup-id numlockx off
@@ -272,3 +291,4 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+exec_always --no-startup-id polybar -c $HOME/.config/polybar/launch.sh

@@ -68,6 +68,7 @@ local startup_scripts = {
 	"picom",
 	"variety &",
 	"dropbox",
+	-- "ibus-daemon -drx",
 --   "sh /home/skela/.screenlayout/layout.sh",
 --   -- Remap modifier keys when pressed alone
 --   --"xcape -e 'Control_L=Escape;Super_L=Hangul_Hanja;Super_R=Hangul'",  
@@ -83,7 +84,7 @@ local startup_scripts = {
 --   "variety",
 -- --   "nitrogen --restore &",
   -- Start ibus
---   "ibus-daemon -drx",
+--   "ibus-daemon -drx",+
 }
   
 -- ========================================
