@@ -327,7 +327,10 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
 
 -- myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
 myWorkspaces = [" home ", " dev ", " sys ", " doc ", " chat ", " email ", " mus ", " vm ", " gfx ", " web "]
-myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
+-- myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
+-- myWorkspaceIndices = [(" home ",1), (" dev ",2), (" sys ",3), (" doc ",4), (" chat ",5), (" email ",6), (" mus ",7), (" vm ",8), (" gfx ",9), (" web ",10)]    
+myWorkspaceIndices = ["1","2","3","4","5","6","7","8","9","0"]
+-- myWorkspaceIndices.last = 0
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
     where i = fromJust $ M.lookup ws myWorkspaceIndices
@@ -373,6 +376,7 @@ myKeys =
 
     -- KB_GROUP Run Prompt
         , ("M-S-<Return>", spawn "dmenu_run -i -p \"Run: \"") -- Dmenu
+        , ("M-d", spawn "dmenu_run -i -p \"Run: \"") -- Dmenu
 
     -- KB_GROUP Other Dmenu Prompts
     -- In Xmonad and many tiling window managers, M-p is the default keybinding to
@@ -492,7 +496,7 @@ myKeys =
         , ("<XF86AudioMute>", spawn "amixer set Master toggle")
         , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
         , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
-        , ("<XF86HomePage>", spawn "qutebrowser https://www.youtube.com/c/DistroTube")
+        , ("<XF86HomePage>", spawn "qutebrowser https://www.google.com")
         , ("<XF86Search>", spawn "dm-websearch")
         , ("<XF86Mail>", runOrRaise "thunderbird" (resource =? "thunderbird"))
         , ("<XF86Calculator>", runOrRaise "qalculate-gtk" (resource =? "qalculate-gtk"))

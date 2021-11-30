@@ -1,0 +1,12 @@
+
+xmonad.hs:336:38: error:
+    • Couldn't match expected type: M.Map [Char] a
+                  with actual type: [String]
+    • In the second argument of ‘M.lookup’, namely ‘myWorkspaceIndices’
+      In the second argument of ‘($)’, namely
+        ‘M.lookup ws myWorkspaceIndices’
+      In the expression: fromJust $ M.lookup ws myWorkspaceIndices
+    • Relevant bindings include i :: a (bound at xmonad.hs:336:11)
+    |
+336 |     where i = fromJust $ M.lookup ws myWorkspaceIndices
+    |                                      ^^^^^^^^^^^^^^^^^^

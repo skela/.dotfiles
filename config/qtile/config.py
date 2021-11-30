@@ -51,7 +51,8 @@ control = "control"
 terminal = "alacritty"
 files = "thunar"
 launcher = "ulauncher --no-window-shadow"
-lock_screen = 'betterlockscreen -l dim -t ":)" --off 5'
+lock_screen = 'betterlockscreen -l dim --off 5'
+browser = "firefox-developer-edition"
 
 vol_cur = "amixer -D pulse get Master"
 vol_up = "amixer -q -D pulse set Master 2%+"
@@ -120,6 +121,7 @@ keys = [
 	Key([k.mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
 	Key([k.mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),	
 	Key([k.mod], k.space, lazy.spawn(launcher), desc="Launch launcher"),
+	Key([k.mod], "d", lazy.spawn(launcher), desc="Launch launcher"),
 	Key([k.mod, k.shift], k.space, lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 	Key([k.mod], "n", lazy.spawn(files), desc="Launch file browser"),	
 	
