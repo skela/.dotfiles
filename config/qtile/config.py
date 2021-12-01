@@ -42,7 +42,7 @@ from settings.icons import Icons
 from settings.keys import Keys
 
 # Required programs:
-# alacritty, flameshot, playerctl
+# alacritty, flameshot, playerctl, ulauncher, betterlockscreen, thunar, firefox-developer-edition
 
 mod = "mod4"
 alt = "mod1"
@@ -54,6 +54,7 @@ files = "thunar"
 launcher = "ulauncher --no-window-shadow"
 lock_screen = 'betterlockscreen -l dim --off 5'
 browser = "firefox-developer-edition"
+toggle_keyboard = "python3 /home/skela/.dotfiles/scripts/toggle_keyboard_layout.py"
 
 vol_cur = "amixer -D pulse get Master"
 vol_up = "amixer -q -D pulse set Master 2%+"
@@ -123,6 +124,7 @@ keys = [
 	Key([k.mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),	
 	Key([k.mod], k.space, lazy.spawn(launcher), desc="Launch launcher"),
 	Key([k.mod], "d", lazy.spawn(launcher), desc="Launch launcher"),
+	Key([k.control], k.space, lazy.spawn(toggle_keyboard), desc="Toggle keyboard"),
 	Key([k.mod, k.shift], k.space, lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 	Key([k.mod], "n", lazy.spawn(files), desc="Launch file browser"),	
 	
@@ -267,7 +269,13 @@ primary_widgets.extend([
 	),
 
 	widget.Spacer(width=bar.STRETCH,background="#00000000"),
-	# widget.Net(fmt=icons.network + " {}",format="{down} ↓↑ {up}"),
+
+	widget.Spacer(length=6),
+	widget.Clock(format='%H:%M (%a) %d-%m-%Y'),				
+	widget.Spacer(length=6),
+
+	widget.Spacer(width=bar.STRETCH,background="#00000000"),	
+
 	widget.Spacer(length=6),
 ])
 
@@ -310,9 +318,9 @@ if socket.gethostname() == "aurora":
 	])
 
 primary_widgets.extend([
-	widget.TextBox(text=icons.clock,font=icons.font),
-	widget.Clock(format='%H:%M (%a) %d-%m-%Y'),				
-	sep(),
+	# widget.TextBox(text=icons.clock,font=icons.font),
+	# widget.Clock(format='%H:%M (%a) %d-%m-%Y'),				
+	# sep(),
 	widget.TextBox(text=icons.volume,font=icons.font),
 	widget.Volume(),
 	sep(),
