@@ -1,4 +1,5 @@
 scripts/.idea/workspace.xml
+.env
 
 .DS_Store
 *.pyc
