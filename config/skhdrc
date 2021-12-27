@@ -106,7 +106,7 @@
 # ]
 
 # open terminal
-alt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
+alt - return : /Applications/kitty.app/Contents/MacOS/kitty ~
 
 # close focused window
 alt - q : yabai -m window --close
