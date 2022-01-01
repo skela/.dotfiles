@@ -49,7 +49,7 @@ alt = "mod1"
 shift = "shift"
 control = "control"
 
-terminal = "alacritty"
+terminal = "kitty"
 files = "thunar"
 launcher = "ulauncher --no-window-shadow"
 lock_screen = 'betterlockscreen -l dim --off 5'
