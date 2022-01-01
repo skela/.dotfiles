@@ -344,6 +344,10 @@ function fish_prompt
   prompt_finish
 end
 
+function start
+	python3 ~/.dotfiles/scripts/start.py
+end
+
 function reload_aliases -d "Reload aliases"
 	if [ -f ~/.aliases ]
 		. ~/.aliases
