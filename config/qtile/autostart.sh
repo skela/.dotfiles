@@ -9,5 +9,5 @@ nitrogen --restore &
 firefox-developer-edition &
 thunderbird &
 slack &
-alacritty &
+kitty &
 1password &
