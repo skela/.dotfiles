@@ -175,7 +175,7 @@ workspaces = [
 	Workspace("gfx","5",layout="floating",icon=icons.gfx,matches=[Match(wm_class="Inkscape"),Match(title="GNU Image Manipulation Program")]),	
 	Workspace("email","6",icon=icons.email,matches=[Match(wm_class="Thunderbird")]),
 	Workspace("3d","7",icon=icons.three_d,matches=[Match(wm_class="Blender"),Match(wm_class="cura"),Match(title="Creality Slicer")]),
-	Workspace("games","8",icon=icons.games,matches=[Match(wm_class="Steam")]),
+	Workspace("games","8",icon=icons.games,matches=[Match(wm_class="Steam"),Match(title="^Android Emulator -")]),
 	Workspace("music","9",icon=icons.music),
 	Workspace("cam","c",icon=icons.cam,matches=[Match(wm_class="onvifviewer"),Match(wm_class="cctv-viewer")]),
 	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="Firefox"),Match(wm_class="firefoxdeveloperedition")]),	
