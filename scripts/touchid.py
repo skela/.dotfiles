@@ -37,12 +37,14 @@ def is_available():
 	return context.canEvaluatePolicy_error_(kTouchIdPolicy, None)[0]
 
 
-def authenticate(reason='authenticate via Touch ID'):
+def authenticate(reason='authenticate via Touch ID',should_check_biometrics:bool=True):
 	context = LAContext.new()
 
 	can_evaluate = context.canEvaluatePolicy_error_(kTouchIdPolicy, None)[0]
 	if not can_evaluate:
-		raise Exception("Touch ID isn't available on this machine")
+		if should_check_biometrics:
+			raise Exception("Touch ID isn't available on this machine")
+		return True
 
 	sema = dispatch_semaphore_create(0)
 
