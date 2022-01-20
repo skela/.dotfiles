@@ -126,10 +126,13 @@ keys = [
 	Key([k.mod], "d", lazy.spawn(launcher), desc="Launch launcher"),
 	Key([k.control], k.space, lazy.spawn(toggle_keyboard), desc="Toggle keyboard"),
 	Key([k.mod, k.shift], k.space, lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-	Key([k.mod], "n", lazy.spawn(files), desc="Launch file browser"),	
+	Key([k.mod], "n", lazy.spawn(files), desc="Launch file browser"),
+	Key([k.mod], "w", lazy.spawn(browser), desc="Launch web browser"),
 	
-    Key([k.alt,k.control],"q" , lazy.spawn(lock_screen), desc="Lock screen"),
+	Key([k.alt,k.control],"q" , lazy.spawn(lock_screen), desc="Lock screen"),
 		
+	
+
 	Key([k.mod], k.tab, lazy.next_layout(), desc="Toggle between layouts"),
 	Key([k.mod,k.shift], k.tab, lazy.prev_layout(), desc="Toggle between layouts"),
 	
@@ -383,7 +386,7 @@ floating_layout = layout.Floating(float_rules=[
 	# Run the utility of `xprop` to see the wm class and name of an X client.
 	*layout.Floating.default_float_rules,
 	Match(title="Qalculate!"),
-    Match(wm_class="kdenlive"),
+	Match(wm_class="kdenlive"),
 	Match(wm_class="Conky"),
 	Match(title="Android Emulator - *"),
 ])
