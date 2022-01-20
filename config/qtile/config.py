@@ -40,6 +40,7 @@ from libqtile.utils import guess_terminal
 from libqtile import layout, bar, widget, hook, qtile
 from settings.icons import Icons
 from settings.keys import Keys
+from libqtile.core.manager import Qtile
 
 # Required programs:
 # alacritty, flameshot, playerctl, ulauncher, betterlockscreen, thunar, firefox-developer-edition
@@ -73,6 +74,16 @@ margin = 6
 single_margin = 6
 
 # Keys
+
+@lazy.function
+def toggle_fullscreen(qt:Qtile):	
+	# qt.current_window.toggle_fullscreen()
+	if qt.current_screen.top.is_show():
+		qt.current_screen.top.show(False)
+		qt.current_window.cmd_enable_fullscreen()
+	else:
+		qt.current_screen.top.show(True)
+		qt.current_window.cmd_disable_fullscreen()
 
 keys = [
 
@@ -121,7 +132,7 @@ keys = [
 	
 	Key([k.mod], k.enter, lazy.spawn(terminal), desc="Launch terminal"),
 	Key([k.mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
-	Key([k.mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),	
+	Key([k.mod], "f", toggle_fullscreen, desc="Toggle fullscreen"),	
 	Key([k.mod], k.space, lazy.spawn(launcher), desc="Launch launcher"),
 	Key([k.mod], "d", lazy.spawn(launcher), desc="Launch launcher"),
 	Key([k.control], k.space, lazy.spawn(toggle_keyboard), desc="Toggle keyboard"),
