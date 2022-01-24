@@ -24,23 +24,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os
 import asyncio
-import subprocess
+import os
 import socket
+import subprocess
 from os import path
-from settings.path import qtile_path, home_path
-
 from typing import List  # noqa: F401
 
-from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Screen, Match
+from libqtile import bar, hook, layout, qtile, widget
+from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from libqtile import layout, bar, widget, hook, qtile
+
 from settings.icons import Icons
 from settings.keys import Keys
-from libqtile.core.manager import Qtile
+from settings.path import home_path, qtile_path
 
 # Required programs:
 # alacritty, flameshot, playerctl, ulauncher, betterlockscreen, thunar, firefox-developer-edition
@@ -53,7 +52,8 @@ control = "control"
 terminal = "kitty"
 files = "thunar"
 launcher = "ulauncher --no-window-shadow"
-lock_screen = 'betterlockscreen -l dim --off 5'
+# lock_screen = "betterlockscreen -l dim --off 5"
+lock_screen = "sh /home/skela/.dotfiles/config/qtile/lock.sh"
 browser = "firefox-developer-edition"
 toggle_keyboard = "python3 /home/skela/.dotfiles/scripts/toggle_keyboard_layout.py"
 
@@ -192,7 +192,7 @@ workspaces = [
 	Workspace("games","8",icon=icons.games,matches=[Match(wm_class="Steam"),Match(title="^Android Emulator -")]),
 	Workspace("music","9",icon=icons.music),
 	Workspace("cam","c",icon=icons.cam,matches=[Match(wm_class="onvifviewer"),Match(wm_class="cctv-viewer")]),
-	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="Firefox"),Match(wm_class="firefoxdeveloperedition")]),	
+	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="Firefox"),Match(wm_class="firefoxdeveloperedition"),Match(wm_class="scrcpy")]),
 ]
 
 groups = list()
@@ -399,7 +399,7 @@ floating_layout = layout.Floating(float_rules=[
 	Match(title="Qalculate!"),
 	Match(wm_class="kdenlive"),
 	Match(wm_class="Conky"),
-	Match(title="Android Emulator - *"),
+	Match(title="^Android Emulator -"),
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
