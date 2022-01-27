@@ -144,12 +144,14 @@ keys = [
 		
 	
 
-	Key([k.mod], k.tab, lazy.next_layout(), desc="Toggle between layouts"),
-	Key([k.mod,k.shift], k.tab, lazy.prev_layout(), desc="Toggle between layouts"),
+	# Key([k.mod], k.tab, lazy.next_layout(), desc="Toggle between layouts"),
+	# Key([k.mod,k.shift], k.tab, lazy.prev_layout(), desc="Toggle between layouts"),
+	Key([k.mod], k.tab, lazy.group.next_window(), desc="Switch to next window"),
+	Key([k.mod,k.shift], k.tab, lazy.group.prev_window(), desc="Switch to previous window"),
 	
 	Key([k.mod], "q", lazy.window.kill(), desc="Kill active window"),
 
-	Key([k.mod], "s", lazy.spawn(f"flameshot screen -p {home_path}"), desc="Take screenshot of current monitor"),
+	Key([k.mod], "s", lazy.spawn(f"flameshot gui --accept-on-select"), desc="Take screenshot"),
 	Key([k.mod,k.shift], "s", lazy.spawn("flameshot gui"), desc="Take screenshot (interactive)"),
 
 	Key([],"XF86AudioRaiseVolume", lazy.spawn(vol_up)),
