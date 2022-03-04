@@ -36,8 +36,8 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from libqtile.log_utils import logger
-
+# from libqtile.log_utils import logger
+from libqtile.backend.base import Window
 from settings.icons import Icons
 from settings.keys import Keys
 from settings.path import home_path, qtile_path
@@ -435,7 +435,7 @@ async def client_new(window):
 
 old_focus = ""
 @hook.subscribe.client_focus
-def on_focus_change(window):
+def on_focus_change(window:Window):
 	global old_focus
 	n = window.name
 	focus_changed = n != old_focus
