@@ -36,13 +36,19 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile.log_utils import logger
 
 from settings.icons import Icons
 from settings.keys import Keys
 from settings.path import home_path, qtile_path
 
+# Qtile docs : https://docs.qtile.org/en/latest/manual/config/index.html
+
+wayland = qtile.core.name == "wayland"
+x11 = qtile.core.name == "x11"
+
 # Required programs:
-# alacritty, flameshot, playerctl, ulauncher, betterlockscreen, thunar, firefox-developer-edition
+# kitty, flameshot, playerctl, ulauncher, betterlockscreen, thunar, firefox-developer-edition
 
 mod = "mod4"
 alt = "mod1"
@@ -50,9 +56,8 @@ shift = "shift"
 control = "control"
 
 terminal = "kitty"
-files = "thunar"
+files = "nautilus"
 launcher = "ulauncher --no-window-shadow"
-# lock_screen = "betterlockscreen -l dim --off 5"
 lock_screen = "sh /home/skela/.dotfiles/config/qtile/lock.sh"
 browser = "firefox-developer-edition"
 toggle_keyboard = "python3 /home/skela/.dotfiles/scripts/toggle_keyboard_layout.py"
@@ -407,7 +412,7 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 
 @hook.subscribe.startup_once
-def autostart():	
+def autostart():
 	subprocess.call([path.join(qtile_path, "autostart.sh")])
 
 def check_window_class(window,name:str) -> bool:
@@ -427,6 +432,16 @@ async def client_new(window):
 	await asyncio.sleep(0.02)
 	if check_window_name(window,"spotify") or check_window_name(window,"spotify premium"):
 		window.togroup("music")
+
+old_focus = ""
+@hook.subscribe.client_focus
+def on_focus_change(window):
+	global old_focus
+	n = window.name
+	focus_changed = n != old_focus
+	# if focus_changed:
+	# 	logger.warning(f"Changed window focus to {n}")
+	old_focus = n
 
 # @hook.subscribe.startup
 # def dbus_register():
