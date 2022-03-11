@@ -52,7 +52,6 @@ control = "control"
 terminal = "kitty"
 files = "nautilus --new-window"
 launcher = "ulauncher --no-window-shadow"
-# lock_screen = "betterlockscreen -l dim --off 5"
 lock_screen = "sh /home/skela/.dotfiles/config/qtile/lock.sh"
 browser = "firefox-developer-edition"
 toggle_keyboard = "python3 /home/skela/.dotfiles/scripts/toggle_keyboard_layout.py"
@@ -77,13 +76,13 @@ single_margin = 6
 
 @lazy.function
 def toggle_fullscreen(qt:Qtile):	
-	# qt.current_window.toggle_fullscreen()
-	if qt.current_screen.top.is_show():
-		qt.current_screen.top.show(False)
-		qt.current_window.cmd_enable_fullscreen()
-	else:
-		qt.current_screen.top.show(True)
-		qt.current_window.cmd_disable_fullscreen()
+	qt.current_window.toggle_fullscreen()
+	# if qt.current_screen.top.is_show():
+	# 	qt.current_screen.top.show(False)
+	# 	qt.current_window.cmd_enable_fullscreen()
+	# else:
+	# 	qt.current_screen.top.show(True)
+	# 	qt.current_window.cmd_disable_fullscreen()
 
 keys = [
 
@@ -427,6 +426,16 @@ async def client_new(window):
 	await asyncio.sleep(0.02)
 	if check_window_name(window,"spotify") or check_window_name(window,"spotify premium"):
 		window.togroup("music")
+
+old_focus = ""
+@hook.subscribe.client_focus
+def on_focus_change(window:Window):
+	global old_focus
+	n = window.name
+	focus_changed = n != old_focus
+	# if focus_changed:
+	# 	logger.warning(f"Changed window focus to {n}")
+	old_focus = n
 
 # @hook.subscribe.startup
 # def dbus_register():
