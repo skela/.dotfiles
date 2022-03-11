@@ -1,7 +1,9 @@
 import os
 import platform
 import json
-import pyperclip as pc
+
+from clipboard import Clipboard
+
 
 f = open(os.path.expanduser("~/.dotfiles/.vault"),"r")
 s = f.read()
@@ -35,7 +37,8 @@ def auth() -> bool:
 	return True
 
 if auth():
-	pc.copy(vault.password)
+	clip = Clipboard()
+	clip.copy(vault.password)
 	print("Authentication completed")
 else:
 	print("Auth failed")

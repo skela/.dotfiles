@@ -42,7 +42,7 @@ from settings.keys import Keys
 from settings.path import home_path, qtile_path
 
 # Required programs:
-# alacritty, flameshot, playerctl, ulauncher, betterlockscreen, thunar, firefox-developer-edition
+# kitty, flameshot, playerctl, ulauncher, betterlockscreen, thunar, firefox-developer-edition
 
 mod = "mod4"
 alt = "mod1"
@@ -50,7 +50,7 @@ shift = "shift"
 control = "control"
 
 terminal = "kitty"
-files = "thunar"
+files = "nautilus --new-window"
 launcher = "ulauncher --no-window-shadow"
 # lock_screen = "betterlockscreen -l dim --off 5"
 lock_screen = "sh /home/skela/.dotfiles/config/qtile/lock.sh"
