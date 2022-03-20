@@ -333,6 +333,13 @@ if socket.gethostname() == "aurora":
 		sep(),
 	])
 
+if socket.gethostname() == "wind":
+	primary_widgets.extend([
+		widget.TextBox(text=icons.battery,font=icons.font),
+		widget.Battery(format="{percent:2.0%} {hour:d}:{min:02d} {watt:.2f}W"),
+		sep()
+	])
+
 primary_widgets.extend([
 	# widget.TextBox(text=icons.clock,font=icons.font),
 	# widget.Clock(format='%H:%M (%a) %d-%m-%Y'),				
@@ -396,7 +403,7 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
-	# Run the utility of `xprop` to see the wm class and name of an X client.
+	# Run the utility of `xprop` toid see the wm class and name of an X client.
 	*layout.Floating.default_float_rules,
 	Match(title="Qalculate!"),
 	Match(wm_class="kdenlive"),
