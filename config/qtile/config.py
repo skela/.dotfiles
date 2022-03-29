@@ -38,6 +38,8 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile.backend.base import Window
 
+from layouts.max import Max
+
 from settings.icons import Icons
 from settings.keys import Keys
 from settings.path import home_path, qtile_path
@@ -239,7 +241,7 @@ layout_theme = {
 
 layouts = [
 	layout.MonadTall(**layout_theme),
-	layout.Max(**layout_theme),
+	Max(max_margin=margin,**layout_theme),
 	layout.Stack(num_stacks=2),
 	layout.MonadWide(**layout_theme),
 	layout.Floating(**layout_theme),
