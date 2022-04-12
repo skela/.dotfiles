@@ -43,6 +43,7 @@ from layouts.max import Max
 from settings.icons import Icons
 from settings.keys import Keys
 from settings.path import home_path, qtile_path
+from widgets.active_app import ActiveAppWidget
 
 # Required programs:
 # kitty, flameshot, playerctl, ulauncher, betterlockscreen, thunar, firefox-developer-edition
@@ -270,7 +271,10 @@ def sep():
 def toggle_lights(device_id:int):
 	return 'python ' + path.join(qtile_path, 'lights.py') + f' -d {device_id}'
 
-primary_widgets = []
+primary_widgets = [
+	ActiveAppWidget(),
+	sep()
+]
 
 primary_widgets.extend([
 
