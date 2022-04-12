@@ -140,6 +140,7 @@ if args.linkup:
 	mkdir_if_needed('config/fish')
 	linkup('config.fish','config/fish/config.fish')
 	linkup('config/qtile','config/qtile')
+	linkup('config/xfce4','config/xfce4')
 	mkdir_if_needed('config/flameshot')
 	linkup('config/flameshot/flameshot.ini','config/flameshot/flameshot.ini')
 	linkup('config/picom','config/picom')
