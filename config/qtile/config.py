@@ -53,7 +53,8 @@ shift = "shift"
 control = "control"
 
 terminal = "kitty"
-files = "nautilus --new-window"
+#files = "nautilus --new-window"
+files = "thunar"
 launcher = "ulauncher --no-window-shadow"
 lock_screen = "sh /home/skela/.dotfiles/config/qtile/lock.sh"
 browser = "firefox-developer-edition"
@@ -439,8 +440,10 @@ def on_focus_change(window:Window):
 	global old_focus
 	n = window.name
 	focus_changed = n != old_focus
+	# TODO: Figure out how to locate the File / Edit / Etc Menus
+	# TODO: Pressing mod + alt should replace the qtile menu bar with the global menu options, so that you can use the keyboard to navigate the menus the way it normally works.
 	# if focus_changed:
-	# 	logger.warning(f"Changed window focus to {n}")
+		# logger.warning(f"Changed window focus to {n}")	
 	old_focus = n
 
 # @hook.subscribe.startup
