@@ -289,7 +289,7 @@ primary_widgets.extend([
 		font=icons.font
 	),
 	
-	extrawidgets.GlobalMenu(padding=10),
+	extrawidgets.GlobalMenu(padding=10,menu_background="#000000",highlight_colour="#ff0000"),
 
 	widget.Spacer(width=bar.STRETCH,background="#00000000"),
 
