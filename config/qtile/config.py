@@ -38,6 +38,8 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile.backend.base import Window
 
+from qtile_extras import widget as extrawidgets
+
 from layouts.max import Max
 
 from settings.icons import Icons
@@ -286,11 +288,13 @@ primary_widgets.extend([
 		other_current_screen_border="ff0000", # focus
 		font=icons.font
 	),
+	
+	extrawidgets.GlobalMenu(padding=10),
 
 	widget.Spacer(width=bar.STRETCH,background="#00000000"),
 
 	widget.Spacer(length=6),
-	widget.Clock(format='%H:%M (%a) %d-%m-%Y'),				
+	widget.Clock(format='%H:%M (%a) %d-%m-%Y'),	
 	widget.Spacer(length=6),
 
 	widget.Spacer(width=bar.STRETCH,background="#00000000"),	
@@ -298,43 +302,54 @@ primary_widgets.extend([
 	widget.Spacer(length=6),
 ])
 
-if socket.gethostname() == "aurora":
-	primary_widgets.extend([		
-		widget.WidgetBox(
-			text_closed = f"{icons.house} ",
-			font=icons.font,
-			widgets=[
-				widget.TextBox(
-					text="Lights - Office ",
-					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(78))}
-				),
-				widget.TextBox(
-					text=icons.light,
-					font=icons.font,
-					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(78))}
-				),
-				widget.TextBox(
-					text=", Family ",
-					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(81))}
-				),
-				widget.TextBox(
-					text=icons.light,
-					font=icons.font,
-					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(81))}
-				),
-				widget.TextBox(
-					text=", Hallway ",
-					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(48))}
-				),
-				widget.TextBox(
-					text=icons.light,
-					font=icons.font,
-					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(48))}
-				),
-			]
-		),
-		sep(),
-	])
+primary_widgets.extend([
+	widget.CheckUpdates(
+		update_interval = 1800,
+		distro = "Arch_checkupdates",
+		display_format = "{updates} Updates",					
+		mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},					
+	),
+	sep(),
+	]
+)
+
+# if socket.gethostname() == "aurora":
+# 	primary_widgets.extend([		
+# 		widget.WidgetBox(
+# 			text_closed = f"{icons.house} ",
+# 			font=icons.font,
+# 			widgets=[
+# 				widget.TextBox(
+# 					text="Lights - Office ",
+# 					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(78))}
+# 				),
+# 				widget.TextBox(
+# 					text=icons.light,
+# 					font=icons.font,
+# 					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(78))}
+# 				),
+# 				widget.TextBox(
+# 					text=", Family ",
+# 					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(81))}
+# 				),
+# 				widget.TextBox(
+# 					text=icons.light,
+# 					font=icons.font,
+# 					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(81))}
+# 				),
+# 				widget.TextBox(
+# 					text=", Hallway ",
+# 					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(48))}
+# 				),
+# 				widget.TextBox(
+# 					text=icons.light,
+# 					font=icons.font,
+# 					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(48))}
+# 				),
+# 			]
+# 		),
+# 		sep(),
+# 	])
 
 if socket.gethostname() == "wind":
 	primary_widgets.extend([
@@ -352,15 +367,11 @@ primary_widgets.extend([
 	sep(),
 	widget.TextBox(text=icons.keyboard,font=icons.font),
 	widget.KeyboardLayout(configured_keyboards=["gb","no"]),
+	# sep(),
+	# widget.Clipboard(text=icons.keyboard,font=icons.font),
 	sep(),
-	widget.CheckUpdates(
-		update_interval = 1800,
-		distro = "Arch_checkupdates",
-		display_format = "{updates} Updates",					
-		mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},					
-		),
-					
-	widget.Systray(padding=8),
+	widget.Systray(padding=8,background="#000000"),
+	# extrawidgets.StatusNotifier(), # TODO: Figure out how to restart qtile so that this thing survives, it currently disappears when you do
 	sep(),
 	widget.CurrentLayoutIcon(scale=0.6),
 	widget.CurrentLayout(),				
