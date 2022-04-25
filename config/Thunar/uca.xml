@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<unique-id>1626681572927904-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>gimp</icon>
+	<name>Edit</name>
+	<unique-id>1649799021913980-1</unique-id>
+	<command>gimp %F</command>
+	<description>Open Bitmap in GIMP</description>
+	<patterns>*.png;*.jpg;*.jpeg</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>inkscape</icon>
+	<name>Edit</name>
+	<unique-id>1649799185118880-2</unique-id>
+	<command>inkscape %F</command>
+	<description>Open SVG in Inkscape</description>
+	<patterns>*.svg</patterns>
+	<image-files/>
+</action>
+</actions>
