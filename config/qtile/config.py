@@ -286,7 +286,7 @@ primary_widgets.extend([
 		this_current_screen_border="ff0000", # focus
 		this_screen_border="dddddd", # not focus
 		other_current_screen_border="ff0000", # focus
-		font=icons.font
+		font=icons.font,
 	),
 	
 	extrawidgets.GlobalMenu(padding=10,menu_background="#000000",highlight_colour="#ff0000"),
@@ -307,7 +307,7 @@ primary_widgets.extend([
 		update_interval = 1800,
 		distro = "Arch_checkupdates",
 		display_format = "{updates} Updates",					
-		mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},					
+		mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
 	),
 	sep(),
 	]
