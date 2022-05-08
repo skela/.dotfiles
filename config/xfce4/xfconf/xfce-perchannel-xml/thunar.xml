@@ -20,7 +20,7 @@
     <value type="string" value="computer:///"/>
   </property>
   <property name="last-details-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_50_PERCENT"/>
-  <property name="last-details-view-column-widths" type="string" value="50,160,50,50,1659,50,50,98,50,408"/>
+  <property name="last-details-view-column-widths" type="string" value="50,160,50,50,1909,50,50,98,50,158"/>
   <property name="last-sort-column" type="string" value="THUNAR_COLUMN_NAME"/>
   <property name="last-sort-order" type="string" value="GTK_SORT_ASCENDING"/>
   <property name="misc-confirm-close-multiple-tabs" type="bool" value="false"/>
