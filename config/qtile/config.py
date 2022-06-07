@@ -78,18 +78,19 @@ k = Keys()
 
 margin = 6
 single_margin = 6
-
-# Keys
+real_layout = {}
 
 @lazy.function
 def toggle_fullscreen(qt:Qtile):	
-	qt.current_window.toggle_fullscreen()
-	# if qt.current_screen.top.is_show():
-	# 	qt.current_screen.top.show(False)
-	# 	qt.current_window.cmd_enable_fullscreen()
-	# else:
-	# 	qt.current_screen.top.show(True)
-	# 	qt.current_window.cmd_disable_fullscreen()
+	group = qt.current_window.group
+	if group in real_layout:
+		group.layout = real_layout.pop(group)
+		qt.current_screen.top.show(True)
+	else:
+		real_layout[group] = group.layout.name
+		group.layout = "max"
+		qt.current_screen.top.show(False)
+	qt.current_window.group = group
 
 keys = [
 
@@ -222,7 +223,7 @@ for ws in workspaces:
 		Key([mod], ws.shortcut, lazy.group[i.name].toscreen(),desc="Switch to group {}".format(i.name)),
 
 		# mod1 + shift + letter of group = switch to & move focused window to group
-		Key([mod, shift], ws.shortcut, lazy.window.togroup(i.name, switch_group=True),
+		Key([mod, shift], ws.shortcut, lazy.window.togroup(i.name, switch_group=False),
 			desc="Switch to & move focused window to group {}".format(i.name)),
 		# Or, use below if you prefer not to switch to that group.
 		# # mod1 + shift + letter of group = move focused window to group
@@ -313,44 +314,6 @@ primary_widgets.extend([
 	]
 )
 
-# if socket.gethostname() == "aurora":
-# 	primary_widgets.extend([		
-# 		widget.WidgetBox(
-# 			text_closed = f"{icons.house} ",
-# 			font=icons.font,
-# 			widgets=[
-# 				widget.TextBox(
-# 					text="Lights - Office ",
-# 					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(78))}
-# 				),
-# 				widget.TextBox(
-# 					text=icons.light,
-# 					font=icons.font,
-# 					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(78))}
-# 				),
-# 				widget.TextBox(
-# 					text=", Family ",
-# 					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(81))}
-# 				),
-# 				widget.TextBox(
-# 					text=icons.light,
-# 					font=icons.font,
-# 					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(81))}
-# 				),
-# 				widget.TextBox(
-# 					text=", Hallway ",
-# 					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(48))}
-# 				),
-# 				widget.TextBox(
-# 					text=icons.light,
-# 					font=icons.font,
-# 					mouse_callbacks={ 'Button1': lambda: qtile.cmd_spawn(toggle_lights(48))}
-# 				),
-# 			]
-# 		),
-# 		sep(),
-# 	])
-
 if socket.gethostname() == "wind":
 	primary_widgets.extend([
 		widget.TextBox(text=icons.battery,font=icons.font),
@@ -359,19 +322,14 @@ if socket.gethostname() == "wind":
 	])
 
 primary_widgets.extend([
-	# widget.TextBox(text=icons.clock,font=icons.font),
-	# widget.Clock(format='%H:%M (%a) %d-%m-%Y'),				
-	# sep(),
 	widget.TextBox(text=icons.volume,font=icons.font),
 	widget.Volume(),
 	sep(),
 	widget.TextBox(text=icons.keyboard,font=icons.font),
 	widget.KeyboardLayout(configured_keyboards=["gb","no"]),
-	# sep(),
-	# widget.Clipboard(text=icons.keyboard,font=icons.font),
 	sep(),
 	widget.Systray(padding=8,background="#000000"),
-	# extrawidgets.StatusNotifier(), # TODO: Figure out how to restart qtile so that this thing survives, it currently disappears when you do
+	widget.Spacer(length=8),
 	sep(),
 	widget.CurrentLayoutIcon(scale=0.6),
 	widget.CurrentLayout(),				
