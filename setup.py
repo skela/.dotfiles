@@ -136,6 +136,7 @@ if args.linkup:
 	linkup('alacritty.yml','config/alacritty/alacritty.yml')
 	# linkup('private/irssiconfig','irssi/config')
 	# linkup('private/irssitheme','irssi/default.theme')
+	linkup('private/ssh.config','.ssh/config')
 	linkup('zshrc')	
 	mkdir_if_needed('config/fish')
 	linkup('config.fish','config/fish/config.fish')
