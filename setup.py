@@ -1,8 +1,8 @@
 
-import os
-import sys
-import subprocess
 import argparse
+import os
+import subprocess
+import sys
 
 # Future Proofing
 
@@ -150,3 +150,6 @@ if args.linkup:
 	linkup('config/variety/ui.conf','config/variety/ui.conf')
 	mkdir_if_needed('config/sway')
 	linkup('config/sway/config','config/sway/config')
+	mkdir_if_needed('config/nvim')
+	linkup('config/nvim','config/nvim')
+
