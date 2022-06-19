@@ -1,3 +1,4 @@
 alias gits='git status'
 alias rod='python3 ~/.dotfiles/libs/r/rod.py'
+alias vim="nvim"
 
