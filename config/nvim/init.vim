@@ -26,6 +26,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'mbbill/undotree'
 Plug 'akinsho/flutter-tools.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
 call plug#end()
 
 set termguicolors
