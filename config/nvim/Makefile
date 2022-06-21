@@ -1,4 +1,4 @@
 
 sync:
-	nvim +PlugInstall
+	nvim +PackerSync
 

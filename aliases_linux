@@ -16,6 +16,7 @@ alias camera="/home/skela/.dotfiles/scripts/camera.py"
 alias wakestorm="wakeonlan f0:18:98:e9:d9:c8"
 alias viewandroid="scrcpy"
 alias viewdroid="scrcpy"
+alias vim="nvim"
 export ANDROID_SDK_ROOT="/home/skela/files/sdks/android"
 export ANDROID_HOME=$ANDROID_SDK_ROOT
 export FLUTTER_HOME="/home/skela/files/sdks/flutter"
