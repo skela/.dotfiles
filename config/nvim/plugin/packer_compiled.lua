@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/home/skela/.local/share/nvim/site/pack/packer/start/gruvbox",
     url = "https://github.com/gruvbox-community/gruvbox"
   },
+  nerdtree = {
+    loaded = true,
+    path = "/home/skela/.local/share/nvim/site/pack/packer/start/nerdtree",
+    url = "https://github.com/preservim/nerdtree"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/skela/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",

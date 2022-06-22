@@ -46,7 +46,8 @@ return packer.startup(function(use)
 	use("gruvbox-community/gruvbox")
 	use("gpanders/editorconfig.nvim")
 	use("mbbill/undotree")
-	
+	use("preservim/nerdtree")
+
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 
 	if PACKER_BOOTSTRAP then

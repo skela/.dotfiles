@@ -18,6 +18,9 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
+keymap("n","<C-b>",":NERDTreeToggle<CR>",opts)
+--keymap("n","<C-Shift-o>",":Telescope<CR>",opts)
+
 -- Normal --
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
