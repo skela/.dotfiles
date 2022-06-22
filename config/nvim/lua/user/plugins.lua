@@ -42,6 +42,7 @@ return packer.startup(function(use)
 	use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
 	use("nvim-telescope/telescope.nvim")
+	use("nvim-telescope/telescope-media-files.nvim")
 	use("neovim/nvim-lspconfig")
 	use("gruvbox-community/gruvbox")
 	use("gpanders/editorconfig.nvim")

@@ -19,7 +19,10 @@ vim.g.maplocalleader = " "
 --   command_mode = "c",
 
 keymap("n","<C-b>",":NERDTreeToggle<CR>",opts)
---keymap("n","<C-Shift-o>",":Telescope<CR>",opts)
+
+keymap("n", "<leader>f", "<cmd>Telescope find_files<cr>", opts)
+--keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = true }))<cr>", opts)
+keymap("n", "<leader>g", "<cmd>Telescope live_grep<cr>", opts)
 
 -- Normal --
 -- Better window navigation
