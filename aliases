@@ -1,4 +1,8 @@
-alias gits='git status'
-alias rod='python3 ~/.dotfiles/libs/r/rod.py'
+alias gits="git status"
+alias glo="git log --oneline"
+alias ga="git add"
+alias gc="git commit"
+alias gw="git worktree"
+alias rod="python3 ~/.dotfiles/libs/r/rod.py"
 alias vim="nvim"
 
