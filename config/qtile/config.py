@@ -81,7 +81,7 @@ single_margin = 6
 real_layout = {}
 
 @lazy.function
-def toggle_fullscreen(qt:Qtile):	
+def toggle_fullscreen(qt:Qtile):
 	group = qt.current_window.group
 	if group in real_layout:
 		group.layout = real_layout.pop(group)
@@ -91,6 +91,13 @@ def toggle_fullscreen(qt:Qtile):
 		group.layout = "max"
 		qt.current_screen.top.show(False)
 	qt.current_window.group = group
+
+@lazy.function
+def screenshot_window(qt:Qtile):
+	w,h = qt.current_window.cmd_get_size()
+	x,y = qt.current_window.cmd_get_position()
+	region = f"{w}x{h}+{x}+{y}"
+	os.system(f'flameshot full --region "{region}"')
 
 keys = [
 
@@ -154,8 +161,9 @@ keys = [
 	
 	Key([k.mod], "q", lazy.window.kill(), desc="Kill active window"),
 
-	Key([k.mod], "s", lazy.spawn(f"flameshot gui --accept-on-select"), desc="Take screenshot"),
-	Key([k.mod,k.shift], "s", lazy.spawn("flameshot gui"), desc="Take screenshot (interactive)"),
+	Key([k.mod], "s", lazy.spawn(f"flameshot gui --accept-on-select"), desc="Take screenshot"),	
+	Key([k.mod,k.shift], "s", screenshot_window, desc="Take screenshot (window)"),
+	Key([k.mod,k.shift,k.control], "s", lazy.spawn("flameshot gui"), desc="Take screenshot (interactive)"),
 
 	Key([],"XF86AudioRaiseVolume", lazy.spawn(vol_up)),
 	Key([],"XF86AudioLowerVolume",lazy.spawn(vol_down)),
