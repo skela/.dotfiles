@@ -162,7 +162,7 @@ keys = [
 	Key([k.mod], "q", lazy.window.kill(), desc="Kill active window"),
 
 	Key([k.mod], "s", lazy.spawn(f"flameshot gui --accept-on-select"), desc="Take screenshot"),	
-	Key([k.mod,k.shift], "s", screenshot_window, desc="Take screenshot (window)"),
+	Key([k.mod,k.control], "s", screenshot_window, desc="Take screenshot (window)"),
 	Key([k.mod,k.shift,k.control], "s", lazy.spawn("flameshot gui"), desc="Take screenshot (interactive)"),
 
 	Key([],"XF86AudioRaiseVolume", lazy.spawn(vol_up)),
