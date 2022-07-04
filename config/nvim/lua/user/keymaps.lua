@@ -18,7 +18,7 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
-keymap("n","<C-b>",":NERDTreeToggle<CR>",opts)
+keymap("n","<C-b>",":NvimTreeToggle<CR>",opts)
 
 keymap("n", "<leader>f", "<cmd>Telescope find_files<cr>", opts)
 --keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = true }))<cr>", opts)

@@ -47,7 +47,11 @@ return packer.startup(function(use)
 	use("gruvbox-community/gruvbox")
 	use("gpanders/editorconfig.nvim")
 	use("mbbill/undotree")
-	use("preservim/nerdtree")
+	use({"kyazdani42/nvim-tree.lua",
+		requires = {
+			"kyazdani42/nvim-web-devicons", -- requires nerd-fonts-jetbrains-mono
+		},
+	})
 
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 
