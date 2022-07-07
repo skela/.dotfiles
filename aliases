@@ -5,4 +5,5 @@ alias gc="git commit"
 alias gw="git worktree"
 alias rod="python3 ~/.dotfiles/libs/r/rod.py"
 alias vim="nvim"
+alias icat="kitty +kitten icat"
 
