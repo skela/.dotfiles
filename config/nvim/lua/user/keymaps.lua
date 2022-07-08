@@ -43,6 +43,11 @@ keymap("n", "<leader>e", ":Lex 30<cr>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
+-- Save file
+keymap("n","<C-S>",":update<CR>",opts)
+keymap("v","<C-S>","<C-C>:update<CR>",opts)
+keymap("i","<C-S>","<C-O>:update<CR>",opts)
+
 -- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
