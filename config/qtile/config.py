@@ -1,29 +1,3 @@
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 import asyncio
 import os
 import socket
@@ -56,7 +30,6 @@ shift = "shift"
 control = "control"
 
 terminal = "kitty"
-#files = "nautilus --new-window"
 files = "thunar"
 launcher = "ulauncher --no-window-shadow"
 lock_screen = "sh /home/skela/.dotfiles/config/qtile/lock.sh"
@@ -196,10 +169,10 @@ class Workspace(object):
 # Use `xprop WM_CLASS` to find wm classes for a window
 workspaces = [
 	Workspace("home","1",icon=icons.home),
-	Workspace("dev","2",icon=icons.dev,matches=[Match(wm_class="code")]),
+	Workspace("dev","2",icon=icons.dev,matches=[Match(wm_class="code"),Match(wm_class="jetbrains-studio")]),
 	Workspace("misc","3",icon=icons.misc,matches=[Match(wm_class="Pamac-manager")]),
 	Workspace("chat","4",icon=icons.chat,matches=[Match(wm_class="Slack")]),
-	Workspace("gfx","5",layout="floating",icon=icons.gfx,matches=[Match(wm_class="Inkscape"),Match(title="GNU Image Manipulation Program"),Match(title="^Android Emulator -")]),	
+	Workspace("gfx","5",layout="floating",icon=icons.gfx,matches=[Match(wm_class="Inkscape"),Match(title="GNU Image Manipulation Program"),Match(title="Android Emulator")]),	
 	Workspace("email","6",icon=icons.email,matches=[Match(wm_class="Thunderbird")]),
 	Workspace("3d","7",icon=icons.three_d,matches=[Match(wm_class="Blender"),Match(wm_class="cura"),Match(title="Creality Slicer")]),
 	Workspace("games","8",layout="floating",icon=icons.games,matches=[Match(wm_class="Steam"),Match(wm_class="discord")]),
@@ -266,10 +239,10 @@ layouts = [
 ]
 
 widget_defaults = dict(
-	font='Roboto Mono for Powerline',
+	font="Roboto Mono for Powerline",
 	fontsize=16,
 	padding=3,
-	background="#000000",	
+	background="#000000",
 )
 extension_defaults = widget_defaults.copy()
 
@@ -280,7 +253,10 @@ def sep():
 # Hallway = 48
 # Family Lounge Dimmer = 81
 def toggle_lights(device_id:int):
-	return 'python ' + path.join(qtile_path, 'lights.py') + f' -d {device_id}'
+	return "python " + path.join(qtile_path, "lights.py") + f" -d {device_id}"
+
+def computer_name() -> str:
+	return socket.gethostname()
 
 primary_widgets = [
 	ActiveAppWidget(),
@@ -316,13 +292,13 @@ primary_widgets.extend([
 		update_interval = 1800,
 		distro = "Arch_checkupdates",
 		display_format = "{updates} Updates",					
-		mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
+		mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " -e sudo pacman -Syu")},
 	),
 	sep(),
 	]
 )
 
-if socket.gethostname() == "wind":
+if computer_name() == "wind":
 	primary_widgets.extend([
 		widget.TextBox(text=icons.battery,font=icons.font),
 		widget.Battery(format="{percent:2.0%} {hour:d}:{min:02d} {watt:.2f}W"),
@@ -388,7 +364,7 @@ floating_layout = layout.Floating(float_rules=[
 	Match(title="Qalculate!"),
 	Match(wm_class="kdenlive"),
 	Match(wm_class="Conky"),
-	Match(title="^Android Emulator -"),
+#	Match(title="Android Emulator"),
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
@@ -399,13 +375,13 @@ def autostart():
 
 def check_window_class(window,name:str) -> bool:
 	n = window.wm_class
-	if n is not None:		
+	if n is not None:
 		n = n.lower()
 	return name == n
 
 def check_window_name(window,name:str) -> bool:
 	n = window.name
-	if n is not None:		
+	if n is not None:
 		n = n.lower()
 	return name == n
 
