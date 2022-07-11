@@ -1,8 +1,8 @@
-require "user.options"
-require "user.keymaps"
-require "user.plugins"
-require "user.theme"
-require "user.telescope"
-require "user.nvim-tree"
-
+require "skela.options"
+require "skela.keymaps"
+require "skela.plugins"
+require "skela.theme"
+require "skela.telescope"
+require "skela.nvim-tree"
+require "skela.lsp"
 

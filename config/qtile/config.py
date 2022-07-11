@@ -9,7 +9,6 @@ from libqtile import bar, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
 from libqtile.backend.base import Window
 
 from qtile_extras import widget as extrawidgets
@@ -18,7 +17,7 @@ from layouts.max import Max
 
 from settings.icons import Icons
 from settings.keys import Keys
-from settings.path import home_path, qtile_path
+from settings.path import qtile_path
 from widgets.active_app import ActiveAppWidget
 
 # Required programs:
