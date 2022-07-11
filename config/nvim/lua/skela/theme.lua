@@ -1,4 +1,4 @@
-local colorscheme = "gruvbox"
+local colorscheme = "darkplus"
 
 vim.opt.termguicolors = true
 vim.opt.guifont = "monospace:h17"

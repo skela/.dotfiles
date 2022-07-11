@@ -69,6 +69,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["darkplus.nvim"] = {
+    loaded = true,
+    path = "/home/skela/.local/share/nvim/site/pack/packer/start/darkplus.nvim",
+    url = "https://github.com/martinsione/darkplus.nvim"
+  },
   ["editorconfig.nvim"] = {
     loaded = true,
     path = "/home/skela/.local/share/nvim/site/pack/packer/start/editorconfig.nvim",
