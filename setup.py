@@ -61,6 +61,12 @@ def linkup(filename,destfilename=None):
 	cmd = 'ln -s ' +src + ' ' + dst
 	os.system(cmd)
 
+def linkup_folder(folder):	
+	src = os.path.join(os.path.expanduser("~/.dotfiles/"),folder)
+	dst = os.path.join(os.path.expanduser("~/"),".config")
+	cmd = f"ln -s {src} {dst}"
+	os.system(cmd)
+
 def mkdir_if_needed(folder:str):
 	dst = '~/.'+folder
 	cmd = f'mkdir -p {dst}'
@@ -88,17 +94,17 @@ def install_brew():
 
 def install_ports():
 	if not has_app("port",'version'):
-		port_cmd = 'open http://www.macports.org/install.php'
+		port_cmd = "open http://www.macports.org/install.php"
 		log("Please install ports manually.")
 		os.system(port_cmd)
 		get_input("Input anything to continue. ")
 	else:
 		log("skipping instalation of ports [Already Installed]")
 
-def install_oh_my_zsh():    
-	if not os.path.exists(os.path.expanduser('~/.oh-my-zsh')):
+def install_oh_my_zsh():
+	if not os.path.exists(os.path.expanduser("~/.oh-my-zsh")):
 		cmd = 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
-		os.system(cmd)        
+		os.system(cmd)
 
 def check_package_managers():
 	for pm in package_managers:
@@ -124,32 +130,25 @@ if args.install_server:
 	install_packages(server_packages=True)
 
 if args.linkup:	
-	linkup('aliases')
-	linkup('bash_profile')
-	linkup('bash_profile','bashrc')
-	linkup('gitconfig')
-	linkup('screenrc')
-	linkup('tmux.conf')
-	linkup('vimrc')
-	linkup('vim')
-	mkdir_if_needed('config/alacritty')
-	linkup('alacritty.yml','config/alacritty/alacritty.yml')
-	# linkup('private/irssiconfig','irssi/config')
-	# linkup('private/irssitheme','irssi/default.theme')
-	linkup('private/ssh.config','ssh/config')
-	linkup('zshrc')	
-	mkdir_if_needed('config/fish')
-	linkup('config.fish','config/fish/config.fish')
-	linkup('config/qtile','config/qtile')
-	linkup('config/xfce4','config/xfce4')
-	mkdir_if_needed('config/flameshot')
-	linkup('config/flameshot/flameshot.ini','config/flameshot/flameshot.ini')
-	linkup('config/picom','config/picom')
-	mkdir_if_needed('config/variety')
-	linkup('config/variety/variety.conf','config/variety/variety.conf')
-	linkup('config/variety/ui.conf','config/variety/ui.conf')
-	mkdir_if_needed('config/sway')
-	linkup('config/sway/config','config/sway/config')
-	mkdir_if_needed('config/nvim')
-	linkup('config/nvim','config/nvim')
+	linkup("aliases")
+	linkup("bash_profile")
+	linkup("bash_profile","bashrc")
+	linkup("gitconfig")
+	linkup("screenrc")
+	linkup("tmux.conf")
+	linkup("private/ssh.config","ssh/config")
+	linkup("zshrc")
 
+	linkup_folder("config/fish")
+	linkup_folder("config/kitty")
+	linkup_folder("config/alacritty")
+	linkup_folder("config/qtile")
+	linkup_folder("config/xfce4")
+	linkup_folder("config/i3")
+	linkup_folder("config/awesome")
+	linkup_folder("config/flameshot")
+	linkup_folder("config/picom")
+	linkup_folder("config/variety")	
+	linkup_folder("config/sway")	
+	linkup_folder("config/nvim")
+	linkup_folder("config/vim")
