@@ -10,3 +10,8 @@ end
 
 vim.cmd("highlight Normal guibg=none")
 
+require("lualine").setup {
+	options = {
+		theme = "powerline_dark"
+	}
+}
