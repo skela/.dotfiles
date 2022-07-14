@@ -27,6 +27,9 @@ keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<C-p>", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
 
+keymap("n", "<leader>/", "<cmd>Commentary<cr>", opts)
+keymap("v", "<leader>/", "<cmd>Commentary<cr>", opts)
+
 -- Normal --
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)

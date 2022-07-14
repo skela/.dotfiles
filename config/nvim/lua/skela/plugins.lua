@@ -55,6 +55,7 @@ return packer.startup(function(use)
 	use("martinsione/darkplus.nvim")
 	use("gpanders/editorconfig.nvim")
 	use("mbbill/undotree")
+	use("tpope/vim-commentary")
 	use({"kyazdani42/nvim-tree.lua",
 		requires = {
 			"kyazdani42/nvim-web-devicons", -- requires nerd-fonts-jetbrains-mono
