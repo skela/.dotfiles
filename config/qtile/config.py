@@ -152,7 +152,7 @@ keys = [
 
 class Workspace(object):
 
-	def __init__(self,name:str,shortcut:str=None,layout:str="monadtall",icon:str=None,matches:list=None):
+	def __init__(self,name:str,shortcut:str|None=None,layout:str="monadtall",icon:str|None=None,matches:list|None=None):
 		self.name = name
 		self.layout = layout
 		self.shortcut = shortcut
@@ -390,17 +390,17 @@ async def client_new(window):
 	if check_window_name(window,"spotify") or check_window_name(window,"spotify premium"):
 		window.togroup("music")
 
-old_focus = ""
-@hook.subscribe.client_focus
-def on_focus_change(window:Window):
-	global old_focus
-	n = window.name
-	focus_changed = n != old_focus
-	# TODO: Figure out how to locate the File / Edit / Etc Menus
-	# TODO: Pressing mod + alt should replace the qtile menu bar with the global menu options, so that you can use the keyboard to navigate the menus the way it normally works.
-	# if focus_changed:
-		# logger.warning(f"Changed window focus to {n}")	
-	old_focus = n
+#old_focus = ""
+#@hook.subscribe.client_focus
+#def on_focus_change(window:Window):
+#	global old_focus
+#	n = window.name
+#	focus_changed = n != old_focus
+#	# TODO: Figure out how to locate the File / Edit / Etc Menus
+#	# TODO: Pressing mod + alt should replace the qtile menu bar with the global menu options, so that you can use the keyboard to navigate the menus the way it normally works.
+#	# if focus_changed:
+#		# logger.warning(f"Changed window focus to {n}")	
+#	old_focus = n
 
 # @hook.subscribe.startup
 # def dbus_register():
