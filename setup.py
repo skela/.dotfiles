@@ -152,3 +152,5 @@ if args.linkup:
 	linkup_folder("config/sway")	
 	linkup_folder("config/nvim")
 	linkup_folder("config/vim")
+	linkup_folder("config/gtk-3.0")
+
