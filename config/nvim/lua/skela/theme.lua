@@ -13,5 +13,8 @@ vim.cmd("highlight Normal guibg=none")
 require("lualine").setup {
 	options = {
 		theme = "powerline_dark"
+	},
+	sections = {
+		lualine_x = {"encoding","filetype"}
 	}
 }

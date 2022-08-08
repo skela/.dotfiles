@@ -1,8 +1,9 @@
 scripts/.idea/workspace.xml
+config/Thunar/accels.scm
+
 .env
 .vault
 .worktrees
-
 .DS_Store
 *.pyc
 
