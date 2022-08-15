@@ -319,18 +319,20 @@ primary_widgets.extend([
 	widget.Spacer(length=6),	
 ])
 
+bar_background = "#000000"
+
 screens = [	
 	Screen(
 		top=bar.Bar(primary_widgets,
 			size=24,
-			background="#00000000",
+			background=bar_background,
 			opacity = 1,
 			margin = [6,6,0,6], # [N E S W]	
 		),
 		# bottom=bar.Bar([widget.TextBox(text=icons.light,font=icons.font,)],size=24,),
 	),
 	Screen(top=bar.Bar([
-			widget.Spacer(width=bar.STRETCH,background="#00000000"),
+			widget.Spacer(width=bar.STRETCH,background=bar_background),
 			widget.Spacer(length=6),
 			widget.CurrentLayoutIcon(scale=0.6),
 			widget.CurrentLayout(),
@@ -338,7 +340,7 @@ screens = [
 		],
 		size=24,
 		opacity=1,
-		background="#00000000",
+		background=bar_background,
 		margin = [6,6,0,6], # [N E S W]
 		)
 	),
