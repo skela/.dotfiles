@@ -8,6 +8,7 @@
 
 alias civ6="LD_PRELOAD=/usr/lib/libfreetype.so steam steam://rungameid/289070"
 alias vscode="code"
+alias htop="btop"
 #alias inkscape="flatpak run --branch=beta org.inkscape.Inkscape"
 alias avdmanager="/home/skela/files/sdks/android/cmdline-tools/latest/bin/avdmanager"
 alias adb="/home/skela/files/sdks/android/platform-tools/adb"

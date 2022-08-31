@@ -7,8 +7,9 @@ import subprocess
 import threading
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-n', '--names', help="The name(s) of the camera(s) (comma separated if multiple)")
-parser.add_argument('-i', '--ip', help="An ip address")
+parser.add_argument("-n","--names",help="The name(s) of the camera(s) (comma separated if multiple)")
+parser.add_argument("-i","--ip",help="An ip address")
+parser.add_argument("-l","--list",help="List known cameras",default=False,action="store_true")
 args = parser.parse_args()
 
 class Camera(object):
@@ -73,6 +74,13 @@ else:
 	names = []
 
 cameras = Cameras()
+
+if args.list:
+	print("List of known cameras:")
+	for cam in cameras.cameras:
+		print(f" - {cam.name} @ {cam.src}")
+	exit(0)
+
 for name in names:	
 	camera = cameras.get_camera(name)
 	if camera is not None:
@@ -86,7 +94,7 @@ if args.ip is not None:
 	chosen_cameras.append(Camera({"name":"temp","src":f"rtsp://{args.ip}/12:554"}))
 
 if len(chosen_cameras) == 0:
-	exit(f"No cameras found with the name {name}")	
+	exit(f"No cameras found with the name(s) {names}")	
 
 processes = list()
 for camera in chosen_cameras:
