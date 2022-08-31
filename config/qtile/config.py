@@ -172,7 +172,7 @@ workspaces = [
 	Workspace("misc","3",icon=icons.misc,matches=[Match(wm_class="Pamac-manager")]),
 	Workspace("chat","4",icon=icons.chat,matches=[Match(wm_class="Slack")]),
 	Workspace("gfx","5",layout="floating",icon=icons.gfx,matches=[Match(wm_class="Inkscape"),Match(title="GNU Image Manipulation Program"),Match(title="Android Emulator")]),	
-	Workspace("email","6",icon=icons.email,matches=[Match(wm_class="Thunderbird")]),
+	Workspace("email","6",icon=icons.email,matches=[Match(wm_class="thunderbird")]),
 	Workspace("3d","7",icon=icons.three_d,matches=[Match(wm_class="Blender"),Match(wm_class="cura"),Match(title="Creality Slicer")]),
 	Workspace("games","8",layout="floating",icon=icons.games,matches=[Match(wm_class="Steam"),Match(wm_class="discord")]),
 	Workspace("music","9",icon=icons.music),
