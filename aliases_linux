@@ -20,6 +20,7 @@ alias viewdroid="scrcpy"
 alias vim="nvim"
 alias mine="watch -n 2 nvidia-smi & nuxhashd"
 alias lookupmac="python3 /home/skela/.dotfiles/scripts/lookup_mac_address.py"
+alias blink="/home/skela/code/blink/target/release/blink"
 
 export ANDROID_SDK_ROOT="/home/skela/files/sdks/android"
 export ANDROID_HOME=$ANDROID_SDK_ROOT

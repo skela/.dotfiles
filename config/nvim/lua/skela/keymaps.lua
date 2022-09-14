@@ -1,5 +1,5 @@
 local opts = { noremap = true, silent = true }
-
+local expr_opts = { noremap = true, silent = true, expr = true }
 local term_opts = { silent = true }
 
 -- Shorten function name
@@ -27,8 +27,8 @@ keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<C-p>", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
 
-keymap("n", "<leader>/", "<cmd>Commentary<cr>", opts)
-keymap("v", "<leader>/", "<cmd>Commentary<cr>", opts)
+keymap("n", "<leader>/", "v:lua.require'commented'.commented_line()", expr_opts)
+keymap("v", "<leader>/", "v:lua.require'commented'.commented_line()", expr_opts)
 
 -- Normal --
 -- Better window navigation
