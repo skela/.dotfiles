@@ -64,6 +64,7 @@ return packer.startup(function(use)
 
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use("nvim-lualine/lualine.nvim")
+	use("numToStr/FTerm.nvim")
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

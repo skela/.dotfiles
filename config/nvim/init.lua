@@ -8,4 +8,5 @@ require "skela.lsp"
 require "skela.treesitter"
 require "skela.completion"
 require "skela.commenting"
+require "skela.terminal"
 

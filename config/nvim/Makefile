@@ -1,4 +1,4 @@
 
 sync:
-	nvim +PackerSync
+	nvim +PackerSync +TSUpdate
 

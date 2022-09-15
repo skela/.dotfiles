@@ -20,6 +20,9 @@ vim.g.maplocalleader = " "
 
 keymap("n","<C-b>",":NvimTreeToggle<CR>",opts)
 
+keymap("n","<C-`>","<CMD>lua require('FTerm').toggle()<CR>",opts)
+keymap("t","<C-`>","<CMD>lua require('FTerm').toggle()<CR>",opts)
+
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<leader>ft", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)

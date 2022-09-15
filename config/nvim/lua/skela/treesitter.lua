@@ -7,7 +7,7 @@ require("nvim-treesitter.configs").setup
   ignore_install = { "javascript" },
   highlight = {
 		enable = true,
-    disable = { "c", "rust" },
+    disable = { "c" },
     additional_vim_regex_highlighting = false,
   },
 }
