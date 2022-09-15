@@ -30,6 +30,9 @@ keymap("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
 keymap("n", "<leader>/", "v:lua.require'commented'.commented_line()", expr_opts)
 keymap("v", "<leader>/", "v:lua.require'commented'.commented_line()", expr_opts)
 
+--keymap("n", "<C-_>", "v:lua.require'commented'.commented_line()", expr_opts)
+--keymap("v", "<C-_>", "v:lua.require'commented'.commented_line()", expr_opts)
+
 -- Normal --
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
