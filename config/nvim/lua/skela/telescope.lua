@@ -1,13 +1,13 @@
-local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
-  return
-end
+
+local telescope = require("skela.utils").require_safely("telescope")
+if not telescope then return end
 
 telescope.load_extension('media_files')
 
 local actions = require "telescope.actions"
 
-telescope.setup {
+telescope.setup
+{
   defaults = {
 
     prompt_prefix = ">",
