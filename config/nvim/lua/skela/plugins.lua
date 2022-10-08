@@ -65,6 +65,8 @@ return packer.startup(function(use)
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use("nvim-lualine/lualine.nvim")
 	use("numToStr/FTerm.nvim")
+	use("mfussenegger/nvim-dap")
+	use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

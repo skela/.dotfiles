@@ -33,6 +33,7 @@ o.wrap = false                            -- display lines as one long line
 o.scrolloff = 8                           -- start scroll X before
 o.sidescrolloff = 8
 o.errorbells = false
+o.cmdheight = 0
 
 o.shortmess:append "c"
 

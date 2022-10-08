@@ -1,5 +1,5 @@
 require "skela.options"
-require "skela.keymaps"
+require("skela.keymaps").defaults()
 require "skela.plugins"
 require "skela.theme"
 require "skela.telescope"
@@ -9,4 +9,5 @@ require "skela.treesitter"
 require "skela.completion"
 require "skela.commenting"
 require "skela.terminal"
+require "skela.flutter"
 

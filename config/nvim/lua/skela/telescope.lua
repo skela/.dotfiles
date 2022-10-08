@@ -1,8 +1,8 @@
-
-local telescope = require("skela.utils").require_safely("telescope")
+local utils = require("skela.utils")
+local telescope = utils.require_safely("telescope")
 if not telescope then return end
 
-telescope.load_extension('media_files')
+telescope.load_extension("media_files")
 
 local actions = require "telescope.actions"
 

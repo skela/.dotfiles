@@ -9,4 +9,12 @@ function utils.require_safely(module_name)
 	return module
 end
 
+function utils.has_module(module_name)
+	local status_ok, _ = pcall(require,module_name)
+	if not status_ok then
+		return false
+	end
+	return true
+end
+
 return utils
