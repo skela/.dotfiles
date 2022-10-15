@@ -114,4 +114,20 @@ function keymapper.lsp_on_attach(_,bufnr)
 
 end
 
+function keymapper.nvim_tree()
+	-- https://github.com/nvim-tree/nvim-tree.lua/blob/b4d704e88d57f2c7889aa01093038a7a5a4f3c5d/doc/nvim-tree-lua.txt#L1210
+	return
+	{
+		custom_only = false,
+		list = {
+			{ key = "a", action = "create" },
+			{ key = "p", action = "parent_node" },
+			{ key = "u", action = "dir_up" },
+			{ key = "o", action = "cd" },
+			{ key = "gg", action = "cd" },
+			{ key = "gp", action = "dir_up" },
+		},
+	}
+end
+
 return keymapper
