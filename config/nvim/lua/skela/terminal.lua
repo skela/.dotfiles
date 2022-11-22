@@ -1,5 +1,8 @@
+local utils = require("skela.utils")
+local fterm = utils.require_safely("FTerm")
+if not fterm then return end
 
-require("FTerm").setup
+fterm.setup
 {
 	border = "single",
 	dimensions = {

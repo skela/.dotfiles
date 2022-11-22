@@ -1,5 +1,8 @@
+local utils = require("skela.utils")
+local treesitter = utils.require_safely("nvim-treesitter.configs")
+if not treesitter then return end
 
-require("nvim-treesitter.configs").setup
+treesitter.setup
 {
   ensure_installed = { "c", "lua", "rust", "python", "dart", "yaml", "json", "bash", "kotlin", "swift", "fish", "ruby", "markdown" },
   sync_install = false,
