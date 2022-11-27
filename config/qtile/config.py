@@ -231,7 +231,7 @@ layouts = [
 	# layout.Columns(),
 	# layout.Matrix(),	
 	# layout.RatioTile(),
-	layout.Tile(**layout_theme),
+	# layout.Tile(**layout_theme),
 	# layout.TreeTab(),
 	# layout.VerticalTile(),
 	# layout.Zoomy(),
@@ -275,11 +275,11 @@ primary_widgets.extend([
 	
 	extrawidgets.GlobalMenu(padding=10,menu_background="#000000",highlight_colour="#ff0000"),
 
-	widget.Spacer(width=bar.STRETCH,background="#00000000"),
+	# widget.Spacer(width=bar.STRETCH,background="#00000000"),
 
-	widget.Spacer(length=6),
-	widget.Clock(format='%H:%M (%a) %d-%m-%Y'),	
-	widget.Spacer(length=6),
+	# widget.Spacer(length=6),
+	# widget.Clock(format='%H:%M (%a) %d-%m-%Y'),	
+	# widget.Spacer(length=6),
 
 	widget.Spacer(width=bar.STRETCH,background="#00000000"),	
 
@@ -315,7 +315,9 @@ primary_widgets.extend([
 	widget.Spacer(length=8),
 	sep(),
 	widget.CurrentLayoutIcon(scale=0.6),
-	widget.CurrentLayout(),				
+	widget.CurrentLayout(),
+	sep(),
+	widget.Clock(format='%H:%M (%a) %d-%m-%Y'),	
 	widget.Spacer(length=6),	
 ])
 
