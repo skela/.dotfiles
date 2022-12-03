@@ -23,6 +23,9 @@ class CameraCollection(object):
 	def __init__(self,d:dict):
 		self.name = d["name"]
 		self.cameras = d["cameras"]
+		self.alt_names = []
+		if "alt_names" in d:
+			self.alt_names = d["alt_names"]
 
 class Cameras(object):
 
@@ -55,7 +58,7 @@ class Cameras(object):
 
 	def get_collection(self,name:str) -> list[Camera]:
 		for alias in self.aliases:
-			if alias.name == name:
+			if alias.name == name or name in alias.alt_names:
 				cameras = list()
 				for cam in alias.cameras:
 					camera = self.get_camera(cam)
