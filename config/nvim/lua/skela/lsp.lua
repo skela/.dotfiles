@@ -17,12 +17,13 @@ local on_attach = function(client,bufnr)
 	keymapper.lsp_on_attach(client,bufnr)
 end
 
-local cfg = require("lspconfig")
+local cfg = utils.require_safely("lspconfig")
+if not cfg then return end
 
 cfg.pyright.setup { on_attach = on_attach }
 --cfg.dartls.setup { on_attach = on_attach }
 
-cfg.sumneko_lua.setup
+cfg.lua_ls.setup
 {
 	on_attach = on_attach,
 	settings = { Lua = { diagnostics = { globals = { "vim" } } } }

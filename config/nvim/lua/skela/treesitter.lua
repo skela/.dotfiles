@@ -14,4 +14,3 @@ treesitter.setup
     additional_vim_regex_highlighting = false,
   },
 }
-
