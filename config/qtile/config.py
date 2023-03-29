@@ -124,11 +124,13 @@ keys = [
 	Key([k.control], k.space, lazy.spawn(toggle_keyboard), desc="Toggle keyboard"),
 	Key([k.mod, k.shift], k.space, lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 	Key([k.mod], "n", lazy.spawn(files), desc="Launch file browser"),
-	Key([k.mod], "w", lazy.spawn(browser), desc="Launch web browser"),	
+	Key([k.mod], "w", lazy.spawn(browser), desc="Launch web browser"),
+	Key([k.mod], "m", lazy.window.toggle_maximize(), desc="Toggle maximize"),
 	Key([k.alt,k.control],"q" , lazy.spawn(lock_screen), desc="Lock screen"),
 	Key([k.control], k.tab, lazy.next_layout(), desc="Toggle between layouts"),
 	Key([k.control,k.shift], k.tab, lazy.prev_layout(), desc="Toggle between layouts"),
-	Key([k.mod], k.tab, lazy.group.next_window(), desc="Switch to next window"),
+	Key([k.mod], k.tab, lazy.layout.next(), desc="Switch to next window"),
+	#Key([k.mod], k.tab, lazy.group.next_window(), desc="Switch to next window"),
 	Key([k.mod,k.shift], k.tab, lazy.group.prev_window(), desc="Switch to previous window"),
 	
 	Key([k.mod], "q", lazy.window.kill(), desc="Kill active window"),
@@ -272,7 +274,20 @@ primary_widgets.extend([
 		other_current_screen_border="ff0000", # focus
 		font=icons.font,
 	),
-	
+	sep(),
+	#  widget.WindowTabs(
+		#  max_chars=50	
+	#  ),
+	#  widget.TaskList(
+		#  max_title_width=200,
+		#  border="#ff0000",
+		#  borderwidth=0,
+		#  highlight_method="block",
+		#  rounded=False,
+		#  padding=0,padding_x=5,
+		#  margin=0,margin_x=5
+	#  ),
+
 	extrawidgets.GlobalMenu(padding=10,menu_background="#000000",highlight_colour="#ff0000"),
 
 	# widget.Spacer(width=bar.STRETCH,background="#00000000"),
@@ -283,10 +298,11 @@ primary_widgets.extend([
 
 	widget.Spacer(width=bar.STRETCH,background="#00000000"),	
 
-	widget.Spacer(length=6),
+	#widget.Spacer(length=6),
 ])
 
 primary_widgets.extend([
+
 	widget.CheckUpdates(
 		update_interval = 1800,
 		distro = "Arch_checkupdates",

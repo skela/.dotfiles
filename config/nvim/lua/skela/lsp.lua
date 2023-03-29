@@ -22,6 +22,7 @@ if not cfg then return end
 
 cfg.pyright.setup { on_attach = on_attach }
 --cfg.dartls.setup { on_attach = on_attach }
+--  cfg.sourcekit_lsp.setup { on_attach = on_attach }
 
 cfg.lua_ls.setup
 {
