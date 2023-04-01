@@ -31,6 +31,8 @@ function keymapper.defaults()
 
 	keymap("n", "<C-p>", "<cmd>Telescope find_files<cr>", opts)
 	keymap("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
+	keymap("n", "<C-S-f>", "<cmd>Telescope live_grep<cr>", opts)
+	keymap("n", "<C-w>", "<cmd>Telescope buffers<cr>", opts)
 
 	keymap("n", "<leader>/", "v:lua.require'commented'.commented_line()", expr_opts)
 	keymap("v", "<leader>/", "v:lua.require'commented'.commented_line()", expr_opts)
