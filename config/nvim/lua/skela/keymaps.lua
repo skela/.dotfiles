@@ -53,6 +53,9 @@ function keymapper.defaults()
 	--keymap("n", "<CS><Left>", ":vertical resize -2<CR>", opts)
 	--keymap("n", "<CS-Right>", ":vertical resize +2<CR>", opts)
 
+	-- Search (Clear Highlight)
+	keymap("n", "<esc><esc>", ":noh<CR>", opts)
+
 	-- Navigate buffers
 	keymap("n", "<S-l>", ":bnext<CR>", opts)
 	keymap("n", "<S-h>", ":bprevious<CR>", opts)
