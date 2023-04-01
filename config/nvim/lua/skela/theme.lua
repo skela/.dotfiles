@@ -13,9 +13,11 @@ vim.cmd("highlight Normal guibg=none")
 
 local lualine = utils.require_safely("lualine")
 if lualine then
+	local powerline = require("lualine.themes.powerline_dark")
+	powerline.insert.c.bg = "#FF0000"
 	lualine.setup {
 		options = {
-			theme = "powerline_dark"
+			theme = powerline
 		},
 		sections = {
 			lualine_x = {"encoding","filetype"}
