@@ -34,7 +34,7 @@ if not vscode then return end
 
 vscode.setup {
 	italic_comments = true,
-	transparent = true,
+	transparent = false,
 }
 
 vscode.load()
