@@ -2,7 +2,7 @@
 set -U fish_user_paths $fish_user_paths $HOME/.local/bin/
 
 # Definitions
-set TERM "xterm-256color"
+set TERM "screen-256color"
 set EDITOR "vim"
 set VISUAL "vim"
 
