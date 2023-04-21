@@ -387,6 +387,7 @@ floating_layout = layout.Floating(float_rules=[
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
+auto_minimize = False
 
 @hook.subscribe.startup_once
 def autostart():	
