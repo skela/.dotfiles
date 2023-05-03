@@ -25,11 +25,11 @@ function keymapper.defaults()
 	keymap("n","<C-`>","<CMD>lua require('FTerm').toggle()<CR>",opts)
 	keymap("t","<C-`>","<CMD>lua require('FTerm').toggle()<CR>",opts)
 
-	keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+	keymap("n", "<leader>ff", "<cmd>Telescope find_files hidden=true<cr>", opts)
 	keymap("n", "<leader>ft", "<cmd>Telescope live_grep<cr>", opts)
 	keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
 
-	keymap("n", "<C-p>", "<cmd>Telescope find_files<cr>", opts)
+	keymap("n", "<C-p>", "<cmd>Telescope find_files hidden=true<cr>", opts)
 	keymap("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
 	keymap("n", "<C-S-f>", "<cmd>Telescope live_grep<cr>", opts)
 	keymap("n", "<C-w>", "<cmd>Telescope buffers<cr>", opts)
