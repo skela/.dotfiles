@@ -6,10 +6,10 @@ variety &
 picom --experimental-backends &
 nitrogen --restore &
 thunar --daemon &
-firefox-developer-edition &
 thunderbird &
 slack &
 kitty &
 xfce4-clipman &
 1password &
+albert &
 

@@ -30,7 +30,8 @@ control = "control"
 
 terminal = "kitty"
 files = "thunar"
-launcher = "ulauncher --no-window-shadow"
+#launcher = "ulauncher --no-window-shadow"
+launcher = "albert toggle"
 lock_screen = "sh /home/skela/.dotfiles/config/qtile/lock.sh"
 browser = "firefox-developer-edition"
 toggle_keyboard = "python3 /home/skela/.dotfiles/scripts/toggle_keyboard_layout.py"
@@ -154,18 +155,19 @@ keys = [
 
 class Workspace(object):
 
-	def __init__(self,name:str,shortcut:str|None=None,layout:str="monadtall",icon:str|None=None,matches:list|None=None):
+	def __init__(self,name:str,shortcut:str|None=None,layout:str="monadtall",icon:str|None=None,matches:list|None=None,spawn: str | list[str] | None = None):
 		self.name = name
 		self.layout = layout
 		self.shortcut = shortcut
 		self.matches = matches
+		self.spawn = spawn
 		if icon is not None:
 			self.label = icon
 		else:
 			self.label = self.name
 
 	def group(self):
-		return Group(self.name,layout=self.layout,label=self.label,matches=self.matches)
+		return Group(self.name,layout=self.layout,label=self.label,matches=self.matches,spawn=self.spawn)
 
 # Use `xprop WM_CLASS` to find wm classes for a window
 workspaces = [
@@ -179,7 +181,7 @@ workspaces = [
 	Workspace("games","8",layout="floating",icon=icons.games,matches=[Match(wm_class="Steam"),Match(wm_class="discord")]),
 	Workspace("music","9",icon=icons.music),
 	Workspace("cam","c",icon=icons.cam,matches=[Match(wm_class="onvifviewer"),Match(wm_class="cctv-viewer")]),
-	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="Firefox"),Match(wm_class="firefoxdeveloperedition"),Match(wm_class="scrcpy")]),
+	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="scrcpy")]),
 ]
 
 groups = list()
@@ -383,15 +385,18 @@ floating_layout = layout.Floating(float_rules=[
 	Match(title="Qalculate!"),
 	Match(wm_class="kdenlive"),
 	Match(wm_class="Conky"),
+	Match(wm_class="albert"),
 #	Match(title="Android Emulator"),
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 auto_minimize = False
+first_time_firefox = True
 
 @hook.subscribe.startup_once
-def autostart():	
+def autostart():
 	subprocess.call([path.join(qtile_path, "autostart.sh")])
+	#subprocess.call(["firefox-developer-edition &"])
 
 def check_window_class(window,name:str) -> bool:
 	n = window.wm_class
@@ -408,8 +413,11 @@ def check_window_name(window,name:str) -> bool:
 @hook.subscribe.client_new
 async def client_new(window):		
 	await asyncio.sleep(0.02)
-	if check_window_name(window,"spotify") or check_window_name(window,"spotify premium"):
+	if check_window_name(window,"spotify") or check_window_name(window,"spotify premium"):	
 		window.togroup("music")
+	if first_time_firefox and (check_window_class("firefox") or check_window_class("firefoxdeveloperedition")):
+		window.togroup("web")
+		first_time_firefox = False
 
 #old_focus = ""
 #@hook.subscribe.client_focus
