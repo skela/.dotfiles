@@ -181,7 +181,7 @@ workspaces = [
 	Workspace("games","8",layout="floating",icon=icons.games,matches=[Match(wm_class="Steam"),Match(wm_class="discord")]),
 	Workspace("music","9",icon=icons.music),
 	Workspace("cam","c",icon=icons.cam,matches=[Match(wm_class="onvifviewer"),Match(wm_class="cctv-viewer")]),
-	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="scrcpy"),Match(wm_class="google-chrome")]),
+	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="scrcpy"),Match(wm_class="google-chrome"),Match(wm_class="Google-chrome")]),
 ]
 
 groups = list()
