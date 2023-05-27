@@ -35,6 +35,9 @@ indent_size = 2
 [*.py]
 indent_style = tab
 
+[*.md]
+indent_style = tab
+
 [*.hs]
 indent_style = space
 indent_size = 4
