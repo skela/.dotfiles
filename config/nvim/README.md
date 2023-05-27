@@ -23,3 +23,10 @@ Install a language
 
 	:TSInstall {language}
 
+# Language Server Protocol Configs
+
+More info can be found [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
+or type in
+
+	:help lspconfig-all
+
