@@ -239,6 +239,12 @@ function gitl -d "Get URL for commit"
 	end
 end
 
+function gito -d "Open Commit Link in Browser"
+    begin
+         firefox-developer-edition (gitl)
+    end
+end
+
 function gitc -d "Get commit id"
 	begin
 		set GIT_COMMIT (git rev-parse HEAD)
