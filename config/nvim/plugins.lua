@@ -12,7 +12,9 @@ local plugins = {
 				"json",
 				"hjson",
 				"swift",
-				"dart"
+				"dart",
+				"dockerfile",
+				"python"
 			}
 		}
 	},
