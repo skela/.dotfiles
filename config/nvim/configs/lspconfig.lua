@@ -7,14 +7,16 @@ local servers = {
 	"pyright",
 	"lua_ls",
 	"dartls",
+	"sourcekit",
+	"rust_analyzer",
 }
 
-lspconfig.rust_analyzer.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	filetypes = {"rust"},
-	root_dir = lspconfig.util.root_pattern("Cargo.toml"),
-})
+-- lspconfig.rust_analyzer.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- 	filetypes = {"rust"},
+-- 	root_dir = lspconfig.util.root_pattern("Cargo.toml"),
+-- })
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup {
