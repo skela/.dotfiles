@@ -30,6 +30,7 @@ local plugins = {
 		opts = {
 			ensure_installed = {
 				"rust-analyzer",
+				"pyright"
 			},
 		},
 	},
