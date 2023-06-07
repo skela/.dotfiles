@@ -5,6 +5,7 @@ set -U fish_user_paths $fish_user_paths $HOME/.local/bin/
 set TERM "screen-256color"
 set EDITOR "vim"
 set VISUAL "vim"
+set BROWSER "firefox-developer-edition"
 
 # Settings
 set fish_greeting
