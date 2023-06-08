@@ -355,6 +355,11 @@ function start
 	python3 ~/.dotfiles/scripts/start.py
 end
 
+function reload_signatures
+	sudo pacman -Sy archlinux-keyring
+	sudo pacman -Sy endeavouros-keyring
+end
+
 function reload_aliases -d "Reload aliases"
 	if [ -f ~/.aliases ]
 		. ~/.aliases
