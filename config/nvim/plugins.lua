@@ -15,8 +15,8 @@ local plugins = {
 				"dart",
 				"dockerfile",
 				"python"
-			}
-		}
+			},
+		},
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -30,7 +30,7 @@ local plugins = {
 		opts = {
 			ensure_installed = {
 				"rust-analyzer",
-				"pyright"
+				"pyright",
 			},
 		},
 	},
