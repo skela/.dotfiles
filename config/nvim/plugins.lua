@@ -1,3 +1,4 @@
+
 local plugins = {
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -43,6 +44,11 @@ local plugins = {
 				}
 			}
 		}
-	}
+	},
+	{
+		"akinsho/toggleterm.nvim",
+		lazy = false,
+		opts = require "custom.configs.toggleterm"
+	},
 }
 return plugins

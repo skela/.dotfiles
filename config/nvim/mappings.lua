@@ -14,6 +14,12 @@ local function previous_file()
 	require("nvchad_ui.tabufline").tabuflinePrev()
 end
 
+local function git_history()
+local term = require("toggleterm.terminal").Terminal
+local git = term:new({ cmd = "tig", hidden = true })
+git:toggle()
+end
+
 local cmds = {}
 cmds.save_file = {cmd(":update"), "Save file"}
 cmds.close_file = {cmd(":bp<bar>sp<bar>bn<bar>bd"), "Close file"}
@@ -40,6 +46,7 @@ M.general = {
 		["<leader>?"] = {cmd("Telescope oldfiles"),"Find recently opened files"},
 		["<leader><leader>"] = {cmd("Telescope buffers"),"Find existing buffers"},
 		["<leader>d"] = {cmd("Telescope diagnostics"),"Diagnostics"},
+		["<leader>gh"] = { git_history, "Git History" },
 	},
 
 	i = {
