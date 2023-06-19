@@ -18,10 +18,10 @@ local function previous_file()
 	require("nvchad_ui.tabufline").tabuflinePrev()
 end
 
+M.memory = {}
+
 local function git_history()
-local term = require("toggleterm.terminal").Terminal
-local git = term:new({ cmd = "tig", hidden = true })
-git:toggle()
+	require("custom.routines.toggleterm").git_history(M.memory,cmd)
 end
 
 local cmds = {}
