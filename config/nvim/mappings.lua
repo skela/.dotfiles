@@ -18,11 +18,7 @@ local function previous_file()
 	require("nvchad_ui.tabufline").tabuflinePrev()
 end
 
-M.memory = {}
-
-local function git_history()
-	require("custom.routines.toggleterm").git_history(M.memory,cmd)
-end
+local toggleterm = require("custom.configs.toggleterm")
 
 local cmds = {}
 cmds.save_file = {cmd(":update<cr><esc>"), "Save file"}
@@ -33,6 +29,8 @@ cmds.find_files = {cmd("Telescope find_files hidden=true"),"Jump to file"}
 cmds.search_all_files = {cmd("Telescope live_grep"),"Search all files"}
 cmds.previous_file = {previous_file,"Go to previous file"}
 cmds.next_file = {next_file,"Go to next file"}
+cmds.plugins_update_mason = {cmd(":MasonInstallAll"),"Update Mason"}
+cmds.plugins_update_treesitter = {cmd(":TSUpdateSync"),"Update Treesitter"}
 
 local common = {
 	["<C-b>"] = cmds.open_file_tree,
@@ -50,7 +48,12 @@ M.general = {
 		["<leader>?"] = {cmd("Telescope oldfiles"),"Find recently opened files"},
 		["<leader><leader>"] = {cmd("Telescope buffers"),"Find existing buffers"},
 		["<leader>d"] = {cmd("Telescope diagnostics"),"Diagnostics"},
-		["<leader>gh"] = { git_history, "Git History" },
+		["<leader>t1"] = {cmd("1:ToggleTerm"), "Terminal 1"},
+		["<leader>t2"] = { toggleterm.toggle2, "Terminal 2" },
+		["<leader>t3"] = { toggleterm.toggle3, "Terminal 3 (Git History)" },
+		["<leader>gh"] = { toggleterm.toggle3, "Git History" },
+		["<leader>pm"] = cmds.plugins_update_mason,
+		["<leader>pt"] = cmds.plugins_update_treesitter,
 	},
 
 	i = {

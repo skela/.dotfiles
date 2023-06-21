@@ -1,23 +1,10 @@
 
+local options = require "custom.configs.opts"
+
 local plugins = {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		opts = {
-			ensure_installed = {
-				"vim",
-				"lua",
-				"html",
-				"css",
-				"javascript",
-				"tsx",
-				"json",
-				"hjson",
-				"swift",
-				"dart",
-				"dockerfile",
-				"python"
-			},
-		},
+		opts = options.treesitter,
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -28,27 +15,16 @@ local plugins = {
 	},
 	{
 		"williamboman/mason.nvim",
-		opts = {
-			ensure_installed = {
-				"rust-analyzer",
-				"pyright",
-			},
-		},
+		opts = options.mason,
 	},
 	{
 		"nvim-telescope/telescope.nvim",
-		opts = {
-			pickers = {
-				find_files = {
-					find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-				}
-			}
-		}
+		opts = options.telescope,
 	},
 	{
 		"akinsho/toggleterm.nvim",
+		opts = options.toggleterm,
 		lazy = false,
-		opts = require "custom.configs.toggleterm"
 	},
 }
 return plugins
