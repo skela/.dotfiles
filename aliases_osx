@@ -1,10 +1,15 @@
 alias fastlane="/Users/skela/.gem/ruby/2.6.0/bin/fastlane"
 alias vim="nvim"
+
 export PATH="$PATH:/Users/skela/Files/SDKs/flutter/bin"
 export PATH="$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin:$PATH"
+
+export C_INCLUDE_PATH="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/"
+export SDKROOT="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+
 function code --wraps='/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code' --description 'alias code /Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'
   /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code $argv;
 end
