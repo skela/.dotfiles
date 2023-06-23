@@ -36,11 +36,12 @@ T.telescope = {
 	}
 }
 
+local toggleterm = require("custom.configs.toggleterm")
 T.toggleterm = {
 	size = 20,
 	open_mapping = [[<c-\>]],
-	on_open = function(t) require("custom.configs.toggleterm").on_term_open(t) end,
-	on_close = function(t) require("custom.configs.toggleterm").on_term_close(t) end,
+	on_open = function(t) toggleterm.on_term_open(t) end,
+	on_close = function(t) toggleterm.on_term_close(t) end,
 	hide_numbers = true,
 	shade_filetypes = {},
 	shade_terminals = true,
