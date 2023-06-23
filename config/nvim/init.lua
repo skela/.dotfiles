@@ -6,7 +6,7 @@ vim.o.shiftwidth = 2
 vim.o.tabstop = 2
 vim.o.smartindent = true
 
-if os.getenv("HOME"):find("/Users/",1,true) == 1 then
+if require("custom.platform").is_mac() then
 	local sdk = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
 	vim.env.C_INCLUDE_PATH = sdk .. "/usr/include/"
 	vim.env.SDKROOT = sdk
