@@ -5,7 +5,6 @@ export PATH="$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin:$PATH"
-
 function code --wraps='/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code' --description 'alias code /Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'
   /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code $argv;
 end
