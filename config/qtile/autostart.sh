@@ -8,7 +8,7 @@ nitrogen --restore &
 thunar --daemon &
 thunderbird &
 slack &
-kitty &
+wezterm &
 xfce4-clipman &
 1password &
 albert &
