@@ -6,8 +6,21 @@ if wezterm.config_builder then
 end
 config.font = wezterm.font "JetBrains Mono"
 config.font_size = 14.0
-config.color_scheme = "Symphonic"
--- config.color_scheme = "3024 Night"
+
+local color_scheme = "Gruvbox Dark (Gogh)"
+
+local builtin_color_scheme = wezterm.color.get_builtin_schemes()[color_scheme]
+builtin_color_scheme.background = "black"
+
+local defaults = wezterm.color.get_default_colors()
+defaults.background = "black"
+
+config.color_schemes = {
+	["My Gruvbox"] = builtin_color_scheme,
+	["My Default"] = defaults,
+}
+
+config.color_scheme = "My Gruvbox"
 
 -- Tab Bar
 config.tab_bar_at_bottom = true
