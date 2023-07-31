@@ -7,20 +7,20 @@ end
 config.font = wezterm.font "JetBrains Mono"
 config.font_size = 14.0
 
-local color_scheme = "Gruvbox Dark (Gogh)"
+local color_scheme = "Snazzy"
 
 local builtin_color_scheme = wezterm.color.get_builtin_schemes()[color_scheme]
 builtin_color_scheme.background = "black"
 
-local defaults = wezterm.color.get_default_colors()
-defaults.background = "black"
+local default_colors = wezterm.color.get_default_colors()
+default_colors.background = "black"
 
 config.color_schemes = {
-	["My Gruvbox"] = builtin_color_scheme,
-	["My Default"] = defaults,
+	["My Scheme"] = builtin_color_scheme,
+	["My Default"] = default_colors,
 }
 
-config.color_scheme = "My Gruvbox"
+config.color_scheme = "My Scheme"
 
 -- Tab Bar
 config.tab_bar_at_bottom = true
