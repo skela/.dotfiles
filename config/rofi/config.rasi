@@ -1,0 +1,32 @@
+
+configuration {
+  display-drun: "Applications";
+  display-window: "Windows";
+  drun-display-format: "{name}";
+  font: "Fira Sans SemiBold 11";
+  modi: "window,run,drun";
+  /* show-icons: true; */
+}
+
+/* Dark theme. */
+/*@import "~/.cache/wal/colors-rofi-dark"*/
+
+window {
+  width:700px;
+}
+
+element {
+  padding:6;
+}
+
+element-text selected {
+  text-color:@background;
+}
+
+prompt {
+  text-color:#ffffff;
+}
+
+entry {
+  text-color:#ffffff;
+}
