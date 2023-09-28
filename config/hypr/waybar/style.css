@@ -1,6 +1,6 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: Roboto, FontAwesome6Free, Helvetica, Arial, sans-serif;
     font-size: 15px;
 }
 
@@ -91,6 +91,7 @@ button:hover {
 #mpd {
     padding: 0 10px;
     color: #ffffff;
+	background-color: #64727D;
 }
 
 #window,
@@ -113,8 +114,6 @@ button:hover {
 }
 
 #battery {
-    background-color: #ffffff;
-    color: #000000;
 }
 
 #battery.charging, #battery.plugged {
@@ -144,33 +143,29 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71;
-    color: #000000;
 }
 
 #memory {
-    background-color: #9b59b6;
 }
 
 #disk {
-    background-color: #964B00;
 }
 
 #backlight {
-    background-color: #90b1b1;
 }
 
 #network {
-    background-color: #2980b9;
 }
 
 #network.disconnected {
     background-color: #f53c3c;
 }
 
+#network.linked {
+	background-color: #ffcc00;
+}
+
 #pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
 }
 
 #pulseaudio.muted {
@@ -202,7 +197,6 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
 }
 
 #temperature.critical {
@@ -210,7 +204,6 @@ label:focus {
 }
 
 #tray {
-    background-color: #2980b9;
 }
 
 #tray > .passive {
@@ -249,8 +242,8 @@ label:focus {
 }
 
 #language {
-    background: #00b093;
-    color: #740864;
+    color: #ffffff;
+	background: #64727D;
     padding: 0 5px;
     margin: 0 5px;
     min-width: 16px;

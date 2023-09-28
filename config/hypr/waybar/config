@@ -1,5 +1,6 @@
 {
     "layer": "top", // Waybar at top layer
+	"output": ["DP-1"],
     // "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 40, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
@@ -8,26 +9,34 @@
 	"margin-right": 20,
 	"margin-top": 8,
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
+    "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "battery#bat2", "clock", "tray"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "hyprland/language", "clock"],
     // Modules configuration
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "warp-on-scroll": false,
-        "format": "{name}: {icon}",
+        "format": "{icon}",
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
+            "1": "", // home
+            "2": "", // dev
+            "3": "", // misc
+            "4": "", // chat
+			"5": "", // gfx
+            "6": "", // mail
+			"7": "", //3d
+			"8": "", //games
+			"9": "", // music
+			"10": "", // web
             "urgent": "",
             "focused": "",
             "default": ""
         }
     },
+	"hyprland/language": {
+		"format": " {}"
+	},
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -85,23 +94,23 @@
         "spacing": 10
     },
     "clock": {
-        // "timezone": "America/New_York",
+		"format": " {:%d-%m %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": " {:%d-%m-%Y %H:%M:%S}"
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": " {usage}%",
         "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+        "format": " {}%"
     },
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
+        "format": "{icon} {temperatureC}°C",
         "format-icons": ["", "", ""]
     },
     "backlight": {
@@ -128,11 +137,11 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": " {ipaddr}/{cidr}",
+        "tooltip-format": " {ifname} via {gwaddr}",
+        "format-linked": " {ifname} (No IP)",
+        "format-disconnected": "⚠ Disconnected",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
