@@ -237,10 +237,13 @@ if [[ " ${SIMPLE_WMS[*]} " = *" $XDG_CURRENT_DESKTOP "* || " ${SIMPLE_WMS[*]} " 
     fi
 fi
 
-if [[ -n $SWAYSOCK ]]; then
+if [[ -n $SWAYSOCK  || $XDG_CURRENT_DESKTOP == "Hyprland" ]]; then
     # If swaybg is available, use it as prevents system freeze.
     # See https://github.com/swaywm/sway/issues/5606
-    if command -v "swaybg" >/dev/null 2>&1; then
+	
+    if command -v "swww" >/dev/null 2>&1; then
+		swww img "$WP" 2>/dev/null
+    elif command -v "swaybg" >/dev/null 2>&1; then
         # Grey background flicker is prevented by killing old swaybg process after new one.
         # See https://github.com/swaywm/swaybg/issues/17#issuecomment-851680720
         PID=`pidof swaybg`
