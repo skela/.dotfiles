@@ -75,6 +75,10 @@ button:hover {
 #workspaces button.persistent {
 }
 
+#workspaces button.empty {
+	opacity: 0.5;
+}
+
 #mode {
     background-color: #64727D;
     border-bottom: 3px solid #ffffff;
