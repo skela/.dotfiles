@@ -9,6 +9,7 @@ class Icons(object):
 		self.dev = ""
 		self.misc = ""
 		self.three_d = ""
+		self.phones = ""
 		self.gfx = ""
 		self.games = ""
 		self.music = ""
@@ -16,7 +17,7 @@ class Icons(object):
 		self.email = ""
 		self.web = ""
 		self.cam = ""
-		
+			
 		self.network = ""
 		self.clock = ""
 		self.volume = ""
