@@ -22,5 +22,5 @@ elif layout == "gb":
     change_to_norwegian()
 
 # aurora running hyprland
-os.system("hyprctl switchxkblayout logitech-gaming-keyboard-g810-keyboard next")
+os.system("hyprctl switchxkblayout logitech-gaming-keyboard-g810 next")
 
