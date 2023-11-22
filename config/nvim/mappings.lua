@@ -11,11 +11,11 @@ local function cmd(s)
 end
 
 local function next_file()
-	require("nvchad_ui.tabufline").tabuflineNext()
+	require("nvchad.tabufline").tabuflineNext()
 end
 
 local function previous_file()
-	require("nvchad_ui.tabufline").tabuflinePrev()
+	require("nvchad.tabufline").tabuflinePrev()
 end
 
 local toggleterm = require("custom.configs.toggleterm")
