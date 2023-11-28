@@ -11,7 +11,7 @@
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["tray", "pulseaudio", "network", "cpu", "memory", "temperature", "hyprland/language", "clock"],
+    "modules-right": ["custom/clipboard","tray", "pulseaudio", "network", "cpu", "memory", "temperature", "hyprland/language", "clock"],
     // Modules configuration
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -30,7 +30,7 @@
 			"9": "", // music
 			"10": "" // web
         },
-		"persistent_workspaces": {
+		"persistent-workspaces": {
 			"1": [],
 			"2": [],
 			"3": [],
@@ -103,7 +103,7 @@
         "spacing": 10
     },
     "clock": {
-		"format": " {:%H:%M - %d-%m}",
+		"format": " {:%d-%m - %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": " {:%d-%m-%Y %H:%M:%S}"
     },
@@ -183,6 +183,20 @@
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    }
+    },
+	"custom/clipboard": {
+	  "format": "",
+	  "interval": "once",
+	  "return-type": "json",
+	  //"on-click": "swaymsg -q exec '$clipboard'; pkill -RTMIN+9 waybar",
+	  //"on-click-right": "swaymsg -q exec '$clipboard-del'; pkill -RTMIN+9 waybar",
+	  //"on-click-middle": "swaymsg -q exec '$clipboard-del-all'",
+	  "on-click": "/home/skela/.dotfiles/scripts/launcher-clipboard.sh",
+	  "on-click-right": "",
+	  "on-click-middle": "cliphist wipe",
+	  "exec": "printf '{\"tooltip\":\"%s\"}' $(cliphist list | wc -l)",
+	  "exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
+	  "signal": 9
+	},
 }
 
