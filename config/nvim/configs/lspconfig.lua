@@ -6,7 +6,7 @@ local lspconfig = require("lspconfig")
 
 local servers = {
 	"pyright",
-	"dartls",
+	-- "dartls",
 	"sourcekit",
 	"rust_analyzer",
 }
@@ -34,6 +34,24 @@ lspconfig.lua_ls.setup
 		telemetry = {
 			enable = false, -- Do not send telemetry data containing a randomized but unique identifier
 		},
+	}
+}
+
+lspconfig.dartls.setup
+{
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		dart = {
+			showTodos = true,
+			updateImportsOnRename = true,
+			enableSdkFormatter = false,
+			completeFunctionCalls = true,
+			analysisExcludedFolders = {
+				vim.fn.expand("$HOME/.pub-cache"),
+				vim.fn.expand("$HOME/files/sdks/flutter"),
+			}
+		}
 	}
 }
 

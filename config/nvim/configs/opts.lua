@@ -25,6 +25,7 @@ T.mason = {
 	ensure_installed = {
 		"rust-analyzer",
 		"pyright",
+		"dart-debug-adapter",
 	},
 }
 
