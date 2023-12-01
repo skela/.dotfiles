@@ -158,6 +158,7 @@ return {
         "yaml",
         "dart",
         "swift",
+        "rust",
       },
     },
   },
