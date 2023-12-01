@@ -27,7 +27,7 @@ end
 
 mapCommon("<C-S>", cmd(":update<cr><esc>"), { desc = "Save file", remap = true })
 mapCommon("<C-W>", cmd(":bp<bar>sp<bar>bn<bar>bd"), { desc = "Close file", remap = true })
-mapCommon("<C-b>", cmd(":Neotree toggle"), { desc = "Open filetree", remap = true })
+mapCommon("<C-b>", cmd("Neotree toggle"), { desc = "Open filetree", remap = true })
 mapCommon("<C-F", cmd("Telescope current_buffer_fuzzy_find"), { desc = "Search current file", remap = true })
 mapCommon("<C-p>", cmd("Telescope find_files hidden=true"), { desc = "Jump to file", remap = true })
 mapCommon("<C-S-f", cmd("Telescope live_grep"), { desc = "Search all files", remap = true })
