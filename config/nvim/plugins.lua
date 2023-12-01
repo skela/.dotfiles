@@ -39,6 +39,7 @@ local plugins = {
   {
     "akinsho/flutter-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "stevearc/dressing.nvim" },
+		lazy = false,
     config = function()
       require('flutter-tools').setup {
 				decorations = {
@@ -88,8 +89,10 @@ local plugins = {
           open_cmd = "tabedit",
         },
         lsp = {
-          on_attach = require("lvim.lsp").common_on_attach,
-          capabilities = require("lvim.lsp").default_capabilities,
+          -- on_attach = require("lvim.lsp").common_on_attach,
+          -- capabilities = require("lvim.lsp").default_capabilities,
+					on_attach = require("plugins.configs.lspconfig").on_attach,
+					capabilities = require("plugins.configs.lspconfig").capabilities,
         },
       }
     end
