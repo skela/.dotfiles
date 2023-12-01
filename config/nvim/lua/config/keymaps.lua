@@ -31,7 +31,7 @@ mapCommon("<C-b>", cmd(":Neotree toggle"), { desc = "Open filetree", remap = tru
 mapCommon("<C-F", cmd("Telescope current_buffer_fuzzy_find"), { desc = "Search current file", remap = true })
 mapCommon("<C-p>", cmd("Telescope find_files hidden=true"), { desc = "Jump to file", remap = true })
 mapCommon("<C-S-f", cmd("Telescope live_grep"), { desc = "Search all files", remap = true })
-mapCommon("A-Left", cmd(":BufferLineCyclePrev"), { desc = "Go to previous file", remap = true })
-mapCommon("A-Right", cmd(":BufferLineCycleNext"), { desc = "Go to next file", remap = true })
+mapCommon("<A-Left>", cmd("BufferLineCyclePrev"), { desc = "Go to previous file", remap = true })
+mapCommon("<A-Right>", cmd("BufferLineCycleNext"), { desc = "Go to next file", remap = true })
 
 mapNormal("<C-n>", cmd("enew"), { desc = "New File" })
