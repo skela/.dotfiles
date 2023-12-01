@@ -1,19 +1,23 @@
-# Setup (First time)
+# 💤 LazyVim
 
-	rm -fdr ~/.config/nvim
-	rm -rf ~/.local/share/nvim
-	git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-	ln -s ~/.dotfiles/config/nvim ~/.config/nvim/lua/custom
+A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
+Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
 
-# Cheatsheet
+## Setup (First time)
+
+## Check Health
+
+  :checkhealth
+
+## Cheatsheet
 
 	Space + c + h
 
-# Theme Switcher
+## Theme Switcher
 
 	Space + t + h
 
-# Syntax Highlighting
+## Syntax Highlighting
 
 Check which languages are installed
 
@@ -23,7 +27,7 @@ Install a language
 
 	:TSInstall {language}
 
-# Language Server Protocol Configs
+## Language Server Protocol Configs
 
 More info can be found [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
 or type in
