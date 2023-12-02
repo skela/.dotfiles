@@ -25,9 +25,10 @@ end
 
 --local toggleterm = require("custom.configs.toggleterm")
 
--- Code
+-- Coding
 map({ "n", "v" }, "<leader>/", "gcc", { desc = "Comment selected line(s)", remap = true })
 map({ "v" }, "<leader>.", "gc", { desc = "Comment selected text", remap = true })
+mapCommon("<C-`>", cmd("TroubleToggle"), { desc = "Show/Hide Problems", remap = true })
 
 -- Files
 mapCommon("<C-S>", cmd(":update<cr><esc>"), { desc = "Save file", remap = true })
