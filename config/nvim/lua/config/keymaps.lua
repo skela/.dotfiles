@@ -13,6 +13,10 @@ local function mapNormal(combo, command, opts)
 	map("n", combo, command, opts)
 end
 
+local function mapVisual(combo, command, opts)
+	map("v", combo, command, opts)
+end
+
 --@param s string
 ---@return string
 local function cmd(s)
@@ -27,7 +31,7 @@ end
 
 -- Coding
 map({ "n", "v" }, "<leader>/", "gcc", { desc = "Comment selected line(s)", remap = true })
-map({ "v" }, "<leader>.", "gc", { desc = "Comment selected text", remap = true })
+mapVisual("<leader>.", "gc", { desc = "Comment selected text", remap = true })
 mapCommon("<C-`>", cmd("TroubleToggle"), { desc = "Show/Hide Problems", remap = true })
 
 -- Files

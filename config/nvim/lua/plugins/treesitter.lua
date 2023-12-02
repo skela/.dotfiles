@@ -23,6 +23,10 @@ return {
 				"swift",
 				"rust",
 			},
+			indent = {
+				enable = true,
+				disable = { "python" },
+			},
 		},
 	},
 }
