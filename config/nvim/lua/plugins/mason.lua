@@ -6,7 +6,6 @@ return {
 				"stylua",
 				"shellcheck",
 				"shfmt",
-				--"flake8",
 				"pyright",
 				"rust-analyzer",
 				"dart-debug-adapter",
