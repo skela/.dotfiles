@@ -29,10 +29,27 @@ end
 
 --local toggleterm = require("custom.configs.toggleterm")
 
+local keymaps = {}
+keymaps.coding = function()
+	mapNormal("<C-1>", cmd("TroubleToggle"), { desc = "Trouble & TODOs", remap = true })
+	mapNormal("<leader>ct", cmd("TroubleToggle"), { desc = "Trouble & TODOs", remap = true })
+end
+
+keymaps.flutter = function(_, _) -- client,buffer
+	keymaps.coding()
+	mapNormal("<leader>cp", cmd(":FlutterOutlineToggle"), { desc = "Property/Function outline", remap = true })
+	mapNormal("<leader>cd", cmd(":FlutterDevices"), { desc = "Devices (Flutter)", remap = true })
+	mapNormal("<leader>ch", cmd(":FlutterReload"), { desc = "Hot Reload (Flutter)", remap = true })
+	mapNormal("<leader>cR", cmd(":FlutterRestart"), { desc = "Restart (Flutter)", remap = true })
+	mapNormal("<leader>cL", cmd(":FlutterRun"), { desc = "Launch (Flutter)", remap = true })
+	mapNormal("<leader>cQ", cmd(":FlutterQuit"), { desc = "Quit (Flutter)", remap = true })
+	-- mapNormal("<leader>cL", ":split | buffer __FLUTTER_DEV_LOG__<CR>", { remap = false, desc = "Open flutter dev log in horizontal split" })
+end
+
 -- Coding
 map({ "n", "v" }, "<C-K>", "gcc<esc>", { desc = "Comment selected line(s)", remap = true })
 mapVisual("<leader>.", "gc", { desc = "Comment selected text", remap = true })
-mapCommon("<C-`>", cmd("TroubleToggle"), { desc = "Show/Hide Problems", remap = true })
+keymaps.coding()
 
 -- Files
 mapCommon("<C-S>", cmd(":update<cr><esc>"), { desc = "Save file", remap = true })
@@ -49,3 +66,5 @@ mapCommon("<C-b>", cmd("Neotree toggle"), { desc = "Open filetree", remap = true
 mapCommon("<C-F>", cmd("Telescope current_buffer_fuzzy_find"), { desc = "Search current file", remap = true })
 mapCommon("<C-p>", cmd("Telescope find_files hidden=true"), { desc = "Jump to file", remap = true })
 mapCommon("<C-S-f>", cmd("Telescope live_grep"), { desc = "Search all files", remap = true })
+
+return keymaps
