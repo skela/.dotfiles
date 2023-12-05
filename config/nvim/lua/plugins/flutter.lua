@@ -42,7 +42,7 @@ return {
 					end,
 				},
 				outline = {
-					open_cmd = "30vnew",
+					open_cmd = "60vnew",
 					auto_open = false,
 				},
 				dev_log = {

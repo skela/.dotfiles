@@ -31,13 +31,14 @@ end
 
 local keymaps = {}
 keymaps.coding = function()
-	mapNormal("<C-1>", cmd("TroubleToggle"), { desc = "Trouble & TODOs", remap = true })
-	mapNormal("<leader>ct", cmd("TroubleToggle"), { desc = "Trouble & TODOs", remap = true })
+	mapNormal("<C-i>", cmd(":TroubleToggle"), { desc = "Trouble & TODOs", remap = true })
+	mapNormal("<leader>ct", cmd(":TroubleToggle"), { desc = "Trouble & TODOs", remap = true })
 end
 
 keymaps.flutter = function(_, _) -- client,buffer
 	keymaps.coding()
 	mapNormal("<leader>cp", cmd(":FlutterOutlineToggle"), { desc = "Property/Function outline", remap = true })
+	mapNormal("<C-o>", cmd(":FlutterOutlineToggle"), { desc = "Property/Function outline", remap = true })
 	mapNormal("<leader>cd", cmd(":FlutterDevices"), { desc = "Devices (Flutter)", remap = true })
 	mapNormal("<leader>ch", cmd(":FlutterReload"), { desc = "Hot Reload (Flutter)", remap = true })
 	mapNormal("<leader>cR", cmd(":FlutterRestart"), { desc = "Restart (Flutter)", remap = true })
