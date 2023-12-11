@@ -47,6 +47,14 @@ keymaps.flutter = function(_, _) -- client,buffer
 	-- mapNormal("<leader>cL", ":split | buffer __FLUTTER_DEV_LOG__<CR>", { remap = false, desc = "Open flutter dev log in horizontal split" })
 end
 
+keymaps.rust = function()
+	return {
+		-- { "K", cmd("RustHoverActions"), desc = "Hover Actions (Rust)" },
+		-- { "<leader>cR", cmd("RustCodeAction"), desc = "Code Action (Rust)" },
+		{ "<leader>cD", cmd("RustDebuggables"), desc = "Run Debuggables (Rust)" },
+	}
+end
+
 -- Coding
 map({ "n", "v" }, "<C-K>", "gcc<esc>", { desc = "Comment selected line(s)", remap = true })
 mapVisual("<leader>.", "gc", { desc = "Comment selected text", remap = true })

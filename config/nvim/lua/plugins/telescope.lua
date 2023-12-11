@@ -8,5 +8,13 @@ return {
 				require("telescope").load_extension("fzf")
 			end,
 		},
+		opts = {
+			defaults = {
+				file_ignore_patterns = {
+					"^.git/",
+					"^node_modules/",
+				},
+			},
+		},
 	},
 }

@@ -9,6 +9,8 @@ return {
 				"pyright",
 				"rust-analyzer",
 				"dart-debug-adapter",
+				-- "table",
+				"codelldb",
 			},
 		},
 	},
