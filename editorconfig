@@ -11,6 +11,7 @@ indent_style = tab
 indent_style = tab
 indent_size = 2
 curly_bracket_next_line = true
+trim_trailing_whitespace = true
 
 [*.js]
 indent_style = tab
