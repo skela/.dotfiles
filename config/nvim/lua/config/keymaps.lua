@@ -47,6 +47,18 @@ keymaps.flutter = function(_, _) -- client,buffer
 	-- mapNormal("<leader>cL", ":split | buffer __FLUTTER_DEV_LOG__<CR>", { remap = false, desc = "Open flutter dev log in horizontal split" })
 end
 
+map({ "i", "s" }, "<Tab>", function()
+	require("cmp").mapping(function(fallback)
+		if require("cmp").visible() then
+			require("cmp").select_next_item()
+		elseif require("luasnip").expand_or_jumpable() then
+			require("luasnip").expand_or_jump()
+		else
+			fallback()
+		end
+	end)
+end)
+
 keymaps.rust = function()
 	return {
 		-- { "K", cmd("RustHoverActions"), desc = "Hover Actions (Rust)" },
