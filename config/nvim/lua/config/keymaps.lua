@@ -27,8 +27,6 @@ local function cmd(s)
 	end
 end
 
---local toggleterm = require("custom.configs.toggleterm")
-
 local keymaps = {}
 keymaps.coding = function()
 	mapNormal("<C-i>", cmd(":TroubleToggle"), { desc = "Trouble & TODOs", remap = true })
@@ -46,6 +44,33 @@ keymaps.flutter = function(_, _) -- client,buffer
 	mapNormal("<leader>cQ", cmd(":FlutterQuit"), { desc = "Quit (Flutter)", remap = true })
 	-- mapNormal("<leader>cL", ":split | buffer __FLUTTER_DEV_LOG__<CR>", { remap = false, desc = "Open flutter dev log in horizontal split" })
 end
+
+local harp = {}
+harp.append = function()
+	require("harpoon"):list():append()
+end
+
+harp.pick = function()
+	local h = require("harpoon")
+	h.ui:toggle_quick_menu(h:list())
+end
+
+harp.select1 = function()
+	require("harpoon"):list():select(1)
+end
+harp.select2 = function()
+	require("harpoon"):list():select(2)
+end
+
+harp.next = function()
+	require("harpoon"):list():next({ ui_nav_wrap = true })
+end
+
+harp.previous = function()
+	require("harpoon"):list():prev({ ui_nav_wrap = true })
+end
+
+keymaps.harpoon = harp
 
 map({ "i", "s" }, "<Tab>", function()
 	require("cmp").mapping(function(fallback)
@@ -75,7 +100,6 @@ keymaps.coding()
 -- Files
 mapCommon("<C-S>", cmd(":update<cr><esc>"), { desc = "Save file", remap = true })
 mapCommon("<C-W>", cmd(":bp<bar>sp<bar>bn<bar>bd"), { desc = "Close file", remap = true })
-mapNormal("<C-n>", cmd("enew"), { desc = "New File" })
 
 -- Top Tabs
 mapCommon("<A-Left>", cmd("BufferLineCyclePrev"), { desc = "Go to previous file", remap = true })
@@ -87,5 +111,14 @@ mapCommon("<C-b>", cmd("Neotree toggle"), { desc = "Open filetree", remap = true
 mapCommon("<C-F>", cmd("Telescope current_buffer_fuzzy_find"), { desc = "Search current file", remap = true })
 mapCommon("<C-p>", cmd("Telescope find_files hidden=true"), { desc = "Jump to file", remap = true })
 mapCommon("<C-S-f>", cmd("Telescope live_grep"), { desc = "Search all files", remap = true })
+
+-- Harpoon
+
+mapNormal("<leader>a", harp.append)
+mapNormal("<C-e>", harp.pick)
+mapNormal("<C-h>", harp.select1)
+mapNormal("<C-t>", harp.select2)
+mapNormal("<C-Left>", harp.next)
+mapNormal("<C-Right>", harp.previous)
 
 return keymaps

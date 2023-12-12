@@ -34,3 +34,23 @@ or type in
 
 	:help lspconfig-all
 
+## Vim Madness
+
+### Replace Text (Multiple Times)
+
+Yank your word (might also work for deletions)
+
+	yw
+
+Paste
+
+	ve"0p
+
+v - visualmode
+
+e - select word
+
+"0 - get value from Register 0 address
+
+p - paste
+
