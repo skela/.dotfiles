@@ -37,6 +37,14 @@ return {
 			on_open = float_handler,
 		})
 
+		local tig = Terminal:new({
+			cmd = "tig",
+			dir = "git_dir",
+			hidden = true,
+			direction = "float",
+			on_open = float_handler,
+		})
+
 		local htop = Terminal:new({
 			cmd = "htop",
 			hidden = true,
@@ -49,6 +57,10 @@ return {
 		end, {})
 		vim.api.nvim_create_user_command("Lazygit", function()
 			lazygit:toggle()
+		end, {})
+
+		vim.api.nvim_create_user_command("Tig", function()
+			tig:toggle()
 		end, {})
 
 		function _LAZYGIT_TOGGLE()
