@@ -182,7 +182,6 @@ workspaces = [
 	Workspace("phones","7",layout="floating",icon=icons.phones,matches=[Match(title="Android Emulator")]),
 	Workspace("games","8",layout="floating",icon=icons.games,matches=[Match(wm_class="Steam"),Match(wm_class="discord")]),
 	Workspace("music","9",icon=icons.music),
-	Workspace("cam","c",icon=icons.cam,matches=[Match(wm_class="onvifviewer"),Match(wm_class="cctv-viewer")]),
 	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="scrcpy"),Match(wm_class="google-chrome"),Match(wm_class="Google-chrome")]),
 ]
 
@@ -216,6 +215,8 @@ for ws in workspaces:
 		# Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
 		#     desc="move focused window to group {}".format(i.name)),
 	])
+
+keys.append(Key([mod], "C", lazy.group["chat"].toscreen(),desc="Switch to Chat"))
 
 layout_theme = {
 	"border_width": 1,

@@ -113,7 +113,6 @@ mapCommon("<C-p>", cmd("Telescope find_files hidden=true"), { desc = "Jump to fi
 mapCommon("<C-S-f>", cmd("Telescope live_grep"), { desc = "Search all files", remap = true })
 
 -- Harpoon
-
 mapNormal("<leader>a", harp.append)
 mapNormal("<C-e>", harp.pick)
 mapNormal("<C-h>", harp.select1)
