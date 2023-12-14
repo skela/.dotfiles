@@ -16,6 +16,8 @@ return {
 					-- keys = keymaps(),
 					keys = {
 						{ "<leader>cD", "<cmd>RustDebuggables<cr>", desc = "Run Debuggables (Rust)" },
+						-- { "K", cmd("RustHoverActions"), desc = "Hover Actions (Rust)" },
+						-- { "<leader>cR", cmd("RustCodeAction"), desc = "Code Action (Rust)" },
 					},
 				},
 			},

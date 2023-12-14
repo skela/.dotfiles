@@ -12,7 +12,7 @@ return {
 			start_in_insert = true,
 			insert_mappings = true,
 			persist_size = true,
-			direction = "horizontal",
+			direction = "float",
 			close_on_exit = true,
 			shell = vim.o.shell,
 			float_opts = {
@@ -55,6 +55,7 @@ return {
 		vim.api.nvim_create_user_command("Htop", function()
 			htop:toggle()
 		end, {})
+
 		vim.api.nvim_create_user_command("Lazygit", function()
 			lazygit:toggle()
 		end, {})
@@ -67,6 +68,16 @@ return {
 			lazygit:toggle()
 		end
 
-		vim.keymap.set("n", "<leader>lg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { noremap = true, silent = true })
+		function _TIG_TOGGLE()
+			tig:toggle()
+		end
+
+		function _HTOP_TOGGLE()
+			htop:toggle()
+		end
+
+		vim.keymap.set("n", "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { noremap = true, silent = true })
+		vim.keymap.set("n", "<leader>th", "<cmd>lua _HTOP_TOGGLE()<CR>", { noremap = true, silent = true })
+		vim.keymap.set("n", "<leader>tt", "<cmd>lua _TIG_TOGGLE()<CR>", { noremap = true, silent = true })
 	end,
 }
