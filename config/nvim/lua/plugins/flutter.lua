@@ -3,7 +3,6 @@ local my_on_attach = function(client, buffer)
 end
 
 return {
-	{ "mfussenegger/nvim-dap" },
 	{
 		"akinsho/flutter-tools.nvim",
 		lazy = false,
@@ -61,7 +60,7 @@ return {
 					color = {
 						enabled = true,
 						background = false,
-						background_color = { r = 19, g = 17, b = 24 },
+						background_color = { r = 0, g = 0, b = 0 },
 						foreground = false,
 						virtual_text = true,
 						virtual_text_str = "■",
