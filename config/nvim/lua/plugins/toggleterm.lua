@@ -1,5 +1,4 @@
 return {
-	-- terminal
 	"akinsho/toggleterm.nvim",
 	event = "VeryLazy",
 	config = function()
@@ -75,9 +74,10 @@ return {
 		function _HTOP_TOGGLE()
 			htop:toggle()
 		end
-
-		vim.keymap.set("n", "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { noremap = true, silent = true })
-		vim.keymap.set("n", "<leader>th", "<cmd>lua _HTOP_TOGGLE()<CR>", { noremap = true, silent = true })
-		vim.keymap.set("n", "<leader>tt", "<cmd>lua _TIG_TOGGLE()<CR>", { noremap = true, silent = true })
 	end,
+	keys = {
+		{ "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", desc = "Terminal lazygit" },
+		{ "<leader>th", "<cmd>lua _HTOP_TOGGLE()<CR>", desc = "Terminal htop" },
+		{ "<leader>tt", "<cmd>lua _TIG_TOGGLE()<CR>", desc = "Terminal tig" },
+	},
 }

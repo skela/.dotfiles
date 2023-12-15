@@ -1,4 +1,4 @@
 indent_type = "Tabs"
 indent_width = 1
-column_width = 300
+column_width = 150
 # collapse_simple_statement = "Never"
