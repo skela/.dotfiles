@@ -36,6 +36,22 @@ or type in
 
 ## Vim Madness
 
+### Multi-line edits
+
+Move cursor to beginning of the line (0)
+
+Press `qq` to start recording.
+
+Do your changes, stop by pressing `q` in normal mode.
+
+Apply your change to the lines u want by pressing:
+
+`@q`
+
+You can apply to multiple lines by pressing (for example 4 lines):
+
+`4@@q` or just `4@@`
+
 ### Replace Text (Multiple Times)
 
 Yank your word (might also work for deletions)
