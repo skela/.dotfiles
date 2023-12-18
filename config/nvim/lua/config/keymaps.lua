@@ -29,8 +29,8 @@ end
 
 local keymaps = {}
 keymaps.coding = function()
-	map_normal("<C-i>", cmd(":TroubleToggle"), { desc = "Trouble & TODOs", remap = true })
-	map_normal("<leader>ct", cmd(":TroubleToggle"), { desc = "Trouble & TODOs", remap = true })
+	map_normal("<C-i>", cmd(":Telescope diagnostics"), { desc = "Trouble & TODOs", remap = true })
+	map_normal("<leader>ct", cmd(":Telescope diagnostics"), { desc = "Trouble & TODOs", remap = true })
 end
 
 keymaps.flutter = function(_, _) -- client,buffer
