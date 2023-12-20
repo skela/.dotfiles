@@ -11,6 +11,7 @@ return {
 		opts = {
 			servers = {
 				pyright = {},
+				sourcekit = {},
 				rust_analyzer = {
 					-- keys = require("config.keymaps").rust(),
 					-- keys = keymaps(),

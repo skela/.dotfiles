@@ -11,6 +11,7 @@ return {
 				"dart-debug-adapter",
 				-- "table",
 				"codelldb",
+				-- "sourcekit",
 			},
 		},
 	},
