@@ -17,6 +17,11 @@ return {
 					"^node_modules/",
 				},
 			},
+			pickers = {
+				live_grep = {
+					only_sort_text = true,
+				},
+			},
 		},
 	},
 }
