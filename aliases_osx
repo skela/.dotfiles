@@ -1,7 +1,7 @@
 alias fastlane="/Users/skela/.gem/ruby/2.6.0/bin/fastlane"
 alias vim="nvim"
 
-export PATH="$PATH:/Users/skela/Files/SDKs/flutter/bin"
+export PATH="$PATH:/Users/skela/Files/sdks/flutter/bin"
 export PATH="$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
