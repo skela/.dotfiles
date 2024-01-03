@@ -28,7 +28,7 @@ alt = "mod1"
 shift = "shift"
 control = "control"
 
-terminal = "wezterm"
+terminal = "kitty"
 files = "thunar"
 #launcher = "ulauncher --no-window-shadow"
 #launcher = "albert toggle"
