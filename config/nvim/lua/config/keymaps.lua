@@ -75,6 +75,8 @@ map_common("<A-Tab>", cmd("e #"), { desc = "Switch to Other file" })
 map_common("<C-b>", cmd("Neotree toggle"), { desc = "Open filetree", remap = true })
 map_common("<C-F>", cmd("Telescope current_buffer_fuzzy_find"), { desc = "Search current file", remap = true })
 map_common("<C-p>", cmd("Telescope find_files hidden=true"), { desc = "Jump to file", remap = true })
+map_common("<C-t>", cmd("Telescope filetypes"), { desc = "Select filetype", remap = true })
+map_common("<leader>bt", cmd("Telescope filetypes"), { desc = "Select filetype for buffer", remap = true })
 map_common("<C-S-F>", cmd("Telescope live_grep"), { desc = "Search all files", remap = true })
 
 return keymaps

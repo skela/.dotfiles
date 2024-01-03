@@ -9,7 +9,7 @@ return {
 				function()
 					local decorations = vim.g.flutter_tools_decorations or {}
 					local project_config = decorations.project_config or {}
-					return project_config.name or "hello"
+					return project_config.name or ""
 				end,
 				-- icon = "version:",
 				color = { fg = colors.orange, gui = "bold" },
