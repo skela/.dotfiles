@@ -28,5 +28,6 @@ return {
 				disable = { "python", "dart" },
 			},
 		},
+		build = ":TSUpdate",
 	},
 }

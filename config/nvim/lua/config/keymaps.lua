@@ -65,6 +65,8 @@ keymaps.coding()
 -- Files
 map_common("<C-S>", cmd(":update<cr><esc>"), { desc = "Save file", remap = true })
 map_common("<C-W>", cmd(":bd"), { desc = "Close file", remap = true })
+map_normal("<leader>ft", cmd("Telescope filetypes"), { desc = "Select filetype for buffer", remap = true })
+map_normal("<leader>fF", cmd("Telescope live_grep"), { desc = "Search all files", remap = true })
 
 -- Top Tabs
 map_common("<A-Left>", cmd("BufferLineCyclePrev"), { desc = "Go to previous file", remap = true })
@@ -76,7 +78,8 @@ map_common("<C-b>", cmd("Neotree toggle"), { desc = "Open filetree", remap = tru
 map_common("<C-F>", cmd("Telescope current_buffer_fuzzy_find"), { desc = "Search current file", remap = true })
 map_common("<C-p>", cmd("Telescope find_files hidden=true"), { desc = "Jump to file", remap = true })
 map_common("<C-t>", cmd("Telescope filetypes"), { desc = "Select filetype", remap = true })
-map_normal("<leader>bt", cmd("Telescope filetypes"), { desc = "Select filetype for buffer", remap = true })
 map_common("<C-S-F>", cmd("Telescope live_grep"), { desc = "Search all files", remap = true })
+map_normal("<leader>tf", cmd("Telescope current_buffer_fuzzy_find"), { desc = "Search current file", remap = true })
+map_normal("<leader>tF", cmd("Telescope live_grep"), { desc = "Search all files", remap = true })
 
 return keymaps
