@@ -370,14 +370,7 @@ function reload_aliases -d "Reload aliases"
     end
 
     alias session="python3 ~/.dotfiles/scripts/session.py"
-    alias tmuxdef="tmux attach -t def || source ~/.tmuxdef"
-    alias tmuxwork="tmux attach -t work || source ~/.tmuxwork"
-    # Example tmux source file
-    #!/bin/bash
-    #tmux new-session -d -s def -n home
-    #tmux new-window -d -n media -c /mnt/australis/services 
-    #tmux new-window -d -n mc -c /mnt/australis/games/minecraft-server/java
-    #tmux attach-session -d -t def
+    alias sesh="python3 ~/.dotfiles/scripts/session.py"
 
     alias assume="source /usr/bin/assume.fish"
 end
