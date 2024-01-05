@@ -1,6 +1,4 @@
-local my_on_attach = function(client, buffer)
-	require("config.keymaps").flutter(client, buffer)
-end
+local my_on_attach = function(client, buffer) require("config.keymaps").flutter(client, buffer) end
 
 return {
 	{
@@ -8,7 +6,7 @@ return {
 		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"stevearc/dressing.nvim", -- optional for vim.ui.select
+			"stevearc/dressing.nvim",
 		},
 		config = function()
 			require("flutter-tools").setup({

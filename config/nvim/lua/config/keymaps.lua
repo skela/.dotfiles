@@ -25,6 +25,7 @@ local keymaps = {}
 keymaps.coding = function()
 	map_normal("<C-i>", cmd(":Telescope diagnostics"), { desc = "Trouble & TODOs", remap = true })
 	map_normal("<leader>ct", cmd(":Telescope diagnostics"), { desc = "Trouble & TODOs", remap = true })
+	-- vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts) -- opens current error warning in a float
 end
 
 keymaps.flutter = function(_, _) -- client,buffer
