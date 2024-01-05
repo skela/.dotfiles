@@ -5,8 +5,6 @@ return {
 	dependencies = "nvim-lua/plenary.nvim",
 	config = function(_, _)
 		local harpoon = require("harpoon")
-
-		-- stylua: ignore start
 		vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end, { desc = "Harpoon Append" })
 		vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon Quick Menu" })
 		vim.keymap.set("n", "<leader>hm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon Quick Menu" })
@@ -16,6 +14,5 @@ return {
 		vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end, { desc = "Harpoon Select 4" })
 		vim.keymap.set("n", "<leader>hn", function() harpoon:list():next({ ui_nav_wrap = true }) end, { desc = "Harpoon Next" })
 		vim.keymap.set("n", "<leader>hb", function() harpoon:list():prev({ ui_nav_wrap = true }) end, { desc = "Harpoon Back" })
-		-- stylua: ignore end
 	end,
 }

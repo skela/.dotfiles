@@ -5,17 +5,11 @@
 local map = vim.keymap.set
 -- local unmap = vim.keymap.del
 
-local function map_common(combo, command, opts)
-	map({ "n", "i", "x", "s" }, combo, command, opts)
-end
+local function map_common(combo, command, opts) map({ "n", "i", "x", "s" }, combo, command, opts) end
 
-local function map_normal(combo, command, opts)
-	map("n", combo, command, opts)
-end
+local function map_normal(combo, command, opts) map("n", combo, command, opts) end
 
-local function map_visual(combo, command, opts)
-	map("v", combo, command, opts)
-end
+local function map_visual(combo, command, opts) map("v", combo, command, opts) end
 
 --@param s string
 ---@return string

@@ -13,18 +13,12 @@ return {
 				linehl = "debugPC",
 				numhl = "",
 			})
-			vim.keymap.set("n", "<F5>", function()
-				require("dap").continue()
-			end)
-			vim.keymap.set("n", "<F10>", function()
-				require("dap").step_over({})
-			end)
-			vim.keymap.set("n", "<F11>", function()
-				require("dap").step_into({})
-			end)
-			vim.keymap.set("n", "<F12>", function()
-				require("dap").step_out({})
-			end)
+			vim.keymap.set("n", "<F5>", function() require("dap").continue() end)
+			vim.keymap.set("n", "<F10>", function() require("dap").step_over({}) end)
+			vim.keymap.set("n", "<F11>", function() require("dap").step_into({}) end)
+			vim.keymap.set("n", "<F12>", function() require("dap").step_out({}) end)
+			vim.keymap.set("n", "<leader>cb", function() require("dap").toggle_breakpoint() end, { desc = "Breakpoint", remap = true })
+			vim.keymap.set("n", "<leader>ce", "<cmd>:DapToggleRepl<cr>", { desc = "RePL", remap = true })
 		end,
 	},
 	{
