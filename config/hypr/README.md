@@ -8,4 +8,5 @@
 * swayidle
 * swww
 * variety
+* jq
 
