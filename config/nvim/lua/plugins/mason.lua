@@ -7,6 +7,7 @@ return {
 				"shellcheck",
 				"shfmt",
 				"pyright",
+				"debugpy",
 				"rust-analyzer",
 				"dart-debug-adapter",
 				-- "table",
