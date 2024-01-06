@@ -1,6 +1,9 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
+		dependencies = {
+			"ldelossa/nvim-dap-projects",
+		},
 		event = "VeryLazy",
 		config = function()
 			vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "debugBreakpoint", linehl = "", numhl = "" })
@@ -21,6 +24,7 @@ return {
 			vim.keymap.set("n", "<leader>cB", "<cmd>:Telescope dap list_breakpoints<cr>", { desc = "List Breakpoints", remap = true })
 			vim.keymap.set("n", "<leader>cc", "<cmd>:Telescope dap frames<cr>", { desc = "Callstack", remap = true })
 			vim.keymap.set("n", "<leader>ce", "<cmd>:DapToggleRepl<cr>", { desc = "RePL", remap = true })
+			require("nvim-dap-projects").search_project_config()
 		end,
 	},
 	{

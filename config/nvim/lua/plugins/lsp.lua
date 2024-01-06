@@ -21,6 +21,9 @@ return {
 						-- { "<leader>cR", cmd("RustCodeAction"), desc = "Code Action (Rust)" },
 					},
 				},
+				lua_ls = {
+					settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+				},
 			},
 			setup = {
 				rust_analyzer = function(_, opts)
