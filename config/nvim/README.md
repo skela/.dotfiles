@@ -9,14 +9,6 @@ Refer to the [documentation](https://lazyvim.github.io/installation) to get star
 
   :checkhealth
 
-## Cheatsheet
-
-	Space + c + h
-
-## Theme Switcher
-
-	Space + t + h
-
 ## Syntax Highlighting
 
 Check which languages are installed
@@ -35,6 +27,10 @@ or type in
 	:help lspconfig-all
 
 ## Vim Madness
+
+### Move line up or down
+
+`Alt+k` or `Alt+j`
 
 ### Multi-line edits
 
