@@ -25,9 +25,11 @@ indent_style = tab
 
 [*.css]
 indent_style = tab
+trim_trailing_whitespace = true
 
 [*.swift]
 indent_style = tab
+trim_trailing_whitespace = true
 
 [*.yaml]
 indent_style = space

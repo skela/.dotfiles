@@ -13,6 +13,7 @@ return {
 				-- "table",
 				"codelldb",
 				-- "sourcekit",
+				"prettier",
 			},
 		},
 	},

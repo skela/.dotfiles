@@ -22,6 +22,7 @@ return {
 				"dart",
 				"swift",
 				"rust",
+				"css",
 			},
 			indent = {
 				enable = true,
