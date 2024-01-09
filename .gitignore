@@ -1,5 +1,8 @@
 scripts/.idea/workspace.xml
 config/Thunar/accels.scm
+config/variety/Favorites
+
+config/tmux/plugins
 
 .env
 .vault
