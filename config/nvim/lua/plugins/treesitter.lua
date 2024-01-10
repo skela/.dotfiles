@@ -23,6 +23,8 @@ return {
 				"swift",
 				"rust",
 				"css",
+				"kotlin",
+				"dockerfile",
 			},
 			indent = {
 				enable = true,

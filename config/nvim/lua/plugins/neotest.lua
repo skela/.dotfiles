@@ -8,7 +8,7 @@ return {
 		opts = {
 			adapters = {
 				["neotest-rust"] = {},
-				["neotest-dart"] = {},
+				["neotest-dart"] = { command = "flutter" },
 				["neotest-python"] = {},
 			},
 		},

@@ -13,6 +13,9 @@ return {
 			servers = {
 				pyright = {},
 				sourcekit = {},
+				kotlin_language_server = {},
+				dockerls = {},
+				docker_compose_language_service = {},
 				rust_analyzer = {
 					-- keys = require("config.keymaps").rust(),
 					-- keys = keymaps(),

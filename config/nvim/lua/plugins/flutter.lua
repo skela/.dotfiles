@@ -9,7 +9,8 @@ return {
 			"stevearc/dressing.nvim",
 		},
 		config = function()
-			require("flutter-tools").setup({
+			local flutter = require("flutter-tools")
+			flutter.setup({
 				decorations = {
 					statusline = {
 						app_version = true,
@@ -31,11 +32,18 @@ return {
 								type = "dart",
 								request = "launch",
 								name = "Launch flutter",
-								dartSdkPath = "/home/skela/files/sdks/flutter/bin/cache/dart-sdk/",
-								flutterSdkPath = "/home/skela/files/sdks/flutter",
 							},
 						}
+						-- require("dap.ext.vscode").load_launchjs((vim.fn.getcwd() .. "/.nvim/dap.json"))
 						require("dap.ext.vscode").load_launchjs()
+						vim.keymap.set("n", "<F5>", function()
+							local commands = require("flutter-tools.commands")
+							if commands.is_running() then
+								vim.cmd("DapContinue")
+							else
+								vim.cmd("FlutterRun")
+							end
+						end)
 					end,
 				},
 				outline = {
