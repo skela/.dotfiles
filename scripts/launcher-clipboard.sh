@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# "on-click": "swaymsg -q exec '$clipboard'; pkill -RTMIN+9 waybar",
+# "on-click-right": "swaymsg -q exec '$clipboard-del'; pkill -RTMIN+9 waybar",
+# "on-click-middle": "swaymsg -q exec '$clipboard-del-all'",
+
 ## Author : Aditya Shakya (adi1090x)
 ## Github : @adi1090x
 #
@@ -16,6 +20,5 @@ theme='style-10'
 ## Run
 rofi \
 	-modi clipboard:/home/skela/.dotfiles/scripts/cliphist-rofi \
-    -show clipboard \
-    -theme ${dir}/${theme}.rasi
-
+	-show clipboard \
+	-theme ${dir}/${theme}.rasi
