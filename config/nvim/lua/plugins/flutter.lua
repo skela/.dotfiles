@@ -36,6 +36,9 @@ return {
 						}
 						-- require("dap.ext.vscode").load_launchjs((vim.fn.getcwd() .. "/.nvim/dap.json"))
 						require("dap.ext.vscode").load_launchjs()
+						local dap = require("dap")
+						if require("utils.tables").length(dap.configurations["dart"]) > 1 then table.remove(dap.configurations["dart"], 1) end
+
 						vim.keymap.set("n", "<F5>", function()
 							local commands = require("flutter-tools.commands")
 							if commands.is_running() then
@@ -69,7 +72,7 @@ return {
 						background_color = { r = 0, g = 0, b = 0 },
 						foreground = false,
 						virtual_text = true,
-						virtual_text_str = "■",
+						virtual_text_str = "⏺",
 					},
 				},
 			})
