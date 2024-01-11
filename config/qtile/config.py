@@ -89,7 +89,7 @@ keys = [
 	Key([k.mod], k.left,lazy.layout.previous()),
 	Key([k.mod], k.right,lazy.layout.next()),
 
-	# Move windows in current stack pane	
+	# Move windows in current stack pane
 	Key([k.control,k.alt], k.left, lazy.screen.prev_group()),
 	Key([k.control,k.alt], k.right, lazy.screen.next_group()),
 	Key([k.control,k.alt], k.up, lazy.screen.prev_group()),
@@ -118,13 +118,13 @@ keys = [
 	# Unsplit = 1 window displayed, like Max layout, but still with
 	# multiple stack panes
 	Key([k.mod, k.shift], "Return", lazy.layout.toggle_split(),desc="Toggle between split and unsplit sides of stack"),
-	
+
 	Key([k.mod], k.enter, lazy.spawn(terminal), desc="Launch terminal"),
 	Key([k.mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
-	Key([k.mod], "f", toggle_fullscreen, desc="Toggle fullscreen"),	
-	Key([k.mod], k.space, lazy.spawn(launcher), desc="Launch launcher"),
+	Key([k.mod], "f", toggle_fullscreen, desc="Toggle fullscreen"),
+	# Key([k.mod], k.space, lazy.spawn(launcher), desc="Launch launcher"),
 	Key([k.mod], "d", lazy.spawn(launcher), desc="Launch launcher"),
-	Key([k.control], k.space, lazy.spawn(toggle_keyboard), desc="Toggle keyboard"),
+	Key([k.mod], k.space, lazy.spawn(toggle_keyboard), desc="Toggle keyboard"),
 	Key([k.mod, k.shift], k.space, lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 	Key([k.mod], "n", lazy.spawn(files), desc="Launch file browser"),
 	Key([k.mod], "w", lazy.spawn(browser), desc="Launch web browser"),
@@ -135,10 +135,10 @@ keys = [
 	Key([k.mod], k.tab, lazy.layout.next(), desc="Switch to next window"),
 	#Key([k.mod], k.tab, lazy.group.next_window(), desc="Switch to next window"),
 	Key([k.mod,k.shift], k.tab, lazy.group.prev_window(), desc="Switch to previous window"),
-	
+
 	Key([k.mod], "q", lazy.window.kill(), desc="Kill active window"),
 
-	Key([k.mod], "s", lazy.spawn(f"flameshot gui --accept-on-select"), desc="Take screenshot"),	
+	Key([k.mod], "s", lazy.spawn(f"flameshot gui --accept-on-select"), desc="Take screenshot"),
 	Key([k.mod,k.control], "s", screenshot_window, desc="Take screenshot (window)"),
 	Key([k.mod,k.shift,k.control], "s", lazy.spawn("flameshot gui"), desc="Take screenshot (interactive)"),
 
@@ -149,10 +149,10 @@ keys = [
 	Key([],"XF86AudioPrev",lazy.spawn(player_prev)),
 	Key([],"XF86AudioPlay",lazy.spawn(player_play_pause)),
 	Key([],"XF86AudioStop",lazy.spawn(player_stop)),
-	
+
 	Key([k.mod, k.shift], "r", lazy.restart(), desc="Restart qtile"),
 
-	Key([k.mod, k.shift], "q", lazy.shutdown(), desc="Shutdown qtile"),	
+	Key([k.mod, k.shift], "q", lazy.shutdown(), desc="Shutdown qtile"),
 ]
 
 class Workspace(object):
@@ -256,7 +256,7 @@ layouts = [
 	# layout.Bsp(),
 	# layout.Stack(num_stacks=2)
 	# layout.Columns(),
-	# layout.Matrix(),	
+	# layout.Matrix(),
 	# layout.RatioTile(),
 	# layout.Tile(**layout_theme),
 	# layout.TreeTab(),
@@ -301,7 +301,7 @@ primary_widgets.extend([
 	),
 	sep(),
 	#  widget.WindowTabs(
-		#  max_chars=50	
+		#  max_chars=50
 	#  ),
 	#  widget.TaskList(
 		#  max_title_width=200,
@@ -318,10 +318,10 @@ primary_widgets.extend([
 	# widget.Spacer(width=bar.STRETCH,background="#00000000"),
 
 	# widget.Spacer(length=6),
-	# widget.Clock(format='%H:%M (%a) %d-%m-%Y'),	
+	# widget.Clock(format='%H:%M (%a) %d-%m-%Y'),
 	# widget.Spacer(length=6),
 
-	widget.Spacer(width=bar.STRETCH,background="#00000000"),	
+	widget.Spacer(width=bar.STRETCH,background="#00000000"),
 
 	#widget.Spacer(length=6),
 ])
@@ -331,7 +331,7 @@ primary_widgets.extend([
 	widget.CheckUpdates(
 		update_interval = 1800,
 		distro = "Arch_checkupdates",
-		display_format = "{updates} Updates",					
+		display_format = "{updates} Updates",
 		mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " -e sudo pacman -Syu")},
 	),
 	sep(),
@@ -358,19 +358,19 @@ primary_widgets.extend([
 	widget.CurrentLayoutIcon(scale=0.6),
 	widget.CurrentLayout(),
 	sep(),
-	widget.Clock(format='%H:%M (%a) %d-%m-%Y'),	
-	widget.Spacer(length=6),	
+	widget.Clock(format='%H:%M (%a) %d-%m-%Y'),
+	widget.Spacer(length=6),
 ])
 
 bar_background = "#000000"
 
-screens = [	
+screens = [
 	Screen(
 		top=bar.Bar(primary_widgets,
 			size=24,
 			background=bar_background,
 			opacity = 1,
-			margin = [6,6,0,6], # [N E S W]	
+			margin = [6,6,0,6], # [N E S W]
 		),
 		# bottom=bar.Bar([widget.TextBox(text=icons.light,font=icons.font,)],size=24,),
 	),
@@ -434,9 +434,9 @@ def check_window_name(window,name:str) -> bool:
 	return name == n
 
 @hook.subscribe.client_new
-async def client_new(window):		
+async def client_new(window):
 	await asyncio.sleep(0.02)
-	if check_window_name(window,"spotify") or check_window_name(window,"spotify premium"):	
+	if check_window_name(window,"spotify") or check_window_name(window,"spotify premium"):
 		window.togroup("music")
 	if first_time_firefox and (check_window_class("firefox") or check_window_class("firefoxdeveloperedition")):
 		window.togroup("web")
@@ -451,7 +451,7 @@ async def client_new(window):
 #	# TODO: Figure out how to locate the File / Edit / Etc Menus
 #	# TODO: Pressing mod + alt should replace the qtile menu bar with the global menu options, so that you can use the keyboard to navigate the menus the way it normally works.
 #	# if focus_changed:
-#		# logger.warning(f"Changed window focus to {n}")	
+#		# logger.warning(f"Changed window focus to {n}")
 #	old_focus = n
 
 # @hook.subscribe.startup
