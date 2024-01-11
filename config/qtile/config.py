@@ -3,7 +3,7 @@ import os
 import socket
 import subprocess
 from os import path
-from typing import List  # noqa: F401
+from typing import List, Optional  # noqa: F401
 
 from libqtile import bar, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
@@ -216,7 +216,27 @@ for ws in workspaces:
 		#     desc="move focused window to group {}".format(i.name)),
 	])
 
-keys.append(Key([mod], "C", lazy.group["chat"].toscreen(),desc="Switch to Chat"))
+screen_before_chat : Optional[int] = None
+
+def get_screen_with_index(qt:Qtile,index:int) -> Optional[Screen]:
+	for screen in qt.screens:
+		if screen.index == index:
+			return screen
+	return None
+
+@lazy.function
+def open_chat(qt:Qtile):
+	if screen_before_chat is None:
+		screen_before_chat = qt.current_screen.index
+		lazy.group["chat"].toscreen()
+	else:
+		screen = get_screen_with_index(qt,screen_before_chat)
+		if screen is not None:
+			screen.toscreen()
+		else:
+			lazy.group["chat"].toscreen()
+
+keys.append(Key([mod], "C", open_chat, desc="Switch to Chat"))
 
 layout_theme = {
 	"border_width": 1,
