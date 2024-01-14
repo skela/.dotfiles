@@ -40,6 +40,15 @@ return {
 				["markdown.mdx"] = { "prettier" },
 				["graphql"] = { "prettier" },
 				["handlebars"] = { "prettier" },
+				["dart"] = { "blink" },
+			},
+			formatters = {
+				blink = {
+					command = "/home/skela/code/blink/target/release/blink",
+					args = { "$FILENAME" },
+					stdin = false,
+					cwd = require("conform.util").root_file({ ".editorconfig", "Pubspec.yaml" }),
+				},
 			},
 		},
 	},
