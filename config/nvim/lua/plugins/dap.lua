@@ -25,6 +25,13 @@ return {
 			vim.keymap.set("n", "<leader>cc", "<cmd>:Telescope dap frames<cr>", { desc = "Callstack", remap = true })
 			vim.keymap.set("n", "<leader>ce", "<cmd>:DapToggleRepl<cr>", { desc = "RePL", remap = true })
 			require("nvim-dap-projects").search_project_config()
+
+			-- local dap = require("dap")
+			-- dap.listeners.before["event_progress_start"]["skela"] = function(id, title) print("event progress start", vim.inspect(id), vim.inspect(title)) end
+			-- dap.listeners.before["event_progress_update"]["skela"] = function(body)
+			-- 	print("event progress update", vim.inspect(body.message), vim.inspect(body.message))
+			-- end
+			-- dap.listeners.before["event_terminated"]["skela"] = function(session, body) print("Session terminated", vim.inspect(session), vim.inspect(body)) end
 		end,
 	},
 	{
@@ -76,6 +83,12 @@ return {
 				},
 			})
 			vim.keymap.set("n", "<leader>ci", function() require("dapui").toggle() end, { desc = "Debug UI", remap = true })
+			-- local dap = require("dap")
+			-- local dapui = require("dapui")
+			-- dap.listeners.before.attach.dapui_config = function() print("dapui attach") end
+			-- dap.listeners.before.launch.dapui_config = function() print("dapui launch") end
+			-- dap.listeners.before.event_terminated.dapui_config = function() print("dapui ev termin") end
+			-- dap.listeners.before.event_exited.dapui_config = function() print("dapui ev exit") end
 		end,
 	},
 }

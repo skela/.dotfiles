@@ -13,12 +13,16 @@
 	// Choose the order of the modules
 	"modules-left": [
 		"hyprland/workspaces"
+		// "custom/separator",
+		// "sway/scratchpad"
 	],
 	"modules-center": [
 		"hyprland/window"
 	],
 	"modules-right": [
 		"custom/clipboard",
+		"idle_inhibitor",
+		"custom/separator",
 		"tray",
 		"pulseaudio",
 		"network",
@@ -76,9 +80,9 @@
 	},
 	"sway/scratchpad": {
 		"format": "{icon} {count}",
-		"show-empty": false,
+		"show-empty": true,
 		"format-icons": [
-			"",
+			",",
 			""
 		],
 		"tooltip": true,
@@ -117,6 +121,11 @@
 			"deactivated": ""
 		}
 	},
+	"custom/separator": {
+        "format": "|",
+        "interval": "once",
+        "tooltip": false
+    },
 	"tray": {
 		// "icon-size": 21,
 		"spacing": 10

@@ -28,9 +28,10 @@ return {
 			},
 			indent = {
 				enable = true,
-				disable = { "python", "dart" },
+				disable = { "python", "dart", "swift" },
 			},
 		},
 		build = ":TSUpdate",
 	},
+	{ "luckasRanarison/tree-sitter-hyprlang", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 }
