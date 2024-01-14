@@ -30,6 +30,7 @@ control = "control"
 
 terminal = "kitty"
 files = "thunar"
+# files = "nautilus -w"
 #launcher = "ulauncher --no-window-shadow"
 #launcher = "albert toggle"
 #launcher = "rofi -show drun -l 10"
