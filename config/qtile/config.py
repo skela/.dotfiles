@@ -54,6 +54,7 @@ k = Keys()
 
 margin = 6
 single_margin = 6
+full_margin = 0
 real_layout = {}
 
 @lazy.function
@@ -232,7 +233,7 @@ layouts = [
 	layout.MonadTall(**layout_theme),
 	layout.MonadWide(**layout_theme),
 	layout.Floating(**layout_theme),
-	Max(max_margin=margin,**layout_theme),
+	Max(max_margin=full_margin,**layout_theme),
 	# Try more layouts by unleashing below layouts.
 	# layout.Bsp(),
 	# layout.Stack(num_stacks=2)

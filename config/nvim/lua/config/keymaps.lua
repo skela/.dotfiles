@@ -23,7 +23,7 @@ end
 
 local keymaps = {}
 keymaps.coding = function()
-	map_normal("<C-i>", cmd(":Telescope diagnostics"), { desc = "Trouble & TODOs", remap = true })
+	-- map_normal("<C-i>", cmd(":Telescope diagnostics"), { desc = "Trouble & TODOs", remap = true })
 	map_normal("<leader>ct", cmd(":Telescope diagnostics"), { desc = "Trouble & TODOs", remap = true })
 	-- vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts) -- opens current error warning in a float
 end
@@ -31,7 +31,7 @@ end
 keymaps.flutter = function(_, _) -- client,buffer
 	keymaps.coding()
 	map_normal("<leader>cp", cmd(":FlutterOutlineToggle"), { desc = "Property/Function outline", remap = true })
-	map_normal("<C-o>", cmd(":FlutterOutlineToggle"), { desc = "Property/Function outline", remap = true })
+	-- map_normal("<C-o>", cmd(":FlutterOutlineToggle"), { desc = "Property/Function outline", remap = true })
 	map_normal("<leader>cD", cmd(":FlutterDevices"), { desc = "Devices (Flutter)", remap = true })
 	map_normal("<leader>cE", cmd(":FlutterEmulators"), { desc = "Emulators (Flutter)", remap = true })
 	map_normal("<leader>ch", cmd(":FlutterReload"), { desc = "Hot Reload (Flutter)", remap = true })
