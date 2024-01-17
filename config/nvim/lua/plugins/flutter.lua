@@ -55,16 +55,24 @@ return {
 				},
 				dev_log = {
 					enabled = false,
-					open_cmd = "",
+					-- notify_errors = false,
 					-- open_cmd = "tabedit",
-					-- open_cmd = "30vnew",
+					open_cmd = "60vnew",
 					-- open_cmd = "30new",
 				},
 				lsp = {
 					on_attach = my_on_attach,
 					settings = {
 						showTodos = true,
+						completeFunctionCalls = true,
 						enableSdkFormatter = false,
+						analysisExcludedFolders = {
+							"*.git",
+							"/home/skela/files/sdks/flutter",
+							"/home/skela/.pub-cache",
+						},
+						enableSnippets = true,
+						updateImportsOnRename = true,
 					},
 					color = {
 						enabled = true,
