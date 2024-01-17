@@ -31,6 +31,10 @@ return {
 				disable = { "python", "dart", "swift" },
 			},
 		},
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup(opts)
+			vim.treesitter.language.register("bash", "dotenv")
+		end,
 		build = ":TSUpdate",
 	},
 	{ "luckasRanarison/tree-sitter-hyprlang", dependencies = { "nvim-treesitter/nvim-treesitter" } },

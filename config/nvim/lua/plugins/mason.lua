@@ -42,6 +42,9 @@ return {
 				["handlebars"] = { "prettier" },
 				["dart"] = { "blink" },
 			},
+			pattern = {
+				[".env.*"] = "dotenv",
+			},
 			formatters = {
 				blink = {
 					command = "/home/skela/code/blink/target/release/blink",
