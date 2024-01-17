@@ -3,6 +3,8 @@ return {
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			"ldelossa/nvim-dap-projects",
+			"nvim-treesitter/nvim-treesitter",
+			"theHamsta/nvim-dap-virtual-text",
 		},
 		event = "VeryLazy",
 		config = function()
@@ -25,7 +27,7 @@ return {
 			vim.keymap.set("n", "<leader>cc", "<cmd>:Telescope dap frames<cr>", { desc = "Callstack", remap = true })
 			vim.keymap.set("n", "<leader>ce", "<cmd>:DapToggleRepl<cr>", { desc = "RePL", remap = true })
 			require("nvim-dap-projects").search_project_config()
-
+			require("nvim-dap-virtual-text").setup({})
 			-- local dap = require("dap")
 			-- dap.listeners.before["event_progress_start"]["skela"] = function(id, title) print("event progress start", vim.inspect(id), vim.inspect(title)) end
 			-- dap.listeners.before["event_progress_update"]["skela"] = function(body)

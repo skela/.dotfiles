@@ -30,14 +30,13 @@ end
 
 keymaps.flutter = function(_, _) -- client,buffer
 	keymaps.coding()
-	map_normal("<leader>cp", cmd(":FlutterOutlineToggle"), { desc = "Property/Function outline", remap = true })
-	-- map_normal("<C-o>", cmd(":FlutterOutlineToggle"), { desc = "Property/Function outline", remap = true })
-	map_normal("<leader>cD", cmd(":FlutterDevices"), { desc = "Devices (Flutter)", remap = true })
-	map_normal("<leader>cE", cmd(":FlutterEmulators"), { desc = "Emulators (Flutter)", remap = true })
+	map_normal("<leader>co", cmd(":FlutterOutlineToggle"), { desc = "Property/Function [o]utline", remap = true })
+	map_normal("<leader>cD", cmd(":FlutterDevices"), { desc = "[D]evices (Flutter)", remap = true })
+	map_normal("<leader>cE", cmd(":FlutterEmulators"), { desc = "[E]mulators (Flutter)", remap = true })
 	map_normal("<leader>ch", cmd(":FlutterReload"), { desc = "Hot Reload (Flutter)", remap = true })
 	map_normal("<leader>cH", cmd(":FlutterRestart"), { desc = "Hot Restart (Flutter)", remap = true })
-	map_normal("<leader>cL", cmd(":FlutterRun"), { desc = "Launch (Flutter)", remap = true })
-	map_normal("<leader>cQ", cmd(":FlutterQuit"), { desc = "Quit (Flutter)", remap = true })
+	map_normal("<leader>cL", cmd(":FlutterRun"), { desc = "[L]aunch (Flutter)", remap = true })
+	map_normal("<leader>cQ", cmd(":FlutterQuit"), { desc = "[Q]uit (Flutter)", remap = true })
 	-- mapNormal("<leader>cL", ":split | buffer __FLUTTER_DEV_LOG__<CR>", { remap = false, desc = "Open flutter dev log in horizontal split" })
 end
 
