@@ -1,5 +1,3 @@
-local my_on_attach = function(client, buffer) require("config.keymaps").flutter(client, buffer) end
-
 return {
 	{
 		"akinsho/flutter-tools.nvim",
@@ -61,13 +59,17 @@ return {
 					-- open_cmd = "30new",
 				},
 				lsp = {
-					on_attach = my_on_attach,
+					on_attach = function(client, buffer)
+						-- require("user.lsp.handlers").on_attach(client, buffer)
+						require("config.keymaps").flutter(client, buffer)
+					end,
+					-- capabilities = require("user.lsp.handlers").capabilities,
 					settings = {
 						showTodos = true,
 						completeFunctionCalls = true,
 						enableSdkFormatter = false,
 						analysisExcludedFolders = {
-							"*.git",
+							".dart_tool",
 							"/home/skela/files/sdks/flutter",
 							"/home/skela/.pub-cache",
 						},
