@@ -9,6 +9,10 @@ return {
 			"simrat39/rust-tools.nvim",
 			"mfussenegger/nvim-dap-python",
 		},
+		init = function()
+			local keys = require("lazyvim.plugins.lsp.keymaps").get()
+			keys[#keys + 1] = { "<leader>cl", "<cmd>:Telescope diagnostics<cr>", desc = "[l]ist TODOs and Issues" }
+		end,
 		opts = {
 			servers = {
 				pyright = {},

@@ -28,7 +28,7 @@ return {
 			},
 			indent = {
 				enable = true,
-				disable = { "python", "dart", "swift" },
+				disable = { "python", "dart", "swift", "rust" },
 			},
 		},
 		config = function(_, opts)

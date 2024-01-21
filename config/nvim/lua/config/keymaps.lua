@@ -22,14 +22,8 @@ local function cmd(s)
 end
 
 local keymaps = {}
-keymaps.coding = function()
-	-- map_normal("<C-i>", cmd(":Telescope diagnostics"), { desc = "Trouble & TODOs", remap = true })
-	map_normal("<leader>ct", cmd(":Telescope diagnostics"), { desc = "Trouble & TODOs", remap = true })
-	-- vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts) -- opens current error warning in a float
-end
 
 keymaps.flutter = function(_, _) -- client,buffer
-	keymaps.coding()
 	map_normal("<leader>co", cmd(":FlutterOutlineToggle"), { desc = "Property/Function [o]utline", remap = true })
 	map_normal("<leader>cD", cmd(":FlutterDevices"), { desc = "[D]evices (Flutter)", remap = true })
 	map_normal("<leader>cE", cmd(":FlutterEmulators"), { desc = "[E]mulators (Flutter)", remap = true })
@@ -55,11 +49,14 @@ end)
 -- Coding
 map({ "n", "v" }, "<C-K>", "gcc<esc>", { desc = "Comment selected line(s)", remap = true })
 map_visual("<leader>.", "gc", { desc = "Comment selected text", remap = true })
-keymaps.coding()
+map_normal("<leader>ct", cmd(":set list!"), { desc = "Toggle [t]abs indicator", remap = true })
+map_normal("<leader>cl", cmd(":Telescope diagnostics"), { desc = "[l]ist TODOs and Issues", remap = true })
+-- vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts) -- opens current error warning in a float
 
 -- Files
 map_common("<C-S>", cmd(":update<cr><esc>"), { desc = "Save file", remap = true })
 map_common("<C-W>", cmd(":bd"), { desc = "Close file", remap = true })
+map_normal("<leader>bs", cmd(":noa w"), { desc = "Save file without formatting", remap = true })
 map_normal("<leader>ft", cmd("Telescope filetypes"), { desc = "Select filetype for buffer", remap = true })
 map_normal("<leader>fF", cmd("Telescope live_grep"), { desc = "Search all files", remap = true })
 

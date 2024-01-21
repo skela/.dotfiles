@@ -25,3 +25,6 @@ vim.filetype.add({
 		["Dockerfile-.*"] = "dockerfile",
 	},
 })
+
+vim.o.listchars = "tab:!·,trail:·"
+vim.o.list = false
