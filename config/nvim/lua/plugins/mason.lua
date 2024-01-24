@@ -17,6 +17,7 @@ return {
 				-- "sourcekit",
 				"prettier",
 				"hadolint",
+				"omnisharp",
 			},
 		},
 	},
