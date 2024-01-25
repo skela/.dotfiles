@@ -16,10 +16,19 @@ return {
 					"^.git/",
 					"^node_modules/",
 				},
+				mappings = {
+					i = {
+						["<C-p>"] = require("telescope.actions.layout").toggle_preview,
+					},
+				},
 			},
 			pickers = {
 				live_grep = {
 					only_sort_text = true,
+				},
+				diagnostics = {
+					line_width = "full",
+					layout_strategy = "vertical",
 				},
 			},
 		},

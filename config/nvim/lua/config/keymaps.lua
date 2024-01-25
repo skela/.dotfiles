@@ -51,7 +51,11 @@ map({ "n", "v" }, "<C-K>", "gcc<esc>", { desc = "Comment selected line(s)", rema
 map_visual("<leader>.", "gc", { desc = "Comment selected text", remap = true })
 map_normal("<leader>ct", cmd(":set list!"), { desc = "Toggle [t]abs indicator", remap = true })
 map_normal("<leader>cl", cmd(":Telescope diagnostics"), { desc = "[l]ist TODOs and Issues", remap = true })
--- vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts) -- opens current error warning in a float
+
+-- map("n", "<TAB>", ">>", { remap = true })
+-- map("n", "<S-TAB>", "<<", { remap = true })
+-- map("v", "<TAB>", "<S->>gv", { remap = true })
+-- map("v", "<S-TAB>", "<S-<>gv", { remap = true })
 
 -- Files
 map_common("<C-S>", cmd(":update<cr><esc>"), { desc = "Save file", remap = true })
