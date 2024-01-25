@@ -18,6 +18,7 @@ return {
 				"prettier",
 				"hadolint",
 				"omnisharp",
+				"kotlin-language-server",
 			},
 		},
 	},
