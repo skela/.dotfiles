@@ -8,6 +8,7 @@ return {
 				"shellcheck",
 				"shfmt",
 				"pyright",
+				"yapf",
 				"debugpy",
 				"rust-analyzer",
 				"dart-debug-adapter",
@@ -44,6 +45,7 @@ return {
 				["graphql"] = { "prettier" },
 				["handlebars"] = { "prettier" },
 				["dart"] = { "blink" },
+				["python"] = { "yapf" },
 			},
 			pattern = {
 				[".env.*"] = "dotenv",
@@ -64,6 +66,15 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function() require("treesj").setup({}) end,
 	},
+	-- {
+	-- 	"nvimtools/none-ls.nvim",
+	-- 	optional = true,
+	-- 	opts = function(_, opts)
+	-- 		local nls = require("null-ls")
+	-- 		opts.sources = opts.sources or {}
+	-- 		table.insert(opts.sources, nls.builtins.formatting.prettier, nls.builtins.formatting.yapf)
+	-- 	end,
+	-- },
 	-- {
 	-- 	"nvimtools/none-ls.nvim",
 	-- 	optional = true,
