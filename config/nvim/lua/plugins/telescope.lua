@@ -1,3 +1,4 @@
+local actions = require("telescope.actions")
 return {
 	{
 		"telescope.nvim",
@@ -12,6 +13,8 @@ return {
 		},
 		opts = {
 			defaults = {
+				-- wrap_results = true,
+				-- sorting_strategy = "ascending",
 				file_ignore_patterns = {
 					"^.git/",
 					"^node_modules/",
@@ -19,6 +22,7 @@ return {
 				mappings = {
 					i = {
 						["<C-p>"] = require("telescope.actions.layout").toggle_preview,
+						["<esc>"] = actions.close,
 					},
 				},
 			},
