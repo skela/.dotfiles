@@ -28,6 +28,7 @@ return {
 						-- { "K", cmd("RustHoverActions"), desc = "Hover Actions (Rust)" },
 						-- { "<leader>cR", cmd("RustCodeAction"), desc = "Code Action (Rust)" },
 					},
+					settings = { ["rust-analyzer"] = { diagnostics = { disabled = { "unresolved-proc-macro" }, enable_experimental = true } } },
 				},
 				lua_ls = {
 					settings = { Lua = { diagnostics = { globals = { "vim" } } } },
