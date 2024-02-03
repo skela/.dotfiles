@@ -11,7 +11,8 @@ return {
 		},
 		init = function()
 			local keys = require("lazyvim.plugins.lsp.keymaps").get()
-			keys[#keys + 1] = { "<leader>cl", "<cmd>:Telescope diagnostics<cr>", desc = "[l]ist TODOs and Issues" }
+			keys[#keys + 1] = { "<leader>cl", false }
+			-- keys[#keys + 1] = { "<leader>cl", "<cmd>:Telescope diagnostics<cr>", desc = "[l]ist TODOs and Issues" }
 		end,
 		opts = {
 			servers = {

@@ -1,4 +1,3 @@
-local actions = require("telescope.actions")
 return {
 	{
 		"telescope.nvim",
@@ -20,9 +19,12 @@ return {
 					"^node_modules/",
 				},
 				mappings = {
+					n = {
+						["<leader>cl"] = require("utils.ui").open_diagnostics,
+					},
 					i = {
 						["<C-p>"] = require("telescope.actions.layout").toggle_preview,
-						["<esc>"] = actions.close,
+						["<esc>"] = require("utils.ui").close_picker,
 					},
 				},
 			},
