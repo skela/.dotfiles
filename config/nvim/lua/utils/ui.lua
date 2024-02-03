@@ -45,4 +45,11 @@ M.open_diagnostics = function()
 	})
 end
 
+M.search_all_files = function()
+	local prompt = M.open_picker("live_grep")
+	require("telescope.builtin").live_grep({
+		default_text = prompt,
+	})
+end
+
 return M
