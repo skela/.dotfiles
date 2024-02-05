@@ -59,7 +59,6 @@ map_normal("<leader>cl", require("utils.ui").open_diagnostics, { desc = "[l]ist 
 
 -- Files
 map_common("<C-S>", cmd(":update<cr><esc>"), { desc = "Save file", remap = true })
-map_common("<C-W>", cmd(":bd"), { desc = "Close file", remap = true })
 map_normal("<leader>bs", cmd(":noa w"), { desc = "Save file without formatting", remap = true })
 map_normal("<leader>ft", cmd("Telescope filetypes"), { desc = "Select filetype for buffer", remap = true })
 map_normal("<leader>fF", require("utils.ui").search_all_files, { desc = "Search all files", remap = true })
