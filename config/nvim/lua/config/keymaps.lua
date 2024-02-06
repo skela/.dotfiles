@@ -57,6 +57,9 @@ map_normal("<leader>cl", require("utils.ui").open_diagnostics, { desc = "[l]ist 
 -- map("v", "<TAB>", "<S->>gv", { remap = true })
 -- map("v", "<S-TAB>", "<S-<>gv", { remap = true })
 
+-- Git
+map_normal("<leader>gb", cmd(":Gitsigns toggle_current_line_blame"), { desc = "Toggle Blame", remap = true })
+
 -- Files
 map_common("<C-S>", cmd(":update<cr><esc>"), { desc = "Save file", remap = true })
 map_normal("<leader>bs", cmd(":noa w"), { desc = "Save file without formatting", remap = true })
