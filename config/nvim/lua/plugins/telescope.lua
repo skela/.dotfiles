@@ -29,6 +29,9 @@ return {
 				},
 			},
 			pickers = {
+				find_files = {
+					find_command = { "rg", "--files", "--hidden", "--glob", "!.git" },
+				},
 				live_grep = {
 					only_sort_text = true,
 				},
