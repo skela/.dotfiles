@@ -25,6 +25,7 @@ return {
 				"css",
 				"kotlin",
 				"dockerfile",
+				"http",
 			},
 			indent = {
 				enable = true,
@@ -38,4 +39,13 @@ return {
 		build = ":TSUpdate",
 	},
 	{ "luckasRanarison/tree-sitter-hyprlang", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+	{
+		"https://github.com/apple/pkl-neovim",
+		lazy = true,
+		event = "BufReadPre *.pkl",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+		build = function() vim.cmd("TSInstall! pkl") end,
+	},
 }

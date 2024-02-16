@@ -81,4 +81,13 @@ map_normal("<leader>tf", cmd("Telescope current_buffer_fuzzy_find"), { desc = "S
 map_normal("<leader>tF", require("utils.ui").search_all_files, { desc = "Search all files", remap = true })
 map_normal("<leader>cs", cmd("e .env"), { desc = "Open [s]ecret .env file", remap = true })
 
+-- Run
+map_normal("<leader>rr", "<Plug>RestNvim", { desc = "[r]un http request", remap = true })
+
+map_normal(
+	"<leader>re",
+	function() require("telescope").extensions.rest.select_env() end,
+	{ desc = "Select [e]nvironment for http request", remap = true }
+)
+
 return keymaps
