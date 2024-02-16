@@ -33,7 +33,7 @@
   "neotest": { "branch": "master", "commit": "f6048f32be831907fb15018af2688ff6633704fc" },
   "neotest-dart": { "branch": "main", "commit": "242b380d44c0932fbc990a264414542e345c5592" },
   "noice.nvim": { "branch": "main", "commit": "bf67d70bd7265d075191e7812d8eb42b9791f737" },
-  "nui.nvim": { "branch": "main", "commit": "a0fd35fcbb4cb479366f1dc5f20145fd718a3733" },
+  "nui.nvim": { "branch": "main", "commit": "c3c7fd618dcb5a89e443a2e1033e7d11fdb0596b" },
   "nvim-cmp": { "branch": "main", "commit": "04e0ca376d6abdbfc8b52180f8ea236cbfddf782" },
   "nvim-dap": { "branch": "master", "commit": "0406598c8079c5441b96ff4a2f245acc085ebcd6" },
   "nvim-dap-projects": { "branch": "main", "commit": "f319ffd99c6c8a0b930bcfc4bee0c751ffbf5808" },
@@ -65,8 +65,8 @@
   "treesj": { "branch": "main", "commit": "60e27280030f9cd8dfb6ceb335922c6ff76682cc" },
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
   "vim-illuminate": { "branch": "master", "commit": "305bf07b919ac526deb5193280379e2f8b599926" },
-  "vim-startuptime": { "branch": "master", "commit": "ad414f255abf4bc7c557fdfbca71a8f0d2d146a4" },
+  "vim-startuptime": { "branch": "master", "commit": "791804e804ce5dd18e2768d2fb68a828d02f6e42" },
   "vim-tmux-navigator": { "branch": "master", "commit": "38b1d0402c4600543281dc85b3f51884205674b6" },
-  "vim-visual-multi": { "branch": "master", "commit": "e67f7fa011c98fc5426352d3bb06362a0f70af3c" },
+  "vim-visual-multi": { "branch": "master", "commit": "cff14071098de5279743b009c496303995fe4df9" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
 }
