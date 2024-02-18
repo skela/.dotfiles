@@ -12,7 +12,7 @@ return {
 					html = function(body) return vim.fn.system({ "tidy", "-i", "-q", "-" }, body) end,
 				},
 			},
-			-- env_pattern = "\\.env$",
+			env_pattern = "\\.http.env$",
 		})
 	end,
 }
