@@ -46,6 +46,7 @@ return {
 				["handlebars"] = { "prettier" },
 				["dart"] = { "blink" },
 				["python"] = { "yapf" },
+				["swift"] = { "swift_format_ext" },
 			},
 			pattern = {
 				[".env.*"] = "dotenv",
@@ -56,6 +57,18 @@ return {
 					args = { "$FILENAME" },
 					stdin = false,
 					cwd = require("conform.util").root_file({ ".editorconfig", "pubspec.yaml" }),
+				},
+				swift_format_ext = {
+					command = "swiftformat",
+					args = { "--stdinpath", "$FILENAME" },
+					range_args = function(self, ctx)
+						return {
+							"--linerange",
+							ctx.range.start[1] .. "," .. ctx.range["end"][1],
+						}
+					end,
+					stdin = true,
+					condition = function(self, ctx) return vim.fs.basename(ctx.filename) ~= "README.md" end,
 				},
 			},
 		},
