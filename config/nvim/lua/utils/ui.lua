@@ -52,4 +52,11 @@ M.search_all_files = function()
 	})
 end
 
+M.search_current_file = function()
+	local prompt = M.open_picker("current_buffer_fuzzy_find")
+	require("telescope.builtin").current_buffer_fuzzy_find({
+		default_text = prompt,
+	})
+end
+
 return M
