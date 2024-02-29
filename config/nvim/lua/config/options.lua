@@ -28,3 +28,4 @@ vim.filetype.add({
 
 vim.o.listchars = "tab:!·,trail:·"
 vim.o.list = false
+vim.o.conceallevel = 2
