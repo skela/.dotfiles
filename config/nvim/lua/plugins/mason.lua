@@ -60,14 +60,14 @@ return {
 				},
 				swift_format_ext = {
 					command = "swiftformat",
-					args = { "--stdinpath", "$FILENAME" },
+					args = { "$FILENAME" },
 					range_args = function(self, ctx)
 						return {
 							"--linerange",
 							ctx.range.start[1] .. "," .. ctx.range["end"][1],
 						}
 					end,
-					stdin = true,
+					stdin = false,
 					condition = function(self, ctx) return vim.fs.basename(ctx.filename) ~= "README.md" end,
 				},
 			},

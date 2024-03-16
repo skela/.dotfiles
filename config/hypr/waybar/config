@@ -240,11 +240,14 @@
 		"format": "",
 		"interval": "once",
 		"return-type": "json",
-		"on-click": "/home/skela/.dotfiles/scripts/launcher-clipboard.sh left",
-		"on-click-right": "/home/skela/.dotfiles/scripts/launcher-clipboard.sh right",
-		"on-click-middle": "cliphist wipe",
+		"on-click": "kitty --class floating -e fish  -c 'clipse $PPID'",
+		"on-click-right": "kitty --class floating -e fish  -c 'clipse $PPID'",
+		"on-click-middle": "clipse -clear",
+		// "on-click": "/home/skela/.dotfiles/scripts/launcher-clipboard.sh left",
+		// "on-click-right": "/home/skela/.dotfiles/scripts/launcher-clipboard.sh right",
+		// "on-click-middle": "cliphist wipe",
 		"exec": "printf '{\"tooltip\":\"%s\"}' $(cliphist list | wc -l)",
-		"exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
+		// "exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
 		"signal": 9
 	}
 }
