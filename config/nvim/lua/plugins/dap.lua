@@ -1,6 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
+		commit = "1350ba3c74aac5d707c9884b226415d57cf73412",
 		dependencies = {
 			"ldelossa/nvim-dap-projects",
 			"nvim-treesitter/nvim-treesitter",
@@ -28,6 +29,8 @@ return {
 			vim.keymap.set("n", "<leader>ce", "<cmd>:DapToggleRepl<cr>", { desc = "RePL", remap = true })
 			require("nvim-dap-projects").search_project_config()
 			require("nvim-dap-virtual-text").setup({})
+			local dap = require("dap")
+			dap.defaults.dart.on_output = function(session, output_event) end
 			-- require("dap").set_log_level("TRACE")
 			-- local dap = require("dap")
 			-- dap.listeners.before["event_progress_start"]["skela"] = function(id, title) print("event progress start", vim.inspect(id), vim.inspect(title)) end
