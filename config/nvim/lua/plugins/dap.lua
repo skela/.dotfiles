@@ -1,7 +1,6 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
-		commit = "1350ba3c74aac5d707c9884b226415d57cf73412",
 		dependencies = {
 			"ldelossa/nvim-dap-projects",
 			"nvim-treesitter/nvim-treesitter",
