@@ -26,6 +26,8 @@ return {
 				"kotlin",
 				"dockerfile",
 				"http",
+				"xml",
+				"graphql",
 			},
 			indent = {
 				enable = true,

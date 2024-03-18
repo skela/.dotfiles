@@ -82,7 +82,7 @@ map_normal("<leader>tF", require("utils.ui").search_all_files, { desc = "Search 
 map_normal("<leader>cs", cmd("e .env"), { desc = "Open [s]ecret .env file", remap = true })
 
 -- Run
-map_normal("<leader>rr", "<Plug>RestNvim", { desc = "[r]un http request", remap = true })
+-- map_normal("<leader>rr", cmd("Rest run"), { desc = "[r]un http request", remap = true })
 
 map_normal(
 	"<leader>re",
