@@ -44,7 +44,7 @@ return {
 				["markdown.mdx"] = { "prettier" },
 				["graphql"] = { "prettier" },
 				["handlebars"] = { "prettier" },
-				["dart"] = { "blink" },
+				-- ["dart"] = { "blink" },
 				["python"] = { "yapf" },
 				-- ["swift"] = { "swift_format_ext" },
 			},
