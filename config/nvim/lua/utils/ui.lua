@@ -39,23 +39,23 @@ M.close_picker = function(prompt_bufnr)
 end
 
 M.open_diagnostics = function()
-	local prompt = M.open_picker("diagnostics")
+	-- local prompt = M.open_picker("diagnostics")
 	require("telescope.builtin").diagnostics({
-		default_text = prompt,
+		-- default_text = prompt,
 	})
 end
 
 M.search_all_files = function()
-	local prompt = M.open_picker("live_grep")
+	-- local prompt = M.open_picker("live_grep")
 	require("telescope.builtin").live_grep({
-		default_text = prompt,
+		-- default_text = prompt,
 	})
 end
 
 M.search_current_file = function()
-	local prompt = M.open_picker("current_buffer_fuzzy_find")
+	-- local prompt = M.open_picker("current_buffer_fuzzy_find")
 	require("telescope.builtin").current_buffer_fuzzy_find({
-		default_text = prompt,
+		-- default_text = prompt,
 	})
 end
 
