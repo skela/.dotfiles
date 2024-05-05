@@ -233,7 +233,11 @@ function gitl -d "Get URL for commit"
         echo $GIT_LINK
         switch (uname -s)
             case Linux
-                echo $GIT_LINK | xclip -selection clipboard
+                if test "$XDG_SESSION_TYPE" = wayland
+                    echo $GIT_LINK | wl-copy
+                else
+                    echo $GIT_LINK | xclip -selection clipboard
+                end
             case Darwin
                 echo $GIT_LINK | pbcopy
         end
@@ -252,9 +256,13 @@ function gitc -d "Get commit id"
         echo $GIT_COMMIT
         switch (uname -s)
             case Linux
-                echo $GIT_COMMIT | xclip -selection clipboard
+                if test "$XDG_SESSION_TYPE" = wayland
+                    echo -n "$(git rev-parse HEAD)" | wl-copy
+                else
+                    echo -n "$(git rev-parse HEAD)" | xclip -selection clipboard
+                end
             case Darwin
-                echo $GIT_COMMIT | pbcopy
+                echo -n "$(git rev-parse HEAD)" | pbcopy
         end
     end
 end
