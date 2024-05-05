@@ -5,6 +5,7 @@ return {
 		defaults = {
 			["<leader>t"] = { name = "+test" },
 			["<leader>r"] = { name = "+run" },
+			["<leader>cd"] = { name = "+debug" },
 		},
 	},
 }

@@ -8,6 +8,7 @@ return {
 		},
 		event = "VeryLazy",
 		config = function()
+			local dap = require("dap")
 			vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "debugBreakpoint", linehl = "", numhl = "" })
 			vim.fn.sign_define("DapBreakpointCondition", { text = " ", texthl = "DiagnosticWarn", linehl = "", numhl = "" })
 			vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "DiagnosticError", linehl = "", numhl = "" })
@@ -18,18 +19,23 @@ return {
 				linehl = "debugPC",
 				numhl = "",
 			})
-			vim.keymap.set("n", "<F5>", function() require("dap").continue() end)
-			vim.keymap.set("n", "<F10>", function() require("dap").step_over({}) end)
-			vim.keymap.set("n", "<F11>", function() require("dap").step_into({}) end)
-			vim.keymap.set("n", "<F12>", function() require("dap").step_out({}) end)
-			vim.keymap.set("n", "<leader>cb", function() require("dap").toggle_breakpoint() end, { desc = "Breakpoint", remap = true })
-			vim.keymap.set("n", "<leader>cB", "<cmd>:Telescope dap list_breakpoints<cr>", { desc = "List Breakpoints", remap = true })
-			vim.keymap.set("n", "<leader>cc", "<cmd>:Telescope dap frames<cr>", { desc = "Callstack", remap = true })
-			vim.keymap.set("n", "<leader>ce", "<cmd>:DapToggleRepl<cr>", { desc = "RePL", remap = true })
+			vim.keymap.set("n", "<F5>", function() dap.continue() end)
+			vim.keymap.set("n", "<F10>", function() dap.step_over({}) end)
+			vim.keymap.set("n", "<F11>", function() dap.step_into({}) end)
+			vim.keymap.set("n", "<F12>", function() dap.step_out({}) end)
+			vim.keymap.set("n", "<leader>cdb", function() dap.toggle_breakpoint() end, { desc = "Breakpoint", remap = true })
+			vim.keymap.set(
+				"n",
+				"<leader>cdB",
+				function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end,
+				{ desc = "Set Breakpoint", remap = true }
+			)
+			vim.keymap.set("n", "<leader>cdl", "<cmd>:Telescope dap list_breakpoints<cr>", { desc = "List Breakpoints", remap = true })
+			vim.keymap.set("n", "<leader>cdc", "<cmd>:Telescope dap frames<cr>", { desc = "Callstack", remap = true })
+			vim.keymap.set("n", "<leader>cdr", "<cmd>:DapToggleRepl<cr>", { desc = "RePL", remap = true })
 			require("nvim-dap-projects").search_project_config()
 			require("nvim-dap-virtual-text").setup({})
-			local dap = require("dap")
-			dap.defaults.dart.on_output = function(session, output_event) end
+			dap.defaults.dart.on_output = function(_, _) end
 			-- require("dap").set_log_level("TRACE")
 			-- local dap = require("dap")
 			-- dap.listeners.before["event_progress_start"]["skela"] = function(id, title) print("event progress start", vim.inspect(id), vim.inspect(title)) end
@@ -87,7 +93,7 @@ return {
 					},
 				},
 			})
-			vim.keymap.set("n", "<leader>ci", function() require("dapui").toggle() end, { desc = "Debug UI", remap = true })
+			vim.keymap.set("n", "<leader>cdi", function() require("dapui").toggle() end, { desc = "Debug UI", remap = true })
 			-- local dap = require("dap")
 			-- local dapui = require("dapui")
 			-- dap.listeners.before.attach.dapui_config = function() print("dapui attach") end
