@@ -1,0 +1,24 @@
+[env]
+TERM = "xterm-256color"
+
+[window]
+decorations = "Buttonless"
+opacity = 0.9
+blur = true
+option_as_alt = "Both"
+
+[font]
+normal.family = "JetBrainsMono Nerd Font Mono"
+size = 14
+
+[colors]
+primary.background = "#000000"
+primary.foreground = "#c5c8c6"
+normal.black = "#000000"
+normal.red = "#C3242B"
+normal.green = "#5B9B4B"
+normal.yellow = "#f0c674"
+normal.blue = "#81a2be"
+normal.magenta = "#b294bb"
+normal.cyan = "#8abeb7"
+normal.white = "#c5c8c6"
