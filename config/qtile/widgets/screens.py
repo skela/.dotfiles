@@ -89,7 +89,7 @@ primary_widgets.extend([
 )
 
 primary_widgets.extend([
-		widget.Systray(padding=8,**widget_decorations),
+		widget.Systray(padding=8,background=color_primary_bg,**widget_decorations),
 		spacer(),
 		sep(),
 	]
