@@ -229,7 +229,7 @@ widget_defaults = dict(
 	font="Roboto Mono for Powerline",
 	fontsize=16,
 	padding=3,
-	background="#000000",
+	background="#00000000",
 )
 # extension_defaults = widget_defaults.copy()
 
