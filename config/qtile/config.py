@@ -1,56 +1,32 @@
 import asyncio
 import os
-import socket
 import subprocess
 from os import path
-from typing import List, Optional  # noqa: F401
+from typing import List # noqa: F401
 
-from libqtile import bar, hook, layout, qtile, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile import hook, layout
+from libqtile.config import Click, Drag, Group, Key, Match
 from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
-from libqtile.backend.base import Window
-
-from qtile_extras import widget as extrawidgets
+from widgets.screens import get_screens
 
 from layouts.max import Max
 
-from settings.icons import Icons
-from settings.keys import Keys
+from settings.settings import Settings
 from settings.path import qtile_path
-from widgets.active_app import ActiveAppWidget
 
 # Required programs:
 # kitty, flameshot, playerctl, ulauncher, betterlockscreen, thunar, firefox-developer-edition
 
-mod = "mod4"
-alt = "mod1"
-shift = "shift"
-control = "control"
+settings = Settings()
+commands = settings.commands
+icons = settings.icons
 
-terminal = "kitty"
-files = "thunar"
-# files = "nautilus -w"
-#launcher = "ulauncher --no-window-shadow"
-#launcher = "albert toggle"
-#launcher = "rofi -show drun -l 10"
-launcher = "/home/skela/.dotfiles/scripts/launcher.sh"
-lock_screen = "sh /home/skela/.dotfiles/scripts/lock.sh"
-browser = "firefox-developer-edition"
-toggle_keyboard = "python3 /home/skela/.dotfiles/scripts/toggle_keyboard_layout.py"
-
-vol_cur = "amixer -D pulse get Master"
-vol_up = "amixer -q -D pulse set Master 2%+"
-vol_down = "amixer -q -D pulse set Master 2%-"
-vol_mute = "amixer -q -D pulse set Master toggle"
-
-player_prev = "playerctl previous --player=spotify"
-player_next = "playerctl next --player=spotify"
-player_play_pause = "playerctl play-pause --player=spotify"
-player_stop = "playerctl stop --player=spotify"
-
-icons = Icons()
-k = Keys()
+k = settings.keys
+mod = k.mod
+alt = k.alt
+shift = k.shift
+control = k.control
 
 margin = 6
 single_margin = 6
@@ -71,8 +47,11 @@ def toggle_fullscreen(qt:Qtile):
 
 @lazy.function
 def screenshot_window(qt:Qtile):
-	w,h = qt.current_window.cmd_get_size()
-	x,y = qt.current_window.cmd_get_position()
+	win = qt.current_window
+	if win is None:
+		return
+	w,h = win.cmd_get_size()
+	x,y = win.cmd_get_position()
 	region = f"{w}x{h}+{x}+{y}"
 	os.system(f'flameshot full --region "{region}"')
 
@@ -121,17 +100,17 @@ keys = [
 	# multiple stack panes
 	Key([k.mod, k.shift], "Return", lazy.layout.toggle_split(),desc="Toggle between split and unsplit sides of stack"),
 
-	Key([k.mod], k.enter, lazy.spawn(terminal), desc="Launch terminal"),
+	Key([k.mod], k.enter, lazy.spawn(commands.terminal), desc="Launch terminal"),
 	Key([k.mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
 	Key([k.mod], "f", toggle_fullscreen, desc="Toggle fullscreen"),
 	# Key([k.mod], k.space, lazy.spawn(launcher), desc="Launch launcher"),
-	Key([k.mod], "d", lazy.spawn(launcher), desc="Launch launcher"),
-	Key([k.mod], k.space, lazy.spawn(toggle_keyboard), desc="Toggle keyboard"),
+	Key([k.mod], "d", lazy.spawn(commands.launcher), desc="Launch launcher"),
+	Key([k.mod], k.space, lazy.spawn(commands.toggle_keyboard), desc="Toggle keyboard"),
 	Key([k.mod, k.shift], k.space, lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-	Key([k.mod], "n", lazy.spawn(files), desc="Launch file browser"),
-	Key([k.mod], "w", lazy.spawn(browser), desc="Launch web browser"),
+	Key([k.mod], "n", lazy.spawn(commands.files), desc="Launch file browser"),
+	Key([k.mod], "w", lazy.spawn(commands.browser), desc="Launch web browser"),
 	Key([k.mod], "m", lazy.window.toggle_maximize(), desc="Toggle maximize"),
-	Key([k.alt,k.control],"q" , lazy.spawn(lock_screen), desc="Lock screen"),
+	Key([k.alt,k.control],"q" , lazy.spawn(commands.lock_screen), desc="Lock screen"),
 	Key([k.control], k.tab, lazy.next_layout(), desc="Toggle between layouts"),
 	Key([k.control,k.shift], k.tab, lazy.prev_layout(), desc="Toggle between layouts"),
 	Key([k.mod], k.tab, lazy.layout.next(), desc="Switch to next window"),
@@ -144,13 +123,13 @@ keys = [
 	Key([k.mod,k.control], "s", screenshot_window, desc="Take screenshot (window)"),
 	Key([k.mod,k.shift,k.control], "s", lazy.spawn("flameshot gui"), desc="Take screenshot (interactive)"),
 
-	Key([],"XF86AudioRaiseVolume", lazy.spawn(vol_up)),
-	Key([],"XF86AudioLowerVolume",lazy.spawn(vol_down)),
-	Key([],"XF86AudioMute",lazy.spawn(vol_mute)),
-	Key([],"XF86AudioNext",lazy.spawn(player_next)),
-	Key([],"XF86AudioPrev",lazy.spawn(player_prev)),
-	Key([],"XF86AudioPlay",lazy.spawn(player_play_pause)),
-	Key([],"XF86AudioStop",lazy.spawn(player_stop)),
+	Key([],"XF86AudioRaiseVolume", lazy.spawn(commands.vol_up)),
+	Key([],"XF86AudioLowerVolume",lazy.spawn(commands.vol_down)),
+	Key([],"XF86AudioMute",lazy.spawn(commands.vol_mute)),
+	Key([],"XF86AudioNext",lazy.spawn(commands.player_next)),
+	Key([],"XF86AudioPrev",lazy.spawn(commands.player_prev)),
+	Key([],"XF86AudioPlay",lazy.spawn(commands.player_play_pause)),
+	Key([],"XF86AudioStop",lazy.spawn(commands.player_stop)),
 
 	Key([k.mod, k.shift], "r", lazy.restart(), desc="Restart qtile"),
 
@@ -178,11 +157,11 @@ workspaces = [
 	Workspace("home","1",icon=icons.home),
 	Workspace("dev","2",icon=icons.dev,matches=[Match(wm_class="code"),Match(wm_class="jetbrains-studio")]),
 	Workspace("misc","3",icon=icons.misc,matches=[Match(wm_class="Pamac-manager")]),
-	Workspace("chat","4",icon=icons.chat,matches=[Match(wm_class="Slack")]),
+	Workspace("chat","4",icon=icons.chat,matches=[Match(wm_class="Slack")],spawn=["slack",commands.discord]),
 	Workspace("gfx","5",layout="floating",icon=icons.gfx,matches=[Match(wm_class="Inkscape"),Match(title="GNU Image Manipulation Program"),Match(wm_class="Blender"),Match(wm_class="cura"),Match(title="Creality Slicer")]),
-	Workspace("email","6",icon=icons.email,matches=[Match(wm_class="thunderbird")]),
+	Workspace("email","6",icon=icons.email,matches=[Match(wm_class="thunderbird")],spawn=["thunderbird"]),
 	Workspace("phones","7",layout="floating",icon=icons.phones,matches=[Match(title="Android Emulator")]),
-	Workspace("games","8",layout="floating",icon=icons.games,matches=[Match(wm_class="Steam"),Match(wm_class="discord")]),
+	Workspace("games","8",layout="floating",icon=icons.games,matches=[Match(wm_class="Steam")]),
 	Workspace("music","9",icon=icons.music),
 	Workspace("web","0",icon=icons.web,matches=[Match(wm_class="scrcpy"),Match(wm_class="google-chrome"),Match(wm_class="Google-chrome")]),
 ]
@@ -254,122 +233,7 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-def sep():
-	return widget.Sep(padding=6,linewidth=1)
-
-# Office dimmer = 78
-# Hallway = 48
-# Family Lounge Dimmer = 81
-def toggle_lights(device_id:int):
-	return "python " + path.join(qtile_path, "lights.py") + f" -d {device_id}"
-
-def computer_name() -> str:
-	return socket.gethostname()
-
-primary_widgets = [
-	ActiveAppWidget(),
-	sep()
-]
-
-primary_widgets.extend([
-
-	widget.GroupBox(
-		highlight_method="line",
-		highlight_color=["000000","000000"],
-		this_current_screen_border="ff0000", # focus
-		this_screen_border="dddddd", # not focus
-		other_current_screen_border="ff0000", # focus
-		font=icons.font,
-	),
-	sep(),
-	#  widget.WindowTabs(
-		#  max_chars=50
-	#  ),
-	#  widget.TaskList(
-		#  max_title_width=200,
-		#  border="#ff0000",
-		#  borderwidth=0,
-		#  highlight_method="block",
-		#  rounded=False,
-		#  padding=0,padding_x=5,
-		#  margin=0,margin_x=5
-	#  ),
-
-	extrawidgets.GlobalMenu(padding=10,menu_background="#000000",highlight_colour="#ff0000"),
-
-	# widget.Spacer(width=bar.STRETCH,background="#00000000"),
-
-	# widget.Spacer(length=6),
-	# widget.Clock(format='%H:%M (%a) %d-%m-%Y'),
-	# widget.Spacer(length=6),
-
-	widget.Spacer(width=bar.STRETCH,background="#00000000"),
-
-	#widget.Spacer(length=6),
-])
-
-primary_widgets.extend([
-
-	widget.CheckUpdates(
-		update_interval = 1800,
-		distro = "Arch_checkupdates",
-		display_format = "{updates} Updates",
-		mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " -e sudo pacman -Syu")},
-	),
-	sep(),
-	]
-)
-
-if computer_name() == "wind":
-	primary_widgets.extend([
-		widget.TextBox(text=icons.battery,font=icons.font),
-		widget.Battery(format="{percent:2.0%} {hour:d}:{min:02d} {watt:.2f}W"),
-		sep()
-	])
-
-primary_widgets.extend([
-	widget.TextBox(text=icons.volume,font=icons.font),
-	widget.Volume(),
-	sep(),
-	widget.TextBox(text=icons.keyboard,font=icons.font),
-	widget.KeyboardLayout(configured_keyboards=["gb","no"]),
-	sep(),
-	widget.Systray(padding=8,background="#000000"),
-	widget.Spacer(length=8),
-	sep(),
-	widget.CurrentLayoutIcon(scale=0.6),
-	widget.CurrentLayout(),
-	sep(),
-	widget.Clock(format='%H:%M (%a) %d-%m-%Y'),
-	widget.Spacer(length=6),
-])
-
-bar_background = "#000000"
-
-screens = [
-	Screen(
-		top=bar.Bar(primary_widgets,
-			size=24,
-			background=bar_background,
-			opacity = 1,
-			margin = [6,6,0,6], # [N E S W]
-		),
-		# bottom=bar.Bar([widget.TextBox(text=icons.light,font=icons.font,)],size=24,),
-	),
-	Screen(top=bar.Bar([
-			widget.Spacer(width=bar.STRETCH,background=bar_background),
-			widget.Spacer(length=6),
-			widget.CurrentLayoutIcon(scale=0.6),
-			widget.CurrentLayout(),
-			widget.Spacer(length=6),
-		],
-		size=24,
-		opacity=1,
-		background=bar_background,
-		margin = [6,6,0,6], # [N E S W]
-		)
-	),
-]
+screens = get_screens()
 
 # Drag floating layouts.
 mouse = [
@@ -384,15 +248,17 @@ main = None  # WARNING: this is deprecated and will be removed soon
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating(float_rules=[
-	# Run the utility of `xprop` toid see the wm class and name of an X client.
-	*layout.Floating.default_float_rules,
-	Match(title="Qalculate!"),
-	Match(wm_class="kdenlive"),
-	Match(wm_class="Conky"),
-	Match(wm_class="albert"),
+floating_layout = layout.Floating(
+	float_rules=[
+		# Run the utility of `xprop` toid see the wm class and name of an X client.
+		*layout.Floating.default_float_rules,
+		Match(title="Qalculate!"),
+		Match(wm_class="kdenlive"),
+		Match(wm_class="Conky"),
+		Match(wm_class="albert"),
 #	Match(title="Android Emulator"),
-])
+	]
+)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 auto_minimize = False
@@ -420,7 +286,7 @@ async def client_new(window):
 	await asyncio.sleep(0.02)
 	if check_window_name(window,"spotify") or check_window_name(window,"spotify premium"):
 		window.togroup("music")
-	if first_time_firefox and (check_window_class("firefox") or check_window_class("firefoxdeveloperedition")):
+	if first_time_firefox and (check_window_class(window,"firefox") or check_window_class(window,"firefoxdeveloperedition")):
 		window.togroup("web")
 		first_time_firefox = False
 
