@@ -7,9 +7,6 @@
 [submodule "fonts"]
 	path = fonts
 	url = https://github.com/powerline/fonts.git
-[submodule "libs/qtile-extras"]
-	path = libs/qtile-extras
-	url = git@github.com:elParaguayo/qtile-extras.git
 [submodule "private"]
 	path = private
 	url = git@github.com:skela/pdotfiles.git
