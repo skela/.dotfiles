@@ -1,11 +1,13 @@
 import socket
 
-from libqtile import bar, qtile, widget
+from libqtile import bar
+from libqtile import qtile
 from libqtile.config import Screen
-from qtile_extras import widget as extrawidgets
-from qtile_extras.widget.decorations import RectDecoration
-from settings.settings import Settings
 
+from qtile_extras import widget
+from qtile_extras.widget.decorations import RectDecoration
+
+from settings.settings import Settings
 from widgets.active_app import ActiveAppWidget
 
 settings = Settings()
@@ -59,13 +61,15 @@ primary_widgets.extend([
 ])
 
 primary_widgets.extend([
-	extrawidgets.GlobalMenu(
+	widget.GlobalMenu(
 		padding=10,
 		menu_background="#000000",
 		highlight_colour="#ff0000",
 		foreground=color_primary_fg,
 		decorations=widget_decorations
 	),
+
+	widget.Spacer(length=6,background=color_primary_bg,decorations=widget_decorations),
 
 	widget.Spacer(width=bar.STRETCH,background=color_transparent),
 ])

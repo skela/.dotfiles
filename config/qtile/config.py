@@ -231,7 +231,7 @@ widget_defaults = dict(
 	padding=3,
 	background="#000000",
 )
-extension_defaults = widget_defaults.copy()
+# extension_defaults = widget_defaults.copy()
 
 screens = get_screens()
 
