@@ -33,17 +33,26 @@ single_margin = 6
 full_margin = 0
 real_layout = {}
 
-@lazy.function
-def toggle_fullscreen(qt:Qtile):
+def toggle_fullscreen_and_bar(qt:Qtile,toggle_bar:bool):
 	group = qt.current_window.group
 	if group in real_layout:
 		group.layout = real_layout.pop(group)
-		qt.current_screen.top.show(True)
+		if toggle_bar:
+			qt.current_screen.top.show(True)
 	else:
 		real_layout[group] = group.layout.name
 		group.layout = "max"
-		qt.current_screen.top.show(False)
+		if toggle_bar:
+			qt.current_screen.top.show(False)
 	qt.current_window.group = group
+
+@lazy.function
+def toggle_fullscreen(qt:Qtile):
+	toggle_fullscreen_and_bar(qt,True)
+
+@lazy.function
+def toggle_maxscreen(qt:Qtile):
+	toggle_fullscreen_and_bar(qt,False)
 
 @lazy.function
 def screenshot_window(qt:Qtile):
@@ -109,7 +118,7 @@ keys = [
 	Key([k.mod, k.shift], k.space, lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 	Key([k.mod], "n", lazy.spawn(commands.files), desc="Launch file browser"),
 	Key([k.mod], "w", lazy.spawn(commands.browser), desc="Launch web browser"),
-	Key([k.mod], "m", lazy.window.toggle_maximize(), desc="Toggle maximize"),
+	Key([k.mod], "m", toggle_maxscreen, desc="Toggle maximize"),
 	Key([k.alt,k.control],"q" , lazy.spawn(commands.lock_screen), desc="Lock screen"),
 	Key([k.control], k.tab, lazy.next_layout(), desc="Toggle between layouts"),
 	Key([k.control,k.shift], k.tab, lazy.prev_layout(), desc="Toggle between layouts"),
