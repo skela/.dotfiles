@@ -94,6 +94,7 @@ return {
 				},
 			})
 			vim.keymap.set("n", "<leader>cdi", function() require("dapui").toggle() end, { desc = "Debug UI", remap = true })
+			vim.keymap.set("n", "<F9>", function() require("dapui").toggle() end, { desc = "Debug UI", remap = true })
 			-- local dap = require("dap")
 			-- local dapui = require("dapui")
 			-- dap.listeners.before.attach.dapui_config = function() print("dapui attach") end
