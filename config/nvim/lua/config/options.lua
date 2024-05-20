@@ -6,7 +6,7 @@ vim.g.python_recommended_style = 0
 vim.o.expandtab = false
 vim.shiftwidth = 2
 vim.o.tabstop = 2
-vim.o.smartident = true
+-- vim.o.smartident = true
 vim.o.autoindent = true
 -- vim.g.editorconfig = true
 
