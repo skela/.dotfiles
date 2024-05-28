@@ -15,6 +15,7 @@ return {
 			-- keys[#keys + 1] = { "<leader>cl", "<cmd>:Telescope diagnostics<cr>", desc = "[l]ist TODOs and Issues" }
 		end,
 		opts = {
+			inlay_hints = { enabled = false },
 			servers = {
 				pyright = {},
 				sourcekit = {},
