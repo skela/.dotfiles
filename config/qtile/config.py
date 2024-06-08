@@ -33,7 +33,7 @@ single_margin = 6
 full_margin = 0
 real_layout = {}
 
-def toggle_fullscreen_and_bar(qt:Qtile,toggle_bar:bool):
+def toggle_fullscreen_and_bar(qt:Qtile,toggle_bar:bool,layout:str="max"):
 	group = qt.current_window.group
 	if group in real_layout:
 		group.layout = real_layout.pop(group)
@@ -41,7 +41,7 @@ def toggle_fullscreen_and_bar(qt:Qtile,toggle_bar:bool):
 			qt.current_screen.top.show(True)
 	else:
 		real_layout[group] = group.layout.name
-		group.layout = "max"
+		group.layout = layout
 		if toggle_bar:
 			qt.current_screen.top.show(False)
 	qt.current_window.group = group
@@ -53,6 +53,10 @@ def toggle_fullscreen(qt:Qtile):
 @lazy.function
 def toggle_maxscreen(qt:Qtile):
 	toggle_fullscreen_and_bar(qt,False)
+
+@lazy.function
+def toggle_monadwide(qt:Qtile):
+	toggle_fullscreen_and_bar(qt,False,layout="monadwide")
 
 @lazy.function
 def screenshot_window(qt:Qtile):
@@ -112,6 +116,7 @@ keys = [
 	Key([k.mod], k.enter, lazy.spawn(commands.terminal), desc="Launch terminal"),
 	Key([k.mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
 	Key([k.mod], "f", toggle_fullscreen, desc="Toggle fullscreen"),
+	Key([k.mod], "j", toggle_monadwide, desc="Toggle monadwide"),
 	# Key([k.mod], k.space, lazy.spawn(launcher), desc="Launch launcher"),
 	Key([k.mod], "d", lazy.spawn(commands.launcher), desc="Launch launcher"),
 	Key([k.mod], k.space, lazy.spawn(commands.toggle_keyboard), desc="Toggle keyboard"),
