@@ -4,6 +4,9 @@ root = true
 indent_size = 4
 curly_bracket_next_line = true
 
+[{Makefile,**.mk}]
+indent_style = tab
+
 [*.ts]
 indent_style = tab
 
