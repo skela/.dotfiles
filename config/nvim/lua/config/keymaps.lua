@@ -80,6 +80,7 @@ map_common("<C-t>", cmd("Telescope filetypes"), { desc = "Select filetype", rema
 map_normal("<leader>tf", require("utils.ui").search_current_file, { desc = "Search current file", remap = true })
 map_normal("<leader>tF", require("utils.ui").search_all_files, { desc = "Search all files", remap = true })
 map_normal("<leader>cs", cmd("e .env"), { desc = "Open [s]ecret .env file", remap = true })
+map_normal("<leader>uS", cmd("Screenkey toggle"), { desc = "Toggle [S]creenkey", remap = true })
 
 -- Run
 -- map_normal("<leader>rr", cmd("Rest run"), { desc = "[r]un http request", remap = true })
