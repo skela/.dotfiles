@@ -1,4 +1,5 @@
-return {
-	"NSStefan002/screenkey.nvim",
-	lazy = false,
-}
+return {}
+-- return {
+-- 	"NSStefan002/screenkey.nvim",
+-- 	lazy = false,
+-- }
