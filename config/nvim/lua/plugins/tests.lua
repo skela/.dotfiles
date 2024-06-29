@@ -40,14 +40,14 @@
 -- }
 --
 return {
-	"quolpr/quicktest.nvim",
+	"skela/quicktest.nvim",
+	branch = "feature/dart",
 	config = function()
 		local qt = require("quicktest")
 
 		qt.setup({
 			adapters = {
 				-- require("quicktest.adapters.dart"),
-				require("utils.quicktest-dart"),
 				-- require("quicktest.adapters.golang")({
 				-- 	additional_args = function(bufnr) return { "-race", "-count=1" } end,
 				-- 	-- bin = function(bufnr) return 'go' end
@@ -56,6 +56,7 @@ return {
 				-- require("quicktest.adapters.vitest"),
 				-- require("quicktest.adapters.elixir"),
 				-- require("quicktest.adapters.criterion"),
+				require("quicktest.adapters.dart"),
 			},
 		})
 	end,

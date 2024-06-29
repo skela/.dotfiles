@@ -52,7 +52,7 @@
   "persistence.nvim": { "branch": "main", "commit": "95d03ad5450389ad7dc2a0fab14ebb3d46bc2c96" },
   "pkl-neovim": { "branch": "main", "commit": "a0ae099c7eb926150ee0a126b1dd78086edbe3fc" },
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
-  "quicktest.nvim": { "branch": "main", "commit": "5eebfbe690c7c5e03635fc5be70210ed23554c9c" },
+  "quicktest.nvim": { "branch": "feature/dart", "commit": "4fbe31001436547f15d5d1593edfb9b5d23b61d5" },
   "rest.nvim": { "branch": "main", "commit": "e7843c55f9df6a9db9f97dac180035c6ff895a90" },
   "rust-tools.nvim": { "branch": "master", "commit": "676187908a1ce35ffcd727c654ed68d851299d3e" },
   "tailwindcss-colorizer-cmp.nvim": { "branch": "main", "commit": "3d3cd95e4a4135c250faf83dd5ed61b8e5502b86" },
