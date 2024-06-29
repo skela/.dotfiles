@@ -59,4 +59,16 @@ M.search_current_file = function()
 	})
 end
 
+M.show_code_info = function()
+	-- vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+	-- vim.lsp.buf.hover()
+	require("hover").hover()
+end
+
+M.show_code_info_select = function()
+	-- vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+	-- vim.lsp.buf.hover()
+	require("hover").hover_select()
+end
+
 return M

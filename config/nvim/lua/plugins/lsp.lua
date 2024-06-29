@@ -4,6 +4,35 @@
 
 return {
 	{
+		"lewis6991/hover.nvim",
+		config = function()
+			require("hover").setup({
+				init = function()
+					require("hover.providers.lsp")
+					-- require('hover.providers.gh')
+					-- require('hover.providers.gh_user')
+					-- require('hover.providers.jira')
+					require("hover.providers.dap")
+					-- require('hover.providers.fold_preview')
+					require("hover.providers.diagnostic")
+					-- require('hover.providers.man')
+					require("hover.providers.dictionary")
+				end,
+				preview_opts = {
+					border = "single",
+				},
+				preview_window = false,
+				title = true,
+				mouse_providers = {
+					"LSP",
+				},
+				mouse_delay = 1000,
+			})
+			vim.keymap.set("n", "<MouseMove>", require("hover").hover_mouse, { desc = "hover.nvim (mouse)" })
+			vim.o.mousemoveevent = true
+		end,
+	},
+	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"simrat39/rust-tools.nvim",
@@ -12,6 +41,8 @@ return {
 		init = function()
 			local keys = require("lazyvim.plugins.lsp.keymaps").get()
 			keys[#keys + 1] = { "<leader>cl", false }
+			keys[#keys + 1] = { "K", function() require("utils.ui").show_code_info() end }
+			keys[#keys + 1] = { "gK", function() require("utils.ui").show_code_info_select() end }
 			-- keys[#keys + 1] = { "<leader>cl", "<cmd>:Telescope diagnostics<cr>", desc = "[l]ist TODOs and Issues" }
 		end,
 		opts = {

@@ -15,6 +15,9 @@ return {
 			defaults = {
 				-- wrap_results = true,
 				-- sorting_strategy = "ascending",
+				layout_config = {
+					width = 0.98,
+				},
 				file_ignore_patterns = {
 					"^.git/",
 					"^node_modules/",
@@ -32,9 +35,11 @@ return {
 			pickers = {
 				find_files = {
 					find_command = { "rg", "--files", "--hidden", "--glob", "!.git" },
+					layout_strategy = "vertical",
 				},
 				live_grep = {
 					only_sort_text = true,
+					layout_strategy = "vertical",
 				},
 				diagnostics = {
 					line_width = "full",
