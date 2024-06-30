@@ -18,6 +18,7 @@ return {
 				layout_config = {
 					width = 0.98,
 				},
+				layout_strategy = "vertical",
 				file_ignore_patterns = {
 					"^.git/",
 					"^node_modules/",
