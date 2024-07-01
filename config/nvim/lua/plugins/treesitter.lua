@@ -28,6 +28,7 @@ return {
 				"http",
 				"xml",
 				"graphql",
+				"pkl",
 			},
 			indent = {
 				enable = true,
