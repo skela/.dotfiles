@@ -31,7 +31,11 @@ keymaps.flutter = function(_, _) -- client,buffer
 	map_normal("<leader>cH", cmd(":FlutterRestart"), { desc = "[H]ot Restart (Flutter)", remap = true })
 	map_normal("<leader>cL", cmd(":FlutterRun"), { desc = "[L]aunch (Flutter)", remap = true })
 	map_normal("<leader>cQ", cmd(":FlutterQuit"), { desc = "[Q]uit (Flutter)", remap = true })
-	-- mapNormal("<leader>cL", ":split | buffer __FLUTTER_DEV_LOG__<CR>", { remap = false, desc = "Open flutter dev log in horizontal split" })
+	map_normal("<leader>cv", cmd(":TermExec cmd='viewdroid -d' open=0"), { desc = "[v]iewdroid device (scrcpy)", remap = true })
+	map_normal("<leader>cVd", cmd(":TermExec cmd='viewdroid -d' open=0"), { desc = "Viewdroid device (scrcpy)", remap = true })
+	map_normal("<leader>cVe", cmd(":TermExec cmd='viewdroid -e' open=0"), { desc = "Viewdroid emulator (scrcpy)", remap = true })
+	map_normal("<leader>cVq", cmd(":2TermExec cmd='killall scrcpy' open=0"), { desc = "Viewdroid quit (scrcpy)", remap = true })
+	map_normal("<leader>cVt", cmd(":ToggleTerm"), { desc = "Viewdroid terminal", remap = true })
 end
 
 map({ "i", "s" }, "<Tab>", function()
@@ -77,18 +81,7 @@ map_common("<C-F>", require("utils.ui").search_current_file, { desc = "Search cu
 map_common("\a", require("utils.ui").search_all_files, { desc = "Search all files", remap = true }) -- ctrl + shift + f work around for kitty
 map_common("<C-p>", cmd("Telescope find_files"), { desc = "Jump to file", remap = true })
 map_common("<C-t>", cmd("Telescope filetypes"), { desc = "Select filetype", remap = true })
-map_normal("<leader>tf", require("utils.ui").search_current_file, { desc = "Search current file", remap = true })
-map_normal("<leader>tF", require("utils.ui").search_all_files, { desc = "Search all files", remap = true })
 map_normal("<leader>cs", cmd("e .env"), { desc = "Open [s]ecret .env file", remap = true })
 map_normal("<leader>uS", cmd("Screenkey toggle"), { desc = "Toggle [S]creenkey", remap = true })
-
--- Run
--- map_normal("<leader>rr", cmd("Rest run"), { desc = "[r]un http request", remap = true })
-
-map_normal(
-	"<leader>re",
-	function() require("telescope").extensions.rest.select_env() end,
-	{ desc = "Select [e]nvironment for http request", remap = true }
-)
 
 return keymaps

@@ -23,16 +23,16 @@ return {
 			vim.keymap.set("n", "<F10>", function() dap.step_over({}) end)
 			vim.keymap.set("n", "<F11>", function() dap.step_into({}) end)
 			vim.keymap.set("n", "<F12>", function() dap.step_out({}) end)
-			vim.keymap.set("n", "<leader>cdb", function() dap.toggle_breakpoint() end, { desc = "Breakpoint", remap = true })
+			vim.keymap.set("n", "<leader>rb", function() dap.toggle_breakpoint() end, { desc = "Breakpoint", remap = true })
 			vim.keymap.set(
 				"n",
-				"<leader>cdB",
+				"<leader>rB",
 				function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end,
 				{ desc = "Set Breakpoint", remap = true }
 			)
-			vim.keymap.set("n", "<leader>cdl", "<cmd>:Telescope dap list_breakpoints<cr>", { desc = "List Breakpoints", remap = true })
-			vim.keymap.set("n", "<leader>cdc", "<cmd>:Telescope dap frames<cr>", { desc = "Callstack", remap = true })
-			vim.keymap.set("n", "<leader>cdr", "<cmd>:DapToggleRepl<cr>", { desc = "RePL", remap = true })
+			vim.keymap.set("n", "<leader>rl", "<cmd>:Telescope dap list_breakpoints<cr>", { desc = "List Breakpoints", remap = true })
+			vim.keymap.set("n", "<leader>rc", "<cmd>:Telescope dap frames<cr>", { desc = "Callstack", remap = true })
+			vim.keymap.set("n", "<leader>rr", "<cmd>:DapToggleRepl<cr>", { desc = "RePL", remap = true })
 			require("nvim-dap-projects").search_project_config()
 			require("nvim-dap-virtual-text").setup({})
 			dap.defaults.dart.on_output = function(_, _) end
@@ -94,7 +94,7 @@ return {
 					},
 				},
 			})
-			vim.keymap.set("n", "<leader>cdi", function() require("dapui").toggle() end, { desc = "Debug UI", remap = true })
+			vim.keymap.set("n", "<leader>ri", function() require("dapui").toggle() end, { desc = "Debug UI", remap = true })
 			vim.keymap.set("n", "<F9>", function() require("dapui").toggle() end, { desc = "Debug UI", remap = true })
 			-- local dap = require("dap")
 			-- local dapui = require("dapui")
@@ -102,6 +102,33 @@ return {
 			-- dap.listeners.before.launch.dapui_config = function() print("dapui launch") end
 			-- dap.listeners.before.event_terminated.dapui_config = function() print("dapui ev termin") end
 			-- dap.listeners.before.event_exited.dapui_config = function() print("dapui ev exit") end
+		end,
+	},
+	{
+		"akinsho/nvim-toggleterm.lua",
+		config = function()
+			require("toggleterm").setup({
+				size = 20,
+				open_mapping = [[<c-\>]],
+				hide_numbers = true,
+				shade_filetypes = {},
+				shade_terminals = true,
+				shading_factor = "1",
+				start_in_insert = true,
+				insert_mappings = true,
+				persist_size = true,
+				direction = "float",
+				close_on_exit = true,
+				shell = vim.o.shell,
+				float_opts = {
+					border = "curved",
+					winblend = 0,
+					highlights = {
+						border = "Normal",
+						background = "Normal",
+					},
+				},
+			})
 		end,
 	},
 }

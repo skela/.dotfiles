@@ -1,40 +1,16 @@
 return {
 	{
-		"vhyrro/luarocks.nvim",
-		priority = 1000,
-		config = true,
-	},
-	{
-		"rest-nvim/rest.nvim",
+		"mistweaverco/kulala.nvim",
 		ft = "http",
-		enabled = false,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"luarocks.nvim",
-		},
 		config = function()
-			require("rest-nvim").setup({
-				result = {
-					formatters = {
-						json = "jq",
-						problem = "jq",
-						html = function(body) return vim.fn.system({ "tidy", "-i", "-q", "-" }, body) end,
-					},
-				},
-				env_pattern = "\\.http.env$",
-				keybinds = {
-					{
-						"<leader>rr",
-						"<cmd>Rest run<cr>",
-						"[r]un http request",
-					},
-					{
-						"<leader>rl",
-						"<cmd>Rest run last<cr>",
-						"Re-run latest request",
-					},
-				},
+			local kulala = require("kulala")
+			kulala.setup({
+				default_env = "prod",
+				default_view = "body",
 			})
+			vim.keymap.set("n", "<leader>pr", kulala.run, { desc = "Run HTTP", remap = true })
+			vim.keymap.set("n", "<leader>pv", kulala.toggle_view, { desc = "View HTTP", remap = true })
+			vim.keymap.set("n", "<leader>pe", kulala.set_selected_env, { desc = "Env HTTP", remap = true })
 		end,
 	},
 }
