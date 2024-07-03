@@ -42,6 +42,9 @@
 return {
 	"skela/quicktest.nvim",
 	branch = "feature/dart",
+	-- "quicktest",
+	-- dir = "~/code/quicktest.nvim/",
+	-- dev = { true },
 	config = function()
 		local qt = require("quicktest")
 
