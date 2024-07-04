@@ -6,4 +6,3 @@ split_before_named_assigns = false
 continuation_align_style = VALIGN-RIGHT
 column_limit = 200
 use_tabs = true
-
