@@ -1,11 +1,9 @@
 return {
 	"folke/which-key.nvim",
 	optional = true,
-	opts = {
-		defaults = {
-			["<leader>t"] = { name = "+test" },
-			["<leader>r"] = { name = "+run" },
-			["<leader>cd"] = { name = "+debug" },
-		},
+	keys = {
+		{ "<leader>t", group = "+test" },
+		{ "<leader>r", group = "+run" },
+		{ "<leader>cd", group = "+debug" },
 	},
 }
