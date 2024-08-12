@@ -62,7 +62,13 @@ end
 M.show_code_info = function()
 	-- vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 	-- vim.lsp.buf.hover()
-	require("hover").hover()
+	require("hover").hover({ providers = { "LSP" } })
+end
+
+M.show_code_options = function()
+	-- vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+	-- vim.lsp.buf.hover()
+	require("hover").hover({})
 end
 
 return M
