@@ -12,5 +12,10 @@ dunst &
 # slack &
 # wezterm &
 kitty &
-xfce4-clipman &
+#xfce4-clipman &
+clipse -listen
 1password &
+
+if [ "$(hostname)" == "aurora" ]; then
+	streamdeck -n &
+fi
