@@ -71,7 +71,7 @@ def screenshot_window(qt: Qtile):
 	w, h = win.cmd_get_size()
 	x, y = win.cmd_get_position()
 	region = f"{w}x{h}+{x}+{y}"
-	os.system(f'flameshot full --region "{region}"')
+	os.system(f'flameshot full --region "{region}" --clipboard')
 
 
 keys = [
@@ -123,7 +123,7 @@ keys = [
 	#Key([k.mod], k.tab, lazy.group.next_window(), desc="Switch to next window"),
 	Key([k.mod, k.shift], k.tab, lazy.group.prev_window(), desc="Switch to previous window"),
 	Key([k.mod], "q", lazy.window.kill(), desc="Kill active window"),
-	Key([k.mod], "s", lazy.spawn(f"flameshot gui --accept-on-select"), desc="Take screenshot"),
+	Key([k.mod], "s", lazy.spawn(f"flameshot gui --accept-on-select --clipboard"), desc="Take screenshot"),
 	Key([k.mod, k.control], "s", screenshot_window, desc="Take screenshot (window)"),
 	Key([k.mod, k.shift, k.control], "s", lazy.spawn("flameshot gui"), desc="Take screenshot (interactive)"),
 	Key([], "XF86AudioRaiseVolume", lazy.spawn(commands.vol_up)),
