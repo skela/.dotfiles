@@ -1,4 +1,3 @@
-
 class Commands(object):
 
 	def __init__(self):
@@ -11,7 +10,8 @@ class Commands(object):
 		#launcher = "rofi -show drun -l 10"
 		self.launcher = "/home/skela/.dotfiles/scripts/launcher.sh"
 		self.lock_screen = "sh /home/skela/.dotfiles/scripts/lock.sh"
-		self.browser = "firefox-developer-edition"
+		# self.browser = "firefox-developer-edition"
+		self.browser = "zen-browser"
 		self.toggle_keyboard = "python3 /home/skela/.dotfiles/scripts/toggle_keyboard_layout.py"
 
 		self.vol_cur = "amixer -D pulse get Master"
@@ -23,4 +23,3 @@ class Commands(object):
 		self.player_next = "playerctl next --player=spotify"
 		self.player_play_pause = "playerctl play-pause --player=spotify"
 		self.player_stop = "playerctl stop --player=spotify"
-
