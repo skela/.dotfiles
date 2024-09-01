@@ -13,7 +13,8 @@ dunst &
 # wezterm &
 kitty &
 #xfce4-clipman &
-clipse -listen
+#clipse -listen
+greenclip daemon &
 1password &
 
 if [ "$(hostname)" == "aurora" ]; then

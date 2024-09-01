@@ -1,4 +1,3 @@
-
 # Icons
 class Icons(object):
 
@@ -17,7 +16,7 @@ class Icons(object):
 		self.email = ""
 		self.web = ""
 		self.cam = ""
-			
+
 		self.network = ""
 		self.clock = ""
 		self.volume = ""
@@ -26,12 +25,13 @@ class Icons(object):
 		self.light = ""
 		self.rss = ""
 		self.tasks = ""
-		self.doc = ""		
+		self.doc = ""
 		self.ssh = ""
 		self.virtual = ""
 		self.updates = ""
 		self.house = ""
+		self.clipboard = ""
 
-		self.max =""
+		self.max = ""
 		self.monadtall = ""
 		self.treetab = ""

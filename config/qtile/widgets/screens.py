@@ -88,11 +88,17 @@ primary_widgets.extend([
 ])
 
 primary_widgets.extend([
+	# widget.TextBox(
+	# 	text=icons.clipboard, mouse_callbacks={
+	# 		"Button1": lazy.spawn("kitty --class floating -e fish  -c 'clipse $fish_pid'"),
+	# 		"Button2": lazy.spawn("clipse -clear"),
+	# 		"Button3": lazy.spawn("kitty --class floating -e fish  -c 'clipse $fish_pid'"),
+	# 	}, fontsize=18, **widget_decorations),
 	widget.TextBox(
-		text="", mouse_callbacks={
-			"Button1": lazy.spawn("kitty --class floating -e fish  -c 'clipse $fish_pid'"),
-			"Button2": lazy.spawn("clipse -clear"),
-			"Button3": lazy.spawn("kitty --class floating -e fish  -c 'clipse $fish_pid'"),
+		text=icons.clipboard, mouse_callbacks={
+			"Button1": lazy.spawn("sh /home/skela/.dotfiles/scripts/launcher-clipboard.sh"),
+			"Button2": lazy.spawn("greenclip clear"),
+			"Button3": lazy.spawn("sh /home/skela/.dotfiles/scripts/launcher-clipboard.sh"),
 		}, fontsize=18, **widget_decorations),
 	widget.Systray(padding=8, background=color_primary_bg, **widget_decorations),
 	spacer(),

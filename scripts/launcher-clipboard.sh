@@ -18,7 +18,9 @@ dir="$HOME/.config/rofi/launchers/type-6"
 theme='style-10'
 
 ## Run
-rofi \
-	-modi clipboard:/home/skela/.dotfiles/scripts/cliphist-rofi \
-	-show clipboard \
-	-theme ${dir}/${theme}.rasi
+# rofi \
+# 	-modi clipboard:/home/skela/.dotfiles/scripts/cliphist-rofi \
+# 	-show clipboard \
+# 	-theme ${dir}/${theme}.rasi
+
+rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -theme ${dir}/${theme}.rasi
