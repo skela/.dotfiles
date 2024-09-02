@@ -5,8 +5,8 @@ set -U fish_user_paths $fish_user_paths $HOME/.local/bin/
 set TERM screen-256color
 set EDITOR vim
 set VISUAL vim
-set BROWSER zen-browser
-#set firefox-developer-edition
+# set BROWSER zen-browser
+set BROWSER firefox-developer-edition
 
 # Settings
 set fish_greeting
@@ -247,8 +247,8 @@ end
 
 function gito -d "Open Commit Link in Browser"
     begin
-        # firefox-developer-edition (gitl)
-        zen-browser (gitl)
+        firefox-developer-edition (gitl)
+        # zen-browser (gitl)
     end
 end
 

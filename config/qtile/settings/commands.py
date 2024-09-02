@@ -10,8 +10,8 @@ class Commands(object):
 		#launcher = "rofi -show drun -l 10"
 		self.launcher = "/home/skela/.dotfiles/scripts/launcher.sh"
 		self.lock_screen = "sh /home/skela/.dotfiles/scripts/lock.sh"
-		# self.browser = "firefox-developer-edition"
-		self.browser = "zen-browser"
+		self.browser = "firefox-developer-edition"
+		# self.browser = "zen-browser"
 		self.toggle_keyboard = "python3 /home/skela/.dotfiles/scripts/toggle_keyboard_layout.py"
 
 		self.vol_cur = "amixer -D pulse get Master"
