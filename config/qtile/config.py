@@ -168,10 +168,10 @@ workspaces = [
 							Match(wm_class="cura"),
 							Match(title="Creality Slicer")]),
 	Workspace("email", "6", icon=icons.email, matches=[Match(wm_class="thunderbird")], spawn=["thunderbird"]),
-	Workspace("phones", "7", layout="floating", icon=icons.phones, matches=[Match(title="Android Emulator")]),
+	Workspace("phones", "7", icon=icons.phones, matches=[Match(title="Android Emulator"),Match(wm_class="scrcpy")]),
 	Workspace("games", "8", layout="floating", icon=icons.games, matches=[Match(wm_class="Steam")]),
 	Workspace("music", "9", icon=icons.music),
-	Workspace("web", "0", icon=icons.web, matches=[Match(wm_class="scrcpy"), Match(wm_class="google-chrome"),
+	Workspace("web", "0", icon=icons.web, matches=[Match(wm_class="google-chrome"),
 													Match(wm_class="Google-chrome")]),
 ]
 
