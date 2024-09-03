@@ -94,7 +94,7 @@ keys = [
 	Key([k.control, k.alt], k.down, lazy.screen.next_group()),
 	Key([k.alt, k.control, k.shift], k.left, lazy.next_screen()),
 	Key([k.alt, k.control, k.shift], k.right, lazy.prev_screen()),
-	Key([k.mod], k.period, lazy.next_screen()),
+	Key([k.mod], k.period, lazy.prev_screen()),
 	Key([k.mod], "minus", lazy.layout.shrink(), lazy.layout.decrease_nmaster(), desc='Shrink window (MonadTall), decrease number in master pane (Tile)'),
 	Key([k.mod], "equal", lazy.layout.grow(), lazy.layout.increase_nmaster(), desc='Expand window (MonadTall), increase number in master pane (Tile)'),
 	Key([k.mod], "r", lazy.layout.reset(), desc='normalize window size ratios'),

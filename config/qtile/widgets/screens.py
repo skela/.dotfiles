@@ -122,7 +122,7 @@ primary_widgets.extend([
 	spacer(),
 ])
 
-secondary_widgets = [
+right_widgets = [
 	widget.Spacer(width=bar.STRETCH, background=color_transparent),
 	spacer(),
 	widget.CurrentLayoutIcon(scale=0.6, **widget_decorations),
@@ -130,8 +130,40 @@ secondary_widgets = [
 	spacer(),
 ]
 
+left_widgets = [
+	spacer(),
+	widget.CurrentLayoutIcon(scale=0.6, **widget_decorations),
+	widget.CurrentLayout(**widget_decorations),
+	spacer(),
+	widget.Spacer(width=bar.STRETCH, background=color_transparent),
+]
 
 def get_screens():
+
+	if computer_name() == "dark":
+		return [
+			Screen(top=bar.Bar(
+				primary_widgets,
+				size=30,
+				opacity=1,
+				background=color_transparent,
+				margin=5,
+			)),
+			Screen(top=bar.Bar(
+				left_widgets,
+				size=30,
+				background=color_transparent,
+				opacity=1,
+				margin=5,
+			),),
+			Screen(top=bar.Bar(
+				right_widgets,
+				size=30,
+				opacity=1,
+				background=color_transparent,
+				margin=5,
+			)),
+		]
 	return [
 		Screen(top=bar.Bar(
 			primary_widgets,
@@ -141,7 +173,7 @@ def get_screens():
 			margin=5,
 		),),
 		Screen(top=bar.Bar(
-			secondary_widgets,
+			right_widgets,
 			size=30,
 			opacity=1,
 			background=color_transparent,
