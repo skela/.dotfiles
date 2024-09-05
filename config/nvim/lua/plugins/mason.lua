@@ -48,7 +48,7 @@ return {
 				["html"] = { "biome" },
 				["json"] = { "prettier" },
 				["jsonc"] = { "prettier" },
-				["yaml"] = { "prettier" },
+				-- ["yaml"] = { "prettier" },
 				["markdown"] = { "prettier" },
 				["markdown.mdx"] = { "prettier" },
 				["graphql"] = { "prettier" },
