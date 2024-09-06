@@ -187,7 +187,8 @@ end
 function get_hostname -d "Set current hostname to prompt variable $HOSTNAME_PROMPT if connected via SSH"
     set -g HOSTNAME_PROMPT ""
     if [ "$theme_hide_hostname" = no -o \( "$theme_hide_hostname" != yes -a -n "$SSH_CLIENT" \) ]
-        set -g HOSTNAME_PROMPT (uname -n | string replace ".local" "" | string replace "domain" "")
+        # set -g HOSTNAME_PROMPT (uname -n | string replace ".local" "" | string replace "domain" "")
+        set -g HOSTNAME_PROMPT (uname -n | string replace ".local" "" | string replace "domain" "" | sed 's/-[0-9]\+$//')
     end
 end
 
