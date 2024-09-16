@@ -247,9 +247,36 @@ function gitl -d "Get URL for commit"
     end
 end
 
+function gitln -d "Get URL for GitHub Network"
+    begin
+        set GIT_REMOTE_INFO (git remote get-url --all origin)
+        set GIT_HOST (echo $GIT_REMOTE_INFO | cut -d ':' -f1 | string replace --filter "git@" "" | string trim)
+        set GIT_REPO (echo $GIT_REMOTE_INFO | cut -d ':' -f2 | cut -d ' ' -f1 | string replace --filter ".git" "")
+        set GIT_LINK (printf 'https://%s/%s/network' $GIT_HOST $GIT_REPO)
+        echo $GIT_LINK
+        switch (uname -s)
+            case Linux
+                if test "$XDG_SESSION_TYPE" = wayland
+                    echo $GIT_LINK | wl-copy
+                else
+                    echo $GIT_LINK | xclip -selection clipboard
+                end
+            case Darwin
+                echo $GIT_LINK | pbcopy
+        end
+    end
+end
+
 function gito -d "Open Commit Link in Browser"
     begin
         firefox-developer-edition (gitl)
+        # zen-browser (gitl)
+    end
+end
+
+function gitn -d "Open Github Network in Browser"
+    begin
+        firefox-developer-edition (gitln)
         # zen-browser (gitl)
     end
 end
