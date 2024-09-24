@@ -48,9 +48,9 @@ def spacer():
 
 primary_widgets = []
 
-primary_widgets.extend([
-	spacer(),
-	widget.GroupBox(
+
+def group_box():
+	return widget.GroupBox(
 		margin_x=5,
 		highlight_method="line",
 		highlight_color=["000000", "000000"],
@@ -60,7 +60,12 @@ primary_widgets.extend([
 		font=icons.font,
 		rounded=True,
 		**widget_decorations,
-	),
+	)
+
+
+primary_widgets.extend([
+	spacer(),
+	group_box(),
 ])
 
 primary_widgets.extend([
@@ -85,23 +90,12 @@ primary_widgets.extend([
 	),
 	spacer(),
 	sep(),
-])
-
-primary_widgets.extend([
-	# widget.TextBox(
-	# 	text=icons.clipboard, mouse_callbacks={
-	# 		"Button1": lazy.spawn("kitty --class floating -e fish  -c 'clipse $fish_pid'"),
-	# 		"Button2": lazy.spawn("clipse -clear"),
-	# 		"Button3": lazy.spawn("kitty --class floating -e fish  -c 'clipse $fish_pid'"),
-	# 	}, fontsize=18, **widget_decorations),
 	widget.TextBox(
 		text=icons.clipboard, mouse_callbacks={
 			"Button1": lazy.spawn("sh /home/skela/.dotfiles/scripts/launcher-clipboard.sh"),
 			"Button2": lazy.spawn("greenclip clear"),
 			"Button3": lazy.spawn("sh /home/skela/.dotfiles/scripts/launcher-clipboard.sh"),
 		}, fontsize=18, **widget_decorations),
-	widget.Systray(padding=8, background=color_primary_bg, **widget_decorations),
-	spacer(),
 	sep(),
 ])
 
@@ -109,9 +103,6 @@ if computer_name() == "wind":
 	primary_widgets.extend([widget.TextBox(text=icons.battery, font=icons.font), widget.Battery(format="{percent:2.0%} {hour:d}:{min:02d} {watt:.2f}W"), sep()])
 
 primary_widgets.extend([
-	widget.TextBox(text=icons.volume, font=icons.font, **widget_decorations),
-	widget.Volume(**widget_decorations),
-	sep(),
 	widget.TextBox(text=icons.keyboard, font=icons.font, **widget_decorations),
 	widget.KeyboardLayout(configured_keyboards=["gb", "no"], **widget_decorations),
 	sep(),
@@ -123,8 +114,25 @@ primary_widgets.extend([
 ])
 
 right_widgets = [
+	spacer(),
+	group_box(),
+	spacer(),
 	widget.Spacer(width=bar.STRETCH, background=color_transparent),
 	spacer(),
+	widget.TextBox(text=icons.volume, font=icons.font, **widget_decorations),
+	widget.Volume(**widget_decorations),
+	sep(),
+	widget.TextBox(text=icons.keyboard, font=icons.font, **widget_decorations),
+	widget.KeyboardLayout(configured_keyboards=["gb", "no"], **widget_decorations),
+	sep(),
+	widget.TextBox(
+		text=icons.clipboard, mouse_callbacks={
+			"Button1": lazy.spawn("sh /home/skela/.dotfiles/scripts/launcher-clipboard.sh"),
+			"Button2": lazy.spawn("greenclip clear"),
+			"Button3": lazy.spawn("sh /home/skela/.dotfiles/scripts/launcher-clipboard.sh"),
+		}, fontsize=18, **widget_decorations),
+	widget.Systray(padding=8, background=color_primary_bg, **widget_decorations),
+	sep(),
 	widget.CurrentLayoutIcon(scale=0.6, **widget_decorations),
 	widget.CurrentLayout(**widget_decorations),
 	spacer(),
@@ -137,6 +145,7 @@ left_widgets = [
 	spacer(),
 	widget.Spacer(width=bar.STRETCH, background=color_transparent),
 ]
+
 
 def get_screens():
 
