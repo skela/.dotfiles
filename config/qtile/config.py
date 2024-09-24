@@ -168,11 +168,10 @@ workspaces = [
 							Match(wm_class="cura"),
 							Match(title="Creality Slicer")]),
 	Workspace("email", "6", icon=icons.email, matches=[Match(wm_class="thunderbird")], spawn=["thunderbird"]),
-	Workspace("phones", "7", icon=icons.phones, matches=[Match(title="Android Emulator"),Match(wm_class="scrcpy")]),
+	Workspace("phones", "7", icon=icons.phones, matches=[Match(title="Android Emulator"), Match(wm_class="scrcpy")]),
 	Workspace("games", "8", layout="floating", icon=icons.games, matches=[Match(wm_class="Steam")]),
 	Workspace("music", "9", icon=icons.music),
-	Workspace("web", "0", icon=icons.web, matches=[Match(wm_class="google-chrome"),
-													Match(wm_class="Google-chrome")]),
+	Workspace("web", "0", icon=icons.web, matches=[Match(wm_class="google-chrome"), Match(wm_class="Google-chrome")]),
 ]
 
 groups = list()
@@ -216,7 +215,8 @@ layouts = [
 	layout.MonadTall(**layout_theme),
 	layout.MonadWide(**layout_theme),
 	layout.Floating(**layout_theme),
-	Max(max_margin=full_margin, **layout_theme),
+	layout.Max(**layout_theme),
+	# Max(max_margin=full_margin, **layout_theme),
 	# Try more layouts by unleashing below layouts.
 	# layout.Bsp(),
 	# layout.Stack(num_stacks=2)
