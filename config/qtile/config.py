@@ -55,7 +55,7 @@ def toggle_fullscreen(qt: Qtile):
 
 @lazy.function
 def toggle_maxscreen(qt: Qtile):
-	toggle_fullscreen_and_bar(qt, False)
+	toggle_fullscreen_and_bar(qt, False, layout="max")
 
 
 @lazy.function
