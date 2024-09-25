@@ -215,8 +215,8 @@ layouts = [
 	layout.MonadTall(**layout_theme),
 	layout.MonadWide(**layout_theme),
 	layout.Floating(**layout_theme),
-	layout.Max(**layout_theme),
-	# Max(max_margin=full_margin, **layout_theme),
+	# layout.Max(**layout_theme),
+	Max(max_margin=full_margin, **layout_theme),
 	# Try more layouts by unleashing below layouts.
 	# layout.Bsp(),
 	# layout.Stack(num_stacks=2)
