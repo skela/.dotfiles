@@ -43,6 +43,10 @@ def spacer():
 	return widget.Spacer(length=10, **widget_decorations)
 
 
+def current_layout_icon():
+	return widget.CurrentLayoutIcon(scale=0.6, custom_icon_paths=["/home/skela/.dotfiles/config/qtile/layouts/icons/"], **widget_decorations)
+
+
 # def get_common_options():
 # 	return {"padding": 15}
 
@@ -106,7 +110,7 @@ primary_widgets.extend([
 	widget.TextBox(text=icons.keyboard, font=icons.font, **widget_decorations),
 	widget.KeyboardLayout(configured_keyboards=["gb", "no"], **widget_decorations),
 	sep(),
-	widget.CurrentLayoutIcon(scale=0.6, **widget_decorations),
+	current_layout_icon(),
 	widget.CurrentLayout(**widget_decorations),
 	sep(),
 	widget.Clock(format='%H:%M (%a) %d-%m-%Y', **widget_decorations),
@@ -133,14 +137,14 @@ right_widgets = [
 		}, fontsize=18, **widget_decorations),
 	widget.Systray(padding=8, background=color_primary_bg, **widget_decorations),
 	sep(),
-	widget.CurrentLayoutIcon(scale=0.6, **widget_decorations),
+	current_layout_icon(),
 	widget.CurrentLayout(**widget_decorations),
 	spacer(),
 ]
 
 left_widgets = [
 	spacer(),
-	widget.CurrentLayoutIcon(scale=0.6, **widget_decorations),
+	current_layout_icon(),
 	widget.CurrentLayout(**widget_decorations),
 	spacer(),
 	widget.Spacer(width=bar.STRETCH, background=color_transparent),

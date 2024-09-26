@@ -1,7 +1,7 @@
 from libqtile import layout
 
 
-class Fullscreen(layout.Max):
+class Full(layout.Max):
 
 	def __init__(self, max_margin, **config):
 		layout.Max.__init__(self, **config)

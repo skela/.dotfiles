@@ -10,7 +10,7 @@ from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
 from widgets.screens import get_screens
 
-from layouts.max import Fullscreen
+from layouts.full import Full
 
 from settings.settings import Settings
 from settings.path import qtile_path
@@ -34,7 +34,7 @@ full_margin = 0
 real_layout = {}
 
 
-def toggle_fullscreen_and_bar(qt: Qtile, toggle_bar: bool, layout: str = "fullscreen"):
+def toggle_fullscreen_and_bar(qt: Qtile, toggle_bar: bool, layout: str = "full"):
 	group = qt.current_window.group
 	if group in real_layout:
 		group.layout = real_layout.pop(group)
@@ -215,7 +215,7 @@ layouts = [
 	layout.MonadTall(**layout_theme),
 	layout.MonadWide(**layout_theme),
 	layout.Floating(**layout_theme),
-	Fullscreen(max_margin=full_margin, **layout_theme),
+	Full(max_margin=full_margin, **layout_theme),
 	layout.Max(**layout_theme),
 	# Try more layouts by unleashing below layouts.
 	# layout.Bsp(),
