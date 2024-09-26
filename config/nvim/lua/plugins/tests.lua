@@ -59,6 +59,7 @@ return {
 				-- require("quicktest.adapters.vitest"),
 				-- require("quicktest.adapters.elixir"),
 				-- require("quicktest.adapters.criterion"),
+				require("quicktest.adapters.golang"),
 				require("quicktest.adapters.dart"),
 			},
 		})
