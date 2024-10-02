@@ -49,7 +49,12 @@ return {
 			inlay_hints = { enabled = false },
 			servers = {
 				pyright = {},
-				sourcekit = {},
+				sourcekit = {
+					on_attach = function(client, _)
+						client.server_capabilities.documentFormattingProvider = false
+						client.server_capabilities.documentRangeFormattingProvider = false
+					end,
+				},
 				kotlin_language_server = {},
 				dockerls = {},
 				docker_compose_language_service = {},
