@@ -71,6 +71,22 @@ return {
 				lua_ls = {
 					settings = { Lua = { diagnostics = { globals = { "vim" } } } },
 				},
+				-- tailwindcss = {
+				-- 	-- exclude a filetype from the default_config
+				-- 	filetypes_exclude = { "markdown" },
+				-- 	-- add additional filetypes to the default_config
+				-- 	filetypes_include = {},
+				-- 	-- to fully override the default_config, change the below
+				-- 	-- filetypes = {}
+				-- 	classRegex = {
+				-- 		{ "styles \\=([^;]*);", "'([^']*)'" },
+				-- 		{ "styles \\=([^;]*);", '"([^"]*)"' },
+				-- 		{ "styles \\=([^;]*);", "\\`([^\\`]*)\\`" },
+				-- 		{ "Styles \\=([^;]*);", "'([^']*)'" },
+				-- 		{ "Styles \\=([^;]*);", '"([^"]*)"' },
+				-- 		{ "Styles \\=([^;]*);", "\\`([^\\`]*)\\`" },
+				-- 	},
+				-- },
 			},
 			setup = {
 				rust_analyzer = function(_, opts)
@@ -79,6 +95,26 @@ return {
 					return true
 				end,
 				pyright = function(_, _) require("dap-python").setup() end,
+				-- tailwindcss = function(_, opts)
+				-- 	local tw = require("lspconfig.server_configurations.tailwindcss")
+				-- 	opts.filetypes = opts.filetypes or {}
+				--
+				-- 	opts.settings = tw.default_config.settings
+				--
+				-- 	-- vim.list_extend(opts.settings.tailwindCSS, { experimental = { classRegex = opts.classRegex } })
+				--
+				-- 	opts.settings.tailwindCSS.experimental = { classRegex = opts.classRegex }
+				--
+				-- 	-- Add default filetypes
+				-- 	vim.list_extend(opts.filetypes, tw.default_config.filetypes)
+				--
+				-- 	-- Remove excluded filetypes
+				-- 	--- @param ft string
+				-- 	opts.filetypes = vim.tbl_filter(function(ft) return not vim.tbl_contains(opts.filetypes_exclude or {}, ft) end, opts.filetypes)
+				--
+				-- 	-- Add additional filetypes
+				-- 	vim.list_extend(opts.filetypes, opts.filetypes_include or {})
+				-- end,
 			},
 		},
 	},

@@ -25,8 +25,6 @@ return {
 				"shellcheck",
 				"shfmt",
 				"stylua",
-				"tailwindcss-language-server",
-				"typescript-language-server",
 				"vtsls",
 				"yapf",
 			},
