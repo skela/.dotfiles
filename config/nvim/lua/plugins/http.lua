@@ -8,7 +8,11 @@ return {
 			{ "<leader>rt", "<cmd>lua require('kulala').toggle_view()<cr>", desc = "Toggle headers/body" },
 			{ "<leader>rp", "<cmd>lua require('kulala').jump_prev()<cr>", desc = "Jump to previous request" },
 			{ "<leader>rn", "<cmd>lua require('kulala').jump_next()<cr>", desc = "Jump to next request" },
+			{ "<leader>rc", "<cmd>lua require('kulala').copy()<cr>", desc = "Copy request as curl" },
+			{ "<leader>ri", "<cmd>lua require('kulala').from_curl()<cr>", desc = "Run curl from clipboard" },
 			{ "<leader>ro", "<cmd>lua require('utils.ui').open_last_request()<cr>", desc = "Open last http request (response)" },
+			{ "<leader>rs", "<cmd>lua require('kulala').search()<cr>", desc = "Search current directory" },
+			{ "<leader>rS", "<cmd>lua require('kulala').scratchpad()<cr>", desc = "Open Scratchpad" },
 			{
 				"<leader>re",
 				"<cmd>lua require('kulala').set_selected_env()<cr>",
