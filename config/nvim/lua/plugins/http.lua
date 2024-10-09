@@ -23,23 +23,24 @@ return {
 			default_winbar_panes = { "body", "headers", "headers_body", "script_output" },
 			winbar = true,
 			default_env = "prod",
+			default_view = "headers_body",
 		},
 		config = function(_, opts)
 			require("kulala").setup(opts)
-			require("kulala.api").on("after_request", function(data)
-				local success, parsed_json = pcall(vim.fn.json_decode, data.body)
-
-				local body_to_display
-				if success then
-					body_to_display = require("utils.ui").pretty_print_json(parsed_json)
-				else
-					body_to_display = data.body
-				end
-
-				require("utils.ui").set_last_response(body_to_display)
-
-				require("utils.ui").create_floating_window(body_to_display)
-			end)
+			-- require("kulala.api").on("after_request", function(data)
+			-- 	local success, parsed_json = pcall(vim.fn.json_decode, data.body)
+			--
+			-- 	local body_to_display
+			-- 	if success then
+			-- 		body_to_display = require("utils.ui").pretty_print_json(parsed_json)
+			-- 	else
+			-- 		body_to_display = data.body
+			-- 	end
+			--
+			-- 	require("utils.ui").set_last_response(body_to_display)
+			--
+			-- 	require("utils.ui").create_floating_window(body_to_display)
+			-- end)
 		end,
 	},
 }
