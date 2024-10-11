@@ -62,6 +62,7 @@ return {
 				require("quicktest.adapters.golang"),
 				require("quicktest.adapters.dart"),
 			},
+			default_win_mode = "popup",
 		})
 	end,
 	dependencies = {
