@@ -11,6 +11,9 @@ from libqtile.lazy import lazy
 from widgets.screens import get_screens
 
 from layouts.full import Full
+from layouts.tall import Tall
+from layouts.wide import Wide
+from layouts.float import Float
 
 from settings.settings import Settings
 from settings.path import qtile_path
@@ -60,7 +63,7 @@ def toggle_maxscreen(qt: Qtile):
 
 @lazy.function
 def toggle_monadwide(qt: Qtile):
-	toggle_fullscreen_and_bar(qt, False, layout="monadwide")
+	toggle_fullscreen_and_bar(qt, False, layout="wide")
 
 
 @lazy.function
@@ -95,8 +98,8 @@ keys = [
 	Key([k.alt, k.control, k.shift], k.left, lazy.next_screen()),
 	Key([k.alt, k.control, k.shift], k.right, lazy.prev_screen()),
 	Key([k.mod], k.period, lazy.prev_screen()),
-	Key([k.mod], "minus", lazy.layout.shrink(), lazy.layout.decrease_nmaster(), desc='Shrink window (MonadTall), decrease number in master pane (Tile)'),
-	Key([k.mod], "equal", lazy.layout.grow(), lazy.layout.increase_nmaster(), desc='Expand window (MonadTall), increase number in master pane (Tile)'),
+	Key([k.mod], "minus", lazy.layout.shrink(), lazy.layout.decrease_nmaster(), desc='Shrink window (Tall), decrease number in master pane (Tile)'),
+	Key([k.mod], "equal", lazy.layout.grow(), lazy.layout.increase_nmaster(), desc='Expand window (Tall), increase number in master pane (Tile)'),
 	Key([k.mod], "r", lazy.layout.reset(), desc='normalize window size ratios'),
 	Key([k.mod], "b", lazy.hide_show_bar("top"), desc='toggle the display of the bar'),
 
@@ -108,7 +111,7 @@ keys = [
 	Key([k.mod], k.enter, lazy.spawn(commands.terminal), desc="Launch terminal"),
 	Key([k.mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
 	Key([k.mod], "f", toggle_fullscreen, desc="Toggle fullscreen"),
-	Key([k.mod], "j", toggle_monadwide, desc="Toggle monadwide"),
+	Key([k.mod], "j", toggle_monadwide, desc="Toggle wide"),
 	# Key([k.mod], k.space, lazy.spawn(launcher), desc="Launch launcher"),
 	Key([k.mod], "d", lazy.spawn(commands.launcher), desc="Launch launcher"),
 	Key([k.mod], k.space, lazy.spawn(commands.toggle_keyboard), desc="Toggle keyboard"),
@@ -161,12 +164,13 @@ workspaces = [
 	Workspace("dev", "2", icon=icons.dev, matches=[Match(wm_class="code"), Match(wm_class="jetbrains-studio")]),
 	Workspace("misc", "3", icon=icons.misc, matches=[Match(wm_class="Pamac-manager")]),
 	Workspace("chat", "4", icon=icons.chat, matches=[Match(wm_class="Slack")], spawn=["slack", commands.discord]),
-	Workspace("gfx", "5", layout="floating", icon=icons.gfx,
-				matches=[Match(wm_class="Inkscape"),
-							Match(title="GNU Image Manipulation Program"),
-							Match(wm_class="Blender"),
-							Match(wm_class="cura"),
-							Match(title="Creality Slicer")]),
+	Workspace(
+		"gfx",
+		"5",
+		layout="floating",
+		icon=icons.gfx,
+		matches=[Match(wm_class="Inkscape"), Match(title="GNU Image Manipulation Program"), Match(wm_class="Blender"), Match(wm_class="cura"), Match(title="Creality Slicer")]
+	),
 	Workspace("email", "6", icon=icons.email, matches=[Match(wm_class="thunderbird")], spawn=["thunderbird"]),
 	Workspace("phones", "7", icon=icons.phones, matches=[Match(title="Android Emulator"), Match(wm_class="scrcpy")]),
 	Workspace("games", "8", layout="floating", icon=icons.games, matches=[Match(wm_class="Steam")]),
@@ -195,26 +199,28 @@ for ws in workspaces:
 	groups.append(i)
 	if ws.shortcut is None:
 		continue
-	keys.extend([
+	keys.extend(
+		[
 	# mod1 + letter of group = switch to group
-		Key([mod], ws.shortcut, lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name)),
+			Key([mod], ws.shortcut, lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name)),
 
 	# mod1 + shift + letter of group = switch to & move focused window to group
-		Key([mod, shift], ws.shortcut, lazy.window.togroup(i.name, switch_group=False), desc="Switch to & move focused window to group {}".format(i.name)),
+			Key([mod, shift], ws.shortcut, lazy.window.togroup(i.name, switch_group=False), desc="Switch to & move focused window to group {}".format(i.name)),
 	# Or, use below if you prefer not to switch to that group.
 	# # mod1 + shift + letter of group = move focused window to group
 	# Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
 	#     desc="move focused window to group {}".format(i.name)),
-	])
+		]
+	)
 
 keys.append(Key([mod], "C", lazy.screen.toggle_group("chat"), desc="Switch to Chat"))
 
 layout_theme = {"border_width": 1, "margin": margin, "single_margin": single_margin, "single_border_width": 0, "border_focus": "C3242B", "border_normal": "1D2330"}
 
 layouts = [
-	layout.MonadTall(**layout_theme),
-	layout.MonadWide(**layout_theme),
-	layout.Floating(**layout_theme),
+	Tall(**layout_theme),
+	Wide(**layout_theme),
+	Float(**layout_theme),
 	Full(max_margin=full_margin, **layout_theme),
 	layout.Max(**layout_theme),
 	# Try more layouts by unleashing below layouts.
@@ -252,16 +258,17 @@ main = None    # WARNING: this is deprecated and will be removed soon
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating(float_rules=[
+floating_layout = layout.Floating(
+	float_rules=[
 	# Run the utility of `xprop` toid see the wm class and name of an X client.
-	*layout.Floating.default_float_rules,
-	Match(title="Qalculate!"),
-	Match(wm_class="kdenlive"),
-	Match(wm_class="Conky"),
-	Match(wm_class="albert"),
-	Match(wm_class="floating"),
-	#	Match(title="Android Emulator"),
-])
+		*layout.Floating.default_float_rules,
+		Match(title="Qalculate!"),
+		Match(wm_class="kdenlive"),
+		Match(wm_class="Conky"),
+		Match(wm_class="albert"),
+		Match(wm_class="floating"),    #	Match(title="Android Emulator"),
+	]
+)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 auto_minimize = False
