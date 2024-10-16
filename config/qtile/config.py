@@ -13,7 +13,8 @@ from widgets.screens import get_screens
 from layouts.full import Full
 from layouts.tall import Tall
 from layouts.wide import Wide
-from layouts.float import Float
+from layouts.flow import Flow
+from layouts.maxi import Maxi
 
 from settings.settings import Settings
 from settings.path import qtile_path
@@ -58,7 +59,7 @@ def toggle_fullscreen(qt: Qtile):
 
 @lazy.function
 def toggle_maxscreen(qt: Qtile):
-	toggle_fullscreen_and_bar(qt, False, layout="max")
+	toggle_fullscreen_and_bar(qt, False, layout="maxi")
 
 
 @lazy.function
@@ -220,9 +221,9 @@ layout_theme = {"border_width": 1, "margin": margin, "single_margin": single_mar
 layouts = [
 	Tall(**layout_theme),
 	Wide(**layout_theme),
-	Float(**layout_theme),
+	Flow(**layout_theme),
 	Full(max_margin=full_margin, **layout_theme),
-	layout.Max(**layout_theme),
+	Maxi(**layout_theme),
 	# Try more layouts by unleashing below layouts.
 	# layout.Bsp(),
 	# layout.Stack(num_stacks=2)
