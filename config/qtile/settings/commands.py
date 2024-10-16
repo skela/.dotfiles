@@ -2,8 +2,7 @@ class Commands(object):
 
 	def __init__(self):
 		self.terminal = "kitty"
-		self.files = "thunar"
-		# files = "nautilus -w"
+		self.files = "nautilus -w"
 		self.discord = "/home/skela/files/apps/discord/Discord"
 		#launcher = "ulauncher --no-window-shadow"
 		#launcher = "albert toggle"
