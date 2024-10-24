@@ -2,9 +2,12 @@
 sh /home/skela/.screenlayout/layout.sh
 variety &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
 #picom --experimental-backends &
 # picom &
 picom -b --config ~/.config/picom/picom-corners.conf &
+# picom -b --no-ewmh-fullscreen --config ~/.config/picom/picom-corners.conf &
+
 nitrogen --restore &
 thunar --daemon &
 dunst &
