@@ -7,6 +7,7 @@ from libqtile.lazy import lazy
 
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration
+# from qtile_extras.widget.githubnotifications import GithubNotifications
 from settings.settings import Settings
 
 settings = Settings()
@@ -19,8 +20,7 @@ color_primary_fg = "#dfdfdf"
 color_transparent = "#00000000"
 
 widget_decorations = {
-	"foreground": color_primary_fg,
-	"decorations": [RectDecoration(
+	"foreground": color_primary_fg, "decorations": [RectDecoration(
 		colour=color_primary_bg,
 		radius=10,
 		filled=True,
@@ -72,50 +72,65 @@ primary_widgets.extend([
 	group_box(),
 ])
 
-primary_widgets.extend([
-	widget.GlobalMenu(
-		padding=10,
-		menu_background="#000000",
-		highlight_colour="#ff0000",
-		**widget_decorations,
-	),
-	spacer(),
-	widget.Spacer(width=bar.STRETCH, background=color_transparent),
-])
+primary_widgets.extend(
+	[
+		widget.GlobalMenu(
+			padding=10,
+			menu_background="#000000",
+			highlight_colour="#ff0000",
+			**widget_decorations,
+		),
+		spacer(),
+		widget.Spacer(width=bar.STRETCH, background=color_transparent),
+	]
+)
 
-primary_widgets.extend([
-	spacer(),
-	widget.CheckUpdates(
-		update_interval=1800,
-		distro="Arch_checkupdates",
-		display_format="{updates} Updates",
-		mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(commands.terminal + " -e sudo pacman -Syu")},
-		**widget_decorations,
-	),
-	spacer(),
-	sep(),
-	widget.TextBox(
-		text=icons.clipboard, mouse_callbacks={
-			"Button1": lazy.spawn("sh /home/skela/.dotfiles/scripts/launcher-clipboard.sh"),
-			"Button2": lazy.spawn("greenclip clear"),
-			"Button3": lazy.spawn("sh /home/skela/.dotfiles/scripts/launcher-clipboard.sh"),
-		}, fontsize=18, **widget_decorations),
-	sep(),
-])
+primary_widgets.extend(
+	[
+		spacer(),
+	# GithubNotifications(**widget_decorations),
+	# spacer(),
+	# sep(),
+		widget.CheckUpdates(
+			update_interval=1800,
+			distro="Arch_checkupdates",
+			display_format="{updates} Updates",
+			mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(commands.terminal + " -e sudo pacman -Syu")},
+			**widget_decorations,
+		),
+		spacer(),
+		sep(),
+		widget.StatusNotifier(**widget_decorations),
+		sep(),
+		widget.TextBox(
+			text=icons.clipboard,
+			mouse_callbacks={
+				"Button1": lazy.spawn("sh /home/skela/.dotfiles/scripts/launcher-clipboard.sh"),
+				"Button2": lazy.spawn("greenclip clear"),
+				"Button3": lazy.spawn("sh /home/skela/.dotfiles/scripts/launcher-clipboard.sh"),
+			},
+			fontsize=18,
+			**widget_decorations
+		),
+		sep(),
+	]
+)
 
 if computer_name() == "wind":
 	primary_widgets.extend([widget.TextBox(text=icons.battery, font=icons.font), widget.Battery(format="{percent:2.0%} {hour:d}:{min:02d} {watt:.2f}W"), sep()])
 
-primary_widgets.extend([
-	widget.TextBox(text=icons.keyboard, font=icons.font, **widget_decorations),
-	widget.KeyboardLayout(configured_keyboards=["gb", "no"], **widget_decorations),
-	sep(),
-	current_layout_icon(),
-	widget.CurrentLayout(**widget_decorations),
-	sep(),
-	widget.Clock(format='%H:%M (%a) %d-%m-%Y', **widget_decorations),
-	spacer(),
-])
+primary_widgets.extend(
+	[
+		widget.TextBox(text=icons.keyboard, font=icons.font, **widget_decorations),
+		widget.KeyboardLayout(configured_keyboards=["gb", "no"], **widget_decorations),
+		sep(),
+		current_layout_icon(),
+		widget.CurrentLayout(**widget_decorations),
+		sep(),
+		widget.Clock(format='%H:%M (%a) %d-%m-%Y', **widget_decorations),
+		spacer(),
+	]
+)
 
 right_widgets = [
 	spacer(),
@@ -130,11 +145,15 @@ right_widgets = [
 	widget.KeyboardLayout(configured_keyboards=["gb", "no"], **widget_decorations),
 	sep(),
 	widget.TextBox(
-		text=icons.clipboard, mouse_callbacks={
+		text=icons.clipboard,
+		mouse_callbacks={
 			"Button1": lazy.spawn("sh /home/skela/.dotfiles/scripts/launcher-clipboard.sh"),
 			"Button2": lazy.spawn("greenclip clear"),
 			"Button3": lazy.spawn("sh /home/skela/.dotfiles/scripts/launcher-clipboard.sh"),
-		}, fontsize=18, **widget_decorations),
+		},
+		fontsize=18,
+		**widget_decorations
+	),
 	widget.Systray(padding=8, background=color_primary_bg, **widget_decorations),
 	sep(),
 	current_layout_icon(),
@@ -162,13 +181,15 @@ def get_screens():
 				background=color_transparent,
 				margin=5,
 			)),
-			Screen(top=bar.Bar(
-				left_widgets,
-				size=30,
-				background=color_transparent,
-				opacity=1,
-				margin=5,
-			),),
+			Screen(
+				top=bar.Bar(
+					left_widgets,
+					size=30,
+					background=color_transparent,
+					opacity=1,
+					margin=5,
+				),
+			),
 			Screen(top=bar.Bar(
 				right_widgets,
 				size=30,
@@ -178,13 +199,15 @@ def get_screens():
 			)),
 		]
 	return [
-		Screen(top=bar.Bar(
-			primary_widgets,
-			size=30,
-			background=color_transparent,
-			opacity=1,
-			margin=5,
-		),),
+		Screen(
+			top=bar.Bar(
+				primary_widgets,
+				size=30,
+				background=color_transparent,
+				opacity=1,
+				margin=5,
+			),
+		),
 		Screen(top=bar.Bar(
 			right_widgets,
 			size=30,
