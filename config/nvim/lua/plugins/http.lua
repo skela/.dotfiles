@@ -24,6 +24,7 @@ return {
 			winbar = true,
 			default_env = "prod",
 			default_view = "headers_body",
+			display_mode = "float",
 		},
 		config = function(_, opts)
 			require("kulala").setup(opts)
