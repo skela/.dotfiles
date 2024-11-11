@@ -140,8 +140,13 @@ function prompt_finish -d "Close open segments"
         set_color normal
     end
     set -g current_bg NONE
+    echo "
+> "
 end
 
+# function postexec_test --on-event fish_postexec
+#     echo
+# end
 
 # ===========================
 # Theme components
