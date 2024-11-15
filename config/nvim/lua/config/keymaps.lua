@@ -38,18 +38,6 @@ keymaps.flutter = function(_, _) -- client,buffer
 	map_normal("<leader>cVt", cmd(":ToggleTerm"), { desc = "Viewdroid terminal", remap = true })
 end
 
-map({ "i", "s" }, "<Tab>", function()
-	require("cmp").mapping(function(fallback)
-		if require("cmp").visible() then
-			require("cmp").select_next_item()
-		elseif require("luasnip").expand_or_jumpable() then
-			require("luasnip").expand_or_jump()
-		else
-			fallback()
-		end
-	end)
-end)
-
 -- Coding
 map({ "n", "v" }, "<C-K>", "gcc<esc>", { desc = "Comment selected line(s)", remap = true })
 map_visual("<leader>.", "gc", { desc = "Comment selected text", remap = true })
