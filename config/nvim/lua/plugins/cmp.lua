@@ -24,18 +24,18 @@ return {
 			}
 			table.insert(opts.sources, { name = "luasnip" })
 		end,
-		keys = {
-			-- ["<tab>"] = function(callback) callback() end,
-			["<tab>"] = function(fallback)
-				if require("cmp").visible() then
-					require("cmp").select_next_item()
-				elseif require("luasnip").expand_or_jumpable() then
-					require("luasnip").expand_or_jump()
-				else
-					fallback()
-				end
-			end,
-		},
+		-- keys = {
+		-- ["<tab>"] = function(callback) callback() end,
+		-- ["<tab>"] = function(fallback)
+		-- 	if require("cmp").visible() then
+		-- 		require("cmp").select_next_item()
+		-- 	elseif require("luasnip").expand_or_jumpable() then
+		-- 		require("luasnip").expand_or_jump()
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end,
+		-- },
 	},
 	{
 		"L3MON4D3/LuaSnip",

@@ -33,7 +33,7 @@ return {
 			},
 			indent = {
 				enable = true,
-				disable = { "python", "dart", "swift", "rust" },
+				disable = { "dart", "swift", "rust" },
 			},
 		},
 		config = function(_, opts)
