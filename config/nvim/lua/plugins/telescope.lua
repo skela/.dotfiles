@@ -4,11 +4,13 @@ return {
 		dependencies = {
 			"nvim-telescope/telescope-fzf-native.nvim",
 			"nvim-telescope/telescope-dap.nvim",
+			-- "nvim-telescope/telescope-media-files.nvim",
 			build = "make",
 			config = function()
 				require("telescope").load_extension("fzf")
 				require("telescope").load_extension("dap")
 				require("telescope").load_extension("rest")
+				-- require("telescope").load_extension("media_files")
 			end,
 		},
 		opts = {
