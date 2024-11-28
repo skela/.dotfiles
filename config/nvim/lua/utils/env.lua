@@ -26,4 +26,13 @@ M.load_variable = function(path, key)
 	return variable
 end
 
+M.get_hostname = function()
+	local f = io.popen("/bin/hostname")
+	if f == nil then return "" end
+	local hostname = f:read("*a") or ""
+	f:close()
+	hostname = string.gsub(hostname, "\n$", "")
+	return hostname
+end
+
 return M
