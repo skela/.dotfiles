@@ -43,6 +43,49 @@ return {
 			-- 	print("event progress update", vim.inspect(body.message), vim.inspect(body.message))
 			-- end
 			-- dap.listeners.before["event_terminated"]["skela"] = function(session, body) print("Session terminated", vim.inspect(session), vim.inspect(body)) end
+
+			dap.adapters.lldb = {
+				type = "executable",
+				command = "/usr/bin/lldb",
+				name = "lldb",
+			}
+			dap.adapters.codelldb = {
+				type = "server",
+				port = "${port}",
+				executable = {
+					command = "codelldb",
+					args = { "--port", "${port}" },
+				},
+			}
+			dap.configurations.swift = {
+				{
+					name = "Launch",
+					type = "codelldb",
+					request = "launch",
+					program = function()
+						vim.fn.system("swift build")
+						return "${workspaceFolder}/.build/debug/" .. vim.fn.substitute(vim.fn.getcwd(), "^.*/", "", "")
+					end,
+					cwd = "${workspaceFolder}",
+					-- liblldb = libLLDB,
+					stopOnEntry = false,
+					args = {},
+				},
+			}
+			dap.configurations.zig = {
+				{
+					name = "Launch",
+					type = "codelldb",
+					request = "launch",
+					program = function()
+						vim.fn.system("zig build")
+						return "${workspaceFolder}/zig-out/bin/${workspaceFolderBasename}"
+					end,
+					cwd = "${workspaceFolder}",
+					stopOnEntry = false,
+					args = {},
+				},
+			}
 		end,
 	},
 	{

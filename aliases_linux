@@ -30,6 +30,7 @@ export ANDROID_HOME=$ANDROID_SDK_ROOT
 export FLUTTER_HOME="/home/skela/files/sdks/flutter"
 
 export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
+export LLDB_USE_NATIVE_PDB_READER="yes"
 
 export PATH="/home/skela/.gem/ruby/2.7.0/bin:$PATH"
 export PATH="/home/skela/.cargo/bin:$PATH"

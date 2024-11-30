@@ -30,6 +30,7 @@ return {
 				"graphql",
 				"pkl",
 				"http",
+				"zig",
 			},
 			indent = {
 				enable = true,

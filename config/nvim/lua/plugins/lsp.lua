@@ -71,6 +71,7 @@ return {
 				lua_ls = {
 					settings = { Lua = { diagnostics = { globals = { "vim" } } } },
 				},
+				zls = {},
 			},
 			setup = {
 				rust_analyzer = function(_, opts)
