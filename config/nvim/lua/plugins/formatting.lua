@@ -36,14 +36,14 @@ return {
 			swift_format_ext = {
 				command = "swiftformat",
 				args = { "$FILENAME" },
-				range_args = function(self, ctx)
+				range_args = function(_, ctx)
 					return {
 						"--linerange",
 						ctx.range.start[1] .. "," .. ctx.range["end"][1],
 					}
 				end,
 				stdin = false,
-				condition = function(self, ctx) return vim.fs.basename(ctx.filename) ~= "README.md" end,
+				condition = function(_, ctx) return vim.fs.basename(ctx.filename) ~= "README.md" end,
 			},
 		},
 	},
@@ -51,6 +51,10 @@ return {
 		"Wansmer/treesj",
 		keys = { "<space>m" },
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = function() require("treesj").setup({}) end,
+		config = function()
+			require("treesj").setup({
+				max_join_length = 500,
+			})
+		end,
 	},
 }
