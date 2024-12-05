@@ -1,50 +1,50 @@
 return {
-	"stevearc/conform.nvim",
-	commit = "a203480a350b03092e473bf3001733d547160a73",
-	priority = 1000,
-	opts = {
-		formatters_by_ft = {
-			["javascript"] = { "biome" },
-			["javascriptreact"] = { "biome" },
-			["typescript"] = { "biome" },
-			["typescriptreact"] = { "biome" },
-			["vue"] = { "biome" },
-			["css"] = { "biome" },
-			["scss"] = { "biome" },
-			["less"] = { "prettier" },
-			["html"] = { "biome" },
-			["json"] = { "prettier" },
-			["jsonc"] = { "prettier" },
-			-- ["yaml"] = { "prettier" },
-			["markdown"] = { "prettier" },
-			["markdown.mdx"] = { "prettier" },
-			["graphql"] = { "prettier" },
-			["handlebars"] = { "prettier" },
-			["dart"] = { "blink" },
-			["python"] = { "yapf" },
-			-- ["swift"] = { "swift_format_ext" },
-		},
-		pattern = {
-			[".env.*"] = "dotenv",
-		},
-		formatters = {
-			blink = {
-				command = "/home/skela/code/blink/target/release/blink",
-				args = { "$FILENAME" },
-				stdin = false,
-				cwd = require("conform.util").root_file({ ".editorconfig", "pubspec.yaml" }),
+	{
+		"stevearc/conform.nvim",
+		opts = {
+			formatters_by_ft = {
+				["javascript"] = { "biome" },
+				["javascriptreact"] = { "biome" },
+				["typescript"] = { "biome" },
+				["typescriptreact"] = { "biome" },
+				["vue"] = { "biome" },
+				["css"] = { "biome" },
+				["scss"] = { "biome" },
+				["less"] = { "prettier" },
+				["html"] = { "biome" },
+				["json"] = { "prettier" },
+				["jsonc"] = { "prettier" },
+				-- ["yaml"] = { "prettier" },
+				["markdown"] = { "prettier" },
+				["markdown.mdx"] = { "prettier" },
+				["graphql"] = { "prettier" },
+				["handlebars"] = { "prettier" },
+				["dart"] = { "blink" },
+				["python"] = { "yapf" },
+				-- ["swift"] = { "swift_format_ext" },
 			},
-			swift_format_ext = {
-				command = "swiftformat",
-				args = { "$FILENAME" },
-				range_args = function(_, ctx)
-					return {
-						"--linerange",
-						ctx.range.start[1] .. "," .. ctx.range["end"][1],
-					}
-				end,
-				stdin = false,
-				condition = function(_, ctx) return vim.fs.basename(ctx.filename) ~= "README.md" end,
+			pattern = {
+				[".env.*"] = "dotenv",
+			},
+			formatters = {
+				blink = {
+					command = "/home/skela/code/blink/target/release/blink",
+					args = { "$FILENAME" },
+					stdin = false,
+					cwd = require("conform.util").root_file({ ".editorconfig", "pubspec.yaml" }),
+				},
+				swift_format_ext = {
+					command = "swiftformat",
+					args = { "$FILENAME" },
+					range_args = function(_, ctx)
+						return {
+							"--linerange",
+							ctx.range.start[1] .. "," .. ctx.range["end"][1],
+						}
+					end,
+					stdin = false,
+					condition = function(_, ctx) return vim.fs.basename(ctx.filename) ~= "README.md" end,
+				},
 			},
 		},
 	},
