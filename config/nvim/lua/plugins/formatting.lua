@@ -1,6 +1,7 @@
 return {
 	"stevearc/conform.nvim",
-	optional = true,
+	commit = "a203480a350b03092e473bf3001733d547160a73",
+	priority = 1000,
 	opts = {
 		formatters_by_ft = {
 			["javascript"] = { "biome" },
