@@ -10,6 +10,8 @@ vim.o.tabstop = 2
 vim.o.autoindent = true
 -- vim.g.editorconfig = true
 
+vim.g.snacks_animate = false
+
 vim.filetype.add({
 	extension = {
 		conf = "conf",
