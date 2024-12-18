@@ -1,41 +1,42 @@
-local luasnip_fix_augroup = vim.api.nvim_create_augroup("MyLuaSnipHistory", { clear = true })
-vim.api.nvim_create_autocmd("ModeChanged", {
-	pattern = "*",
-	callback = function()
-		if
-			((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
-			and require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-			and not require("luasnip").session.jump_active
-		then
-			require("luasnip").unlink_current()
-		end
-	end,
-	group = luasnip_fix_augroup,
-})
-
 return {
 	{
-		"nvim-cmp",
-		optional = true,
-		dependencies = { "saadparwaiz1/cmp_luasnip" },
-		opts = function(_, opts)
-			opts.snippet = {
-				expand = function(args) require("luasnip").lsp_expand(args.body) end,
-			}
-			table.insert(opts.sources, { name = "luasnip" })
-		end,
-		-- keys = {
-		-- ["<tab>"] = function(callback) callback() end,
-		-- ["<tab>"] = function(fallback)
-		-- 	if require("cmp").visible() then
-		-- 		require("cmp").select_next_item()
-		-- 	elseif require("luasnip").expand_or_jumpable() then
-		-- 		require("luasnip").expand_or_jump()
-		-- 	else
-		-- 		fallback()
-		-- 	end
-		-- end,
-		-- },
+		-- https://github.com/saghen/blink.cmp?tab=readme-ov-file#configuration
+		"saghen/blink.cmp",
+		dependencies = "rafamadriz/friendly-snippets",
+		-- event = "InsertEnter",
+		opts = {
+			keymap = {
+				preset = "default",
+				-- ["<Right>"] = { "select_and_accept", "fallback" },
+				["<Right>"] = { "accept", "fallback" },
+
+				-- preset = "default",
+				-- ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+				-- ["<C-e>"] = { "hide", "fallback" },
+				-- ["<CR>"] = {},
+				-- ["<C-y>"] = { "select_and_accept", "fallback" },
+				-- ["<Right>"] = { "select_and_accept", "fallback" },
+				--
+				-- ["<Tab>"] = { "snippet_forward", "fallback" },
+				-- ["<S-Tab>"] = { "snippet_backward", "fallback" },
+				--
+				-- ["<Up>"] = { "select_prev", "fallback" },
+				-- ["<Down>"] = { "select_next", "fallback" },
+				-- ["<C-p>"] = { "select_prev", "fallback" },
+				-- ["<C-n>"] = { "select_next", "fallback" },
+				--
+				-- ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+				-- ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+			},
+			list = {
+				selection = "manual",
+			},
+			sources = {
+				default = { "lsp", "path", "snippets", "buffer" },
+				-- optionally disable cmdline completions
+				-- cmdline = {},
+			},
+		},
 	},
 	{
 		"L3MON4D3/LuaSnip",
