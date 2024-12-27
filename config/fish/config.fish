@@ -16,10 +16,12 @@ set -g theme_hg_prompt_enabled no
 set -g theme_svn_prompt_enabled no
 set -g fish_prompt_pwd_dir_length 0
 
+fish_config theme choose tokyonight
+
 # Colors
-set -g color_dir_bg red
-set -g color_dir_str white
-set -g color_user_str white
+# set -g color_dir_bg f7768e
+# set -g color_dir_str ffffff
+set -g color_user_str ffffff
 
 set -g current_bg NONE
 set segment_separator \uE0B0
