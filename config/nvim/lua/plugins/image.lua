@@ -1,5 +1,6 @@
 return {
 	"3rd/image.nvim",
+	event = "VeryLazy",
 	dependencies = { "luarocks.nvim" },
 	config = function(_, opts)
 		opts.integrations = {
