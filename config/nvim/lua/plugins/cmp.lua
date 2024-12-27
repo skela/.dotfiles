@@ -2,6 +2,7 @@ return {
 	{
 		-- https://github.com/saghen/blink.cmp?tab=readme-ov-file#configuration
 		"saghen/blink.cmp",
+		version = "v0.7.6",
 		dependencies = "rafamadriz/friendly-snippets",
 		-- event = "InsertEnter",
 		opts = {
