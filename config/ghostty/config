@@ -15,3 +15,6 @@ keybind = cmd+eight=text:\x1b8
 keybind = cmd+nine=text:\x1b9
 keybind = cmd+zero=text:\x1b0
 
+keybind = cmd+left=text:\x1b[1;3D
+keybind = cmd+right=text:\x1b[1;3C
+
