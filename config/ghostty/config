@@ -1,6 +1,7 @@
 background-opacity = 0.93 
 background = 000000
 font-family = "JetBrains Mono"
+window-decoration = false
 
 theme = tokyonight
 
