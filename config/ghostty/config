@@ -1,9 +1,14 @@
 background-opacity = 0.93 
 background = 000000
+
 font-family = "JetBrains Mono"
+font-size = 14
+
 window-decoration = false
 
 theme = tokyonight
+
+confirm-close-surface = false
 
 keybind = cmd+one=text:\x1b1
 keybind = cmd+two=text:\x1b2
