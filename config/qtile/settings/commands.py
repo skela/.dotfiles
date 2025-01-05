@@ -1,7 +1,7 @@
 class Commands(object):
 
 	def __init__(self):
-		self.terminal = "kitty"
+		self.terminal = "ghostty"
 		# self.files = "nautilus -w"
 		self.files = "thunar"
 		self.discord = "/home/skela/files/apps/discord/Discord"

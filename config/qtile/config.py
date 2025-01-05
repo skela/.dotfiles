@@ -2,12 +2,13 @@ import asyncio
 import os
 import subprocess
 from os import path
-from typing import List    # noqa: F401
+from typing import List, Optional    # noqa: F401
 
 from libqtile import hook, layout
 from libqtile.config import Click, Drag, Group, Key, Match
 from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
+from libqtile.group import _Group
 from widgets.screens import get_screens
 
 from layouts.full import Full
@@ -35,7 +36,7 @@ control = k.control
 margin = 6
 single_margin = 6
 full_margin = 0
-real_layout = {}
+real_layout: dict[Optional[_Group], str] = {}
 
 
 def toggle_fullscreen_and_bar(qt: Qtile, toggle_bar: bool, layout: str = "full"):

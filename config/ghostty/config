@@ -5,10 +5,24 @@ font-family = "JetBrains Mono"
 font-size = 14
 
 window-decoration = false
+window-padding-y = 8,0
 
 theme = tokyonight
 
 confirm-close-surface = false
+
+keybind = alt+one=text:\x1b1
+keybind = alt+two=text:\x1b2
+keybind = alt+three=text:\x1b3
+keybind = alt+four=text:\x1b4
+keybind = alt+five=text:\x1b5
+keybind = alt+six=text:\x1b6
+keybind = alt+seven=text:\x1b7
+keybind = alt+eight=text:\x1b8
+keybind = alt+nine=text:\x1b9
+keybind = alt+zero=text:\x1b0
+keybind = alt+left=text:\x1b[1;3D
+keybind = alt+right=text:\x1b[1;3C
 
 keybind = cmd+one=text:\x1b1
 keybind = cmd+two=text:\x1b2
@@ -20,7 +34,6 @@ keybind = cmd+seven=text:\x1b7
 keybind = cmd+eight=text:\x1b8
 keybind = cmd+nine=text:\x1b9
 keybind = cmd+zero=text:\x1b0
-
 keybind = cmd+left=text:\x1b[1;3D
 keybind = cmd+right=text:\x1b[1;3C
 

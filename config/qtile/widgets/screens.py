@@ -1,7 +1,6 @@
 import socket
 
 from libqtile import bar
-from libqtile import qtile
 from libqtile.config import Screen
 from libqtile.lazy import lazy
 
@@ -95,7 +94,7 @@ primary_widgets.extend(
 			update_interval=1800,
 			distro="Arch_checkupdates",
 			display_format="{updates} Updates",
-			mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(commands.terminal + " -e sudo pacman -Syu")},
+			mouse_callbacks={"Button1": lambda: lazy.spawn(commands.terminal + " -e sudo pacman -Syu")},
 			**widget_decorations,
 		),
 		spacer(),
