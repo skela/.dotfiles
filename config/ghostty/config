@@ -11,6 +11,15 @@ theme = tokyonight
 
 confirm-close-surface = false
 
+keybind = ctrl+shift+f=text:\x07
+
+#map ctrl+1 launch sh -c "tmux switch-client -t 1"
+#map ctrl+2 launch sh -c "tmux switch-client -t 2"
+#map ctrl+3 launch sh -c "tmux switch-client -t 3"
+#map ctrl+4 launch sh -c "tmux switch-client -t 4"
+#map ctrl+5 launch sh -c "tmux switch-client -t 5"
+#map ctrl+6 launch sh -c "tmux switch-client -t 6"
+
 keybind = alt+one=text:\x1b1
 keybind = alt+two=text:\x1b2
 keybind = alt+three=text:\x1b3
