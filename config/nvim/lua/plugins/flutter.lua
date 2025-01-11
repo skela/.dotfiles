@@ -65,7 +65,7 @@ return {
 					end,
 					-- capabilities = require("user.lsp.handlers").capabilities,
 					settings = {
-						showTodos = true,
+						showTodos = false,
 						completeFunctionCalls = true,
 						enableSdkFormatter = false,
 						analysisExcludedFolders = {

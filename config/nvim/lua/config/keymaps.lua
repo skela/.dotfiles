@@ -41,8 +41,9 @@ end
 -- Coding
 map({ "n", "v" }, "<C-K>", "gcc<esc>", { desc = "Comment selected line(s)", remap = true })
 map_visual("<leader>.", "gc", { desc = "Comment selected text", remap = true })
-map_normal("<leader>ct", cmd(":set list!"), { desc = "Toggle [t]abs indicator", remap = true })
-map_normal("<leader>cl", require("utils.ui").open_diagnostics, { desc = "[l]ist TODOs and Issues", remap = true })
+map_normal("<leader>ut", cmd(":set list!"), { desc = "Toggle tabs indicator", remap = true })
+map_normal("<leader>ct", cmd("TodoTelescope"), { desc = "List [t]odos", remap = true })
+map_normal("<leader>cd", require("utils.ui").open_diagnostics, { desc = "List [d]iagnostics", remap = true })
 
 -- map("n", "<TAB>", ">>", { remap = true })
 -- map("n", "<S-TAB>", "<<", { remap = true })
