@@ -14,7 +14,7 @@ dunst &
 # thunderbird &
 # slack &
 # wezterm &
-kitty &
+ghostty &
 #xfce4-clipman &
 #clipse -listen
 greenclip daemon &
