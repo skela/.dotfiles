@@ -48,6 +48,9 @@ return {
 					line_width = "full",
 					layout_strategy = "vertical",
 				},
+				lsp_references = {
+					layout_strategy = "vertical",
+				},
 			},
 		},
 	},

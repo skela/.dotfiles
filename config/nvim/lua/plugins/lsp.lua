@@ -1,7 +1,3 @@
--- local keymaps = function()
--- 	return require("config.keymaps").rust()
--- end
-
 return {
 	{
 		"lewis6991/hover.nvim",
@@ -43,7 +39,6 @@ return {
 			keys[#keys + 1] = { "<leader>cl", false }
 			keys[#keys + 1] = { "K", function() require("utils.ui").show_code_info() end }
 			keys[#keys + 1] = { "L", function() require("utils.ui").show_code_options() end }
-			-- keys[#keys + 1] = { "<leader>cl", "<cmd>:Telescope diagnostics<cr>", desc = "[l]ist TODOs and Issues" }
 		end,
 		opts = {
 			inlay_hints = { enabled = false },
@@ -70,6 +65,7 @@ return {
 				},
 				lua_ls = {
 					settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+					-- on_attach = on_attach,
 				},
 				zls = {},
 			},
