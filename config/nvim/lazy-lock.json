@@ -7,6 +7,7 @@
   "catppuccin": { "branch": "main", "commit": "f67b886d65a029f12ffa298701fb8f1efd89295d" },
   "conform.nvim": { "branch": "master", "commit": "70019124aa4f2e6838be9fbd2007f6d13b27a96d" },
   "dart-vim-plugin": { "branch": "master", "commit": "4bdc04e2540edf90fda2812434c11d19dc04bc8f" },
+  "dial.nvim": { "branch": "master", "commit": "46b4375e84e8eb771129bff6b2b1e47746601ef9" },
   "dressing.nvim": { "branch": "master", "commit": "3a45525bb182730fe462325c99395529308f431e" },
   "flash.nvim": { "branch": "main", "commit": "34c7be146a91fec3555c33fe89c7d643f6ef5cf1" },
   "flutter-tools.nvim": { "branch": "main", "commit": "234a9d4022d0a17301e85a08660d489bffb7383f" },

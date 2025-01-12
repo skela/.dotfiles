@@ -91,4 +91,15 @@ return {
 	{ -- for dart syntax highlighting
 		"dart-lang/dart-vim-plugin",
 	},
+	{ import = "lazyvim.plugins.extras.lang.typescript" },
+	{ "luckasRanarison/tree-sitter-hyprlang", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+	{
+		"https://github.com/apple/pkl-neovim",
+		lazy = true,
+		event = "BufReadPre *.pkl",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+		build = function() vim.cmd("TSInstall! pkl") end,
+	},
 }
