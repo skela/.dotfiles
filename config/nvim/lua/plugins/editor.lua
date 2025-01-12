@@ -160,11 +160,15 @@ return {
 	},
 	{
 		"folke/which-key.nvim",
-		optional = true,
-		keys = {
-			{ "<leader>t", group = "+test" },
-			{ "<leader>r", group = "+run" },
-			{ "<leader>cd", group = "+debug" },
+		event = "VeryLazy",
+		opts = {
+			spec = {
+				{ "<leader>t", group = "+test" },
+				{ "<leader>r", group = "+run", icon = { icon = "" } },
+				{ "<leader>h", group = "+harpoon", icon = { icon = "󰛢" } },
+				{ "<leader>co", group = "+open", icon = { icon = "" } },
+				{ "<leader>cV", group = "+viewdroid", icon = { icon = "" } },
+			},
 		},
 	},
 }

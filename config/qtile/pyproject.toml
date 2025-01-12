@@ -3,7 +3,8 @@ name = "qt"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13.1"
 dependencies = [
-	"qtile"
+	"qtile==0.29",
+	"qtile-extras==0.29"
 ]

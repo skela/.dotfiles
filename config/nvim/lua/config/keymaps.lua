@@ -24,7 +24,7 @@ end
 local keymaps = {}
 
 keymaps.flutter = function(_, _) -- client,buffer
-	map_normal("<leader>co", cmd(":FlutterOutlineToggle"), { desc = "Property/Function [o]utline", remap = true })
+	map_normal("<leader>cO", cmd(":FlutterOutlineToggle"), { desc = "Property/Function [O]utline", remap = true })
 	map_normal("<leader>cD", cmd(":FlutterDevices"), { desc = "[D]evices (Flutter)", remap = true })
 	map_normal("<leader>cE", cmd(":FlutterEmulators"), { desc = "[E]mulators (Flutter)", remap = true })
 	map_normal("<leader>ch", cmd(":FlutterReload"), { desc = "[h]ot Reload (Flutter)", remap = true })
@@ -44,6 +44,7 @@ map_visual("<leader>.", "gc", { desc = "Comment selected text", remap = true })
 map_normal("<leader>ut", cmd(":set list!"), { desc = "Toggle tabs indicator", remap = true })
 map_normal("<leader>ct", cmd("TodoTelescope"), { desc = "List [t]odos", remap = true })
 map_normal("<leader>cd", require("utils.ui").open_diagnostics, { desc = "List [d]iagnostics", remap = true })
+map_normal("<leader>cs", cmd(":noa w"), { desc = "Save file without formatting", remap = true })
 
 -- map("n", "<TAB>", ">>", { remap = true })
 -- map("n", "<S-TAB>", "<<", { remap = true })
@@ -70,7 +71,7 @@ map_common("<C-F>", require("utils.ui").search_current_file, { desc = "Search cu
 map_common("\a", require("utils.ui").search_all_files, { desc = "Search all files", remap = true }) -- ctrl + shift + f work around for kitty
 map_common("<C-p>", cmd("Telescope find_files"), { desc = "Jump to file", remap = true })
 map_common("<C-t>", cmd("Telescope filetypes"), { desc = "Select filetype", remap = true })
-map_normal("<leader>cs", cmd("e .env"), { desc = "Open [s]ecret .env file", remap = true })
+map_normal("<leader>cos", cmd("e .env"), { desc = "Open [s]ecret .env file", remap = true })
 map_normal("<leader>uS", cmd("Screenkey toggle"), { desc = "Toggle [S]creenkey", remap = true })
 
 return keymaps
