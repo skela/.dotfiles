@@ -1,21 +1,37 @@
--- local colors = require("../utils/colors")
 return {
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
 		opts = function(_, opts)
-			opts.sections.lualine_x = {
-				{ "diagnostics", sources = { "nvim_workspace_diagnostic" } },
+			local icons = LazyVim.config.icons
+			local trouble = require("trouble")
+			local symbols = trouble.statusline({
+				mode = "lsp_document_symbols",
+				groups = {},
+				title = false,
+				filter = { range = true },
+				format = "{kind_icon}{symbol.name:Normal}",
+				hl_group = "lualine_c_normal",
+			})
+			opts.sections.lualine_c = {
+				LazyVim.lualine.root_dir(),
+				{
+					"diagnostics",
+					sources = { "nvim_workspace_diagnostic" },
+					symbols = {
+						error = icons.diagnostics.Error,
+						warn = icons.diagnostics.Warn,
+						info = icons.diagnostics.Info,
+						hint = icons.diagnostics.Hint,
+					},
+				},
+				{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+				{ LazyVim.lualine.pretty_path() },
+				{
+					symbols.get,
+					cond = symbols.has,
+				},
 			}
-			-- table.insert(opts.sections.lualine_x, {
-			-- 	function()
-			-- 		local decorations = vim.g.flutter_tools_decorations or {}
-			-- 		local project_config = decorations.project_config or {}
-			-- 		return project_config.name or ""
-			-- 	end,
-			-- 	-- icon = "version:",
-			-- 	color = { fg = colors.orange, gui = "bold" },
-			-- })
 			opts.sections.lualine_y = { "encoding" }
 			opts.sections.lualine_z = { "location", "progress" }
 			return opts
