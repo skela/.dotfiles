@@ -7,7 +7,7 @@ from libqtile.lazy import lazy
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration
 # from qtile_extras.widget.githubnotifications import GithubNotifications
-from settings.settings import Settings
+from .settings import Settings
 
 settings = Settings()
 icons = settings.icons

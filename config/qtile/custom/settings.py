@@ -1,6 +1,7 @@
-from settings.icons import Icons
-from settings.keys import Keys
-from settings.commands import Commands
+from .icons import Icons
+from .keys import Keys
+from .commands import Commands
+
 
 class Settings(object):
 
@@ -8,4 +9,3 @@ class Settings(object):
 		self.icons = Icons()
 		self.keys = Keys()
 		self.commands = Commands()
-

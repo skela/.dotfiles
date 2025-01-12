@@ -9,7 +9,6 @@ from libqtile.config import Click, Drag, Group, Key, Match
 from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
 from libqtile.group import _Group
-from widgets.screens import get_screens
 
 from layouts.full import Full
 from layouts.tall import Tall
@@ -17,8 +16,10 @@ from layouts.wide import Wide
 from layouts.flow import Flow
 from layouts.maxi import Maxi
 
-from settings.settings import Settings
-from settings.path import qtile_path
+from custom.screens import get_screens
+from custom.settings import Settings
+from custom.path import qtile_path
+import custom.traverse as traverse
 
 # Required programs:
 # kitty, flameshot, playerctl, ulauncher, betterlockscreen, thunar, firefox-developer-edition
@@ -87,10 +88,14 @@ keys = [
 	Key([k.mod, k.shift], k.right, lazy.layout.client_to_next(), desc="Move window to next"),
 
 	# Switch between windows in current stack pane
-	Key([k.mod], k.down, lazy.layout.down()),
-	Key([k.mod], k.up, lazy.layout.up()),
-	Key([k.mod], k.left, lazy.layout.previous()),
-	Key([k.mod], k.right, lazy.layout.next()),
+	# Key([k.mod], k.down, lazy.layout.down()),
+	# Key([k.mod], k.up, lazy.layout.up()),
+	# Key([k.mod], k.left, lazy.layout.previous()),
+	# Key([k.mod], k.right, lazy.layout.next()),
+	Key([k.mod], k.down, lazy.function(traverse.down)),
+	Key([k.mod], k.up, lazy.function(traverse.up)),
+	Key([k.mod], k.left, lazy.function(traverse.left)),
+	Key([k.mod], k.right, lazy.function(traverse.right)),
 
 	# Move windows in current stack pane
 	Key([k.control, k.alt], k.left, lazy.screen.prev_group()),
