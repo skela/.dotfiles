@@ -28,6 +28,7 @@ return {
 				"vtsls",
 				"yapf",
 				"zls",
+				"ols",
 			},
 		},
 	},
@@ -100,6 +101,7 @@ return {
 						client.server_capabilities.documentRangeFormattingProvider = false
 					end,
 				},
+				ols = {},
 				kotlin_language_server = {},
 				dockerls = {},
 				docker_compose_language_service = {},
