@@ -92,10 +92,16 @@ keys = [
 	# Key([k.mod], k.up, lazy.layout.up()),
 	# Key([k.mod], k.left, lazy.layout.previous()),
 	# Key([k.mod], k.right, lazy.layout.next()),
+
+	# Switch between windows regardless of monitor (jumps to other monitors if needed)
 	Key([k.mod], k.down, lazy.function(traverse.down)),
 	Key([k.mod], k.up, lazy.function(traverse.up)),
 	Key([k.mod], k.left, lazy.function(traverse.left)),
 	Key([k.mod], k.right, lazy.function(traverse.right)),
+	Key([k.mod], "j", lazy.function(traverse.down)),
+	Key([k.mod], "k", lazy.function(traverse.up)),
+	Key([k.mod], "h", lazy.function(traverse.left)),
+	Key([k.mod], "l", lazy.function(traverse.right)),
 
 	# Move windows in current stack pane
 	Key([k.control, k.alt], k.left, lazy.screen.prev_group()),
@@ -109,23 +115,18 @@ keys = [
 	Key([k.mod], "equal", lazy.layout.grow(), lazy.layout.increase_nmaster(), desc='Expand window (Tall), increase number in master pane (Tile)'),
 	Key([k.mod], "r", lazy.layout.reset(), desc='normalize window size ratios'),
 	Key([k.mod], "b", lazy.hide_show_bar("top"), desc='toggle the display of the bar'),
-
-	# Toggle between split and unsplit sides of stack.
-	# Split = all windows displayed
-	# Unsplit = 1 window displayed, like Max layout, but still with
-	# multiple stack panes
 	Key([k.mod, k.shift], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
 	Key([k.mod], k.enter, lazy.spawn(commands.terminal), desc="Launch terminal"),
 	Key([k.mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
 	Key([k.mod], "f", toggle_fullscreen, desc="Toggle fullscreen"),
-	Key([k.mod], "j", toggle_monadwide, desc="Toggle wide"),
+	Key([k.mod], "v", toggle_monadwide, desc="Toggle wide"),
+	Key([k.mod], "m", toggle_maxscreen, desc="Toggle maximize"),
 	# Key([k.mod], k.space, lazy.spawn(launcher), desc="Launch launcher"),
 	Key([k.mod], "d", lazy.spawn(commands.launcher), desc="Launch launcher"),
 	Key([k.mod], k.space, lazy.spawn(commands.toggle_keyboard), desc="Toggle keyboard"),
 	Key([k.mod, k.shift], k.space, lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 	Key([k.mod], "n", lazy.spawn(commands.files), desc="Launch file browser"),
 	Key([k.mod], "w", lazy.spawn(commands.browser), desc="Launch web browser"),
-	Key([k.mod], "m", toggle_maxscreen, desc="Toggle maximize"),
 	Key([k.alt, k.control], "q", lazy.spawn(commands.lock_screen), desc="Lock screen"),
 	Key([k.control], k.tab, lazy.next_layout(), desc="Toggle between layouts"),
 	Key([k.control, k.shift], k.tab, lazy.prev_layout(), desc="Toggle between layouts"),
