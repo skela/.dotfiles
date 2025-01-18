@@ -1,8 +1,6 @@
 {
 	"layer": "top", // Waybar at top layer
-	"output": [
-		"DP-1"
-	],
+	"output": ["DP-1"],
 	// "position": "bottom", // Waybar position (top|bottom|left|right)
 	"height": 40, // Waybar height (to be removed for auto height)
 	// "width": 1280, // Waybar width
@@ -16,9 +14,7 @@
 		// "custom/separator",
 		// "sway/scratchpad"
 	],
-	"modules-center": [
-		"hyprland/window"
-	],
+	"modules-center": ["hyprland/window"],
 	"modules-right": [
 		"custom/clipboard",
 		"idle_inhibitor",
@@ -36,7 +32,10 @@
 	"hyprland/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": true,
+		"on-click": "activate",
+		"move-to-monitor": true,
 		"warp-on-scroll": false,
+		"show-special": true,
 		"format": "{icon}",
 		"format-icons": {
 			"1": "", // home
@@ -81,10 +80,7 @@
 	"sway/scratchpad": {
 		"format": "{icon} {count}",
 		"show-empty": true,
-		"format-icons": [
-			",",
-			""
-		],
+		"format-icons": [",", ""],
 		"tooltip": true,
 		"tooltip-format": "{app}: {title}"
 	},
@@ -122,10 +118,10 @@
 		}
 	},
 	"custom/separator": {
-        "format": "|",
-        "interval": "once",
-        "tooltip": false
-    },
+		"format": "|",
+		"interval": "once",
+		"tooltip": false
+	},
 	"tray": {
 		// "icon-size": 21,
 		"spacing": 10
@@ -148,26 +144,12 @@
 		"critical-threshold": 80,
 		// "format-critical": "{temperatureC}°C {icon}",
 		"format": "{icon} {temperatureC}°C",
-		"format-icons": [
-			"",
-			"",
-			""
-		]
+		"format-icons": ["", "", ""]
 	},
 	"backlight": {
 		// "device": "acpi_video1",
 		"format": "{percent}% {icon}",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			""
-		]
+		"format-icons": ["", "", "", "", "", "", "", "", ""]
 	},
 	"battery": {
 		"states": {
@@ -181,13 +163,7 @@
 		"format-alt": "{time} {icon}",
 		// "format-good": "", // An empty format will hide the module
 		// "format-full": "",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			""
-		]
+		"format-icons": ["", "", "", "", ""]
 	},
 	"battery#bat2": {
 		"bat": "BAT2"
@@ -198,7 +174,7 @@
 		"format-ethernet": "",
 		"tooltip-format": " {ifname} via {gwaddr}",
 		"format-linked": " (No IP)",
-		"format-disconnected": "⚠ Disconnected",
+		"format-disconnected": "! Disconnected",
 		"format-alt": "{ifname}: {ipaddr}/{cidr}"
 	},
 	"pulseaudio": {
@@ -216,11 +192,7 @@
 			"phone": "",
 			"portable": "",
 			"car": "",
-			"default": [
-				"",
-				"",
-				""
-			]
+			"default": ["", "", ""]
 		},
 		"on-click": "pavucontrol"
 	},

@@ -1,7 +1,9 @@
 root = true
 
 [*]
-indent_size = 4
+indent_style = tab
+indent_size = 2
+trim_trailing_whitespace = true
 curly_bracket_next_line = true
 
 [{Makefile,**.mk}]
@@ -20,6 +22,10 @@ trim_trailing_whitespace = true
 indent_style = tab
 
 [*.json]
+indent_style = tab
+indent_size = 2
+
+[*.jsonc]
 indent_style = tab
 indent_size = 2
 

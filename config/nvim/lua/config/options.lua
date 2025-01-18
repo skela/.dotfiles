@@ -30,6 +30,11 @@ vim.filetype.add({
 	},
 })
 
+-- vim.opt.guicursor = {
+-- 	"n-v-c:block-Cursor/lCursor", -- Block cursor for normal, visual, and command modes
+-- 	"i:ver25-Cursor/lCursor", -- Thin vertical line for insert mode
+-- }
+
 vim.o.listchars = "tab:!·,trail:·"
 vim.o.list = false
 vim.o.conceallevel = 2
