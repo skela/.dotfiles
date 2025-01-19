@@ -47,7 +47,8 @@
 			"7": "", // phones
 			"8": "", // games
 			"9": "", // music
-			"10": "" // web
+			"10": "", // web
+			"special": ""
 		},
 		"persistent-workspaces": {
 			"1": [],
