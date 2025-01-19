@@ -23,6 +23,7 @@ folder_links = [
 	"config/nvim",
 	"config/vim",
 	"config/gtk-3.0",
+	"config/clipse"
 ]
 
 
