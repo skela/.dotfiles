@@ -32,8 +32,8 @@ if [ "$TARGET_MONITOR" != "$CURRENT_MONITOR" ] && [ "$TARGET_MONITOR" != "" ]; t
 		hyprctl dispatch moveworkspacetomonitor "$TARGET_WORKSPACE $CURRENT_MONITOR"
 	fi
 	# Restart waybar to refresh state
-	echo "Restarting waybar..."
-	killall waybar && waybar &
+	# echo "Restarting waybar..."
+	# killall waybar && waybar &
 else
 	echo "Monitors are the same or target monitor is empty, moving workspace to the current monitor."
 	hyprctl dispatch moveworkspacetomonitor "$TARGET_WORKSPACE $CURRENT_MONITOR"
