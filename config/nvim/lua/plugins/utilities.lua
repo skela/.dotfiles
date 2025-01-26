@@ -26,6 +26,7 @@ return {
 			default_env = "prod",
 			default_view = "headers_body",
 			display_mode = "float",
+			q_to_close_float = true,
 		},
 		config = function(_, opts)
 			require("kulala").setup(opts)

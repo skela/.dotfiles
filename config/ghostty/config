@@ -1,4 +1,4 @@
-background-opacity = 0.93 
+background-opacity = 0.93
 background = 000000
 
 font-family = "JetBrains Mono"
@@ -19,6 +19,20 @@ keybind = ctrl+shift+f=text:\x07
 #map ctrl+4 launch sh -c "tmux switch-client -t 4"
 #map ctrl+5 launch sh -c "tmux switch-client -t 5"
 #map ctrl+6 launch sh -c "tmux switch-client -t 6"
+
+#keybind = ctrl+physical:1=text:\x11
+#keybind = ctrl+physical:2=text:\x12
+#keybind = ctrl+physical:3=text:\x13
+#keybind = ctrl+one=text:\x1b[33;5u
+#keybind = ctrl+two=text:\x12
+#keybind = ctrl+three=text:\x13
+#keybind = ctrl+four=text:\x14
+#keybind = ctrl+five=text:\x15
+#keybind = ctrl+six=text:\x16
+#keybind = ctrl+seven=text:\x17
+#keybind = ctrl+eight=text:\x18
+#keybind = ctrl+nine=text:\x19
+#keybind = ctrl+zero=text:\x10
 
 keybind = alt+one=text:\x1b1
 keybind = alt+two=text:\x1b2
