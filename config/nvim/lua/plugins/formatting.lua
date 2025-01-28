@@ -21,7 +21,7 @@ return {
 				["handlebars"] = { "prettier" },
 				["dart"] = { "blink" },
 				["python"] = { "yapf" },
-				-- ["swift"] = { "swift_format_ext" },
+				["swift"] = { "swift_format_ext" },
 			},
 			pattern = {
 				[".env.*"] = "dotenv",
