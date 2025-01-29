@@ -2,9 +2,10 @@ return {
 	{ import = "lazyvim.plugins.extras.coding.blink" },
 	{
 		"saghen/blink.cmp",
+		dependencies = "rafamadriz/friendly-snippets",
 		opts = function(_, opts)
 			opts.completion.accept.auto_brackets.enabled = false
-			opts.completion.list = { selection = { preselect = false, auto_insert = true } }
+			opts.completion.list = { selection = { preselect = false, auto_insert = false } }
 		end,
 	},
 	-- {
