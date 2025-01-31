@@ -1,0 +1,7 @@
+theme: tokyo-night
+#layout: vertical
+layout: horizontal
+editor: nvim
+
+focus:
+  on_startup: collection
