@@ -50,7 +50,7 @@
   "plenary.nvim": { "branch": "master", "commit": "3707cdb1e43f5cea73afb6037e6494e7ce847a66" },
   "quicktest.nvim": { "branch": "main", "commit": "08ca5870414f529597e8ac05027f0a98dbf4c084" },
   "rust-tools.nvim": { "branch": "master", "commit": "676187908a1ce35ffcd727c654ed68d851299d3e" },
-  "snacks.nvim": { "branch": "main", "commit": "09bf19f15b2ba81092c44f53b57f93f286a14b1b" },
+  "snacks.nvim": { "branch": "main", "commit": "abd9e0daeca6b3d04424f46702d076d2f4d60f9c" },
   "telescope-dap.nvim": { "branch": "master", "commit": "783366bd6c1e7fa0a5c59c07db37f49c805a28df" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "dae2eac9d91464448b584c7949a31df8faefec56" },
   "telescope.nvim": { "branch": "master", "commit": "415af52339215926d705cccc08145f3782c4d132" },
