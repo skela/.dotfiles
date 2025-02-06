@@ -5,3 +5,7 @@ editor: nvim
 
 focus:
   on_startup: collection
+
+keymap:
+  send-request: ctrl+r
+
