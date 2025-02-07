@@ -1,7 +1,4 @@
 return {
-	-- { import = "lazyvim.plugins.extras.editor.harpoon2" },
-	{ import = "lazyvim.plugins.extras.editor.dial" },
-	-- { import = "lazyvim.plugins.extras.editor.fzf" },
 	{
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",

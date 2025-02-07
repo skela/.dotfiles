@@ -91,7 +91,6 @@ return {
 	{ -- for dart syntax highlighting
 		"dart-lang/dart-vim-plugin",
 	},
-	{ import = "lazyvim.plugins.extras.lang.typescript" },
 	{ "luckasRanarison/tree-sitter-hyprlang", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 	{
 		"https://github.com/apple/pkl-neovim",
