@@ -1,5 +1,4 @@
 return {
-	{ import = "lazyvim.plugins.extras.coding.blink" },
 	{
 		"saghen/blink.cmp",
 		dependencies = "rafamadriz/friendly-snippets",
