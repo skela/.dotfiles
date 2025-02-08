@@ -431,6 +431,12 @@ function y
     rm -f -- "$tmp"
 end
 
+function ta -d "Tmux Attach"
+    begin
+        tmux a
+    end
+end
+
 function start
     python3 ~/.dotfiles/scripts/start.py
 end
