@@ -37,3 +37,7 @@ export PATH="/home/skela/.cargo/bin:$PATH"
 export PATH="$FLUTTER_HOME/bin:$PATH"
 export PATH="/home/skela/.pulumi/bin:$PATH"
 export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
+
+export DOTNET_ROOT="/home/skela/.dotnet"
+export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
+
