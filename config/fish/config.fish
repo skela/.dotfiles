@@ -5,7 +5,6 @@ set -U fish_user_paths $fish_user_paths $HOME/.local/bin/
 set TERM screen-256color
 set EDITOR vim
 set VISUAL vim
-# set BROWSER zen-browser
 set BROWSER firefox-developer-edition
 
 # Settings
@@ -233,24 +232,29 @@ function hg_get_state -d "Get mercurial working directory state"
     end
 end
 
+function copy_to_clipboard -d "Copy to clipboard"
+    set -l str $argv[1]
+    switch (uname -s)
+        case Linux
+            if test "$XDG_SESSION_TYPE" = wayland
+                echo -n "$str" | wl-copy
+            else
+                echo -n "$str" | xclip -selection clipboard
+            end
+        case Darwin
+            echo -n "$str" | pbcopy
+    end
+end
+
 function gitl -d "Get URL for commit"
     begin
         set GIT_COMMIT (git rev-parse HEAD)
         set GIT_REMOTE_INFO (git remote get-url --all origin)
         set GIT_HOST (echo $GIT_REMOTE_INFO | cut -d ':' -f1 | string replace --filter "git@" "" | string trim)
         set GIT_REPO (echo $GIT_REMOTE_INFO | cut -d ':' -f2 | cut -d ' ' -f1 | string replace --filter ".git" "")
-        set GIT_LINK (printf 'https://%s/%s/commit/%s ' $GIT_HOST $GIT_REPO $GIT_COMMIT)
+        set GIT_LINK (printf 'https://%s/%s/commit/%s' $GIT_HOST $GIT_REPO $GIT_COMMIT)
         echo $GIT_LINK
-        switch (uname -s)
-            case Linux
-                if test "$XDG_SESSION_TYPE" = wayland
-                    echo $GIT_LINK | wl-copy
-                else
-                    echo $GIT_LINK | xclip -selection clipboard
-                end
-            case Darwin
-                echo $GIT_LINK | pbcopy
-        end
+        copy_to_clipboard $GIT_LINK
     end
 end
 
@@ -261,30 +265,19 @@ function gitln -d "Get URL for GitHub Network"
         set GIT_REPO (echo $GIT_REMOTE_INFO | cut -d ':' -f2 | cut -d ' ' -f1 | string replace --filter ".git" "")
         set GIT_LINK (printf 'https://%s/%s/network' $GIT_HOST $GIT_REPO)
         echo $GIT_LINK
-        switch (uname -s)
-            case Linux
-                if test "$XDG_SESSION_TYPE" = wayland
-                    echo $GIT_LINK | wl-copy
-                else
-                    echo $GIT_LINK | xclip -selection clipboard
-                end
-            case Darwin
-                echo $GIT_LINK | pbcopy
-        end
+        copy_to_clipboard $GIT_LINK
     end
 end
 
 function gito -d "Open Commit Link in Browser"
     begin
         firefox-developer-edition (gitl)
-        # zen-browser (gitl)
     end
 end
 
 function gitn -d "Open Github Network in Browser"
     begin
         firefox-developer-edition (gitln)
-        # zen-browser (gitl)
     end
 end
 
@@ -292,16 +285,7 @@ function gitc -d "Get commit id"
     begin
         set GIT_COMMIT (git rev-parse HEAD)
         echo $GIT_COMMIT
-        switch (uname -s)
-            case Linux
-                if test "$XDG_SESSION_TYPE" = wayland
-                    echo -n "$(git rev-parse HEAD)" | wl-copy
-                else
-                    echo -n "$(git rev-parse HEAD)" | xclip -selection clipboard
-                end
-            case Darwin
-                echo -n "$(git rev-parse HEAD)" | pbcopy
-        end
+        copy_to_clipboard $GIT_COMMIT
     end
 end
 
@@ -446,6 +430,46 @@ function reload_signatures
     sudo pacman -Sy endeavouros-keyring
 end
 
+function reload_variables -d "Reload Environment variables"
+    switch (uname -s)
+        case Linux
+            set -xg FLUTTER_HOME "$HOME/files/sdks/flutter"
+            set -xg ANDROID_SDK_ROOT "$HOME/files/sdks/android"
+            set -xg ANDROID_HOME "$ANDROID_SDK_ROOT"
+            set -xg DOTNET_ROOT "$HOME/.dotnet"
+            set -xg CARGO_ROOT "$HOME/.cargo"
+            set -xg PULUMI_ROOT "$HOME/.pulumi"
+
+            set -xg CHROME_EXECUTABLE /usr/bin/google-chrome-stable
+            set -xg LLDB_USE_NATIVE_PDB_READER yes
+
+            # set -x PATH "$HOME/.gem/ruby/2.7.0/bin" $PATH
+            set -x PATH "$CARGO_ROOT/bin" $PATH
+            set -x PATH "$FLUTTER_HOME/bin" $PATH
+            set -x PATH "$PULUMI_ROOT/bin" $PATH
+
+            set -x PATH "$ANDROID_HOME/tools" $PATH
+            set -x PATH "$ANDROID_HOME/tools/bin" $PATH
+            set -x PATH "$ANDROID_HOME/platform-tools" $PATH
+
+            set -x PATH "$DOTNET_ROOT" $PATH
+            set -x PATH "$DOTNET_ROOT/tools" $PATH
+            set -x PATH "$HOME/.local/bin/" $PATH
+        case Darwin
+            set -xg FLUTTER_HOME "$HOME/Files/SDKs/flutter"
+
+            set -x PATH "$FLUTTER_HOME/bin" $PATH
+            set -x PATH "/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin" $PATH
+            set -x PATH /usr/local/sbin $PATH
+            set -x PATH /opt/homebrew/bin $PATH
+
+            #export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/"
+            #export C_INCLUDE_PATH="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/"
+            # export SDKROOT="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+            set -x PATH "$HOME/.local/bin/" $PATH
+    end
+end
+
 function reload_aliases -d "Reload aliases"
     if [ -f ~/.aliases ]
         . ~/.aliases
@@ -455,14 +479,26 @@ function reload_aliases -d "Reload aliases"
         . ~/.dotfiles/aliases
     end
 
+    switch (uname -s)
+        case Linux
+            if [ -f ~/.dotfiles/aliases_linux ]
+                . ~/.dotfiles/aliases_linux
+            end
+        case Darwin
+            if [ -f ~/.dotfiles/aliases_osx]
+                . ~/.dotfiles/aliases_osx
+            end
+    end
+
     alias session="python3 ~/.dotfiles/scripts/session.py"
     alias sesh="python3 ~/.dotfiles/scripts/session.py"
-
     alias assume="source /usr/bin/assume.fish"
 end
 
 function reload -d "Reload Config"
     reload_aliases
+    reload_variables
 end
 
 reload_aliases
+reload_variables

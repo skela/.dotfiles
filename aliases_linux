@@ -1,16 +1,7 @@
-##alias vscode="flatpak run com.visualstudio.code"
-##alias adb="/home/skela/files/sdks/android/platform-tools/adb"
-
-#ANDROID_HOME=/home/skela/files/sdks/Android/Sdk
-
-#export PATH="$PATH:/home/skela/files/sdks/flutter/bin"
-#export PATH="$PATH:/home/skela/files/sdks/Android/Sdk/platform-tools"
-
 alias civ6="LD_PRELOAD=/usr/lib/libfreetype.so steam steam://rungameid/289070"
 alias vscode="code"
 alias htop="btop"
 alias publish="/home/skela/code/publish/.build/release/publish-cli"
-#alias inkscape="flatpak run --branch=beta org.inkscape.Inkscape"
 alias avdmanager="/home/skela/files/sdks/android/cmdline-tools/latest/bin/avdmanager"
 alias adb="/home/skela/files/sdks/android/platform-tools/adb"
 alias cat="bat"
@@ -20,24 +11,9 @@ alias wakelight="wakeonlan 04:42:1a:2b:69:58"
 alias wakecat="wakeonlan 1c:69:7a:9f:8a:14"
 alias viewandroid="scrcpy"
 alias viewdroid="scrcpy"
-alias vim="nvim"
 alias mine="watch -n 2 nvidia-smi & nuxhashd"
 alias lookupmac="python3 /home/skela/.dotfiles/scripts/lookup_mac_address.py"
 alias blink="/home/skela/code/blink/target/release/blink"
 
-export ANDROID_SDK_ROOT="/home/skela/files/sdks/android"
-export ANDROID_HOME=$ANDROID_SDK_ROOT
-export FLUTTER_HOME="/home/skela/files/sdks/flutter"
 
-export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
-export LLDB_USE_NATIVE_PDB_READER="yes"
-
-export PATH="/home/skela/.gem/ruby/2.7.0/bin:$PATH"
-export PATH="/home/skela/.cargo/bin:$PATH"
-export PATH="$FLUTTER_HOME/bin:$PATH"
-export PATH="/home/skela/.pulumi/bin:$PATH"
-export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
-
-export DOTNET_ROOT="/home/skela/.dotnet"
-export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 
