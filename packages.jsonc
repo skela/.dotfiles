@@ -1,0 +1,23 @@
+// List of packages that will be installed in response to setup.py
+[
+	// cli
+	{ "name": "neovim", "tags": ["server"] },
+	{ "name": "posting", "tags": ["server"] },
+	{ "name": "lazygit", "tags": ["server"] },
+	{ "name": "lazydocker", "tags": ["server"] },
+	{ "name": "yazi", "tags": ["server"] },
+	{ "name": "uv", "tags": ["server"] },
+
+	// obvious packages
+	{ "name": "gimp" },
+	{ "name": "inkscape" },
+
+	// programming utilities
+	{ "name": "spe" },
+
+	// multimedia
+	{ "name": "audacity" },
+	{ "name": "arista-gtk" },
+	{ "name": "vlc" },
+	{ "name": "sox" }
+]
