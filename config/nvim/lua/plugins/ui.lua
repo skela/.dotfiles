@@ -81,6 +81,12 @@ return {
 					{ section = "startup" },
 				},
 			},
+			styles = {
+				notification_history = {
+					width = 0.9,
+					height = 0.9,
+				},
+			},
 		},
 	},
 	{

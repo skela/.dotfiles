@@ -98,7 +98,7 @@ return {
 				"http",
 				"xml",
 				"graphql",
-				"pkl",
+				-- "pkl",
 				"http",
 				"zig",
 			},
