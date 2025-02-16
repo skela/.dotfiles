@@ -1,0 +1,9 @@
+node_modules
+.cache
+.build
+.git
+desktop
+downloads
+code
+files
+documents
