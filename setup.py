@@ -47,6 +47,7 @@ folder_links = [
 	FolderLink("config/pop-shell"),
 	FolderLink("config/polybar"),
 	FolderLink("config/yazi"),
+	FolderLink("config/tofi"),
 ]
 
 file_links = [
