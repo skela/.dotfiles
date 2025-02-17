@@ -101,6 +101,7 @@ return {
 				-- "pkl",
 				"http",
 				"zig",
+				-- "openscad",
 			},
 			indent = {
 				enable = true,

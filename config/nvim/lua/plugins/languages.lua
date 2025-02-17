@@ -71,6 +71,7 @@ return {
 						analysisExcludedFolders = {
 							".dart_tool",
 							"/home/skela/files/sdks/flutter",
+							"/home/skela/files/sdks/flutter/packages",
 							"/home/skela/.pub-cache",
 						},
 						enableSnippets = true,

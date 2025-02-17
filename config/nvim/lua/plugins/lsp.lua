@@ -29,6 +29,7 @@ return {
 				"yapf",
 				"zls",
 				"ols",
+				"openscad-lsp",
 			},
 		},
 	},
@@ -94,6 +95,12 @@ return {
 		opts = {
 			inlay_hints = { enabled = false },
 			servers = {
+				-- openscad_lsp = {
+				-- 	cmd = { "openscad-lsp", "--stdio" },
+				-- 	filetypes = { "openscad" },
+				-- 	root_dir = function(fname) return vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1]) end,
+				-- 	single_file_support = true,
+				-- },
 				pyright = {},
 				sourcekit = {
 					on_attach = function(client, _)
