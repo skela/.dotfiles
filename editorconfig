@@ -9,6 +9,9 @@ curly_bracket_next_line = true
 [{Makefile,**.mk}]
 indent_style = tab
 
+[*.scad]
+indent_style = tab
+
 [*.ts]
 indent_style = tab
 
