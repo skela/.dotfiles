@@ -430,7 +430,7 @@ function reload_signatures
     sudo pacman -Sy endeavouros-keyring
 end
 
-function ls --wraps=eza --description 'Wrapper for eza with custom behavior'
+function ezals --wraps=eza --description 'Wrapper for eza with custom behavior'
     # Loop through the arguments, skipping flags and their values
     set -l dir_path ""
     set -l skip_next 0
@@ -480,56 +480,31 @@ function ls --wraps=eza --description 'Wrapper for eza with custom behavior'
     end
 end
 
-function ll --wraps=eza --description 'Wrapper for eza with custom behavior'
-    # Loop through the arguments, skipping flags and their values
-    set -l dir_path ""
-    set -l skip_next 0
-
-    for arg in $argv
-        # Skip the next argument if it's a value for a previous flag
-        if test $skip_next -eq 1
-            set skip_next 0
-            continue
-        end
-
-        # If the argument starts with a '-', it's a flag
-        if string match -- -r '^-' $arg
-
-
-            # Some flags (like --flag=value) have an argument attached
-            if string match -- -r '^--?[^=]+=.*' $arg
-                continue
-            end
-
-            # Flags like --flag or -f might expect the next argument to be their value
-            if string match -- -r '^--?[^=]+' $arg
-                set skip_next 1
-            end
-            continue
-        end
-
-        # If it's not a flag, assume it's the directory
-        set dir_path $arg
-        break
-    end
-
-    # Check if we found a directory argument, if not, use the current directory
-    if test -z "$dir_path"
-        set dir_path (pwd)
-    end
-
-    # Concatenate the directory with the .eza_ignore file
-    set target_file "$dir_path/.hidden"
-
-    # Test if the .eza_ignore file exists in the directory
-    if test -e $target_file
-        set DIR_EZA_IGNORE (cat $target_file | tr '\n' '|')
-        eza -l --icons auto --color auto --no-git --no-quotes --ignore-glob "$DIR_EZA_IGNORE" $argv
-    else
-        eza -l $argv --icons auto --color auto --no-git --no-quotes --ignore-glob "$EZA_IGNORE"
-    end
+function ls
+    ezals $argv
 end
 
+function ll
+    ezals -l $argv
+end
+
+function lt
+    ezals -T $argv
+end
+
+set -g _EZA_DEFAULT_ARGS --icons=auto --color=always --group-directories-first
+
+function lsa
+    eza -a $_EZA_DEFAULT_ARGS $argv
+end
+
+function lla
+    eza -al $_EZA_DEFAULT_ARGS $argv
+end
+
+function lta
+    eza -aT $_EZA_DEFAULT_ARGS $argv
+end
 
 function reload_variables -d "Reload Environment variables"
     switch (uname -s)
@@ -573,13 +548,6 @@ end
 
 function reload_aliases -d "Reload aliases"
 
-    alias la='eza -al --color=always --group-directories-first' # my preferred listing
-    # alias ls='eza --color=always --group-directories-first' # all files and dirs
-    alias lsa='eza -a --color=always --group-directories-first' # all files and dirs
-    # alias ll='eza -l --color=always --group-directories-first' # long format
-    alias lla='eza -al --color=always --group-directories-first' # long format
-    alias lt='eza -aT --color=always --group-directories-first' # tree listing
-
     if [ -f ~/.aliases ]
         . ~/.aliases
     end
@@ -599,8 +567,6 @@ function reload_aliases -d "Reload aliases"
             end
     end
 
-    alias session="python3 ~/.dotfiles/scripts/session.py"
-    alias sesh="python3 ~/.dotfiles/scripts/session.py"
     alias assume="source /usr/bin/assume.fish"
 end
 
