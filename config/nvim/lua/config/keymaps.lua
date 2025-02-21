@@ -74,4 +74,9 @@ map_common("<C-t>", cmd("Telescope filetypes"), { desc = "Select filetype", rema
 map_normal("<leader>cos", cmd("e .env"), { desc = "Open [s]ecret .env file", remap = true })
 map_normal("<leader>uS", cmd("Screenkey toggle"), { desc = "Toggle [S]creenkey", remap = true })
 
+map_common("<leader>nl", cmd("Lazy"), { desc = "Open [l]azy package manager", remap = true })
+map_common("<leader>nh", cmd("LazyHealth"), { desc = "Open lazy [h]ealth", remap = true })
+map_common("<leader>nm", cmd("Mason"), { desc = "Open [m]ason package manager", remap = true })
+map_common("<leader>nn", Snacks.notifier.show_history, { desc = "Open recent [n]otifications", remap = true })
+
 return keymaps
