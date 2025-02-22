@@ -8,7 +8,7 @@ return {
 	-- 			only_render_image_at_cursor = true,
 	-- 			resolve_image_path = function(document_path, image_path, fallback)
 	-- 				local strings = require("utils.strings")
-	-- 				local obsidian_vault = "/home/skela/Documents/notes/skela/"
+	-- 				local obsidian_vault = "/home/skela/documents/notes/skela/"
 	-- 				if strings.starts_with(document_path, obsidian_vault) then
 	-- 					local document_name = strings.get_last_path_component(document_path)
 	-- 					local assets =
