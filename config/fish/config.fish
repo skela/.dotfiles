@@ -509,7 +509,9 @@ end
 function reload_variables -d "Reload Environment variables"
     switch (uname -s)
         case Linux
-            set -xg FLUTTER_HOME "$HOME/files/sdks/flutter"
+            set -xg FVM_CACHE_PATH "$HOME/files/sdks/fvm"
+            set -xg FLUTTER_HOME "$HOME/files/sdks/fvm/default"
+            # set -xg FLUTTER_HOME "$HOME/files/sdks/flutter"
             set -xg ANDROID_SDK_ROOT "$HOME/files/sdks/android"
             set -xg ANDROID_HOME "$ANDROID_SDK_ROOT"
             set -xg DOTNET_ROOT "$HOME/.dotnet"
@@ -530,7 +532,6 @@ function reload_variables -d "Reload Environment variables"
 
             set -x PATH "$DOTNET_ROOT" $PATH
             set -x PATH "$DOTNET_ROOT/tools" $PATH
-            set -x PATH "$HOME/.local/bin/" $PATH
         case Darwin
             set -xg FLUTTER_HOME "$HOME/Files/SDKs/flutter"
 
@@ -542,8 +543,9 @@ function reload_variables -d "Reload Environment variables"
             #export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/"
             #export C_INCLUDE_PATH="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/"
             # export SDKROOT="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
-            set -x PATH "$HOME/.local/bin/" $PATH
     end
+    set -x PATH "$HOME/.pub-cache/bin/" $PATH
+    set -x PATH "$HOME/.local/bin/" $PATH
 end
 
 function reload_aliases -d "Reload aliases"
