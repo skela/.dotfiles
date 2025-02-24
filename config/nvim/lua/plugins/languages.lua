@@ -73,6 +73,8 @@ return {
 							"/home/skela/files/sdks/flutter",
 							"/home/skela/files/sdks/flutter/packages",
 							"/home/skela/.pub-cache",
+							"/home/skela/.puro",
+							"/home/skela/files/sdks/fvm",
 						},
 						enableSnippets = true,
 						updateImportsOnRename = true,
