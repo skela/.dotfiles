@@ -509,9 +509,9 @@ end
 function reload_variables -d "Reload Environment variables"
     switch (uname -s)
         case Linux
-            set -xg FVM_CACHE_PATH "$HOME/files/sdks/fvm"
-            set -xg FLUTTER_HOME "$HOME/files/sdks/fvm/default"
-            # set -xg FLUTTER_HOME "$HOME/files/sdks/flutter"
+            # set -xg FVM_CACHE_PATH "$HOME/files/sdks/fvm"
+            # set -xg FLUTTER_HOME "$HOME/files/sdks/fvm/default"
+            set -xg FLUTTER_HOME "$HOME/files/sdks/flutter"
             set -xg ANDROID_SDK_ROOT "$HOME/files/sdks/android"
             set -xg ANDROID_HOME "$ANDROID_SDK_ROOT"
             set -xg DOTNET_ROOT "$HOME/.dotnet"
