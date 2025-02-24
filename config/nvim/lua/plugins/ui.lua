@@ -12,10 +12,28 @@ local easee_header = [[
 ██╔══╝  ██╔══██║ ╚═══██╗██╔══╝  ██╔══╝
 ███████╗██║  ██║██████╔╝███████╗███████╗
 ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝]]
-
+local aurora_header = [[
+ █████╗ ██╗   ██╗██████╗  ██████╗ ██████╗  █████╗
+██╔══██╗██║   ██║██╔══██╗██╔═══██╗██╔══██╗██╔══██╗
+███████║██║   ██║██████╔╝██║   ██║██████╔╝███████║
+██╔══██║██║   ██║██╔══██╗██║   ██║██╔══██╗██╔══██║
+██║  ██║╚██████╔╝██║  ██║╚██████╔╝██║  ██║██║  ██║
+╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+]]
+local rain_header = [[
+██████╗ █████╗  ██╗███╗   ██╗
+██╔══██╗██╔══██╗██║████╗  ██║
+██████╔╝███████║██║██╔██╗ ██║
+██╔══██╗██╔══██║██║██║╚██╗██║
+██║  ██║██║  ██║██║██║ ╚████║
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝
+]]
+require("utils.env").get_hostname()
 local header = neovim_header
-
-if require("utils.env").get_hostname() == "dark" then header = easee_header end
+local hostname = require("utils.env").get_hostname()
+if hostname == "dark" then header = easee_header end
+if hostname == "aurora" then header = aurora_header end
+if hostname == "rain" then header = rain_header end
 
 return {
 	{
