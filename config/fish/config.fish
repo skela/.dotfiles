@@ -512,7 +512,6 @@ function reload_variables -d "Reload Environment variables"
             # set -xg FVM_CACHE_PATH "$HOME/files/sdks/fvm"
             # set -xg FLUTTER_HOME "$HOME/files/sdks/fvm/default"
             set -xg FLUTTER_HOME "$HOME/files/sdks/flutter"
-            set -xg PURO_ROOT "$HOME/.puro"
             set -xg ANDROID_SDK_ROOT "$HOME/files/sdks/android"
             set -xg ANDROID_HOME "$ANDROID_SDK_ROOT"
             set -xg DOTNET_ROOT "$HOME/.dotnet"
@@ -526,10 +525,6 @@ function reload_variables -d "Reload Environment variables"
             set -x PATH "$CARGO_ROOT/bin" $PATH
             # set -x PATH "$FLUTTER_HOME/bin" $PATH
             set -x PATH "$PULUMI_ROOT/bin" $PATH
-
-            set -x PATH "$PURO_ROOT/bin" $PATH
-            set -x PATH "$PURO_ROOT/shared/pub_cache/bin" $PATH
-            set -x PATH "$PURO_ROOT/envs/default/flutter/bin" $PATH
 
             set -x PATH "$ANDROID_HOME/tools" $PATH
             set -x PATH "$ANDROID_HOME/tools/bin" $PATH
