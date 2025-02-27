@@ -101,7 +101,6 @@ return {
 				-- 	root_dir = function(fname) return vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1]) end,
 				-- 	single_file_support = true,
 				-- },
-				-- pyright = {},
 				sourcekit = {
 					on_attach = function(client, _)
 						client.server_capabilities.documentFormattingProvider = false
@@ -127,10 +126,7 @@ return {
 					-- on_attach = on_attach,
 				},
 				zls = {},
-				pyright = {
-					mason = false,
-					autostart = false,
-				},
+				pyright = {},
 			},
 			setup = {
 				rust_analyzer = function(_, opts)
@@ -138,7 +134,7 @@ return {
 					require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
 					return true
 				end,
-				-- pyright = function(_, _) require("dap-python").setup() end,
+				pyright = function(_, _) require("dap-python").setup() end,
 			},
 		},
 	},
