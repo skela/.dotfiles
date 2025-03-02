@@ -422,7 +422,7 @@ function ta -d "Tmux Attach"
 end
 
 function start
-    python3 ~/.dotfiles/scripts/start.py
+    /home/skela/.dotfiles/.venv/bin/python3 ~/.dotfiles/scripts/start.py
 end
 
 function reload_signatures
