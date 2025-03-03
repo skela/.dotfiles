@@ -525,7 +525,7 @@ function reload_variables -d "Reload Environment variables"
 
             # set -x PATH "$HOME/.gem/ruby/2.7.0/bin" $PATH
             set -x PATH "$CARGO_ROOT/bin" $PATH
-            # set -x PATH "$FLUTTER_HOME/bin" $PATH
+            set -x PATH "$FLUTTER_HOME/bin" $PATH
             set -x PATH "$PULUMI_ROOT/bin" $PATH
 
             set -x PATH "$ANDROID_HOME/tools" $PATH
