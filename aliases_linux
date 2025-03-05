@@ -14,6 +14,5 @@ alias viewdroid="scrcpy"
 alias mine="watch -n 2 nvidia-smi & nuxhashd"
 alias lookupmac="python3 /home/skela/.dotfiles/scripts/lookup_mac_address.py"
 alias blink="/home/skela/code/blink/target/release/blink"
-
-
+alias tmux='TERM=xterm-256color /usr/bin/tmux'
 

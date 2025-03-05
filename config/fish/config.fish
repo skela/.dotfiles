@@ -1,4 +1,3 @@
-
 set -U fish_user_paths $fish_user_paths $HOME/.local/bin/
 
 # Definitions
@@ -203,7 +202,6 @@ function prompt_dir -d "Display the current directory"
     prompt_segment $color_dir_bg $color_dir_str (prompt_pwd)
 end
 
-
 function prompt_hg -d "Display mercurial state"
     set -l branch
     set -l state
@@ -309,7 +307,6 @@ function prompt_git -d "Display the current git state"
     end
 end
 
-
 function prompt_svn -d "Display the current svn state"
     set -l ref
     if command svn info >/dev/null 2>&1
@@ -336,7 +333,6 @@ end
 function svn_get_revision -d "get the current revision number"
     svn info 2>/dev/null | sed -n 's/Revision:\ //p'
 end
-
 
 function prompt_status -d "the symbols for a non zero exit status, root and background jobs"
     if [ $RETVAL -ne 0 ]
@@ -422,7 +418,7 @@ function ta -d "Tmux Attach"
 end
 
 function start
-    /home/skela/.dotfiles/.venv/bin/python3 ~/.dotfiles/scripts/start.py
+    ~/.dotfiles/.venv/bin/python ~/.dotfiles/scripts/start.py
 end
 
 function reload_signatures
@@ -444,7 +440,6 @@ function ezals --wraps=eza --description 'Wrapper for eza with custom behavior'
 
         # If the argument starts with a '-', it's a flag
         if string match -- -r '^-' $arg
-
 
             # Some flags (like --flag=value) have an argument attached
             if string match -- -r '^--?[^=]+=.*' $arg
@@ -566,7 +561,7 @@ function reload_aliases -d "Reload aliases"
                 . ~/.dotfiles/aliases_linux
             end
         case Darwin
-            if [ -f ~/.dotfiles/aliases_osx]
+            if [ -f ~/.dotfiles/aliases_osx ]
                 . ~/.dotfiles/aliases_osx
             end
     end
