@@ -1,0 +1,14 @@
+
+keybind = cmd+one=text:\x1b1
+keybind = cmd+two=text:\x1b2
+keybind = cmd+three=text:\x1b3
+keybind = cmd+four=text:\x1b4
+keybind = cmd+five=text:\x1b5
+keybind = cmd+six=text:\x1b6
+keybind = cmd+seven=text:\x1b7
+keybind = cmd+eight=text:\x1b8
+keybind = cmd+nine=text:\x1b9
+keybind = cmd+zero=text:\x1b0
+keybind = cmd+left=text:\x1b[1;3D
+keybind = cmd+right=text:\x1b[1;3C
+
