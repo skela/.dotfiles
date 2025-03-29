@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This script is run when the application starts
 # Its purpose is to obtain the current wallpaper as an absolute path, or file URI (e.g. file://a/b.jpg)
@@ -13,6 +13,10 @@ if [ "$desktop" == "ubuntu" ] || [ "$XDG_CURRENT_DESKTOP" == "Unity" ]; then
 # XFCE
 elif [ "$desktop" == "xubuntu" ] || [ "$XDG_CURRENT_DESKTOP" == "XFCE" ]; then
         xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image
+
+# Lingmo OS
+elif [ "$XDG_CURRENT_DESKTOP" == "Lingmo" ]; then
+        qdbus com.lingmo.Settings /Theme com.lingmo.Theme.wallpaper
 
 # LXDE/PCManFM
 elif [ "$XDG_CURRENT_DESKTOP" == "LXDE" ]; then
@@ -34,8 +38,8 @@ elif [ "$XDG_CURRENT_DESKTOP" == "MATE" ]; then
 elif [ "$desktop" == "Cinnamon" ] || [ "$XDG_CURRENT_DESKTOP" == "X-Cinnamon" ]; then
         gsettings get org.cinnamon.desktop.background picture-uri
 
-# KDE Plasma 5
-elif [ "$XDG_CURRENT_DESKTOP" == "KDE" ] && [ "$KDE_SESSION_VERSION" == "5" ]; then
+# KDE Plasma 5+
+elif [ "$XDG_CURRENT_DESKTOP" == "KDE" ]; then
         grep 'Image=' ~/.config/plasma-org.kde.plasma.desktop-appletsrc | sed 's/Image=//'
 
 # Trinity

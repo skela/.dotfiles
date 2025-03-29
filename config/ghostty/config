@@ -1,5 +1,7 @@
 # If you change this and need to have ghostty reload, press `ctrl + shift + ,`
 
+app-notifications = no-clipboard-copy
+
 background-opacity = 0.93
 background = 000000
 
