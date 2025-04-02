@@ -108,6 +108,10 @@ return {
 		},
 	},
 	{
+		"danielwe/trouble.nvim",
+		commit = "c07851ea8bf95a1e8c10be8ce12b2b5c08152301",
+	},
+	{
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
 		opts = function(_, opts)
@@ -142,6 +146,8 @@ return {
 			}
 			opts.sections.lualine_y = { "encoding" }
 			opts.sections.lualine_z = { "location", "progress" }
+			-- opts.options.theme = "tokyonight"
+			-- vim.api.nvim_set_hl(0, "StatusLine", { link = "lualine_c_normal" })
 			return opts
 		end,
 	},
