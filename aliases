@@ -9,4 +9,5 @@ alias icat="kitty +kitten icat"
 alias wifi="python3 ~/.dotfiles/scripts/wifi.py --help"
 alias wifi-scan="python3 ~/.dotfiles/scripts/wifi.py --scan"
 alias wifi-connect="python3 ~/.dotfiles/scripts/wifi.py --connect"
+alias devcom="git add . ; git commit -m meh ; git push origin master"
 
