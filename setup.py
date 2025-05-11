@@ -4,6 +4,7 @@ import subprocess
 import sys
 import json
 import re
+from typing import Optional
 
 
 class FolderLink(object):
@@ -65,10 +66,10 @@ def get_input(msg):
 	return input(msg)
 
 
-package_managers = ["apt-get", "apt", "yum", "yay", "paru"]
+package_managers = ["apt-get", "apt", "yum", "yay", "paru", "pacman"]
 
 
-def get_packages(server_packages: bool):
+def get_packages(server_packages: bool) -> list[str]:
 	s = "packages.jsonc"
 	f = open(s)
 	packs_raw = f.read()
@@ -88,23 +89,31 @@ def get_packages(server_packages: bool):
 	return packages
 
 
-def install_package_manager():
+def install_package_manager() -> Optional[str]:
 	p = sys.platform
 	if p == "darwin":
 		install_brew()
+		return "brew"
 	if p == "linux2" or p == "linux":
-		check_package_managers()
+		return check_package_managers()
 	if p == "win32" or p == "win64":
 		log("The F***?")
+	return None
 
 
 def install_packages(server_packages=False):
-	install_package_manager()
+	pm = install_package_manager()
 	packages = get_packages(server_packages)
 	log(str(packages))
 	r = get_input("Would you like to install these packages? (y/n) ")
 	if r == "y" or r == "Y":
-		log("TODO: Fill in this function (install_packages)")
+		for package in packages:
+			cmd = f"{pm} install {package}"
+			if pm == "pacman" or pm == "yay":
+				cmd = f"{pm} -S {package} --noconfirm"
+			elif pm == "paru":
+				cmd = f"{pm} -S {package} --sudoloop"
+			os.system(cmd)
 	elif r == "n":
 		log("Ok, as you wish")
 	else:
@@ -174,13 +183,14 @@ def install_oh_my_zsh():
 		os.system(cmd)
 
 
-def check_package_managers():
+def check_package_managers() -> Optional[str]:
 	log("Checking package managers...")
 	for pm in package_managers:
 		if has_app(pm):
 			log("This system has " + pm + " installed.")
-			return
+			return pm
 	log("Warning, failed to identify the package manager for this system.")
+	return None
 
 
 parser = argparse.ArgumentParser()
