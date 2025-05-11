@@ -7,10 +7,13 @@
 	{ "name": "lazydocker", "tags": ["server"] },
 	{ "name": "yazi", "tags": ["server"] },
 	{ "name": "uv", "tags": ["server"] },
+	{ "name": "git", "tags": ["server"] },
+	{ "name": "tmux", "tags": ["server"] },
 
 	// obvious packages
 	{ "name": "gimp" },
 	{ "name": "inkscape" },
+	{ "name": "ghostty" },
 
 	// programming utilities
 	{ "name": "spe" },
