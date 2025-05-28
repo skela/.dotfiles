@@ -574,5 +574,7 @@ function reload -d "Reload Config"
     reload_variables
 end
 
+source ~/.dotfiles/.env
+
 reload_aliases
 reload_variables
