@@ -17,26 +17,28 @@ return {
 	{
 		"yetone/avante.nvim",
 		event = "VeryLazy",
-		version = false, -- Never set this value to "*"! Never!
+		version = false,
 		opts = {
-			-- add any opts here
-			-- for example
 			provider = "bedrock",
-			openai = {
-				endpoint = "https://api.openai.com/v1",
-				model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-				timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-				temperature = 0,
-				max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-				--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
-			},
-			bedrock = {
-				-- model = "us.anthropic.claude-3-5-sonnet-20240620-v1:0",
-				-- model = "us.anthropic.claude-sonnet-4-20250514-v1:0",
-				-- model = "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
-				model = "us.anthropic.claude-3-7-sonnet-20250219-v1:0",
-				aws_profile = "bedrock",
-				aws_region = "us-east-1",
+			providers = {
+				openai = {
+					endpoint = "https://api.openai.com/v1",
+					model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+					extra_request_body = {
+						timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+						temperature = 0,
+						max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+						--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+					},
+				},
+				bedrock = {
+					-- model = "us.anthropic.claude-3-5-sonnet-20240620-v1:0",
+					-- model = "us.anthropic.claude-sonnet-4-20250514-v1:0",
+					-- model = "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
+					model = "us.anthropic.claude-3-7-sonnet-20250219-v1:0",
+					aws_profile = "bedrock",
+					aws_region = "us-east-1",
+				},
 			},
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
