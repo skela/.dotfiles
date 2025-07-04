@@ -1,0 +1,3 @@
+#!/bin/bash
+"/home/skela/.local/share/JetBrains/Toolbox/apps/android-studio/bin/format.sh" -r "$@"
+

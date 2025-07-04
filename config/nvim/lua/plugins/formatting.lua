@@ -22,6 +22,7 @@ return {
 				["dart"] = { "blink" },
 				["python"] = { "yapf" },
 				["swift"] = { "swift_format_ext" },
+				["kotlin"] = { "ijfmt" },
 			},
 			pattern = {
 				[".env.*"] = "dotenv",
@@ -44,6 +45,19 @@ return {
 					end,
 					stdin = false,
 					condition = function(_, ctx) return vim.fs.basename(ctx.filename) ~= "README.md" end,
+				},
+				ijfmt = {
+					command = "/home/skela/.dotfiles/scripts/ijfmt",
+					stdin = false,
+					args = { "$FILENAME" },
+					cwd = require("conform.util").root_file({
+						"AndroidManifest.xml",
+						"pubspec.yaml",
+						"build.gradle",
+						".editorconfig",
+					}),
+					timeout_ms = 15000,
+					async = true,
 				},
 			},
 		},
