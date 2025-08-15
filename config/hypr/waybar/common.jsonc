@@ -1,13 +1,41 @@
 {
 	"layer": "top", // Waybar at top layer
-	// "position": "bottom", // Waybar position (top|bottom|left|right)
-	"height": 40, // Waybar height (to be removed for auto height)
-	// "width": 1280, // Waybar width
-	"spacing": 4, // Gaps between modules (4px)
-	"margin-left": 20,
-	"margin-right": 20,
-	"margin-top": 8,
-	// Choose the order of the modules
+	"position": "top", // Waybar position (top|bottom|left|right)
+
+	// Arrows
+	"custom/left-arrow-light-start": {
+		"format": "\ue0b2",
+		"tooltip": false
+	},
+	"custom/left-arrow-dark-start": {
+		"format": "\ue0b2",
+		"tooltip": false
+	},
+	"custom/right-arrow-light-end": {
+		"format": "\ue0b0",
+		"tooltip": false
+	},
+	"custom/right-arrow-dark-end": {
+		"format": "\ue0b0",
+		"tooltip": false
+	},
+	"custom/left-arrow-dark": {
+		"format": "\ue0b2",
+		"tooltip": false
+	},
+	"custom/left-arrow-light": {
+		"format": "\ue0b2",
+		"tooltip": false
+	},
+	"custom/right-arrow-dark": {
+		"format": "\ue0b0",
+		"tooltip": false
+	},
+	"custom/right-arrow-light": {
+		"format": "\ue0b0",
+		"tooltip": false
+	},
+
 	// Modules configuration
 	"hyprland/workspaces": {
 		"disable-scroll": true,
