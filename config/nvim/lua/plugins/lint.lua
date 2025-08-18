@@ -7,19 +7,27 @@ return {
 				markdown = { "markdownlint-cli2" },
 			},
 			events = { "BufWritePost", "BufReadPost", "InsertLeave" },
-			linters = {
-				["markdownlint-cli2"] = {
-					args = { "--config", "~/.dotfiles/config/markdownlint-cli2.yaml", "--" },
-				},
-			},
 		},
-		-- config = function()
-		-- 	local markdownlint = require("lint").linters.markdownlint
-		-- 	markdownlint.args = {
-		-- 		"--disable",
-		-- 		"MD013",
-		-- 		"--", -- Required
-		-- 	}
-		-- end,
+		config = function()
+			local markdownlint = require("lint").linters.markdownlint
+			markdownlint.args = {
+				"--disable",
+				"MD013",
+				"--",
+			}
+		end,
+	},
+	{
+		"nvimtools/none-ls.nvim",
+		config = function()
+			local null_ls = require("null-ls")
+			null_ls.setup({
+				sources = {
+					null_ls.builtins.diagnostics.markdownlint_cli2.with({
+						extra_args = { "--config", vim.fn.stdpath("config") .. "/markdownlint-cli2.yaml" },
+					}),
+				},
+			})
+		end,
 	},
 }

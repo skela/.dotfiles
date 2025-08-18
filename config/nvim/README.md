@@ -7,24 +7,30 @@ Refer to the [documentation](https://lazyvim.github.io/installation) to get star
 
 ## Check Health
 
-  :checkhealth
+:checkhealth
 
 ## Syntax Highlighting
 
 Check which languages are installed
 
-	:TSInstallInfo
+    :TSInstallInfo
 
 Install a language
 
-	:TSInstall {language}
+    :TSInstall {language}
 
 ## Language Server Protocol Configs
 
 More info can be found [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
 or type in
 
-	:help lspconfig-all
+    :help lspconfig-all
+
+### Which LSP is guilty?
+
+Hover diagnostics (so navigate to the problematic line), then enter this command:
+
+`:lua print(vim.inspect(vim.diagnostic.get(0)))`
 
 ## Vim Madness
 
@@ -52,11 +58,11 @@ You can apply to multiple lines by pressing (for example 4 lines):
 
 Yank your word (might also work for deletions)
 
-	yw
+    yw
 
 Paste
 
-	ve"0p
+    ve"0p
 
 v - visualmode
 
@@ -65,4 +71,3 @@ e - select word
 "0 - get value from Register 0 address
 
 p - paste
-
