@@ -530,7 +530,7 @@ function reload_variables -d "Reload Environment variables"
             set -x PATH "$DOTNET_ROOT" $PATH
             set -x PATH "$DOTNET_ROOT/tools" $PATH
         case Darwin
-            set -xg FLUTTER_HOME "$HOME/Files/SDKs/flutter"
+            set -xg FLUTTER_HOME "$HOME/Files/sdks/flutter"
 
             set -x PATH "$FLUTTER_HOME/bin" $PATH
             set -x PATH "/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin" $PATH

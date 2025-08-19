@@ -1,5 +1,6 @@
 alias fastlane="/Users/skela/.gem/ruby/2.6.0/bin/fastlane"
 alias tmux='TERM=xterm-256color /opt/homebrew/bin/tmux'
+alias ip='networksetup -getinfo "USB3.0 5K Graphic Docking"'
 
 function code --wraps='/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code' --description 'alias code /Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'
 /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code $argv
