@@ -1,4 +1,16 @@
 return {
+
+	-- {
+	-- 	"CopilotC-Nvim/CopilotChat.nvim",
+	-- 	dependencies = {
+	-- 		{ "nvim-lua/plenary.nvim", branch = "master" },
+	-- 	},
+	-- 	build = "make tiktoken",
+	-- 	opts = {
+	-- 		-- See Configuration section for options
+	-- 	},
+	-- },
+	--
 	-- {
 	-- 	"jackMort/ChatGPT.nvim",
 	-- 	enabled = false,
@@ -19,16 +31,16 @@ return {
 		event = "VeryLazy",
 		version = false,
 		opts = {
-			provider = "bedrock",
+			provider = "openai",
 			providers = {
 				openai = {
 					endpoint = "https://api.openai.com/v1",
-					model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+					model = "gpt-5-nano", -- gpt-5-mini, gpt-5-nano, gpt-5, o4-mini
 					extra_request_body = {
-						timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-						temperature = 0,
-						max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-						--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+						-- 	-- timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+						temperature = 1,
+						-- 	max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+						-- 	--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
 					},
 				},
 				bedrock = {
@@ -37,7 +49,17 @@ return {
 					-- model = "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
 					model = "us.anthropic.claude-3-7-sonnet-20250219-v1:0",
 					aws_profile = "bedrock",
-					aws_region = "us-east-1",
+					aws_region = "eu-west-1",
+				},
+				copilot = {
+					model = "gemini-2.0-flash-001",
+					endpoint = "https://api.githubcopilot.com",
+					allow_insecure = false,
+					timeout = 10 * 60 * 1000,
+					extra_request_body = {
+						temperature = 0,
+						max_completion_tokens = 1000000,
+					},
 				},
 			},
 		},
