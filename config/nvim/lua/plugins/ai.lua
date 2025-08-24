@@ -31,6 +31,7 @@ return {
 		event = "VeryLazy",
 		version = false,
 		opts = {
+			-- mode = "legacy", -- legacy or agentic
 			provider = "openai",
 			providers = {
 				openai = {
