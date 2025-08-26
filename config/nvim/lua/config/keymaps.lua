@@ -55,6 +55,8 @@ map_normal("<leader>cs", cmd(":noa w"), { desc = "Save file without formatting",
 -- Git
 map_normal("<leader>gb", cmd(":Gitsigns toggle_current_line_blame"), { desc = "Toggle Blame", remap = true })
 
+-- map_normal("<leader>aD", cmd(':lua vim.fn.system("rm -Rf ~/.local/state/nvim/avante")<CR>'), { desc = "Clear Avante", noremap = true, silent = true })
+
 -- Files
 map_common("<C-S>", cmd(":update<cr><esc>"), { desc = "Save file", remap = true })
 map_normal("<leader>bs", cmd(":noa w"), { desc = "Save file without formatting", remap = true })
