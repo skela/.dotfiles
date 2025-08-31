@@ -17,8 +17,8 @@ return {
 		opts = {
 			workspaces = {
 				{
-					name = "personal",
-					path = "~/documents/notes/skela",
+					name = "notes",
+					path = "~/documents/notes",
 				},
 			},
 		},
