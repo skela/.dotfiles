@@ -9,6 +9,7 @@
 	{ "name": "uv", "tags": ["server"] },
 	{ "name": "git", "tags": ["server"] },
 	{ "name": "tmux", "tags": ["server"] },
+	{ "name": "zoxide", "tags": ["server"] },
 
 	// obvious packages
 	{ "name": "gimp" },

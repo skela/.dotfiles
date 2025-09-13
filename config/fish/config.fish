@@ -670,3 +670,5 @@ loadenv ~/.dotfiles/private/.env
 
 reload_aliases
 reload_variables
+
+zoxide init fish | source
