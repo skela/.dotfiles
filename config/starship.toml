@@ -64,10 +64,8 @@ staged = '[++\($count\)](fg:#769ff0 bg:#394260)'
 renamed = '👅'
 deleted = '✘'
 
-[python]
-symbol = " "
-style = "bg:#212736"
-format = "[ $symbol(venv:$virtualenv)]($style)"
+[dart]
+symbol = " "
 
 [nodejs]
 symbol = " "
@@ -89,3 +87,41 @@ symbol = " "
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
+[package]
+symbol = "󰏗 "
+
+[perl]
+symbol = " "
+
+[pijul_channel]
+symbol = " "
+
+[pixi]
+symbol = "󰏗 "
+
+[python]
+symbol = " "
+
+[rlang]
+symbol = "󰟔 "
+
+[ruby]
+symbol = " "
+
+[scala]
+symbol = " "
+
+[swift]
+symbol = " "
+
+[zig]
+symbol = " "
+
+[gradle]
+symbol = " "
+
+[c]
+symbol = " "
+
+[cpp]
+symbol = " "
