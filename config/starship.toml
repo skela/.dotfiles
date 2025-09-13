@@ -101,6 +101,8 @@ symbol = "󰏗 "
 
 [python]
 symbol = " "
+style = "bg:#212736"
+format = "[ $symbol(venv:$virtualenv)]($style)"
 
 [rlang]
 symbol = "󰟔 "
