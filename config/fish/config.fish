@@ -672,3 +672,4 @@ reload_aliases
 reload_variables
 
 zoxide init fish | source
+starship init fish | source

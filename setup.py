@@ -55,6 +55,7 @@ file_links = [
 	FileLink("config/greenclip.toml"),
 	FileLink("config/electron-flags.conf"),
 	FileLink("config/albert.conf"),
+	FileLink("config/starship.toml"),
 ]
 
 

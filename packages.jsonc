@@ -10,6 +10,7 @@
 	{ "name": "git", "tags": ["server"] },
 	{ "name": "tmux", "tags": ["server"] },
 	{ "name": "zoxide", "tags": ["server"] },
+	{ "name": "starship", "tags": ["server"] },
 
 	// obvious packages
 	{ "name": "gimp" },

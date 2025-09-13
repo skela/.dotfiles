@@ -1,0 +1,90 @@
+format = """
+$username\
+$hostname\
+[](bg:#769ff0 fg:#000000)\
+$directory\
+[](fg:#769ff0 bg:#394260)\
+$git_branch\
+$git_status\
+[](fg:#394260 bg:#212736)\
+$python\
+$nodejs\
+$rust\
+$golang\
+$php\
+[ ](fg:#1d2230)\
+\n╰─>$character"""
+
+add_newline = false
+
+[directory]
+style = "fg:black bg:#769ff0"
+format = "[ $path ]($style)"
+truncate_to_repo = true
+truncation_length = 10
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"documents" = "󰈙 "
+"Downloads" = " "
+"downloads" = " "
+"Music" = " "
+"music" = " "
+"Pictures" = " "
+"pictures" = " "
+
+[username]
+show_always = true
+style_user = "bg:#000000 fg:white"
+format = "[ $user]($style)"
+
+[hostname]
+ssh_only = false
+style = "bg:#000000 fg:white"
+format = "[@$hostname ]($style)"
+
+[git_branch]
+symbol = ""
+style = "bg:#394260"
+format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
+
+[git_status]
+style = "bg:#394260"
+format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
+conflicted = '🏳'
+ahead = '⇡'
+behind = '⇣'
+diverged = '⇕'
+up_to_date = ''
+untracked = '?'
+stashed = '📦'
+modified = '!'
+staged = '[++\($count\)](fg:#769ff0 bg:#394260)'
+renamed = '👅'
+deleted = '✘'
+
+[python]
+style = "bg:#212736"
+format = "[ $symbol(venv:$virtualenv)]($style)"
+
+[nodejs]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[php]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
