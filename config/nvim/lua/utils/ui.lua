@@ -63,13 +63,13 @@ end
 M.show_code_info = function()
 	-- vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 	-- vim.lsp.buf.hover()
-	require("hover").hover({ providers = { "LSP" } })
+	require("hover").open({ providers = { "hover.providers.lsp" } })
 end
 
 M.show_code_options = function()
 	-- vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 	-- vim.lsp.buf.hover()
-	require("hover").hover({})
+	require("hover").open({})
 end
 
 M.set_last_response = function(res) last_response = res end

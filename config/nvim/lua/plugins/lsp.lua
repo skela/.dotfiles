@@ -54,25 +54,25 @@ return {
 	{
 		"lewis6991/hover.nvim",
 		config = function()
-			require("hover").setup({
-				init = function()
-					require("hover.providers.lsp")
-					-- require('hover.providers.gh')
-					-- require('hover.providers.gh_user')
-					-- require('hover.providers.jira')
-					require("hover.providers.dap")
-					-- require('hover.providers.fold_preview')
-					require("hover.providers.diagnostic")
-					-- require('hover.providers.man')
-					require("hover.providers.dictionary")
-				end,
+			require("hover").config({
+				providers = {
+					"hover.providers.lsp",
+					--'hover.providers.gh',
+					--'hover.providers.gh_user',
+					-- require('hover.providers.jira',
+					"hover.providers.dap",
+					-- 'hover.providers.fold_preview',
+					"hover.providers.diagnostic",
+					-- 'hover.providers.man',
+					"hover.providers.dictionary",
+				},
 				preview_opts = {
 					border = "single",
 				},
 				preview_window = false,
 				title = true,
 				mouse_providers = {
-					"LSP",
+					"hover.providers.lsp",
 				},
 				mouse_delay = 1000,
 			})
@@ -93,6 +93,7 @@ return {
 			keys[#keys + 1] = { "L", function() require("utils.ui").show_code_options() end }
 		end,
 		opts = {
+
 			inlay_hints = { enabled = false },
 			servers = {
 				-- openscad_lsp = {

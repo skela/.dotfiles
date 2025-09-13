@@ -19,6 +19,9 @@ return {
 				debugger = {
 					enabled = true,
 					run_via_dap = true,
+					-- if empty dap will not stop on any exceptions, otherwise it will stop on those specified
+					-- see |:help dap.set_exception_breakpoints()| for more info
+					exception_breakpoints = {},
 					register_configurations = function(_)
 						require("dap").adapters.dart = {
 							type = "executable",
@@ -51,6 +54,14 @@ return {
 					open_cmd = "60vnew",
 					auto_open = false,
 				},
+				closing_tags = {
+					highlight = "ErrorMsg", -- highlight for the closing tag
+					prefix = ">", -- character to use for close tag e.g. > Widget
+					priority = 10, -- priority of virtual text in current line
+					-- consider to configure this when there is a possibility of multiple virtual text items in one line
+					-- see `priority` option in |:help nvim_buf_set_extmark| for more info
+					enabled = true, -- set to false to disable
+				},
 				dev_log = {
 					enabled = false,
 					-- notify_errors = false,
@@ -82,7 +93,8 @@ return {
 					color = {
 						enabled = true,
 						background = false,
-						background_color = { r = 0, g = 0, b = 0 },
+						-- background_color = { r = 0, g = 0, b = 0 },
+						background_color = nil,
 						foreground = false,
 						virtual_text = true,
 						virtual_text_str = "⏺",
