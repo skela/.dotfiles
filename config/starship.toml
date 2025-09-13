@@ -13,7 +13,7 @@ $rust\
 $golang\
 $php\
 [ ](fg:#1d2230)\
-\n╰─>$character"""
+\n$character"""
 
 add_newline = false
 
@@ -65,26 +65,27 @@ renamed = '👅'
 deleted = '✘'
 
 [python]
+symbol = " "
 style = "bg:#212736"
 format = "[ $symbol(venv:$virtualenv)]($style)"
 
 [nodejs]
-symbol = ""
+symbol = " "
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [rust]
-symbol = ""
+symbol = " "
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [golang]
-symbol = ""
+symbol = " "
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [php]
-symbol = ""
+symbol = " "
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
