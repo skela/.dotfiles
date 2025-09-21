@@ -39,8 +39,8 @@ return {
 			},
 		},
 		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
-			vim.treesitter.language.register("bash", "dotenv")
+			-- require("nvim-treesitter.configs").setup(opts)
+			-- vim.treesitter.language.register("bash", "dotenv")
 		end,
 		build = ":TSUpdate",
 	},
