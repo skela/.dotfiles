@@ -55,7 +55,7 @@ return {
 					auto_open = false,
 				},
 				closing_tags = {
-					highlight = "ErrorMsg", -- highlight for the closing tag
+					highlight = "Comment", -- highlight for the closing tag
 					prefix = ">", -- character to use for close tag e.g. > Widget
 					priority = 10, -- priority of virtual text in current line
 					-- consider to configure this when there is a possibility of multiple virtual text items in one line
