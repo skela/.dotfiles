@@ -13,7 +13,7 @@ font-size = 14
 window-decoration = true
 window-padding-y = 8,0
 
-theme = tokyonight
+theme = TokyoNight
 
 confirm-close-surface = false
 
