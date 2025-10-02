@@ -19,16 +19,18 @@ return {
 				debugger = {
 					enabled = true,
 					run_via_dap = true,
-					-- if empty dap will not stop on any exceptions, otherwise it will stop on those specified
-					-- see |:help dap.set_exception_breakpoints()| for more info
 					exception_breakpoints = {},
 					register_configurations = function(_)
-						require("dap").adapters.dart = {
+						local dap = require("dap")
+						dap.adapters.dart = {
 							type = "executable",
-							command = vim.fn.stdpath("data") .. "/mason/bin/dart-debug-adapter",
-							args = { "flutter" },
+							command = "flutter",
+							args = { "debug_adapter" },
+							options = {
+								detached = false,
+							},
 						}
-						require("dap").configurations.dart = {
+						dap.configurations.dart = {
 							{
 								type = "dart",
 								request = "launch",
@@ -37,7 +39,6 @@ return {
 						}
 						-- require("dap.ext.vscode").load_launchjs((vim.fn.getcwd() .. "/.nvim/dap.json"))
 						require("dap.ext.vscode").load_launchjs()
-						local dap = require("dap")
 						if require("utils.tables").length(dap.configurations["dart"]) > 1 then table.remove(dap.configurations["dart"], 1) end
 
 						vim.keymap.set("n", "<F5>", function()

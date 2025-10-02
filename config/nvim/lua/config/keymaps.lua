@@ -30,6 +30,8 @@ keymaps.flutter = function(_, _) -- client,buffer
 	map_normal("<leader>cE", cmd(":FlutterEmulators"), { desc = "[E]mulators (Flutter)", remap = true })
 	map_normal("<leader>ch", cmd(":FlutterReload"), { desc = "[h]ot Reload (Flutter)", remap = true })
 	map_normal("<leader>cH", cmd(":FlutterRestart"), { desc = "[H]ot Restart (Flutter)", remap = true })
+	map_normal("<leader>D", cmd(":FlutterDevices"), { desc = "[D]evices (Flutter)", remap = true })
+	map_normal("<leader>R", cmd(":FlutterRestart"), { desc = "[R]estart (Flutter)", remap = true })
 	map_normal("<leader>cL", cmd(":FlutterRun"), { desc = "[L]aunch (Flutter)", remap = true })
 	map_normal("<leader>cQ", cmd(":FlutterQuit"), { desc = "[Q]uit (Flutter)", remap = true })
 	map_normal("<leader>cv", cmd(":TermExec cmd='viewdroid -d' open=0"), { desc = "[v]iewdroid device (scrcpy)", remap = true })
