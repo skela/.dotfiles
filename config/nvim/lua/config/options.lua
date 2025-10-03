@@ -27,6 +27,7 @@ vim.filetype.add({
 	pattern = {
 		["%.env%.[%w_.-]+"] = "dotenv",
 		["Dockerfile-.*"] = "dockerfile",
+		["Slackfile"] = "json",
 	},
 })
 
