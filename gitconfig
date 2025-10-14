@@ -40,3 +40,5 @@
 	helper = store
 [init]
 	defaultBranch = master
+[pull]
+	rebase = true
