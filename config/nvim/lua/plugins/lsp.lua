@@ -86,16 +86,15 @@ return {
 			"simrat39/rust-tools.nvim",
 			"mfussenegger/nvim-dap-python",
 		},
-		init = function()
-			local keys = require("lazyvim.plugins.lsp.keymaps").get()
-			keys[#keys + 1] = { "<leader>cl", false }
-			keys[#keys + 1] = { "K", function() require("utils.ui").show_code_info() end }
-			keys[#keys + 1] = { "L", function() require("utils.ui").show_code_options() end }
-		end,
 		opts = {
 
 			inlay_hints = { enabled = false },
 			servers = {
+				["*"] = {
+					keys = { "<leader>cl", false },
+					{ "K", function() require("utils.ui").show_code_info() end },
+					{ "L", function() require("utils.ui").show_code_options() end },
+				},
 				-- openscad_lsp = {
 				-- 	cmd = { "openscad-lsp", "--stdio" },
 				-- 	filetypes = { "openscad" },
