@@ -91,9 +91,11 @@ return {
 			inlay_hints = { enabled = false },
 			servers = {
 				["*"] = {
-					keys = { "<leader>cl", false },
-					{ "K", function() require("utils.ui").show_code_info() end },
-					{ "L", function() require("utils.ui").show_code_options() end },
+					keys = {
+						{ "<leader>cl", false },
+						{ "K", function() require("utils.ui").show_code_info() end },
+						{ "L", function() require("utils.ui").show_code_options() end },
+					},
 				},
 				-- openscad_lsp = {
 				-- 	cmd = { "openscad-lsp", "--stdio" },
