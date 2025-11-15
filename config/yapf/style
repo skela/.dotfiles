@@ -1,14 +1,10 @@
 [style]
-based_on_style = google
-spaces_before_comment = 4
-split_before_logical_operator = true
-split_before_named_assigns = false
-continuation_align_style = VALIGN-RIGHT
-column_limit = 200
 use_tabs = true
-dedent_closing_brackets = true
-allow_split_before_dict_value = false
-split_before_first_argument = true
-split_arguments_when_comma_terminated = true
-split_all_comma_separated_values = false 
-split_all_top_level_comma_separated_values = true
+column_limit = 500
+based_on_style = pep8
+DEDENT_CLOSING_BRACKETS = True
+SPLIT_BEFORE_FIRST_ARGUMENT = True
+SPLIT_ARGUMENTS_WHEN_COMMA_TERMINATED = True
+CONTINUATION_ALIGN_STYLE = valign-right
+INDENT_WIDTH = 1
+CONTINUATION_INDENT_WIDTH = 1
