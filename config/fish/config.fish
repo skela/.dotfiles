@@ -2,8 +2,8 @@ set -U fish_user_paths $fish_user_paths $HOME/.local/bin/
 
 # Definitions
 set TERM screen-256color
-set EDITOR vim
-set VISUAL vim
+set EDITOR nvim
+set VISUAL nvim
 set BROWSER firefox-developer-edition
 
 # Settings
