@@ -40,6 +40,9 @@ open = [
 	{ run = 'open "$@"',                    desc = "Open", for = "macos" },
 	{ run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
 ]
+bambu = [
+	{ run = 'bambu-studio "$@"', orphan = true, desc = "Bambu Studio", for = "linux" },
+]
 reveal = [
 	{ run = 'xdg-open "$(dirname "$1")"',           desc = "Reveal", for = "linux" },
 	{ run = 'open -R "$1"',                         desc = "Reveal", for = "macos" },
@@ -62,6 +65,10 @@ rules = [
 	{ name = "*/", use = [ "edit", "open", "reveal" ] },
 	# Text
 	{ mime = "text/*", use = [ "edit", "reveal" ] },
+	{ name = "*.json", use = "edit" },
+	{ name = "*.md", use = "edit" },
+	# 3D models
+	{ name = "*.3mf", use = "bambu" },
 	# Image
 	{ mime = "image/*", use = [ "open", "reveal" ] },
 	# Media
