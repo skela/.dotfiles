@@ -11,6 +11,8 @@
 	{ "name": "tmux", "tags": ["server"] },
 	{ "name": "zoxide", "tags": ["server"] },
 	{ "name": "starship", "tags": ["server"] },
+	{ "name": "dotnet", "tags": ["server"] },
+	{ "name": "npm", "tags": ["server"] },
 
 	// obvious packages
 	{ "name": "gimp" },
