@@ -63,7 +63,6 @@ map_normal("<leader>gb", cmd(":Gitsigns toggle_current_line_blame"), { desc = "T
 map_common("<C-S>", cmd(":update<cr><esc>"), { desc = "Save file", remap = true })
 map_normal("<leader>bs", cmd(":noa w"), { desc = "Save file without formatting", remap = true })
 map_normal("<leader>ft", cmd("Telescope filetypes"), { desc = "Select filetype for buffer", remap = true })
-map_normal("<leader>fF", require("utils.ui").search_all_files, { desc = "Search all files", remap = true })
 
 -- Top Tabs
 map_common("<A-Left>", cmd("BufferLineCyclePrev"), { desc = "Go to previous file", remap = true })
@@ -72,9 +71,7 @@ map_common("<A-Tab>", cmd("e #"), { desc = "Switch to Other file" })
 
 -- General
 map_common("<C-b>", cmd("Neotree toggle"), { desc = "Open filetree", remap = true })
-map_common("<C-F>", require("utils.ui").search_current_file, { desc = "Search current file", remap = true })
-map_common("\a", require("utils.ui").search_all_files, { desc = "Search all files", remap = true }) -- ctrl + shift + f work around for kitty
-map_common("<C-p>", cmd("Telescope find_files"), { desc = "Jump to file", remap = true })
+map_common("<C-f>", function() Snacks.picker.lines() end, { desc = "Search current file", remap = true })
 map_common("<C-t>", cmd("Telescope filetypes"), { desc = "Select filetype", remap = true })
 map_normal("<leader>cos", cmd("e .env"), { desc = "Open [s]ecret .env file", remap = true })
 map_normal("<leader>uS", cmd("Screenkey toggle"), { desc = "Toggle [S]creenkey", remap = true })

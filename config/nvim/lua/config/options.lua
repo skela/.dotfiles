@@ -11,7 +11,6 @@ vim.o.autoindent = true
 -- vim.g.editorconfig = true
 
 vim.g.snacks_animate = false
-vim.g.lazyvim_picker = "telescope"
 
 vim.filetype.add({
 	extension = {

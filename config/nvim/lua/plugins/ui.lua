@@ -100,12 +100,43 @@ return {
 					{ section = "startup" },
 				},
 			},
-			styles = {
-				notification_history = {
-					width = 0.9,
-					height = 0.9,
+			picker = {
+				layouts = {
+					default = {
+						layout = {
+							width = 0.95,
+							height = 0.95,
+						},
+					},
+				},
+
+				-- layout = { preset = "default" }
+				sources = {
+					lines = {
+						layout = "default",
+					},
 				},
 			},
+			styles = {
+				notification_history = {
+					width = 0.95,
+					height = 0.95,
+				},
+			},
+		},
+		keys = {
+			{ "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+			{ "<C-p>", function() Snacks.picker.files() end, desc = "Find Files" },
+			{ "<C-f>", function() Snacks.picker.lines() end, desc = "Search current file" },
+			{ "\a", function() Snacks.picker.grep() end, desc = "Search all files" }, -- ctrl + shift + f work around for ghostty/kitty
+			{ "<leader>nn", function() Snacks.notifier.show_history() end, desc = "Open recent [n]otifications" },
+			{ "<leader>cd", function() Snacks.picker.diagnostics() end, desc = "List [d]iagnostics" },
+			{ "<leader>z", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+			{ "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
+			{ "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+			{ "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
+			{ "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+			--map_common("<C-t>", cmd("Snacks filetypes"), { desc = "Select filetype", remap = true })
 		},
 	},
 	{
