@@ -109,6 +109,13 @@ return {
 						},
 					},
 				},
+				win = {
+					input = {
+						keys = {
+							["<Esc>"] = { "close", mode = { "n", "i" } },
+						},
+					},
+				},
 
 				-- layout = { preset = "default" }
 				sources = {
