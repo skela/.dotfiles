@@ -53,6 +53,7 @@ detect_desktop() {
 		*"deepin"*) echo "deepin" ;;
 		*"trinity"*) echo "trinity" ;;
 		*"fluxbox"*) echo "fluxbox" ;;
+		*"Hyprland"*) echo "hyprland" ;;
 		*"sway"*) echo "sway" ;;
 		*"enlightenment"* | *"moksha"*) echo "enlightenment" ;;
 		*) echo "$XDG_CURRENT_DESKTOP" | tr '[:upper:]' '[:lower:]' ;;
@@ -303,6 +304,10 @@ elif [ "$DE" == "cinnamon" ]; then
 		gsettings set org.cinnamon.desktop.background picture-options "$4"
 	fi
 
+elif [ "$DE" == "hyprland" ]; then
+	hyprctl hyprpaper wallpaper "DP-1,$WP" 2>/dev/null
+	hyprctl hyprpaper wallpaper "HDMI-A-1,$WP" 2>/dev/null
+
 elif [ "$DE" == "awesome" ]; then
 	# Awesome Window Manager
 	# Be sure to start variety when you start awesome, such as by adding it to ~/.xinitrc
@@ -316,7 +321,9 @@ elif [[ "$XDG_CURRENT_DESKTOP" == "COSMIC" ]]; then
 else
 	# For simple WMs, use either feh or nitrogen
 	# TODO: These should take the scaling parameter $4 into account and use other options than --bg-fill
-	if command -v "feh" >/dev/null 2>&1; then
+	if command -v "swww" >/dev/null 2>&1; then
+		swww img "$WP" 2>/dev/null
+	elif command -v "feh" >/dev/null 2>&1; then
 		feh --bg-fill "$WP" 2>/dev/null
 	elif command -v "nitrogen" >/dev/null 2>&1; then
 		nitrogen --set-zoom-fill --save "$WP" 2>/dev/null
