@@ -7,17 +7,12 @@
 desktop="$DESKTOP_SESSION"
 
 # Gnome 3, Unity:
-if [ "$desktop" == "ubuntu" ] || [ "$XDG_CURRENT_DESKTOP" == "Unity" ] || [ "$XDG_CURRENT_DESKTOP" == "Budgie" ]; then
+if [ "$desktop" == "ubuntu" ] || [ "$XDG_CURRENT_DESKTOP" == "Unity" ]; then
         gsettings get org.gnome.desktop.background picture-uri
 
 # XFCE
 elif [ "$desktop" == "xubuntu" ] || [ "$XDG_CURRENT_DESKTOP" == "XFCE" ]; then
-        # Find first existing backdrop property (monitor names vary by setup)
-        # See: https://github.com/varietywalls/variety/issues/164
-        prop=$(xfconf-query -c xfce4-desktop -p /backdrop -l 2>/dev/null | grep -E -e "screen.*/monitor.*/last-image$" -e "screen.*/monitor.*image-path$" | head -1)
-        if [ -n "$prop" ]; then
-                xfconf-query -c xfce4-desktop -p "$prop" 2>/dev/null
-        fi
+        xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image
 
 # Lingmo OS
 elif [ "$XDG_CURRENT_DESKTOP" == "Lingmo" ]; then
@@ -51,10 +46,6 @@ elif [ "$XDG_CURRENT_DESKTOP" == "KDE" ]; then
 elif [ "$XDG_CURRENT_DESKTOP" == "Trinity" ]; then
         # The "1" refers to the virtual desktop number
         dcop kdesktop KBackgroundIface currentWallpaper 1 2> /dev/null
-
-# Cosmic
-elif [ "$XDG_CURRENT_DESKTOP" == "COSMIC" ]; then
-        grep -oP '(?<=source: Path\(")(.+)(?="\))' ~/.config/cosmic/com.system76.CosmicBackground/v1/all
 
 # All above fails => fallback to the Gnome 3 way
 else

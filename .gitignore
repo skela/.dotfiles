@@ -1,7 +1,8 @@
 scripts/.idea/workspace.xml
 config/Thunar/accels.scm
 config/variety/Favorites
-config/fish/fish_variables
+config/fish/fish_variables*
+config/fish/conf.d
 
 config/tmux/plugins
 
