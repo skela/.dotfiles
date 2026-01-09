@@ -306,6 +306,8 @@ elif [ "$DE" == "cinnamon" ]; then
 
 elif [ "$DE" == "hyprland" ]; then
 	hyprctl hyprpaper wallpaper "DP-1,$WP" 2>/dev/null
+	hyprctl hyprpaper wallpaper "DP-3,$WP" 2>/dev/null
+	hyprctl hyprpaper wallpaper "DP-4,$WP" 2>/dev/null
 	hyprctl hyprpaper wallpaper "HDMI-A-1,$WP" 2>/dev/null
 
 elif [ "$DE" == "awesome" ]; then
