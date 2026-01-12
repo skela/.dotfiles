@@ -28,7 +28,7 @@ elif layout == "gb":
 machine = socket.gethostname()
 
 # for machines running hyprland - hyprctl devices to list devices
-if machine == "aurora":
+if machine == "aurora" or machine == "dark":
 	os.system("hyprctl switchxkblayout logitech-gaming-keyboard-g810 next")
-if machine == "dark":
-	os.system("hyprctl switchxkblayout primax-hp-wired-desktop-320k-keyboard next")
+# if machine == "dark":
+# 	os.system("hyprctl switchxkblayout primax-hp-wired-desktop-320k-keyboard next")
