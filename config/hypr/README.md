@@ -2,11 +2,12 @@
 
 ## Depends
 
-* waybar
-* hyprshot
-* swaylock
-* swayidle
-* swww
-* variety
-* jq
-
+- waybar
+- hyprshot
+- hyprlock
+- hypridle
+- hyprpaper
+- swww
+- variety
+- jq
+- bibata-cursor-theme-bin
