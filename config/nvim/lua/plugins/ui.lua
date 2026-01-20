@@ -122,6 +122,21 @@ return {
 					lines = {
 						layout = "default",
 					},
+					files = {
+						hidden = true,
+						ignored = true,
+						exclude = {
+							".git",
+							"build",
+							".cache",
+							"dist",
+							"node_modules",
+							".venv",
+							".build",
+							"raw/.*",
+							".dart_tool",
+						},
+					},
 				},
 			},
 			styles = {
