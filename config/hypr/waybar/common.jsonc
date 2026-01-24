@@ -230,13 +230,13 @@
 	"custom/recording": {
 		"format": "{icon}",
 		"format-icons": {
-			"recording": "<span foreground='red'></span>",
-			"stopped": ""
+			"recording": "<span></span> Recording Screen", // stop icon
+			"stopped": "" // record icon
 		},
+		"tooltip": true,
 		"return-type": "json",
-		"exec": "if [ -f /tmp/recording_status ]; then echo '{\"icon\":\"recording\",\"tooltip\":\"Recording - Click to stop\"}'; else echo '{\"icon\":\"stopped\",\"tooltip\":\"\"}'; fi",
-		"interval": 1,
-		"on-click": "pkill wf-recorder && notify-send \"Recording stopped\" && rm -f /tmp/recording_status",
+		"exec": "$HOME/.config/hypr/scripts/recording-status.sh",
+		"on-click": "$HOME/.config/hypr/scripts/toggle-recording.sh",
 		"signal": 10
 	},
 	"custom/notifications": {

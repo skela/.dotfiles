@@ -136,11 +136,17 @@ window#waybar {
 #custom-notifications,
 #custom-background,
 #custom-clipboard,
+#custom-recording,
 #network,
 #temperature,
 #tray {
 	background: #222630;
 	color: #fdf6e3;
+}
+
+#custom-recording.recording {
+	background: #ff0000;
+	color: #ffffff;
 }
 
 #clock,
@@ -151,6 +157,7 @@ window#waybar {
 #disk,
 #temperature,
 #custom-clipboard,
+#custom-recording,
 #custom-notifications {
 	padding: 0 10px;
 }

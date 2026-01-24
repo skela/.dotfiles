@@ -661,6 +661,10 @@ function reload_aliases -d "Reload aliases"
     alias assume="source /usr/bin/assume.fish"
 end
 
+function reload_waybar -d "Reload Waybar"
+    pkill waybar && hyprctl dispatch exec waybar
+end
+
 function reload -d "Reload Config"
     reload_aliases
     reload_variables
