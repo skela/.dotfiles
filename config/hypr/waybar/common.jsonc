@@ -227,6 +227,18 @@
 		// "exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
 		"signal": 9
 	},
+	"custom/recording": {
+		"format": "{icon}",
+		"format-icons": {
+			"recording": "<span foreground='red'></span>",
+			"stopped": ""
+		},
+		"return-type": "json",
+		"exec": "if [ -f /tmp/recording_status ]; then echo '{\"icon\":\"recording\",\"tooltip\":\"Recording - Click to stop\"}'; else echo '{\"icon\":\"stopped\",\"tooltip\":\"\"}'; fi",
+		"interval": 1,
+		"on-click": "pkill wf-recorder && notify-send \"Recording stopped\" && rm -f /tmp/recording_status",
+		"signal": 10
+	},
 	"custom/notifications": {
 		"tooltip": false,
 		//"format": "{} {icon} ",
