@@ -137,6 +137,7 @@ return {
 							"raw/.*",
 							".dart_tool",
 							"__pycache__",
+							".cxx",
 						},
 					},
 				},
