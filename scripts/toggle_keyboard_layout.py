@@ -3,6 +3,7 @@
 import os
 import subprocess
 import socket
+from typing import Optional
 
 
 def change_to_norwegian():
@@ -28,7 +29,12 @@ elif layout == "gb":
 machine = socket.gethostname()
 
 # for machines running hyprland - hyprctl devices to list devices
-if machine == "aurora" or machine == "dark":
-	os.system("hyprctl switchxkblayout logitech-gaming-keyboard-g810 next")
-# if machine == "dark":
-# 	os.system("hyprctl switchxkblayout primax-hp-wired-desktop-320k-keyboard next")
+
+keyboard: Optional[str] = None
+if machine == "aurora":
+	keyboard = "logitech-gaming-keyboard-g810"
+elif machine == "dark":
+	keyboard = "keychron--keychron-link--keyboard"
+
+if keyboard is not None:
+	os.system(f"hyprctl switchxkblayout {keyboard} next")
