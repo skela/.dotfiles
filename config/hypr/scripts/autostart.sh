@@ -1,6 +1,7 @@
 #!/bin/bash
 
 waybar &
+# ironbar --config ~/.dotfiles/config/hypr/ironbar/config.json &
 
 hyprpaper &
 variety &

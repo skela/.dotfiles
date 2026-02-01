@@ -1,0 +1,96 @@
+{
+	"position": "top",
+	"height": 24,
+	"start": [
+		{
+			"type": "workspaces",
+			"format": "{icon}",
+			"name_map": {
+				"1": "",
+				"2": "",
+				"3": "",
+				"4": "",
+				"5": "",
+				"6": "",
+				"7": "",
+				"8": "",
+				"9": "󰝚",
+				"10": "",
+				"special": ""
+			},
+			"favorites": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+			"show_special": true,
+			"visible_only": false,
+			"show_empty": true
+		}
+	],
+	"center": [
+		{
+			"type": "focused",
+			"icon_size": 16
+		}
+	],
+	"end": [
+		{
+			"type": "custom",
+			"bar": [
+				{
+					"type": "button",
+					"label": "",
+					"tooltip": "Not recording – click to start",
+					"on_click": "!/home/skela/.dotfiles/config/hypr/scripts/toggle-recording.sh",
+					"show_if": "/home/skela/.dotfiles/config/hypr/scripts/recording-false.sh"
+				}
+			]
+		},
+		{
+			"type": "custom",
+			"bar": [
+				{
+					"type": "button",
+					"label": "<span foreground=\"#ff5555\"></span>",
+					"tooltip": "Recording – click to stop",
+					"on_click": "!/home/skela/.dotfiles/config/hypr/scripts/toggle-recording.sh",
+					"show_if": "/home/skela/.dotfiles/config/hypr/scripts/recording-true.sh"
+				}
+			]
+		},
+		{
+			"type": "custom",
+			"bar": [
+				{
+					"type": "button",
+					"label": "",
+					"tooltip": "{{1000:printf '%s' $(cliphist list | wc -l)}} clipboard items",
+					"on_click": "!kitty --class floating -e fish -c 'clipse $fish_pid'",
+					"on_click_right": "!kitty --class floating -e fish -c 'clipse $fish_pid'",
+					"on_click_middle": "!clipse -clear"
+				}
+			]
+		},
+		{
+			"type": "battery",
+			"show_if": "ls /sys/class/power_supply/ | grep --quiet '^BAT'"
+		},
+		{
+			"type": "network_manager",
+			"icon_size": 16
+		},
+		{
+			"type": "sys_info",
+			"format": ["{cpu_percent}% ", "{memory_percent}% "],
+			"interval": {
+				"cpu": 1
+			}
+		},
+		{
+			"type": "clock"
+		},
+		{
+			"type": "tray"
+		},
+		{
+			"type": "notifications"
+		}
+	]
+}
