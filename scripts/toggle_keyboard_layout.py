@@ -31,9 +31,7 @@ machine = socket.gethostname()
 # for machines running hyprland - hyprctl devices to list devices
 
 keyboard: Optional[str] = None
-if machine == "aurora":
-	keyboard = "logitech-gaming-keyboard-g810"
-elif machine == "dark":
+if machine == "dark" or machine == "aurora":
 	keyboard = "keychron--keychron-link--keyboard"
 
 if keyboard is not None:
