@@ -17,6 +17,7 @@ mouse_events   = [ "click", "scroll" ]
 title_format   = "Yazi: {cwd}"
 
 [preview]
+image						= "kitty"
 wrap            = "no"
 tab_size        = 2
 max_width       = 600
