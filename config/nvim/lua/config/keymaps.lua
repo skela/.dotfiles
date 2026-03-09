@@ -81,4 +81,5 @@ map_normal("<leader>nh", cmd("LazyHealth"), { desc = "Open lazy [h]ealth", remap
 map_normal("<leader>nm", cmd("Mason"), { desc = "Open [m]ason package manager", remap = true })
 map_normal("<leader>nn", Snacks.notifier.show_history, { desc = "Open recent [n]otifications", remap = true })
 
+
 return keymaps

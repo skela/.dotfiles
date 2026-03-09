@@ -97,12 +97,26 @@ return {
 						{ "L", function() require("utils.ui").show_code_options() end },
 					},
 				},
-				-- openscad_lsp = {
-				-- 	cmd = { "openscad-lsp", "--stdio" },
-				-- 	filetypes = { "openscad" },
-				-- 	root_dir = function(fname) return vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1]) end,
-				-- 	single_file_support = true,
-				-- },
+				openscad_lsp = {
+					keys = {
+						{
+							"<leader>cv",
+							function()
+								local file = vim.api.nvim_buf_get_name(0)
+								if file == "" then
+									vim.notify("No file path for current buffer", vim.log.levels.WARN)
+									return
+								end
+
+								local job_id = vim.fn.jobstart({ "openscad", file }, { detach = true })
+								if job_id <= 0 then
+									vim.notify("Failed to launch OpenSCAD", vim.log.levels.ERROR)
+								end
+							end,
+							desc = "Open current SCAD file in OpenSCAD",
+						},
+					},
+				},
 				sourcekit = {
 					on_attach = function(client, _)
 						client.server_capabilities.documentFormattingProvider = false
