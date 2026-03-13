@@ -4,39 +4,41 @@ import os
 import argparse
 import json
 import subprocess
-import threading
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-n","--names",help="The name(s) of the camera(s) (comma separated if multiple)")
-parser.add_argument("-i","--ip",help="An ip address")
-parser.add_argument("-l","--list",help="List known cameras",default=False,action="store_true")
+parser.add_argument("-n", "--names", help="The name(s) of the camera(s) (comma separated if multiple)")
+parser.add_argument("-i", "--ip", help="An ip address")
+parser.add_argument("-l", "--list", help="List known cameras", default=False, action="store_true")
 args = parser.parse_args()
+
 
 class Camera(object):
 
-	def __init__(self,d:dict):
+	def __init__(self, d: dict):
 		self.name = d["name"]
 		self.src = d["src"]
 
+
 class CameraCollection(object):
 
-	def __init__(self,d:dict):
+	def __init__(self, d: dict):
 		self.name = d["name"]
 		self.cameras = d["cameras"]
 		self.alt_names = []
 		if "alt_names" in d:
 			self.alt_names = d["alt_names"]
 
+
 class Cameras(object):
 
 	def __init__(self):
 
 		home = os.path.expanduser("~")
-		config = os.path.join(home,".config","cameras.json")
+		config = os.path.join(home, ".config", "cameras.json")
 		f = open(config)
 		d = json.loads(f.read())
 		f.close()
-		
+
 		cams = d["cameras"]
 		cameras = list()
 		for cam in cams:
@@ -50,13 +52,13 @@ class Cameras(object):
 			aliases.append(alias)
 		self.aliases = aliases
 
-	def get_camera(self,name:str) -> Camera:
+	def get_camera(self, name: str) -> Camera:
 		for cam in self.cameras:
 			if cam.name == name:
 				return cam
 		return None
 
-	def get_collection(self,name:str) -> list[Camera]:
+	def get_collection(self, name: str) -> list[Camera]:
 		for alias in self.aliases:
 			if alias.name == name or name in alias.alt_names:
 				cameras = list()
@@ -67,6 +69,7 @@ class Cameras(object):
 				if len(cameras) > 0:
 					return cameras
 		return None
+
 
 names = args.names
 chosen_cameras = list()
@@ -84,7 +87,7 @@ if args.list:
 		print(f" - {cam.name} @ {cam.src}")
 	exit(0)
 
-for name in names:	
+for name in names:
 	camera = cameras.get_camera(name)
 	if camera is not None:
 		chosen_cameras.append(camera)
@@ -94,15 +97,15 @@ for name in names:
 			chosen_cameras.extend(collection)
 
 if args.ip is not None:
-	chosen_cameras.append(Camera({"name":"temp","src":f"rtsp://{args.ip}/12:554"}))
+	chosen_cameras.append(Camera({"name": "temp", "src": f"rtsp://{args.ip}/12:554"}))
 
 if len(chosen_cameras) == 0:
-	exit(f"No cameras found with the name(s) {names}")	
+	exit(f"No cameras found with the name(s) {names}")
 
 processes = list()
 for camera in chosen_cameras:
 	cmd = f"ffplay -rtsp_transport tcp -i {camera.src}"
-	p = subprocess.Popen([cmd],shell=True)
+	p = subprocess.Popen([cmd], shell=True)
 	processes.append(p)
 
 try:
