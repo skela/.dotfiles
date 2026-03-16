@@ -1,4 +1,5 @@
 [Added Associations]
+application/pdf=org.gnome.Papers.desktop;
 application/x-extension-htm=firefox-developer-edition.desktop;
 application/x-extension-html=firefox-developer-edition.desktop;
 application/x-extension-shtml=firefox-developer-edition.desktop;
@@ -19,6 +20,7 @@ x-scheme-handler/mailto=userapp-Thunderbird-3BX0G3.desktop;
 x-scheme-handler/mid=userapp-Thunderbird-3BX0G3.desktop;
 
 [Default Applications]
+application/pdf=org.gnome.Papers.desktop;
 application/x-extension-htm=firefox-developer-edition.desktop
 application/x-extension-html=firefox-developer-edition.desktop
 application/x-extension-shtml=firefox-developer-edition.desktop
