@@ -1,5 +1,4 @@
 return {
-
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = function(_, opts)
@@ -18,6 +17,7 @@ return {
 				"python",
 				"query",
 				"regex",
+				"svelte",
 				"tsx",
 				"typescript",
 				"vim",

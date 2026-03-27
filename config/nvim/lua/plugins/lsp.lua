@@ -25,6 +25,7 @@ return {
 				"shellcheck",
 				"shfmt",
 				"stylua",
+				"svelte-language-server",
 				"vtsls",
 				"yapf",
 				"zls",
@@ -109,9 +110,7 @@ return {
 								end
 
 								local job_id = vim.fn.jobstart({ "openscad", file }, { detach = true })
-								if job_id <= 0 then
-									vim.notify("Failed to launch OpenSCAD", vim.log.levels.ERROR)
-								end
+								if job_id <= 0 then vim.notify("Failed to launch OpenSCAD", vim.log.levels.ERROR) end
 							end,
 							desc = "Open current SCAD file in OpenSCAD",
 						},
@@ -122,6 +121,10 @@ return {
 						client.server_capabilities.documentFormattingProvider = false
 						client.server_capabilities.documentRangeFormattingProvider = false
 					end,
+				},
+				svelte = {},
+				vtsls = {
+					filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
 				},
 				ols = {},
 				kotlin_language_server = {},
