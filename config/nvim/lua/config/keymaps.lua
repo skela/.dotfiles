@@ -24,6 +24,58 @@ end
 
 local keymaps = {}
 
+-- Git helper functions
+local function get_github_url()
+	local remote_url = vim.fn.systemlist("git config --get remote.origin.url")[1]
+	if not remote_url then
+		vim.notify("Not a git repository or no origin remote", vim.log.levels.ERROR)
+		return nil
+	end
+
+	-- Convert SSH URL to HTTPS format
+	-- git@github.com:user/repo.git -> https://github.com/user/repo
+	local github_url = remote_url:gsub("^git@github%.com:", "https://github.com/")
+	github_url = github_url:gsub("%.git$", "")
+
+	-- Handle HTTPS URLs
+	github_url = github_url:gsub("^https://github%.com/(.*)%.git$", "https://github.com/%1")
+
+	return github_url
+end
+
+local function open_commit_in_github()
+	local github_url = get_github_url()
+	if not github_url then return end
+
+	local line = vim.fn.line(".")
+	local file = vim.fn.expand("%:p")
+
+	-- Get the commit hash for the current line
+	local blame_output = vim.fn.systemlist("git blame -L " .. line .. "," .. line .. " --porcelain " .. file)[1]
+	if not blame_output then
+		vim.notify("Could not get git blame information", vim.log.levels.ERROR)
+		return
+	end
+
+	local commit_hash = blame_output:match("^(%x+)")
+	if not commit_hash or commit_hash:match("^0+$") then
+		vim.notify("Line not committed yet", vim.log.levels.WARN)
+		return
+	end
+
+	local url = github_url .. "/commit/" .. commit_hash
+	vim.fn.system("xdg-open '" .. url .. "'")
+	vim.notify("Opening: " .. url)
+end
+
+local function open_repo_in_github()
+	local github_url = get_github_url()
+	if not github_url then return end
+
+	vim.fn.system("xdg-open '" .. github_url .. "'")
+	vim.notify("Opening: " .. github_url)
+end
+
 keymaps.flutter = function(_, _) -- client,buffer
 	map_normal("<leader>cO", cmd(":FlutterOutlineToggle"), { desc = "Property/Function [O]utline", remap = true })
 	map_normal("<leader>cD", cmd(":FlutterDevices"), { desc = "[D]evices (Flutter)", remap = true })
@@ -56,6 +108,8 @@ map_normal("<leader>cs", cmd(":noa w"), { desc = "Save file without formatting",
 
 -- Git
 map_normal("<leader>gb", cmd(":Gitsigns toggle_current_line_blame"), { desc = "Toggle Blame", remap = true })
+map_normal("<leader>go", open_commit_in_github, { desc = "Open commit in GitHub", remap = true })
+map_normal("<leader>gO", open_repo_in_github, { desc = "Open repo in GitHub", remap = true })
 
 -- map_normal("<leader>aD", cmd(':lua vim.fn.system("rm -Rf ~/.local/state/nvim/avante")<CR>'), { desc = "Clear Avante", noremap = true, silent = true })
 
