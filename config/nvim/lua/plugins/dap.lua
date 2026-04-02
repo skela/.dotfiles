@@ -49,6 +49,12 @@ return {
 				command = "/usr/bin/lldb",
 				name = "lldb",
 			}
+			dap.adapters.swift = {
+				type = "executable",
+				command = "/usr/lib/swift/bin/lldb-dap",
+				name = "swift",
+			}
+
 			dap.adapters.codelldb = {
 				type = "server",
 				port = "${port}",
@@ -60,14 +66,21 @@ return {
 			dap.configurations.swift = {
 				{
 					name = "Launch",
-					type = "codelldb",
+					type = "swift",
 					request = "launch",
 					program = function()
-						vim.fn.system("swift build")
-						return "${workspaceFolder}/.build/debug/" .. vim.fn.substitute(vim.fn.getcwd(), "^.*/", "", "")
+						local has_package = vim.fn.filereadable(vim.fn.getcwd() .. "/Package.swift") == 1
+						if has_package then
+							vim.fn.system("swift build")
+							return "${workspaceFolder}/.build/debug/" .. vim.fn.substitute(vim.fn.getcwd(), "^.*/", "", "")
+						else
+							local file = vim.fn.expand("%:p")
+							local out = "/tmp/" .. vim.fn.expand("%:t:r")
+							vim.fn.system("swiftc -g " .. vim.fn.shellescape(file) .. " -o " .. vim.fn.shellescape(out))
+							return out
+						end
 					end,
 					cwd = "${workspaceFolder}",
-					-- liblldb = libLLDB,
 					stopOnEntry = false,
 					args = {},
 				},

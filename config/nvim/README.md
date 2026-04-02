@@ -5,6 +5,21 @@ Refer to the [documentation](https://lazyvim.github.io/installation) to get star
 
 ## Setup (First time)
 
+## Additional Programs
+
+Here's a list of additional programs that will need to be installed on the system for things to work correctly.
+
+- fzf
+- luarocks
+- make
+- ripgrep (`rg`)
+- swift
+- swiftformat
+- flutter (Flutter SDK)
+- lldb
+- markdownlint-cli2
+- python39 (for swift debug)
+
 ## Check Health
 
 :checkhealth

@@ -153,7 +153,7 @@ return {
 					require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
 					return true
 				end,
-				pyright = function(_, _) require("dap-python").setup() end,
+				pyright = function(_, _) require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python") end,
 			},
 		},
 	},
