@@ -85,6 +85,28 @@ return {
 					args = {},
 				},
 			}
+			dap.configurations.c = {
+				{
+					name = "Launch",
+					type = "codelldb",
+					request = "launch",
+					program = function()
+						local has_makefile = vim.fn.filereadable(vim.fn.getcwd() .. "/Makefile") == 1
+						if has_makefile then
+							vim.fn.system("make")
+							return vim.fn.input("Binary path: ", vim.fn.getcwd() .. "/", "file")
+						else
+							local file = vim.fn.expand("%:p")
+							local out = "/tmp/" .. vim.fn.expand("%:t:r")
+							vim.fn.system("gcc -g " .. vim.fn.shellescape(file) .. " -o " .. vim.fn.shellescape(out))
+							return out
+						end
+					end,
+					cwd = "${workspaceFolder}",
+					stopOnEntry = false,
+					args = {},
+				},
+			}
 			dap.configurations.zig = {
 				{
 					name = "Launch",
