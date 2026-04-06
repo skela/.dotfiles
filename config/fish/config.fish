@@ -596,7 +596,7 @@ end
 function reload_variables -d "Reload Environment variables"
     switch (uname -s)
         case Linux
-            set -xg CONTAINER_PROGRAM podman
+            # set -xg CONTAINER_PROGRAM podman
 
             # set -xg FVM_CACHE_PATH "$HOME/files/sdks/fvm"
             # set -xg FLUTTER_HOME "$HOME/files/sdks/fvm/default"
