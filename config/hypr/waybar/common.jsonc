@@ -239,6 +239,15 @@
 		"on-click": "$HOME/.config/hypr/scripts/toggle-recording.sh",
 		"signal": 10
 	},
+	"custom/idle-inhibit": {
+		"format": "{}",
+		"return-type": "json",
+		"interval": "once",
+		"exec": "$HOME/.config/hypr/scripts/idle-inhibit-status.sh",
+		"on-click": "$HOME/.config/hypr/scripts/toggle-idle-inhibit.sh",
+		"signal": 12,
+		"tooltip": true
+	},
 	"custom/notifications": {
 		"tooltip": false,
 		//"format": "{} {icon} ",
