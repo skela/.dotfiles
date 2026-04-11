@@ -1,4 +1,3 @@
-# If you change this and need to have ghostty reload, press `ctrl + shift + ,`
 
 app-notifications = no-clipboard-copy
 clipboard-read = allow
