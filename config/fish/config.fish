@@ -376,8 +376,20 @@ function __auto_source_venv --on-variable PWD --description "Activate/Deactivate
     end
     # If virtualenv activated but we are not in a git directory, deactivate.
     if test -n "$VIRTUAL_ENV"
-        deactivate
+        if functions -q deactivate
+            deactivate
+        else
+            set -e VIRTUAL_ENV
+            set -e VIRTUAL_ENV_PROMPT
+        end
     end
+end
+
+# Clear any VIRTUAL_ENV inherited from the parent process (e.g. tmux on macOS)
+# without triggering a full activation that would interfere with fish_prompt setup.
+if test -n "$VIRTUAL_ENV"; and not functions -q deactivate
+    set -e VIRTUAL_ENV
+    set -e VIRTUAL_ENV_PROMPT
 end
 
 # ===========================
