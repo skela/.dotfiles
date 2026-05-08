@@ -42,3 +42,4 @@ x-scheme-handler/http=firefox-developer-edition.desktop
 x-scheme-handler/https=firefox-developer-edition.desktop
 x-scheme-handler/mailto=userapp-Thunderbird-3BX0G3.desktop
 x-scheme-handler/mid=userapp-Thunderbird-3BX0G3.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
