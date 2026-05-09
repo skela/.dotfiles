@@ -2,7 +2,11 @@
   "FixCursorHold.nvim": { "branch": "master", "commit": "1900f89dc17c603eec29960f57c00bd9ae696495" },
   "LazyVim": { "branch": "main", "commit": "83d90f339defdb109a6ede333865a66ffc7ef6aa" },
   "LuaSnip": { "branch": "master", "commit": "642b0c595e11608b4c18219e93b88d7637af27bc" },
+<<<<<<< HEAD
   "SchemaStore.nvim": { "branch": "main", "commit": "1ccbd3720b5064146b16d7761957da302ea1e86f" },
+=======
+  "SchemaStore.nvim": { "branch": "main", "commit": "7127911cc824a1d2f600492edd9667b476cf3eda" },
+>>>>>>> 0bce06d (welcome sparky + latest nvim and variety)
   "baleia.nvim": { "branch": "main", "commit": "32617940adb2eea56e85a64883a19961ceac9641" },
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
@@ -16,7 +20,11 @@
   "flash.nvim": { "branch": "main", "commit": "fcea7ff883235d9024dc41e638f164a450c14ca2" },
   "flutter-tools.nvim": { "branch": "main", "commit": "7d1acfd139215e02d2784733af69a61aaebe06e8" },
   "friendly-snippets": { "branch": "main", "commit": "6cd7280adead7f586db6fccbd15d2cac7e2188b9" },
+<<<<<<< HEAD
   "fzf-lua": { "branch": "main", "commit": "33fe4b6f0c817c4d99a7baeea82c4d17e57efd64" },
+=======
+  "fzf-lua": { "branch": "main", "commit": "44816af2465bb0a17ae0f1f2d8a4f9c3df524fcd" },
+>>>>>>> 0bce06d (welcome sparky + latest nvim and variety)
   "gitsigns.nvim": { "branch": "main", "commit": "dd3f588bacbeb041be6facf1742e42097f62165d" },
   "grug-far.nvim": { "branch": "main", "commit": "21790e59dd0109a92a70cb874dd002af186314f5" },
   "harpoon": { "branch": "harpoon2", "commit": "87b1a3506211538f460786c23f98ec63ad9af4e5" },
@@ -65,7 +73,7 @@
   "quicktest.nvim": { "branch": "main", "commit": "09f568e376fdf46e44ed7426e5609a113eea010e" },
   "render-markdown.nvim": { "branch": "main", "commit": "629eb9533ec989d9d5c6cab8f3ad5372422c24e0" },
   "rust-tools.nvim": { "branch": "master", "commit": "676187908a1ce35ffcd727c654ed68d851299d3e" },
-  "rustaceanvim": { "branch": "master", "commit": "b25d186481624964523fee34f44c529b101c7435" },
+  "rustaceanvim": { "branch": "main", "commit": "524d8bedd31c0e5ca6de4fa344750401d109c0af" },
   "snacks.nvim": { "branch": "main", "commit": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e" },
   "telescope-dap.nvim": { "branch": "master", "commit": "783366bd6c1e7fa0a5c59c07db37f49c805a28df" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "b25b749b9db64d375d782094e2b9dce53ad53a40" },

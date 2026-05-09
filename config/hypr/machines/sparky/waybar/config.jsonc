@@ -1,0 +1,39 @@
+{
+	"output": ["eDP-1"],
+	"modules-left": [
+		"hyprland/workspaces",
+		"custom/right-arrow-light-end",
+		"custom/right-arrow-dark-end"
+	],
+	"modules-center": ["hyprland/window"],
+	"modules-right": [
+		"custom/left-arrow-light-start",
+		"custom/left-arrow-dark-start",
+		"custom/recording",
+		"custom/clipboard",
+		"custom/idle-inhibit",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"network",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"pulseaudio",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"cpu",
+		"memory",
+		"temperature",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"hyprland/language",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"clock",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"custom/pacman",
+		"tray",
+		"custom/notifications"
+	],
+	"include": ["~/.dotfiles/config/hypr/waybar/common.jsonc"]
+}
