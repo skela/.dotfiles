@@ -8,7 +8,6 @@
 - hypridle
 - hyprpaper
 - hyprpm
-- swww
 - variety
 - jq
 - bibata-cursor-theme-bin

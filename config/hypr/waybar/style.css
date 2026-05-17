@@ -161,11 +161,12 @@ window#waybar {
 #battery,
 #disk,
 #temperature,
+#network,
 #custom-clipboard,
 #custom-recording,
 #custom-idle-inhibit,
 #custom-notifications {
-	padding: 0 10px;
+	padding: 0 6px;
 }
 
 #custom-background {
