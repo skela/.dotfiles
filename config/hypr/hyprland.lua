@@ -1,4 +1,3 @@
--- Hostname detection for per-machine config
 local hostname = "unknown"
 local f = io.open("/etc/hostname", "r")
 if f then
@@ -8,7 +7,6 @@ end
 
 local home = os.getenv("HOME")
 
--- Monitors (per-machine)
 if hostname == "aurora" then
 	hl.monitor({ output = "DP-1", mode = "2560x1440", position = "0x0", scale = 1 })
 	hl.monitor({ output = "HDMI-A-1", mode = "2560x1440", position = "2560x0", scale = 1 })
@@ -18,9 +16,15 @@ elseif hostname == "dark" then
 	hl.monitor({ output = "DP-1", mode = "2560x1440", position = "0x0", scale = 1 })
 	hl.monitor({ output = "DP-4", mode = "2560x1440", position = "2560x0", scale = 1 })
 	hl.monitor({ output = "DP-3", mode = "2560x1440", position = "5120x0", scale = 1 })
+else
+	hl.monitor({
+		output = "",
+		mode = "preferred",
+		position = "auto",
+		scale = "auto",
+	})
 end
 
--- Colors (Catppuccin Macchiato)
 local colors = {
 	rosewater = "rgb(f4dbd6)",
 	flamingo = "rgb(f0c6c6)",
@@ -50,7 +54,6 @@ local colors = {
 	crust = "rgb(181926)",
 }
 
--- Environment variables
 hl.env("GTK_THEME", "Adwaita-dark")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XCURSOR_SIZE", "24")
@@ -60,7 +63,6 @@ hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("QT_QPA_PLATFORMTHEME", "hyprqt6engine")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 
--- Autostart
 hl.on("hyprland.start", function()
 	hl.exec_cmd(home .. "/.config/hypr/scripts/autostart.sh")
 	hl.exec_cmd("hyprctl setcursor Bibata-Modern-Ice 24")
@@ -70,7 +72,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("[workspace 10 silent] firefox-developer-edition")
 end)
 
--- Input
 hl.config({
 	input = {
 		kb_layout = "gb,no",
@@ -79,18 +80,25 @@ hl.config({
 		touchpad = {
 			natural_scroll = false,
 		},
+		repeat_rate = 35,
+		repeat_delay = 200,
 	},
 })
 
--- General
+hl.gesture({
+	fingers = 3,
+	direction = "horizontal",
+	action = "workspace",
+})
+
 hl.config({
 	general = {
 		gaps_in = 5,
-		gaps_out = 10,
+		gaps_out = 5,
 		border_size = 2,
 		col = {
 			active_border = {
-				colors = { "rgba(cad3f5ee)", "rgba(b7bdf869)", "rgba(b7bdf869)", "rgba(cad3f5ee)" },
+				colors = { "rgba(33ccffee)", "rgba(00ff99ee)" },
 				angle = 45,
 			},
 			inactive_border = "rgba(b7bdf869)",
@@ -100,7 +108,6 @@ hl.config({
 	},
 })
 
--- Decoration
 hl.config({
 	decoration = {
 		rounding = 7,
@@ -128,15 +135,33 @@ hl.config({
 	},
 })
 
--- Animations
-hl.curve("myBezier", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1.05 } } })
+-- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
+hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
+hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1 } } })
+hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
+hl.curve("almostLinear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1 } } })
+hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
 
-hl.animation({ leaf = "windows", enabled = true, speed = 2, curve = "myBezier" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 7, curve = "default", style = "popin 80%" })
-hl.animation({ leaf = "border", enabled = true, speed = 10, curve = "default" })
-hl.animation({ leaf = "borderangle", enabled = true, speed = 8, curve = "default" })
-hl.animation({ leaf = "fade", enabled = true, speed = 7, curve = "default" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 2, curve = "default" })
+-- Default springs
+hl.curve("easy", { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
+
+hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
+hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
+hl.animation({ leaf = "windows", enabled = true, speed = 4.79, spring = "easy" })
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 4.1, spring = "easy", style = "popin 87%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
+hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, bezier = "almostLinear" })
+hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "quick" })
+hl.animation({ leaf = "layers", enabled = true, speed = 3.81, bezier = "easeOutQuint" })
+hl.animation({ leaf = "layersIn", enabled = true, speed = 4, bezier = "easeOutQuint", style = "fade" })
+hl.animation({ leaf = "layersOut", enabled = true, speed = 1.5, bezier = "linear", style = "fade" })
+hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.79, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
 
 -- Layouts
 hl.config({
@@ -151,12 +176,12 @@ hl.config({
 })
 
 -- Device
-hl.config({
-	device = {
-		name = "epic-mouse-v1",
-		sensitivity = -0.5,
-	},
-})
+-- hl.config({
+-- 	device = {
+-- 		name = "epic-mouse-v1",
+-- 		sensitivity = -0.5,
+-- 	},
+-- })
 
 -- Misc
 hl.config({
@@ -203,28 +228,28 @@ hl.config({
 	},
 })
 
--- Workspaces
--- TODO: workspace config if needed (workspace 1 is default)
-
 -- Keybinds
-local mainMod = "SUPER"
+local main_mod = "SUPER"
 local menu = "tofi-drun --drun-launch=true"
 local browser = "firefox-developer-edition"
 local files = "cosmic-files"
 
 -- General binds
-hl.bind(mainMod .. " + return", hl.dsp.exec_cmd("ghostty --gtk-single-instance=true"))
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd("hyprctl dispatch killactive"))
-hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("hyprctl dispatch exit"))
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(home .. "/.dotfiles/scripts/toggle_keyboard_layout.py"))
-hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("hyprctl dispatch fullscreen 0"))
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("hyprctl dispatch fullscreen 1"))
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(files))
+hl.bind(main_mod .. " + return", hl.dsp.exec_cmd("ghostty --gtk-single-instance=true"))
+hl.bind(main_mod .. " + Q", hl.dsp.window.close())
+hl.bind(
+	main_mod .. " + SHIFT + Q",
+	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
+)
+hl.bind(main_mod .. " + W", hl.dsp.exec_cmd(browser))
+hl.bind(main_mod .. " + D", hl.dsp.exec_cmd(menu))
+hl.bind(main_mod .. " + SPACE", hl.dsp.exec_cmd(home .. "/.dotfiles/scripts/toggle_keyboard_layout.py"))
+hl.bind(main_mod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+hl.bind(main_mod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(main_mod .. " + N", hl.dsp.exec_cmd(files))
 hl.bind("CONTROL + ALT + Q", hl.dsp.exec_cmd("pidof hyprlock || (hyprlock)"))
-hl.bind("CONTROL + ALT + left", hl.dsp.exec_cmd("hyprctl dispatch workspace -1"))
-hl.bind("CONTROL + ALT + right", hl.dsp.exec_cmd("hyprctl dispatch workspace +1"))
+hl.bind("CONTROL + ALT + left", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind("CONTROL + ALT + right", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(
 	"CONTROL + ALT + C",
 	hl.dsp.exec_cmd(
@@ -232,66 +257,66 @@ hl.bind(
 	)
 )
 hl.bind("CONTROL + ALT + P", hl.dsp.exec_cmd("1password --quick-access"))
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("firefox-developer-edition --new-window https://chatgpt.com"))
+hl.bind(main_mod .. " + A", hl.dsp.exec_cmd("firefox-developer-edition --new-window https://chatgpt.com"))
 
 -- Waybar
-hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("killall -SIGUSR2 waybar"))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/toggle_waybar.sh"))
+hl.bind(main_mod .. " + SHIFT + R", hl.dsp.exec_cmd("killall -SIGUSR2 waybar"))
+hl.bind(main_mod .. " + B", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/toggle_waybar.sh"))
 
 -- Window management
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("hyprctl dispatch togglefloating"))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("hyprctl dispatch pseudo"))
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg togglesplit"))
+hl.bind(main_mod .. " + T", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
+hl.bind(main_mod .. " + V", hl.dsp.layout("togglesplit"))
 
 -- Screenshots
-hl.bind(mainMod .. " + CONTROL + SHIFT + ALT + S", hl.dsp.exec_cmd("hyprshot -m output"))
-hl.bind(mainMod .. " + CONTROL + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m window"))
-hl.bind(mainMod .. " + CONTROL + S", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("hyprshot -m region"))
+hl.bind(main_mod .. " + CONTROL + SHIFT + ALT + S", hl.dsp.exec_cmd("hyprshot -m output"))
+hl.bind(main_mod .. " + CONTROL + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m window"))
+hl.bind(main_mod .. " + CONTROL + S", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
+hl.bind(main_mod .. " + S", hl.dsp.exec_cmd("hyprshot -m region"))
 
 -- Screen recording
-hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(home .. "/.dotfiles/config/hypr/scripts/toggle-recording.sh"))
+hl.bind(main_mod .. " + SHIFT + V", hl.dsp.exec_cmd(home .. "/.dotfiles/config/hypr/scripts/toggle-recording.sh"))
 
 -- Focus movement
-hl.bind(mainMod .. " + left", hl.dsp.exec_cmd("hyprctl dispatch movefocus l"))
-hl.bind(mainMod .. " + right", hl.dsp.exec_cmd("hyprctl dispatch movefocus r"))
-hl.bind(mainMod .. " + up", hl.dsp.exec_cmd("hyprctl dispatch movefocus u"))
-hl.bind(mainMod .. " + down", hl.dsp.exec_cmd("hyprctl dispatch movefocus d"))
-hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd("hyprctl dispatch cyclenext preservefullscreen"))
+hl.bind(main_mod .. " + left", hl.dsp.focus({ direction = "left" }))
+hl.bind(main_mod .. " + right", hl.dsp.focus({ direction = "right" }))
+hl.bind(main_mod .. " + up", hl.dsp.focus({ direction = "up" }))
+hl.bind(main_mod .. " + down", hl.dsp.focus({ direction = "down" }))
+hl.bind(main_mod .. " + TAB", hl.dsp.window.cycle_next())
 
 -- Move windows
-hl.bind(mainMod .. " + CONTROL + left", hl.dsp.exec_cmd("hyprctl dispatch movewindow l"))
-hl.bind(mainMod .. " + CONTROL + right", hl.dsp.exec_cmd("hyprctl dispatch movewindow r"))
-hl.bind(mainMod .. " + CONTROL + up", hl.dsp.exec_cmd("hyprctl dispatch movewindow u"))
-hl.bind(mainMod .. " + CONTROL + down", hl.dsp.exec_cmd("hyprctl dispatch movewindow d"))
+hl.bind(main_mod .. " + CONTROL + left", hl.dsp.window.move({ direction = "left" }))
+hl.bind(main_mod .. " + CONTROL + right", hl.dsp.window.move({ direction = "right" }))
+hl.bind(main_mod .. " + CONTROL + up", hl.dsp.window.move({ direction = "up" }))
+hl.bind(main_mod .. " + CONTROL + down", hl.dsp.window.move({ direction = "down" }))
 
 -- Move workspace to other monitor
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor +1"))
+hl.bind(main_mod .. " + O", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor +1"))
 
 -- Resize
-hl.bind(mainMod .. " + equal", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg splitratio +0.05"))
-hl.bind(mainMod .. " + minus", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg splitratio -0.05"))
+hl.bind(main_mod .. " + equal", hl.dsp.window.resize({ x = 50, y = 50, relative = true }))
+hl.bind(main_mod .. " + minus", hl.dsp.window.resize({ x = -50, y = -50, relative = true }))
 
 -- Workspaces (qtile-like swap)
 for i = 0, 9 do
 	local ws = i == 0 and 10 or i
 	local key = tostring(i)
-	hl.bind(mainMod .. " + " .. key, hl.dsp.exec_cmd(home .. "/.dotfiles/config/hypr/scripts/qtile_like_swap.sh " .. ws))
-	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent " .. ws))
+	hl.bind(main_mod .. " + " .. key, hl.dsp.exec_cmd(home .. "/.dotfiles/config/hypr/scripts/qtile_like_swap.sh " .. ws))
+	hl.bind(main_mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = ws }))
 end
 
 hl.bind(
-	mainMod .. " + C",
+	main_mod .. " + C",
 	hl.dsp.exec_cmd("python3 " .. home .. "/.dotfiles/config/hypr/scripts/toggle_workspace_4.py")
 )
 
 -- Scroll through workspaces
-hl.bind(mainMod .. " + mouse_down", hl.dsp.exec_cmd("hyprctl dispatch workspace e+1"))
-hl.bind(mainMod .. " + mouse_up", hl.dsp.exec_cmd("hyprctl dispatch workspace e-1"))
+hl.bind(main_mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(main_mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
 -- Scratchpad
-hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("hyprctl dispatch togglespecialworkspace"))
-hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace special"))
+hl.bind(main_mod .. " + X", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(main_mod .. " + SHIFT + X", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Media keys
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(home .. "/.dotfiles/scripts/volume_up.sh"), { locked = true })
@@ -303,14 +328,14 @@ hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(home .. "/.dotfiles/scripts/player_play
 hl.bind("XF86AudioStop", hl.dsp.exec_cmd(home .. "/.dotfiles/scripts/player_stop.sh"), { locked = true })
 
 -- Groups
-hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(home .. "/.dotfiles/config/hypr/scripts/group_absorb.sh"))
-hl.bind(mainMod .. " + period", hl.dsp.exec_cmd(home .. "/.dotfiles/config/hypr/scripts/group_eject.sh"))
-hl.bind(mainMod .. " + bracketleft", hl.dsp.exec_cmd("hyprctl dispatch changegroupactive b"))
-hl.bind(mainMod .. " + bracketright", hl.dsp.exec_cmd("hyprctl dispatch changegroupactive f"))
+hl.bind(main_mod .. " + comma", hl.dsp.exec_cmd(home .. "/.dotfiles/config/hypr/scripts/group_absorb.sh"))
+hl.bind(main_mod .. " + period", hl.dsp.exec_cmd(home .. "/.dotfiles/config/hypr/scripts/group_eject.sh"))
+hl.bind(main_mod .. " + bracketleft", hl.dsp.exec_cmd("hyprctl dispatch changegroupactive b"))
+hl.bind(main_mod .. " + bracketright", hl.dsp.exec_cmd("hyprctl dispatch changegroupactive f"))
 
 -- Mouse binds
-hl.bind(mainMod .. " + mouse:272", hl.dsp.exec_cmd("hyprctl dispatch movewindow"), { mouse = true })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.exec_cmd("hyprctl dispatch resizewindow"), { mouse = true })
+hl.bind(main_mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(main_mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Window rules
 hl.window_rule({ match = { class = "org.inkscape.Inkscape" }, workspace = "5", no_initial_focus = true })
