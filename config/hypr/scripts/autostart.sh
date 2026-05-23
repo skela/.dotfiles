@@ -13,7 +13,3 @@ clipse -listen &
 swaync &
 
 hypridle &
-
-~/.config/hypr/scripts/media-idleinhibit.sh &
-
-streamdeck -n &
