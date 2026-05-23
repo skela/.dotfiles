@@ -1,174 +1,133 @@
 * {
-	font-size: 12px;
-	/* font-family: monospace; */
-	font-family:
-		Roboto, FontAwesome7Free, FontAwesome6Free, Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	font-family: Roboto, FontAwesome7Free, FontAwesome6Free, Helvetica, Arial, sans-serif;
 }
 
 window#waybar {
-	background: transparent;
-	color: #fdf6e3;
+	background: #050812;
+	color: #d0e4f8;
+	border-bottom: 1px solid rgba(0, 168, 248, 0.18);
+	box-shadow: 0 1px 20px rgba(0, 168, 248, 0.07);
 }
 
 .modules-right,
 .modules-left {
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 4px;
+	padding-right: 4px;
 }
 
 .modules-center,
 .modules-right,
 .modules-left {
-	padding-top: 8px;
-	padding-bottom: 2px;
+	padding-top: 4px;
+	padding-bottom: 4px;
 }
 
+/* ── Workspaces ── */
 #workspaces {
-	padding-left: 0;
-	padding-right: 3px;
-	border-radius: 0 3px 3px 0;
+	background: transparent;
+	padding: 0;
+	margin: 0 4px 0 0;
 }
 
 #workspaces button {
-	padding: 0 5px;
-	background-color: transparent;
-	color: #ffffff;
-	border-radius: 0;
+	padding: 2px 8px;
+	background-color: #0a1428;
+	color: #2d5070;
+	border-radius: 5px;
+	margin: 0 2px;
+	min-width: 28px;
+	border: none;
+	transition: background 150ms, color 150ms, box-shadow 150ms;
 }
 
-#workspaces button:hover,
-#workspaces button.focused {
-	background-color: black;
-	color: #fdf6e3;
-	box-shadow: inset 0 -3px #d08770;
-}
-
-#workspaces button.urgent {
-	box-shadow: inset 0 -3px #eb4d4b;
-}
-
-#workspaces button.visible {
-	background-color: black;
+#workspaces button:hover {
+	background-color: #0e1e3a;
+	color: #7ab8e8;
+	box-shadow: none;
 }
 
 #workspaces button.active {
-	background-color: black;
-	box-shadow: inset 0 -3px #5e81ac;
+	background-color: #071526;
+	color: #00a8f8;
+	box-shadow: inset 0 -2px #00a8f8;
+}
+
+#workspaces button.active.empty {
+	color: #00a8f8;
+}
+
+#workspaces button.urgent {
+	color: #ff4060;
+	box-shadow: inset 0 -2px #ff4060;
 }
 
 #workspaces button.empty {
-	opacity: 0.2;
-}
-
-#custom-right-arrow-dark-end,
-#custom-left-arrow-light-start {
-	color: transparent;
-}
-
-#custom-right-arrow-light-end,
-#custom-left-arrow-dark-start {
-	color: #222630;
 	background-color: transparent;
+	color: #6a90b8;
+	opacity: 0.5;
 }
 
-#custom-left-arrow-light-start,
-#custom-left-arrow-dark-start,
-#custom-right-arrow-light-end,
-#custom-right-arrow-dark-end,
-#custom-right-arrow-dark,
-#custom-left-arrow-dark,
-#custom-right-arrow-light,
-#custom-left-arrow-light {
-	font-size: 20;
+/* ── Window title ── */
+#window {
+	color: #6a90b8;
+	font-size: 12px;
 }
 
-#custom-right-arrow-light,
-#custom-left-arrow-light {
-	color: #191d24;
-	background-color: #191d24;
-}
-
-#custom-right-arrow-dark,
-#custom-left-arrow-dark {
-	background-color: #191d24;
-	color: #222630;
-}
-
-#custom-right-arrow-light,
-#custom-left-arrow-light {
-	background: #222630;
-	color: #191d24;
-}
-
-#pulseaudio,
-#clock.one {
-	border-radius: 2px 0 0 2px;
-}
-
-#clock.three {
-	border-radius: 0 2px 2px 0;
-}
-
-#custom-pacman,
-#idle_inhibitor {
-	padding: 0 10px 0 4px;
-}
-
-#tray,
-#language {
-	padding: 0 4px;
-}
-
-#clock.one,
-#clock.two,
-#clock.three,
+/* ── All module chips ── */
 #clock,
-#workspaces,
 #pulseaudio,
 #memory,
 #cpu,
-#custom-spotify,
-#custom-pacman,
+#temperature,
 #battery,
 #disk,
+#network,
 #language,
-#idle_inhibitor,
-#custom-notifications,
-#custom-background,
+#custom-pacman,
+#custom-spotify,
 #custom-clipboard,
 #custom-recording,
 #custom-idle-inhibit,
-#network,
-#temperature,
+#custom-notifications,
+#custom-background,
+#idle_inhibitor,
 #tray {
-	background: #222630;
-	color: #fdf6e3;
+	background: #0a1428;
+	color: #7a9ec0;
+	padding: 2px 9px;
+	border-radius: 6px;
+	margin: 2px 2px;
+}
+
+
+/* ── States ── */
+#network.disconnected {
+	color: #ff4060;
+}
+
+#pulseaudio.muted {
+	color: #2a4060;
+}
+
+#battery.warning {
+	color: #e8a830;
+}
+
+#battery.critical {
+	color: #ff4060;
+}
+
+#temperature.critical {
+	color: #ff4060;
 }
 
 #custom-recording.recording {
-	background: #ff0000;
-	color: #ffffff;
+	background: #060e1e;
+	color: #00a8f8;
+	box-shadow: 0 0 0 1px rgba(0, 168, 248, 0.28);
 }
 
 #custom-idle-inhibit.active {
-	color: #ebcb8b;
-}
-
-#clock,
-#pulseaudio,
-#memory,
-#cpu,
-#battery,
-#disk,
-#temperature,
-#network,
-#custom-clipboard,
-#custom-recording,
-#custom-idle-inhibit,
-#custom-notifications {
-	padding: 0 6px;
-}
-
-#custom-background {
-	padding: 0 5px;
+	color: #00a8f8;
 }
