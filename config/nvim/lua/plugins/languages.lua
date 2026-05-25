@@ -74,6 +74,7 @@ return {
 					on_attach = function(client, buffer)
 						-- require("user.lsp.handlers").on_attach(client, buffer)
 						require("config.keymaps").flutter(client, buffer)
+						vim.lsp.document_color.enable(true, { bufnr = buffer })
 					end,
 					-- capabilities = require("user.lsp.handlers").capabilities,
 					settings = {
@@ -90,15 +91,6 @@ return {
 						},
 						enableSnippets = true,
 						updateImportsOnRename = true,
-					},
-					color = {
-						enabled = true,
-						background = false,
-						-- background_color = { r = 0, g = 0, b = 0 },
-						background_color = nil,
-						foreground = false,
-						virtual_text = true,
-						virtual_text_str = "⏺",
 					},
 				},
 			})
