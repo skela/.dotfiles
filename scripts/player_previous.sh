@@ -1,4 +1,4 @@
 #!/bin/bash
 
-playerctl previous --player=spotify
+playerctl previous
 

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-amixer -q -D pulse set Master toggle
+wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 

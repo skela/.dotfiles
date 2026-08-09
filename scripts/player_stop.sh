@@ -1,4 +1,4 @@
 #!/bin/bash
 
-playerctl stop --player=spotify
+playerctl stop
 

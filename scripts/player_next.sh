@@ -1,4 +1,4 @@
 #!/bin/bash
 
-playerctl next --player=spotify
+playerctl next
 

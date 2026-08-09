@@ -1,4 +1,4 @@
 #!/bin/bash
 
-amixer -q -D pulse set Master 2%-
+wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-
 

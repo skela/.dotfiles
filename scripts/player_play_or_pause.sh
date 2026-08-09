@@ -1,4 +1,4 @@
 #!/bin/bash
 
-playerctl play-pause --player=spotify
+playerctl play-pause
 
