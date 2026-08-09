@@ -1,10 +1,12 @@
 {
 	"output": ["DP-4"],
 	"modules-left": [
-		"hyprland/workspaces"
+		"hyprland/workspaces",
+		"hyprland/window"
 	],
-	"modules-center": ["hyprland/window"],
+	"modules-center": [],
 	"modules-right": [
+		"mpris",
 		"custom/recording",
 		"custom/idle-inhibit",
 		"custom/clipboard",
