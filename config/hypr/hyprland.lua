@@ -269,10 +269,13 @@ hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
 hl.bind(main_mod .. " + V", hl.dsp.layout("togglesplit"))
 
 -- Screenshots
-hl.bind(main_mod .. " + CONTROL + SHIFT + ALT + S", hl.dsp.exec_cmd("hyprshot -m output"))
-hl.bind(main_mod .. " + CONTROL + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m window"))
-hl.bind(main_mod .. " + CONTROL + S", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
-hl.bind(main_mod .. " + S", hl.dsp.exec_cmd("hyprshot -m region"))
+hl.bind(main_mod .. " + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh smart"))
+hl.bind(main_mod .. " + CONTROL + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh smart --annotate"))
+hl.bind(main_mod .. " + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh window"))
+hl.bind(main_mod .. " + CONTROL + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh window --annotate"))
+-- picker variants (select which window instead of using active):
+-- hl.bind(main_mod .. " + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh windows"))
+-- hl.bind(main_mod .. " + CONTROL + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh windows --annotate"))
 
 -- Screen recording
 hl.bind(main_mod .. " + SHIFT + V", hl.dsp.exec_cmd(home .. "/.dotfiles/config/hypr/scripts/toggle-recording.sh"))

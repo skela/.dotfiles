@@ -3,17 +3,22 @@
 ## Depends
 
 - waybar
-- hyprshot
 - hyprlock
 - hypridle
 - hyprpaper
 - hyprpm
+- hyprpicker — screen freeze for screenshots
 - variety
 - jq
 - bibata-cursor-theme-bin
 - hyprqt6engine
 - dolphin
 - kvantum — Qt style engine (provides `kvantum-dark` style and `KvDark` theme/color scheme)
+- grim — screenshot capture
+- slurp — region/window picker
+- wl-clipboard — `wl-copy` for clipboard integration
+- gpu-screen-recorder — screen recording
+- tensaku — screenshot annotation (`tensaku-bin` on AUR)
 
 # QT6 (for Dolphin theming)
 
