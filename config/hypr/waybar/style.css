@@ -92,6 +92,7 @@ window#waybar {
 #custom-notifications,
 #custom-background,
 #idle_inhibitor,
+#mpris,
 #tray {
 	background: #0a1428;
 	color: #7a9ec0;

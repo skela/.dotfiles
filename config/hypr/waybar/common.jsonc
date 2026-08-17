@@ -203,7 +203,8 @@
 		"format-paused": "{status_icon} {dynamic}",
 		"player-icons": {
 			"default": "▶",
-			"ytmdesktop": "♫"
+			"ytmdesktop": "♫",
+			"purr": "♫"
 		},
 		"status-icons": {
 			"paused": "⏸"
