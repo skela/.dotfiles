@@ -266,7 +266,42 @@ hl.bind(main_mod .. " + B", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/toggl
 -- Window management
 hl.bind(main_mod .. " + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
-hl.bind(main_mod .. " + V", hl.dsp.layout("togglesplit"))
+hl.bind(main_mod .. " + backslash", hl.dsp.layout("togglesplit"))
+
+-- Universal copy/paste: uses Ctrl+Insert / Shift+Insert in terminals to avoid
+-- conflicting with Ctrl+C (SIGINT). Uses send_key_state down/up split to avoid
+-- synthetic key state getting stuck when Super is physically held.
+local function send_shortcut_once(mods, key)
+	return function()
+		hl.dispatch(hl.dsp.send_key_state({ mods = mods, key = key, state = "down" }))
+		hl.timer(function()
+			hl.dispatch(hl.dsp.send_key_state({ mods = mods, key = key, state = "up" }))
+		end, { timeout = 50, type = "oneshot" })
+	end
+end
+
+local function active_window_is_terminal()
+	local window = hl.get_active_window()
+	if not window then return false end
+	local class = (window.class or ""):lower()
+	for _, c in ipairs({ "com.mitchellh.ghostty", "alacritty", "kitty", "foot", "org.codeberg.dnkl.foot", "wezterm" }) do
+		if class == c:lower() then return true end
+	end
+	return false
+end
+
+local function universal_clipboard(default_mods, default_key, term_mods, term_key)
+	return function()
+		if active_window_is_terminal() then
+			send_shortcut_once(term_mods, term_key)()
+		else
+			send_shortcut_once(default_mods, default_key)()
+		end
+	end
+end
+
+hl.bind(main_mod .. " + C", universal_clipboard("CTRL", "C", "CTRL", "Insert"))
+hl.bind(main_mod .. " + V", universal_clipboard("CTRL", "V", "SHIFT", "Insert"))
 
 -- Screenshots
 hl.bind(main_mod .. " + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh smart"))
@@ -309,7 +344,7 @@ for i = 0, 9 do
 end
 
 hl.bind(
-	main_mod .. " + C",
+	main_mod .. " + grave",
 	hl.dsp.exec_cmd("python3 " .. home .. "/.dotfiles/config/hypr/scripts/toggle_workspace_4.py")
 )
 
