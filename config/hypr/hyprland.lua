@@ -7,6 +7,15 @@ end
 
 local home = os.getenv("HOME")
 
+local use_quickshell = false
+
+-- Communicate the bar choice to autostart.sh via a flag file read at login
+if use_quickshell then
+	os.execute("touch /tmp/.use-quickshell-bar")
+else
+	os.execute("rm -f /tmp/.use-quickshell-bar")
+end
+
 if hostname == "aurora" then
 	hl.monitor({ output = "DP-1", mode = "2560x1440", position = "0x0", scale = 1 })
 	hl.monitor({ output = "HDMI-A-1", mode = "2560x1440", position = "2560x0", scale = 1 })
@@ -282,10 +291,14 @@ end
 
 local function active_window_is_terminal()
 	local window = hl.get_active_window()
-	if not window then return false end
+	if not window then
+		return false
+	end
 	local class = (window.class or ""):lower()
 	for _, c in ipairs({ "com.mitchellh.ghostty", "alacritty", "kitty", "foot", "org.codeberg.dnkl.foot", "wezterm" }) do
-		if class == c:lower() then return true end
+		if class == c:lower() then
+			return true
+		end
 	end
 	return false
 end
@@ -307,7 +320,10 @@ hl.bind(main_mod .. " + V", universal_clipboard("CTRL", "V", "SHIFT", "Insert"))
 hl.bind(main_mod .. " + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh smart"))
 hl.bind(main_mod .. " + CONTROL + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh smart --annotate"))
 hl.bind(main_mod .. " + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh window"))
-hl.bind(main_mod .. " + CONTROL + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh window --annotate"))
+hl.bind(
+	main_mod .. " + CONTROL + SHIFT + S",
+	hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh window --annotate")
+)
 -- picker variants (select which window instead of using active):
 -- hl.bind(main_mod .. " + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh windows"))
 -- hl.bind(main_mod .. " + CONTROL + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh windows --annotate"))

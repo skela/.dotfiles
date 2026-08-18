@@ -1,6 +1,10 @@
 #!/bin/bash
 
-waybar &
+if [[ -f /tmp/.use-quickshell-bar ]]; then
+  quickshell -c "$HOME/.config/quickshell/omarchy-bar" &
+else
+  waybar &
+fi
 # ironbar --config ~/.dotfiles/config/hypr/ironbar/config.json &
 
 hyprpaper &
