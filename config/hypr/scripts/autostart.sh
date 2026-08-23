@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ -f /tmp/.use-quickshell-bar ]]; then
-  quickshell -c "$HOME/.config/quickshell/omarchy-bar" &
+  quickshell -p "$HOME/.dotfiles/config/quickshell/skela-bar" &
 else
   waybar &
 fi

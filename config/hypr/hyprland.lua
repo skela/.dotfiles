@@ -7,7 +7,7 @@ end
 
 local home = os.getenv("HOME")
 
-local use_quickshell = false
+local use_quickshell = true
 
 -- Communicate the bar choice to autostart.sh via a flag file read at login
 if use_quickshell then
@@ -270,7 +270,7 @@ hl.bind(main_mod .. " + A", hl.dsp.exec_cmd("firefox-developer-edition --new-win
 
 -- Waybar
 hl.bind(main_mod .. " + SHIFT + R", hl.dsp.exec_cmd("killall -SIGUSR2 waybar"))
-hl.bind(main_mod .. " + B", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/toggle_waybar.sh"))
+hl.bind(main_mod .. " + B", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/toggle_bar.sh"))
 
 -- Window management
 hl.bind(main_mod .. " + T", hl.dsp.window.float({ action = "toggle" }))
