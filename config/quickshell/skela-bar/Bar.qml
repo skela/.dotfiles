@@ -26,7 +26,72 @@ Item {
   readonly property string barFont:   nfFont.name
   readonly property string wsFont:    "Font Awesome 7 Free Solid"
 
-  // ── Clock ──────────────────────────────────────────────────────────────
+  // ── Window expansion ───────────────────────────────────────────────────
+  property bool titleExpanded: false
+  property string activeWindowTitle: Hyprland.activeToplevel ? Hyprland.activeToplevel.title : ""
+  property string activeAppIcon: ""
+
+  Process {
+    id: iconLookupProcess
+    command: ["/home/skela/.dotfiles/config/quickshell/skela-bar/find-icon.sh"]
+    running: false
+    stdout: SplitParser { onRead: data => iconLookupProcess.iconPath = data }
+    property string iconPath: ""
+
+    onExited: function(exitCode) {
+      if (exitCode === 0 && iconPath) {
+        activeAppIcon = "file://" + iconPath.trim()
+      } else {
+        activeAppIcon = ""
+      }
+      iconPath = ""
+    }
+  }
+
+  function updateAppIcon() {
+    if (!Hyprland.activeToplevel) {
+      activeAppIcon = ""
+      return
+    }
+
+    var ipc = Hyprland.activeToplevel.lastIpcObject
+    var cls = ipc && ipc.class ? String(ipc.class) : ""
+
+    if (!cls) {
+      activeAppIcon = ""
+      return
+    }
+
+    // Clear icon and start lookup
+    activeAppIcon = ""
+    iconLookupProcess.command = ["/home/skela/.dotfiles/config/quickshell/skela-bar/find-icon.sh", cls]
+    iconLookupProcess.running = true
+  }
+  
+  // Watch title changes to trigger icon update
+  property string watchTitle: Hyprland.activeToplevel ? String(Hyprland.activeToplevel.title || "") : ""
+  
+  onWatchTitleChanged: {
+    root.updateAppIcon()
+  }
+  
+  Component.onCompleted: {
+    root.updateAppIcon()
+  }
+
+  
+  // Map common window classes to their icon paths
+  function getIconPath(cls) {
+    var iconMap = {
+      "firefox-developer-edition": "/usr/share/icons/hicolor/128x128/apps/firefox-developer-edition.png",
+      "com.mitchellh.ghostty": "/usr/share/icons/hicolor/128x128/apps/com.mitchellh.ghostty.png",
+      "firefox": "/usr/share/icons/hicolor/128x128/apps/firefox.png",
+      "chrome": "/usr/share/icons/hicolor/128x128/apps/google-chrome.png",
+      "code": "/usr/share/icons/hicolor/128x128/apps/code.png",
+      "org.kde.dolphin": "/usr/share/icons/hicolor/128x128/apps/org.kde.dolphin.png"
+    }
+    return iconMap[cls] || iconMap[cls.toLowerCase()] || ""
+  }  // ── Clock ──────────────────────────────────────────────────────────────
   property date now: new Date()
   SystemClock {
     precision: SystemClock.Minutes
@@ -339,12 +404,11 @@ Item {
             id: titleMouse
             anchors.fill: parent
             hoverEnabled: true
+            onEntered: root.titleExpanded = true
+            onExited: root.titleExpanded = false
           }
 
-          Tip {
-            hover: titleMouse
-            text: Hyprland.activeToplevel ? Hyprland.activeToplevel.title : ""
-          }
+
         }
 
         // MPRIS chip
@@ -376,6 +440,8 @@ Item {
             hoverEnabled: true
             acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
             cursorShape: Qt.PointingHandCursor
+            onEntered: root.titleExpanded = true
+            onExited: root.titleExpanded = false
             onClicked: function(mouse) {
               if (!root.mprisPlayer) return
               if (mouse.button === Qt.LeftButton) root.mprisPlayer.togglePlaying()

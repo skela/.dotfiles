@@ -9,8 +9,8 @@ Rectangle {
   visible: hover !== null && hover.containsMouse && text !== ""
   z: 999
 
-  anchors.top: parent.bottom
-  anchors.topMargin: 5
+  anchors.bottom: parent.top
+  anchors.bottomMargin: 5
   anchors.horizontalCenter: parent.horizontalCenter
 
   color: "#0d1e30"

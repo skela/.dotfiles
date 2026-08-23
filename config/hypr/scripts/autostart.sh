@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [[ -f /tmp/.use-quickshell-bar ]]; then
-  quickshell -p "$HOME/.dotfiles/config/quickshell/skela-bar" &
+  # Use KDE/Breeze dark theme for system tray menus
+  QT_STYLE_OVERRIDE=Breeze QT_QPA_PLATFORMTHEME=kde quickshell -p "$HOME/.dotfiles/config/quickshell/skela-bar" &
 else
   waybar &
 fi
