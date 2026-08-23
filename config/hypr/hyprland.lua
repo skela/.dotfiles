@@ -256,7 +256,7 @@ hl.bind(main_mod .. " + SPACE", hl.dsp.exec_cmd(home .. "/.dotfiles/scripts/togg
 hl.bind(main_mod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind(main_mod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(main_mod .. " + N", hl.dsp.exec_cmd(files))
-hl.bind("CONTROL + ALT + Q", hl.dsp.exec_cmd("pidof hyprlock || (hyprlock)"))
+hl.bind("CONTROL + ALT + Q", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/lock.sh"))
 hl.bind("CONTROL + ALT + left", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind("CONTROL + ALT + right", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(
