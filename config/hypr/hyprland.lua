@@ -374,6 +374,7 @@ hl.bind(main_mod .. " + X", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(main_mod .. " + SHIFT + X", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Media keys
+hl.bind("XF86Tools", hl.dsp.exec_cmd("quickshell msg -p " .. home .. "/.dotfiles/config/quickshell/skela-bar overlay toggle"))
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(home .. "/.dotfiles/scripts/volume_up.sh"), { locked = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(home .. "/.dotfiles/scripts/volume_down.sh"), { locked = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd(home .. "/.dotfiles/scripts/volume_mute.sh"), { locked = true })

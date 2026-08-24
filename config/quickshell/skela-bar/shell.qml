@@ -6,6 +6,7 @@ import QtQuick
 
 ShellRoot {
   property bool barVisible: true
+  property bool overlayPinned: false
   property string hostname: ""
 
   Process {
@@ -21,6 +22,11 @@ ShellRoot {
     function toggle(): void { barVisible = !barVisible }
   }
 
+  IpcHandler {
+    target: "overlay"
+    function toggle(): void { overlayPinned = !overlayPinned }
+  }
+
   Variants {
     model: Quickshell.screens
 
@@ -31,7 +37,7 @@ ShellRoot {
       readonly property bool isPrimary: modelData.name === primaryScreen
 
       screen: modelData
-      implicitHeight: isPrimary && barVisible ? (barItem.titleExpanded ? 168 : 28) : 0
+      implicitHeight: isPrimary && barVisible ? ((barItem.titleExpanded || overlayPinned) ? 168 : 28) : 0
       exclusiveZone: isPrimary && barVisible ? 28 : 0
       anchors { top: true; left: true; right: true }
       exclusionMode: ExclusionMode.Ignore
@@ -52,7 +58,7 @@ ShellRoot {
 
       // Combined info expansion
       Rectangle {
-        visible: isPrimary && barVisible && barItem.titleExpanded
+        visible: isPrimary && barVisible && (barItem.titleExpanded || overlayPinned)
         anchors { top: parent.top; topMargin: 28; left: parent.left; right: parent.right }
         height: 140
         color: "#050812"
