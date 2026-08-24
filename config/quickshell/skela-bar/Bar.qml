@@ -315,8 +315,15 @@ Item {
     return null
   }
 
+  Process {
+    id: wsSwitchProc
+    property int targetId: 0
+    command: ["/home/skela/.dotfiles/config/hypr/scripts/qtile_like_swap.sh", String(targetId)]
+  }
+
   function switchWorkspace(id) {
-    Hyprland.dispatch("hl.dsp.focus({workspace=" + id + "})")
+    wsSwitchProc.targetId = id
+    if (!wsSwitchProc.running) wsSwitchProc.running = true
   }
 
   // ── Layout ─────────────────────────────────────────────────────────────
@@ -349,8 +356,6 @@ Item {
             width: 22; height: 20
             radius: 5
             color: parent.focused ? "#071526" : (wsMouse.containsMouse ? "#0e1e3a" : "#0a1428")
-            border.color: parent.focused ? root.clrAccent : "transparent"
-            border.width: parent.focused ? 1 : 0
           }
 
           Text {

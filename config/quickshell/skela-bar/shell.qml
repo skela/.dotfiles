@@ -6,6 +6,15 @@ import QtQuick
 
 ShellRoot {
   property bool barVisible: true
+  property string hostname: ""
+
+  Process {
+    command: ["hostname"]
+    running: true
+    stdout: SplitParser {
+      onRead: data => hostname = data.trim()
+    }
+  }
 
   IpcHandler {
     target: "bar"
@@ -18,7 +27,8 @@ ShellRoot {
     PanelWindow {
       required property var modelData
 
-      readonly property bool isPrimary: modelData.name === "DP-1"
+      readonly property string primaryScreen: hostname === "dark" ? "DP-4" : "DP-1"
+      readonly property bool isPrimary: modelData.name === primaryScreen
 
       screen: modelData
       implicitHeight: isPrimary && barVisible ? (barItem.titleExpanded ? 140 : 28) : 0
