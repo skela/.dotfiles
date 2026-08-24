@@ -31,12 +31,12 @@ Row {
 
       Image {
         anchors.centerIn: parent
-        width: 16
-        height: 16
+        width: 18
+        height: 18
         source: String(parent.modelData.icon || "")
         fillMode: Image.PreserveAspectFit
-        sourceSize.width: Math.round(16 * Screen.devicePixelRatio)
-        sourceSize.height: Math.round(16 * Screen.devicePixelRatio)
+        sourceSize.width: Math.round(18 * Screen.devicePixelRatio)
+        sourceSize.height: Math.round(18 * Screen.devicePixelRatio)
       }
 
       MouseArea {

@@ -83,7 +83,8 @@ end)
 
 hl.config({
 	input = {
-		kb_layout = "gb,no",
+		kb_layout = "gb+skela(nordic_altgr),no",
+		kb_options = "lv3:ralt_switch",
 		follow_mouse = 1,
 		sensitivity = 0,
 		touchpad = {
