@@ -18,7 +18,7 @@ Item {
   readonly property color clrBg:      "#050812"
   readonly property color clrFg:      "#d0e4f8"
   readonly property color clrAccent:  "#00a8f8"
-  readonly property color clrChipBg:  "transparent"  // Removed background
+  readonly property color clrChipBg:  "#0a1428"
   readonly property color clrChipFg:  "#7a9ec0"
   readonly property color clrDim:     "#2d5070"
   readonly property color clrUrgent:  "#ff4060"
@@ -351,10 +351,17 @@ Item {
 
           width: 26; height: 22
 
+          Rectangle {
+            anchors.centerIn: parent
+            width: 22; height: 20
+            radius: 5
+            color: parent.focused ? "#071526" : (wsMouse.containsMouse ? "#0e1e3a" : "#0a1428")
+          }
+
           Text {
             anchors.centerIn: parent
             text: root.wsIcons[parent.modelData] || String(parent.modelData)
-            color: parent.focused ? root.clrAccent : root.clrChipFg
+            color: parent.focused ? root.clrAccent : root.clrDim
             font.family: root.wsFont
             font.pixelSize: 14
             opacity: parent.occupied || parent.focused ? 1.0 : 0.4
