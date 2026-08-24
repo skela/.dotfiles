@@ -27,7 +27,8 @@ Item {
   readonly property string wsFont:    "Font Awesome 7 Free Solid"
 
   // ── Window expansion ───────────────────────────────────────────────────
-  property bool titleExpanded: false
+  property int expandHoverCount: 0
+  readonly property bool titleExpanded: expandHoverCount > 0
   property string activeWindowTitle: Hyprland.activeToplevel ? Hyprland.activeToplevel.title : ""
   property string activeAppIcon: ""
 
@@ -237,7 +238,7 @@ Item {
     onExited: function() { if (!langProc.running) langProc.running = true }
   }
   Process {
-    id: pavuProc
+    id: pavuControlProc
     command: ["pavucontrol"]
   }
   function toggleKeyboard() {
@@ -282,8 +283,11 @@ Item {
 
   // ── Notifications (swaync) ────────────────────────────────────────────
   property bool notifPanelOpen: false
-  Process { id: notifToggle; command: ["bash", "-c", "sleep 0.1 && swaync-client -t -sw"] }
-  Process { id: notifDnd;    command: ["swaync-client", "-d", "-sw"] }
+  property alias notifToggle: notifToggleProc
+  property alias notifDnd: notifDndProc
+  property alias pavuProc: pavuControlProc
+  Process { id: notifToggleProc; command: ["bash", "-c", "sleep 0.1 && swaync-client -t -sw"] }
+  Process { id: notifDndProc;    command: ["swaync-client", "-d", "-sw"] }
 
   // ── MPRIS: first active player ─────────────────────────────────────────
   readonly property var mprisPlayer: {
@@ -371,88 +375,37 @@ Item {
       }
     }
 
-    // ── Center: MPRIS + window title ─────────────────────────────────────
+    // ── Center: Clock ─────────────────────────────────────────────────────
     Item {
       id: centerArea
       anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter }
-      width: Math.min(centerRow.implicitWidth, parent.width - wsRow.implicitWidth - rightRow.implicitWidth - 16)
+      width: centerClockRow.implicitWidth + 18
       height: 24
-      clip: false
 
       Row {
-        id: centerRow
+        id: centerClockRow
         anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter }
-        spacing: 6
-
-        // Window title
+        spacing: 4
         Text {
-          id: titleText
-          anchors.verticalCenter: parent.verticalCenter
-          visible: Hyprland.activeToplevel !== null && Hyprland.activeToplevel.title !== ""
-          text: {
-            var t = Hyprland.activeToplevel ? Hyprland.activeToplevel.title : ""
-            if (t.length > 36) t = t.slice(0, 35) + "\u2026"
-            return t
-          }
+          height: 18; verticalAlignment: Text.AlignVCenter
+          text: ""
           color: root.clrChipFg
-          font.family: root.barFont
-          font.pixelSize: 12
-
-          MouseArea {
-            id: titleMouse
-            anchors.fill: parent
-            hoverEnabled: true
-            onEntered: root.titleExpanded = true
-            onExited: root.titleExpanded = false
-          }
-
-
+          font.family: root.barFont; font.pixelSize: 18
         }
-
-        // MPRIS chip
-        Rectangle {
-          visible: root.mprisPlayer !== null
-          width: visible ? mprisText.implicitWidth + 18 : 0; height: 24
-          radius: 6; color: root.clrChipBg
-
-          Text {
-            id: mprisText
-            anchors.centerIn: parent
-            text: {
-              if (!root.mprisPlayer) return ""
-              var icon = root.mprisPlaying ? "\u25B6" : "\u23F8"
-              var title = root.mprisPlayer.trackTitle || ""
-              var artist = root.mprisPlayer.trackArtist || ""
-              var label = title || artist
-              if (label.length > 28) label = label.slice(0, 27) + "\u2026"
-              return icon + (label ? "  " + label : "")
-            }
-            color: root.clrChipFg
-            font.family: root.barFont
-            font.pixelSize: 12
-          }
-
-          MouseArea {
-            id: mprisMouse
-            anchors.fill: parent
-            hoverEnabled: true
-            acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
-            cursorShape: Qt.PointingHandCursor
-            onEntered: root.titleExpanded = true
-            onExited: root.titleExpanded = false
-            onClicked: function(mouse) {
-              if (!root.mprisPlayer) return
-              if (mouse.button === Qt.LeftButton) root.mprisPlayer.togglePlaying()
-              else if (mouse.button === Qt.RightButton) root.mprisPlayer.next()
-              else if (mouse.button === Qt.MiddleButton) root.mprisPlayer.previous()
-            }
-          }
-
-          Tip {
-            hover: mprisMouse
-            text: root.mprisPlayer ? ((root.mprisPlayer.trackTitle || "") + (root.mprisPlayer.trackArtist ? " — " + root.mprisPlayer.trackArtist : "")) : ""
-          }
+        Text {
+          height: 18; verticalAlignment: Text.AlignVCenter
+          text: Qt.formatDateTime(root.now, "dd/MM - HH:mm")
+          color: root.clrChipFg
+          font.family: root.barFont; font.pixelSize: 13
         }
+      }
+
+      MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+        onEntered: root.expandHoverCount++
+        onExited: root.expandHoverCount--
       }
     }
 
@@ -515,228 +468,7 @@ Item {
         }
       }
 
-      // Clipboard
-            Rectangle {
-        id: clipChip
-        width: 30; height: 24
-        radius: 6; color: root.clrChipBg
-        Text {
-          anchors.centerIn: parent
-          text: ""
-          color: root.clrChipFg
-          font.family: root.barFont
-          font.pixelSize: 18
-        }
-        MouseArea {
-          anchors.fill: parent
-          acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
-          cursorShape: Qt.PointingHandCursor
-          onClicked: function(mouse) {
-            if (mouse.button === Qt.MiddleButton) root.clearClipboard()
-            else root.openClipboard()
-          }
-        }
-      }
 
-      // Network
-      Rectangle {
-        id: netChip
-        property bool expanded: false
-        width: netChipRow.implicitWidth + 18; height: 24
-        radius: 6; color: root.clrChipBg
-
-        Row {
-          id: netChipRow
-          anchors.centerIn: parent
-          height: 18
-          spacing: 4
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: root.netIcon
-            color: root.netConnected ? root.clrChipFg : root.clrUrgent
-            font.family: root.barFont; font.pixelSize: 18
-          }
-          Text {
-            visible: netChip.expanded
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: root.netLabel.replace(root.netIcon, "").trim()
-            color: root.netConnected ? root.clrChipFg : root.clrUrgent
-            font.family: root.barFont; font.pixelSize: 13
-          }
-        }
-
-        MouseArea {
-          id: netMouse
-          anchors.fill: parent
-          hoverEnabled: true
-          cursorShape: Qt.PointingHandCursor
-          onClicked: netChip.expanded = !netChip.expanded
-        }
-
-        Tip { hover: netMouse; text: root.netLabel }
-      }
-
-      // Volume
-      Rectangle {
-        width: volRow.implicitWidth + 18; height: 24
-        radius: 6; color: root.clrChipBg
-
-        Row {
-          id: volRow
-          anchors.centerIn: parent
-          height: 18
-          spacing: 4
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: {
-              if (root.audioMuted) return ""
-              var v = root.audioVolume
-              return v === 0 ? "" : (v < 30 ? "" : (v < 70 ? "" : ""))
-            }
-            color: root.audioMuted ? root.clrDim : root.clrChipFg
-            font.family: root.barFont; font.pixelSize: 18
-          }
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: root.audioVolume + "%"
-            color: root.audioMuted ? root.clrDim : root.clrChipFg
-            font.family: root.barFont; font.pixelSize: 13
-          }
-        }
-
-        MouseArea {
-          id: volMouse
-          anchors.fill: parent
-          hoverEnabled: true
-          acceptedButtons: Qt.LeftButton | Qt.RightButton
-          cursorShape: Qt.PointingHandCursor
-          onClicked: function(mouse) {
-            if (mouse.button === Qt.RightButton) {
-              if (!pavuProc.running) pavuProc.running = true
-            } else {
-              if (root.audioSink && root.audioSink.audio)
-                root.audioSink.audio.muted = !root.audioSink.audio.muted
-            }
-          }
-          onWheel: function(wheel) {
-            if (!root.audioSink || !root.audioSink.audio) return
-            var delta = wheel.angleDelta.y > 0 ? 0.03 : -0.03
-            root.audioSink.audio.volume = Math.max(0, Math.min(1.5, root.audioSink.audio.volume + delta))
-          }
-        }
-
-        Tip {
-          hover: volMouse
-          text: (root.audioMuted ? "Muted — " : "") + root.audioVolume + "% · scroll to adjust"
-        }
-      }
-
-      // CPU
-      Rectangle {
-        width: cpuRow.implicitWidth + 18; height: 24
-        radius: 6; color: root.clrChipBg
-
-        Row {
-          id: cpuRow
-          anchors.centerIn: parent
-          height: 18
-          spacing: 4
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: ""
-            color: root.cpuPct > 85 ? root.clrUrgent : root.clrChipFg
-            font.family: root.barFont; font.pixelSize: 18
-          }
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: root.cpuPct + "%"
-            color: root.cpuPct > 85 ? root.clrUrgent : root.clrChipFg
-            font.family: root.barFont; font.pixelSize: 13
-          }
-        }
-      }
-
-      // Memory
-      Rectangle {
-        width: memRow.implicitWidth + 18; height: 24
-        radius: 6; color: root.clrChipBg
-
-        Row {
-          id: memRow
-          anchors.centerIn: parent
-          height: 18
-          spacing: 4
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: ""
-            color: root.memPct > 85 ? root.clrUrgent : root.clrChipFg
-            font.family: root.barFont; font.pixelSize: 18
-          }
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: root.memPct + "%"
-            color: root.memPct > 85 ? root.clrUrgent : root.clrChipFg
-            font.family: root.barFont; font.pixelSize: 13
-          }
-        }
-      }
-
-      // Temperature
-      Rectangle {
-        width: tempRow.implicitWidth + 18; height: 24
-        radius: 6; color: root.clrChipBg
-
-        Row {
-          id: tempRow
-          anchors.centerIn: parent
-          height: 18
-          spacing: 4
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: root.tempC < 50 ? "" : (root.tempC < 70 ? "" : "")
-            color: root.tempC >= 80 ? root.clrUrgent : root.clrChipFg
-            font.family: root.barFont; font.pixelSize: 18
-          }
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: root.tempC + "\u00B0C"
-            color: root.tempC >= 80 ? root.clrUrgent : root.clrChipFg
-            font.family: root.barFont; font.pixelSize: 13
-          }
-        }
-      }
-
-      // Language
-      Rectangle {
-        visible: root.kbLang !== ""
-        width: langRow.implicitWidth + 18; height: 24
-        radius: 6; color: root.clrChipBg
-
-        Row {
-          id: langRow
-          anchors.centerIn: parent
-          height: 18
-          spacing: 4
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: ""
-            color: root.clrChipFg
-            font.family: root.barFont; font.pixelSize: 18
-          }
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: root.kbLang
-            color: root.clrChipFg
-            font.family: root.barFont; font.pixelSize: 13
-          }
-        }
-
-        MouseArea {
-          anchors.fill: parent
-          cursorShape: Qt.PointingHandCursor
-          onClicked: root.toggleKeyboard()
-        }
-      }
 
       // Pacman updates
       Rectangle {
@@ -764,48 +496,44 @@ Item {
         }
       }
 
-      // System tray
+      // System tray toggle + tray
+      property bool trayVisible: false
+
+      Rectangle {
+        width: 24; height: 24
+        radius: 6; color: rightRow.trayVisible ? Qt.rgba(0, 0.659, 0.973, 0.12) : root.clrChipBg
+        border.color: rightRow.trayVisible ? Qt.rgba(0, 0.659, 0.973, 0.3) : "transparent"
+        border.width: 1
+        Text {
+          anchors.centerIn: parent
+          text: "\uF069"
+          color: rightRow.trayVisible ? root.clrAccent : root.clrChipFg
+          font.family: "JetBrainsMono Nerd Font Mono"
+          font.pixelSize: 16
+        }
+        MouseArea {
+          anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
+          onClicked: rightRow.trayVisible = !rightRow.trayVisible
+        }
+      }
+
       Tray {
+        visible: rightRow.trayVisible
         barHeight: 22
         fg: root.clrChipFg
         barFont: root.barFont
       }
 
-      // Clock
-      Rectangle {
-        width: clockRow.implicitWidth + 18; height: 24
-        radius: 6; color: root.clrChipBg
-
-        Row {
-          id: clockRow
-          anchors.centerIn: parent
-          height: 18
-          spacing: 4
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: ""
-            color: root.clrChipFg
-            font.family: root.barFont; font.pixelSize: 18
-          }
-          Text {
-            height: 18; verticalAlignment: Text.AlignVCenter
-            text: Qt.formatDateTime(root.now, "dd/MM - HH:mm")
-            color: root.clrChipFg
-            font.family: root.barFont; font.pixelSize: 13
-          }
-        }
-      }
-
       // Notifications
-            Rectangle {
-        id: bellChip
+      Rectangle {
         width: 30; height: 24
         radius: 6; color: root.clrChipBg
         Text {
           anchors.centerIn: parent
-          text: ""
+          text: "\uF0F3"
           color: root.clrChipFg
-          font.family: root.barFont
+          font.family: "JetBrainsMono Nerd Font Mono"
           font.pixelSize: 18
         }
         MouseArea {
@@ -814,9 +542,9 @@ Item {
           cursorShape: Qt.PointingHandCursor
           onClicked: function(mouse) {
             if (mouse.button === Qt.RightButton) {
-              if (!notifDnd.running) notifDnd.running = true
+              if (!root.notifDnd.running) root.notifDnd.running = true
             } else {
-              if (!notifToggle.running) notifToggle.running = true
+              if (!root.notifToggle.running) root.notifToggle.running = true
             }
           }
         }
