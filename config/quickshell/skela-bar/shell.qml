@@ -31,21 +31,30 @@ ShellRoot {
     model: Quickshell.screens
 
     PanelWindow {
+      id: panelWindow
       required property var modelData
 
       readonly property string primaryScreen: hostname === "dark" ? "DP-4" : "DP-1"
       readonly property bool isPrimary: modelData.name === primaryScreen
 
       screen: modelData
-      implicitHeight: isPrimary && barVisible ? ((barItem.titleExpanded || overlayPinned) ? 168 : 28) : 0
+      implicitHeight: isPrimary && barVisible ? 168 : 0
       exclusiveZone: isPrimary && barVisible ? 28 : 0
       anchors { top: true; left: true; right: true }
       exclusionMode: ExclusionMode.Ignore
       color: "transparent"
 
-      Behavior on implicitHeight { enabled: false }
+      mask: Region { item: inputMask }
+
+      Item {
+        id: inputMask
+        anchors { top: parent.top; left: parent.left; right: parent.right }
+        height: (barItem.titleExpanded || overlayPinned) ? 168 : 28
+      }
+
 
       Rectangle {
+        id: barRect
         visible: isPrimary && barVisible
         anchors { top: parent.top; left: parent.left; right: parent.right }
         height: 28
@@ -63,15 +72,17 @@ ShellRoot {
         height: 140
         color: "#050812"
 
-        // Keep panel open while hovered, and allow clicks
+        // Keep panel open while hovered, close when mouse leaves
         MouseArea {
           anchors.fill: parent
           hoverEnabled: true
           acceptedButtons: Qt.NoButton
-          onEntered: barItem.expandHoverCount++
-          onExited: barItem.expandHoverCount--
+          onEntered: barItem.overlayHovered = true
+          onExited: {
+            barItem.overlayHovered = false
+            barItem.titleExpanded = false
+          }
         }
-
         Rectangle {
           anchors { bottom: parent.bottom; left: parent.left; right: parent.right }
           height: 1

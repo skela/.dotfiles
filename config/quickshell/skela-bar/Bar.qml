@@ -27,9 +27,24 @@ Item {
   readonly property string wsFont:    "Font Awesome 7 Free Solid"
 
   // ── Window expansion ───────────────────────────────────────────────────
-  property int expandHoverCount: 0
-  readonly property bool titleExpanded: expandHoverCount > 0
-  property string activeWindowTitle: Hyprland.activeToplevel ? Hyprland.activeToplevel.title : ""
+  property bool titleExpanded: false
+  property bool overlayHovered: false
+  onOverlayHoveredChanged: { if (overlayHovered) collapseTimer.stop() }
+
+  Timer {
+    id: collapseTimer
+    interval: 200
+    repeat: false
+    onTriggered: { if (!root.overlayHovered) root.titleExpanded = false }
+  }
+
+  function hoverEnter() {
+    collapseTimer.stop()
+    titleExpanded = true
+  }
+  function hoverExit() {
+    collapseTimer.restart()
+  }  property string activeWindowTitle: Hyprland.activeToplevel ? Hyprland.activeToplevel.title : ""
   property string activeAppIcon: ""
 
   Process {
@@ -404,8 +419,8 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
-        onEntered: root.expandHoverCount++
-        onExited: root.expandHoverCount--
+        onEntered: root.hoverEnter()
+        onExited: root.hoverExit()
       }
     }
 
@@ -499,6 +514,13 @@ Item {
       // System tray toggle + tray
       property bool trayVisible: false
 
+      Tray {
+        visible: rightRow.trayVisible
+        barHeight: 22
+        fg: root.clrChipFg
+        barFont: root.barFont
+      }
+
       Rectangle {
         width: 24; height: 24
         radius: 6; color: rightRow.trayVisible ? Qt.rgba(0, 0.659, 0.973, 0.12) : root.clrChipBg
@@ -516,13 +538,6 @@ Item {
           cursorShape: Qt.PointingHandCursor
           onClicked: rightRow.trayVisible = !rightRow.trayVisible
         }
-      }
-
-      Tray {
-        visible: rightRow.trayVisible
-        barHeight: 22
-        fg: root.clrChipFg
-        barFont: root.barFont
       }
 
       // Notifications
