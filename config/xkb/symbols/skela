@@ -1,0 +1,9 @@
+partial alphanumeric_keys
+xkb_symbols "nordic_altgr" {
+    // AltGr+a → å (override gb which maps AltGr+a → æ)
+    key <AC01> { [ a, A, aring, Aring ] };
+    // AltGr+e → æ
+    key <AD03> { [ e, E, ae, AE ] };
+    // AltGr+o → oslash already works in gb, but keep it explicit
+    key <AD09> { [ o, O, oslash, Oslash ] };
+};

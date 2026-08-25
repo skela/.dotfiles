@@ -49,6 +49,7 @@ folder_links = [
 	FolderLink("config/polybar"),
 	FolderLink("config/yazi"),
 	FolderLink("config/tofi"),
+	FolderLink("config/xkb"),
 ]
 
 file_links = [
