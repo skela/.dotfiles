@@ -1,3 +1,9 @@
 os:
-  editPreset: "nvim-remote"
+  edit: "~/.dotfiles/config/lazygit/scripts/smart_edit.sh {{filename}}"
+  editAtLine: "~/.dotfiles/config/lazygit/scripts/smart_edit.sh +{{line}} {{filename}}"
+  editAtLineAndWait: "~/.dotfiles/config/lazygit/scripts/smart_edit.sh +{{line}} {{filename}}"
+  
+keybinding:
+  universal:
+    openFile: "" # disable 'o' key
 
