@@ -56,6 +56,12 @@ return {
 		opts = {
 			lazygit = {
 				configure = true,
+				win = {
+					on_exit = function()
+						-- Close the terminal window when lazygit exits
+						vim.cmd("close")
+					end,
+				},
 			},
 			dashboard = {
 
