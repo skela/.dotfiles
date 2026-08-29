@@ -267,7 +267,8 @@ hl.bind(
 	)
 )
 hl.bind("CONTROL + ALT + P", hl.dsp.exec_cmd("1password --quick-access"))
-hl.bind(main_mod .. " + A", hl.dsp.exec_cmd("firefox-developer-edition --new-window https://chatgpt.com"))
+hl.bind(main_mod .. " + A", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(main_mod .. " + SHIFT + A", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Waybar
 hl.bind(main_mod .. " + SHIFT + R", hl.dsp.exec_cmd("killall -SIGUSR2 waybar"))
