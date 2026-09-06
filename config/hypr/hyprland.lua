@@ -267,6 +267,12 @@ hl.bind(
 	)
 )
 hl.bind("CONTROL + ALT + P", hl.dsp.exec_cmd("1password --quick-access"))
+hl.bind(
+	"CONTROL + ALT + T",
+	hl.dsp.exec_cmd(
+		"[float;size 2304 1296;center] kitty --class floating --title btop --os-window-tag btop -e btop"
+	)
+)
 hl.bind(main_mod .. " + A", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(main_mod .. " + SHIFT + A", hl.dsp.window.move({ workspace = "special:magic" }))
 
@@ -277,7 +283,7 @@ hl.bind(main_mod .. " + B", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/toggl
 -- Window management
 hl.bind(main_mod .. " + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
-hl.bind(main_mod .. " + backslash", hl.dsp.layout("togglesplit"))
+hl.bind(main_mod .. " + J", hl.dsp.layout("togglesplit"))
 
 -- Universal copy/paste: uses Ctrl+Insert / Shift+Insert in terminals to avoid
 -- conflicting with Ctrl+C (SIGINT). Uses send_key_state down/up split to avoid
@@ -375,7 +381,10 @@ hl.bind(main_mod .. " + X", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(main_mod .. " + SHIFT + X", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Media keys
-hl.bind("XF86Tools", hl.dsp.exec_cmd("quickshell msg -p " .. home .. "/.dotfiles/config/quickshell/skela-bar overlay toggle"))
+hl.bind(
+	"XF86Tools",
+	hl.dsp.exec_cmd("quickshell msg -p " .. home .. "/.dotfiles/config/quickshell/skela-bar overlay toggle")
+)
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(home .. "/.dotfiles/scripts/volume_up.sh"), { locked = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(home .. "/.dotfiles/scripts/volume_down.sh"), { locked = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd(home .. "/.dotfiles/scripts/volume_mute.sh"), { locked = true })
