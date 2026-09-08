@@ -34,7 +34,7 @@ ShellRoot {
       id: panelWindow
       required property var modelData
 
-      readonly property string primaryScreen: hostname === "dark" ? "DP-4" : "DP-1"
+      readonly property string primaryScreen: hostname === "dark" ? "DP-4" : hostname === "sparky" ? "eDP-1" : "DP-1"
       readonly property bool isPrimary: modelData.name === primaryScreen
 
       screen: modelData
