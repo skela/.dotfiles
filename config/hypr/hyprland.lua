@@ -180,6 +180,9 @@ hl.config({
 		force_split = 2,
 		smart_resizing = true,
 	},
+	scrolling = {
+		column_width = 0.49,
+	},
 	master = {
 		smart_resizing = true,
 	},
@@ -282,6 +285,7 @@ hl.bind(main_mod .. " + B", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/toggl
 
 -- Window management
 hl.bind(main_mod .. " + T", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(main_mod .. " + L", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/toggle_workspace_layout.sh"))
 hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
 hl.bind(main_mod .. " + J", hl.dsp.layout("togglesplit"))
 
