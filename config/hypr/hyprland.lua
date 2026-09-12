@@ -368,7 +368,7 @@ for i = 0, 9 do
 	local ws = i == 0 and 10 or i
 	local key = tostring(i)
 	hl.bind(main_mod .. " + " .. key, hl.dsp.exec_cmd(home .. "/.dotfiles/config/hypr/scripts/qtile_like_swap.sh " .. ws))
-	hl.bind(main_mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = ws }))
+	hl.bind(main_mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = ws, follow = false }))
 end
 
 hl.bind(
