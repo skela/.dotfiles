@@ -383,6 +383,35 @@ ShellRoot {
 
             Text { text: "·"; color: "#1a3050"; font.pixelSize: 12; anchors.verticalCenter: parent.verticalCenter }
 
+            // Battery
+            Rectangle {
+              visible: barItem.batteryPresent
+              width: batOverlayRow.implicitWidth + 16; height: 22
+              radius: 5; color: "transparent"
+              Row {
+                id: batOverlayRow
+                anchors.centerIn: parent
+                spacing: 5
+                Text {
+                  height: 16; verticalAlignment: Text.AlignVCenter
+                  text: "BAT"
+                  color: barItem.batteryLow ? "#7a1020" : "#2d5070"
+                  font.family: "sans-serif"; font.pixelSize: 10; font.bold: true
+                }
+                Text {
+                  height: 16; verticalAlignment: Text.AlignVCenter
+                  text: barItem.batteryPct + "%"
+                    + (barItem.batteryStatus === "Charging" ? " charging" : "")
+                    + (barItem.batteryTimeLabel ? " (" + barItem.batteryTimeLabel
+                        + (barItem.batteryStatus === "Charging" ? " to full" : " left") + ")" : "")
+                  color: barItem.batteryLow ? "#ff4060" : (barItem.batteryStatus === "Charging" ? "#00a8f8" : "#7a9ec0")
+                  font.family: "sans-serif"; font.pixelSize: 12
+                }
+              }
+            }
+
+            Text { text: "·"; color: "#1a3050"; font.pixelSize: 12; anchors.verticalCenter: parent.verticalCenter }
+
             // Network
             Rectangle {
               width: netOverlayRow.implicitWidth + 16; height: 22

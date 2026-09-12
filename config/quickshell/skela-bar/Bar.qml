@@ -202,6 +202,76 @@ Item {
     onTriggered: { if (!sysProc.running) sysProc.running = true }
   }
 
+  // ── Battery ───────────────────────────────────────────────────────────
+  property bool   batteryPresent: false
+  property int    batteryPct: 0
+  property string batteryStatus: ""   // Charging / Discharging / Full / Not charging
+  property string batteryTimeLabel: ""
+
+  readonly property bool batteryLow: batteryPresent && batteryStatus === "Discharging" && batteryPct <= 15
+  readonly property bool batteryWarn: batteryPresent && batteryStatus === "Discharging" && batteryPct <= 30
+
+  readonly property color batteryColor:
+    batteryLow ? clrUrgent
+    : batteryWarn ? clrWarn
+    : (batteryStatus === "Charging") ? clrAccent
+    : clrChipFg
+
+  readonly property string batteryIcon:
+    batteryStatus === "Charging" ? "\uf5e7"
+    : (batteryStatus === "Full" || batteryPct >= 97) ? "\uf1e6"
+    : batteryPct >= 90 ? "\uf240"
+    : batteryPct >= 65 ? "\uf241"
+    : batteryPct >= 40 ? "\uf242"
+    : batteryPct >= 15 ? "\uf243"
+    : "\uf244"
+
+  Process {
+    id: batteryProc
+    command: ["bash", "-c",
+      "bat=$(ls -d /sys/class/power_supply/BAT* 2>/dev/null | head -1);" +
+      "if [ -z \"$bat\" ]; then echo none; exit 0; fi;" +
+      "pct=$(cat \"$bat/capacity\" 2>/dev/null || echo 0);" +
+      "st=$(cat \"$bat/status\" 2>/dev/null || echo Unknown);" +
+      "en=$(cat \"$bat/energy_now\" 2>/dev/null || cat \"$bat/charge_now\" 2>/dev/null || echo 0);" +
+      "ef=$(cat \"$bat/energy_full\" 2>/dev/null || cat \"$bat/charge_full\" 2>/dev/null || echo 0);" +
+      "pw=$(cat \"$bat/power_now\" 2>/dev/null || cat \"$bat/current_now\" 2>/dev/null || echo 0);" +
+      "mins=0;" +
+      "if [ \"${pw:-0}\" -gt 0 ] 2>/dev/null; then" +
+      "  if [ \"$st\" = Discharging ]; then mins=$(( en * 60 / pw ));" +
+      "  elif [ \"$st\" = Charging ]; then mins=$(( (ef - en) * 60 / pw )); fi;" +
+      "fi;" +
+      "echo \"$pct|$st|$mins\""]
+    stdout: SplitParser {
+      onRead: function(line) {
+        var s = line.trim()
+        if (s === "" ) return
+        if (s === "none") {
+          root.batteryPresent = false
+          return
+        }
+        var parts = s.split("|")
+        if (parts.length >= 3) {
+          root.batteryPresent = true
+          root.batteryPct = parseInt(parts[0]) || 0
+          root.batteryStatus = parts[1]
+          var mins = parseInt(parts[2]) || 0
+          if (mins > 0) {
+            var h = Math.floor(mins / 60)
+            var m = mins % 60
+            root.batteryTimeLabel = (h > 0 ? h + "h " : "") + m + "m"
+          } else {
+            root.batteryTimeLabel = ""
+          }
+        }
+      }
+    }
+  }
+  Timer {
+    interval: 15000; running: true; repeat: true; triggeredOnStart: true
+    onTriggered: { if (!batteryProc.running) batteryProc.running = true }
+  }
+
   // ── Network ───────────────────────────────────────────────────────────
   property string netLabel: ""
   property string netIcon: ""
@@ -462,6 +532,33 @@ Item {
         MouseArea {
           anchors.fill: parent; cursorShape: Qt.PointingHandCursor
           onClicked: root.toggleRecording()
+        }
+      }
+
+      // Battery
+      Rectangle {
+        visible: root.batteryPresent
+        width: batRow.implicitWidth + 16; height: 24
+        radius: 6
+        color: root.batteryLow ? Qt.rgba(0.478, 0.063, 0.125, 0.35) : root.clrChipBg
+
+        Row {
+          id: batRow
+          anchors.centerIn: parent
+          height: 18
+          spacing: 5
+          Text {
+            height: 18; verticalAlignment: Text.AlignVCenter
+            text: root.batteryIcon
+            color: root.batteryColor
+            font.family: root.wsFont; font.pixelSize: 15
+          }
+          Text {
+            height: 18; verticalAlignment: Text.AlignVCenter
+            text: root.batteryPct + "%"
+            color: root.batteryColor
+            font.family: root.barFont; font.pixelSize: 13
+          }
         }
       }
 

@@ -78,7 +78,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("[workspace 1 silent] ghostty")
 	hl.exec_cmd("[workspace 4 silent] slack")
 	hl.exec_cmd("[workspace 6 silent] thunderbird")
-	hl.exec_cmd("[workspace 10 silent] firefox-developer-edition")
+	hl.exec_cmd("[workspace 10 silent] firefox")
 end)
 
 hl.config({
@@ -244,7 +244,7 @@ hl.config({
 -- Keybinds
 local main_mod = "SUPER"
 local menu = "tofi-drun --drun-launch=true"
-local browser = "firefox-developer-edition"
+local browser = "firefox"
 local files = "cosmic-files"
 
 -- General binds
@@ -272,9 +272,7 @@ hl.bind(
 hl.bind("CONTROL + ALT + P", hl.dsp.exec_cmd("1password --quick-access"))
 hl.bind(
 	"CONTROL + ALT + T",
-	hl.dsp.exec_cmd(
-		"[float;size 2304 1296;center] kitty --class floating --title btop --os-window-tag btop -e btop"
-	)
+	hl.dsp.exec_cmd("[float;size 2304 1296;center] kitty --class floating --title btop --os-window-tag btop -e btop")
 )
 hl.bind(main_mod .. " + A", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(main_mod .. " + SHIFT + A", hl.dsp.window.move({ workspace = "special:magic" }))
