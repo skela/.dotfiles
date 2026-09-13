@@ -4,7 +4,7 @@ set -U fish_user_paths $fish_user_paths $HOME/.local/bin/
 set TERM screen-256color
 set -x EDITOR nvim
 set -x VISUAL nvim
-set BROWSER firefox-developer-edition
+set BROWSER firefox
 
 # Settings
 set fish_greeting
