@@ -5,6 +5,7 @@ clipboard-write = allow
 
 background-opacity = 0.93
 background = 000000
+background-blur = macos-glass-regular
 
 font-family = "JetBrains Mono"
 font-size = 14

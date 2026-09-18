@@ -1,5 +1,6 @@
 
 macos-option-as-alt = left
+macos-titlebar-style = hidden
 
 #keybind = cmd+one=text:\x1b1
 #keybind = cmd+two=text:\x1b2
