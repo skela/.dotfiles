@@ -269,13 +269,13 @@ end
 
 function gito -d "Open Commit Link in Browser"
     begin
-        firefox-developer-edition (gitl)
+        firefox (gitl)
     end
 end
 
 function gitn -d "Open Github Network in Browser"
     begin
-        firefox-developer-edition (gitln)
+        firefox (gitln)
     end
 end
 
