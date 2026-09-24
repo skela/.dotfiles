@@ -1,0 +1,187 @@
+#!/usr/bin/env bash
+#
+# clipssh - Send a clipboard screenshot to a remote SSH host.
+# Based on https://github.com/samuellawrentz/clipssh
+#
+
+set -euo pipefail
+
+VERSION="1.0.0"
+ALIAS_DIR="$HOME/.clipssh"
+ALIAS_FILE="$ALIAS_DIR/aliases"
+
+usage() {
+    printf '%s\n' \
+        'Usage: clipssh [user@host|alias] [options]' \
+        '       clipssh alias add <name> <user@host>' \
+        '       clipssh alias remove <name>' \
+        '       clipssh alias list' \
+        '' \
+        'Send the clipboard image to a remote SSH host and copy the remote path.' \
+        '' \
+        'Environment:' \
+        '  CLIPSSH_HOST         Default remote host' \
+        '  CLIPSSH_REMOTE_DIR   Remote upload directory (default: /tmp)'
+}
+
+error() {
+    printf 'Error: %s\n' "$1" >&2
+    exit 1
+}
+
+success() {
+    printf '%s\n' "$1"
+}
+
+ensure_alias_file() {
+    mkdir -p -- "$ALIAS_DIR"
+    if [[ ! -f "$ALIAS_FILE" ]]; then
+        umask 077
+        : > "$ALIAS_FILE"
+    fi
+}
+
+alias_add() {
+    local name="${1:-}"
+    local target="${2:-}"
+    [[ -n "$name" && -n "$target" ]] || error 'Usage: clipssh alias add <name> <user@host>'
+    [[ "$name" != *[=[:space:]]* ]] || error "Invalid alias name: $name"
+    [[ "$target" == *@* ]] || error "Target must be in user@host form: $target"
+
+    ensure_alias_file
+    local tmp
+    tmp=$(mktemp)
+    trap 'rm -f -- "$tmp"' RETURN
+    awk -F= -v name="$name" '$1 != name' "$ALIAS_FILE" > "$tmp"
+    printf '%s=%s\n' "$name" "$target" >> "$tmp"
+    mv -- "$tmp" "$ALIAS_FILE"
+    trap - RETURN
+    success "Saved alias: $name -> $target"
+}
+
+alias_remove() {
+    local name="${1:-}"
+    [[ -n "$name" ]] || error 'Usage: clipssh alias remove <name>'
+    ensure_alias_file
+
+    if ! awk -F= -v name="$name" '$1 == name { found=1 } END { exit !found }' "$ALIAS_FILE"; then
+        error "Alias not found: $name"
+    fi
+
+    local tmp
+    tmp=$(mktemp)
+    trap 'rm -f -- "$tmp"' RETURN
+    awk -F= -v name="$name" '$1 != name' "$ALIAS_FILE" > "$tmp"
+    mv -- "$tmp" "$ALIAS_FILE"
+    trap - RETURN
+    success "Removed alias: $name"
+}
+
+alias_list() {
+    ensure_alias_file
+    if [[ ! -s "$ALIAS_FILE" ]]; then
+        printf '%s\n' 'No aliases saved. Add one with: clipssh alias add <name> <user@host>'
+    else
+        cat -- "$ALIAS_FILE"
+    fi
+}
+
+resolve_alias() {
+    local name="$1"
+    [[ -f "$ALIAS_FILE" ]] || error "Alias not found: $name"
+    local target
+    target=$(awk -F= -v name="$name" '$1 == name { print substr($0, index($0, "=") + 1); exit }' "$ALIAS_FILE")
+    [[ -n "$target" ]] || error "Alias not found: $name"
+    printf '%s\n' "$target"
+}
+
+# Quote one value for the remote POSIX shell. CLIPSSH_REMOTE_DIR is local
+# configuration, but it must not become shell syntax on the remote host.
+shell_quote() {
+    local value="$1"
+    value=${value//\'/\'\\\'\'}
+    printf "'%s'" "$value"
+}
+
+if [[ "${1:-}" == "alias" ]]; then
+    shift
+    case "${1:-}" in
+        add) shift; alias_add "$@"; exit 0 ;;
+        remove) shift; alias_remove "$@"; exit 0 ;;
+        list) alias_list; exit 0 ;;
+        *) error 'Usage: clipssh alias <add|remove|list> ...' ;;
+    esac
+fi
+
+HOST=""
+while (($# > 0)); do
+    case "$1" in
+        -h|--help) usage; exit 0 ;;
+        -v|--version) printf 'clipssh %s\n' "$VERSION"; exit 0 ;;
+        -*) error "Unknown option: $1" ;;
+        *) HOST="$1"; shift; break ;;
+    esac
+done
+
+HOST="${HOST:-${CLIPSSH_HOST:-}}"
+[[ -n "$HOST" ]] || error 'No host specified. Use: clipssh user@host or set CLIPSSH_HOST'
+
+if [[ "$HOST" != *@* ]]; then
+    HOST=$(resolve_alias "$HOST")
+fi
+
+SSH_PORT=""
+if [[ "$HOST" =~ ^(.*):([0-9]+)$ && "${BASH_REMATCH[1]}" != *:* ]]; then
+    HOST="${BASH_REMATCH[1]}"
+    SSH_PORT="${BASH_REMATCH[2]}"
+fi
+
+command -v ssh >/dev/null 2>&1 || error 'ssh not found'
+
+if [[ "$OSTYPE" == darwin* ]]; then
+    command -v pngpaste >/dev/null 2>&1 || error 'pngpaste not found. Install with: brew install pngpaste'
+    PASTE_CMD=(pngpaste)
+elif [[ "$OSTYPE" == linux* ]]; then
+    if [[ -n "${WAYLAND_DISPLAY:-}" ]] && command -v wl-paste >/dev/null 2>&1; then
+        PASTE_CMD=(wl-paste --type image/png)
+    elif command -v xclip >/dev/null 2>&1; then
+        PASTE_CMD=(xclip -selection clipboard -target image/png -o)
+    else
+        error 'No clipboard tool found. Install xclip or wl-clipboard'
+    fi
+else
+    error "Unsupported OS: $OSTYPE"
+fi
+
+TEMP_FILE="$(mktemp).png"
+trap 'rm -f -- "$TEMP_FILE"' EXIT
+
+if ! "${PASTE_CMD[@]}" > "$TEMP_FILE" 2>/dev/null; then
+    error 'No image in clipboard. Take a screenshot first'
+fi
+[[ -s "$TEMP_FILE" ]] || error 'Clipboard image is empty'
+
+REMOTE_DIR="${CLIPSSH_REMOTE_DIR:-/tmp}"
+REMOTE_PATH="$REMOTE_DIR/clipboard-$(date +%s).png"
+REMOTE_PATH_QUOTED=$(shell_quote "$REMOTE_PATH")
+
+SSH_OPTS=()
+if [[ -n "$SSH_PORT" ]]; then
+    SSH_OPTS+=(-p "$SSH_PORT")
+fi
+
+# The remote umask keeps the screenshot private even though /tmp is shared.
+if ! ssh "${SSH_OPTS[@]}" "$HOST" "umask 077 && cat > $REMOTE_PATH_QUOTED" < "$TEMP_FILE" 2>/dev/null; then
+    error "Failed to upload to $HOST"
+fi
+
+if [[ "$OSTYPE" == darwin* ]]; then
+    printf '%s' "$REMOTE_PATH" | pbcopy
+elif [[ -n "${WAYLAND_DISPLAY:-}" ]] && command -v wl-copy >/dev/null 2>&1; then
+    printf '%s' "$REMOTE_PATH" | wl-copy
+elif command -v xclip >/dev/null 2>&1; then
+    printf '%s' "$REMOTE_PATH" | xclip -selection clipboard
+fi
+
+success "Uploaded: $REMOTE_PATH"
+printf '%s\n' 'Path copied to clipboard - paste it directly'
