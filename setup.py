@@ -151,6 +151,53 @@ def linkup_file(file: FileLink):
 	os.system(cmd)
 
 
+mozilla_apps = {
+	# dotfiles folder: profile roots (linux, mac)
+	"config/firefox": ["~/.mozilla/firefox", "~/Library/Application Support/Firefox"],
+	"config/thunderbird": ["~/.thunderbird", "~/Library/Thunderbird"],
+}
+
+
+def mozilla_profile_paths(root: str) -> list[str]:
+	import configparser
+	ini = os.path.join(root, "profiles.ini")
+	if not os.path.exists(ini):
+		return []
+	cfg = configparser.ConfigParser()
+	cfg.read(ini)
+	paths = []
+	for section in cfg.sections():
+		if not section.startswith("Profile") or "Path" not in cfg[section]:
+			continue
+		path = cfg[section]["Path"]
+		if cfg[section].get("IsRelative", "1") == "1":
+			path = os.path.join(root, path)
+		if os.path.isdir(path):
+			paths.append(path)
+	return paths
+
+
+def linkup_mozilla_profiles():
+	# Links every entry in e.g. config/firefox/ (user.js, chrome/, ...) into each profile.
+	# Profiles must exist, so start the app once before running this.
+	for folder, roots in mozilla_apps.items():
+		src_dir = os.path.join(os.path.expanduser("~/.dotfiles/"), folder)
+		if not os.path.isdir(src_dir):
+			continue
+		for root in roots:
+			for profile in mozilla_profile_paths(os.path.expanduser(root)):
+				for name in os.listdir(src_dir):
+					src = os.path.join(src_dir, name)
+					dst = os.path.join(profile, name)
+					if os.path.islink(dst):
+						os.remove(dst)
+					elif os.path.exists(dst):
+						log(f"skipping {dst} [Already exists and is not a symlink]")
+						continue
+					os.symlink(src, dst)
+					log(f"linked {dst}")
+
+
 def mkdir_if_needed(folder: str):
 	dst = "~/." + folder
 	cmd = f"mkdir -p {dst}"
@@ -223,3 +270,5 @@ if args.linkup:
 
 	for link in file_links:
 		linkup_file(link)
+
+	linkup_mozilla_profiles()

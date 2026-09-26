@@ -413,3 +413,6 @@ hl.window_rule({ match = { class = "org.mozilla.Thunderbird" }, workspace = "6",
 hl.window_rule({ match = { class = "scrcpy" }, workspace = "7", no_initial_focus = true })
 hl.window_rule({ match = { class = "1password", title = "Quick Access - 1Password" }, center = true })
 hl.window_rule({ match = { class = "clipse" }, float = true, size = { 2304, 1296 }, center = true, maximize = true })
+
+-- Ignore maximize requests from apps
+hl.window_rule({ name = "suppress-maximize-events", match = { class = ".*" }, suppress_event = "maximize" })
