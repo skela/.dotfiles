@@ -416,6 +416,7 @@ hl.bind(main_mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(main_mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Window rules
+hl.window_rule({ match = { class = "com.mitchellh.ghostty" }, no_anim = true })
 hl.window_rule({ match = { class = "org.inkscape.Inkscape" }, workspace = "5", no_initial_focus = true })
 hl.window_rule({ match = { class = "gimp" }, workspace = "5", no_initial_focus = true })
 hl.window_rule({ match = { class = "blender" }, workspace = "5", no_initial_focus = true })
