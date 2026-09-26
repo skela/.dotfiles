@@ -246,6 +246,8 @@ local main_mod = "SUPER"
 local menu = "tofi-drun --drun-launch=true"
 local browser = "firefox"
 local files = "cosmic-files"
+local magic_workspace_toggle =
+	"quickshell msg -p " .. home .. "/.dotfiles/config/quickshell/skela-bar magicWorkspace toggle"
 
 -- General binds
 hl.bind(main_mod .. " + return", hl.dsp.exec_cmd("ghostty --gtk-single-instance=true"))
@@ -274,8 +276,16 @@ hl.bind(
 	"CONTROL + ALT + T",
 	hl.dsp.exec_cmd("[float;size 2304 1296;center] kitty --class floating --title btop --os-window-tag btop -e btop")
 )
-hl.bind(main_mod .. " + A", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(main_mod .. " + A", hl.dsp.exec_cmd(magic_workspace_toggle))
 hl.bind(main_mod .. " + SHIFT + A", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(
+	main_mod .. " + SHIFT + C",
+	hl.dsp.exec_cmd(
+		"quickshell msg -p "
+			.. home
+			.. "/.dotfiles/config/quickshell/skela-bar calendarWorkspace toggle"
+	)
+)
 
 -- Waybar
 hl.bind(main_mod .. " + SHIFT + R", hl.dsp.exec_cmd("killall -SIGUSR2 waybar"))
@@ -379,7 +389,7 @@ hl.bind(main_mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(main_mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
 -- Scratchpad
-hl.bind(main_mod .. " + X", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(main_mod .. " + X", hl.dsp.exec_cmd(magic_workspace_toggle))
 hl.bind(main_mod .. " + SHIFT + X", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Media keys

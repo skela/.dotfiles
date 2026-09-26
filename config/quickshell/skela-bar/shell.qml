@@ -2,12 +2,77 @@
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
+import Quickshell.Hyprland
 import QtQuick
 
 ShellRoot {
+  id: shellRoot
   property bool barVisible: true
   property bool overlayPinned: false
+  property bool magicWorkspaceOpen: false
+  property bool magicWorkspaceInitialized: false
   property string hostname: ""
+  property int previousWorkspaceId: 1
+  property int currentWorkspaceId: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id : 1
+  property int lastWorkspaceId: currentWorkspaceId
+
+  onCurrentWorkspaceIdChanged: {
+    if (currentWorkspaceId === 11 && lastWorkspaceId !== 11)
+      previousWorkspaceId = lastWorkspaceId
+    lastWorkspaceId = currentWorkspaceId
+  }
+
+  function toggleCalendarWorkspace(): void {
+    const current = Hyprland.focusedWorkspace
+    if (!current) return
+
+    let target = 11
+    if (current.id === 11) {
+      target = previousWorkspaceId > 0 && previousWorkspaceId !== 11
+        ? previousWorkspaceId : 1
+    } else {
+      previousWorkspaceId = current.id
+    }
+
+    calendarWorkspaceProcess.targetId = target
+    if (!calendarWorkspaceProcess.running)
+      calendarWorkspaceProcess.running = true
+  }
+
+  function toggleMagicWorkspace(): void {
+    if (magicWorkspaceToggleProcess.running) return
+    magicWorkspaceInitialized = true
+    magicWorkspaceOpen = !magicWorkspaceOpen
+    magicWorkspaceToggleProcess.running = true
+  }
+
+  Process {
+    command: ["bash", "-c",
+      "hyprctl monitors -j | jq -r 'any(.[]; .specialWorkspace.name == \"special:magic\")'"]
+    running: true
+    stdout: SplitParser {
+      onRead: function(line) {
+        if (!shellRoot.magicWorkspaceInitialized) {
+          shellRoot.magicWorkspaceOpen = line.trim() === "true"
+          shellRoot.magicWorkspaceInitialized = true
+        }
+      }
+    }
+  }
+
+  Process {
+    id: calendarWorkspaceProcess
+    property int targetId: 11
+    command: ["/home/skela/.dotfiles/config/hypr/scripts/qtile_like_swap.sh", String(targetId)]
+  }
+
+  Process {
+    id: magicWorkspaceToggleProcess
+    command: ["hyprctl", "dispatch", 'hl.dsp.workspace.toggle_special("magic")']
+    onExited: function(exitCode) {
+      if (exitCode !== 0) shellRoot.magicWorkspaceOpen = !shellRoot.magicWorkspaceOpen
+    }
+  }
 
   Process {
     command: ["hostname"]
@@ -25,6 +90,16 @@ ShellRoot {
   IpcHandler {
     target: "overlay"
     function toggle(): void { overlayPinned = !overlayPinned }
+  }
+
+  IpcHandler {
+    target: "calendarWorkspace"
+    function toggle(): void { shellRoot.toggleCalendarWorkspace() }
+  }
+
+  IpcHandler {
+    target: "magicWorkspace"
+    function toggle(): void { shellRoot.toggleMagicWorkspace() }
   }
 
   Variants {
@@ -62,6 +137,9 @@ ShellRoot {
         Bar {
           id: barItem
           anchors.fill: parent
+          magicWorkspaceOpen: shellRoot.magicWorkspaceOpen
+          onMagicWorkspaceToggleRequested: shellRoot.toggleMagicWorkspace()
+          onCalendarWorkspaceToggleRequested: shellRoot.toggleCalendarWorkspace()
         }
       }
 

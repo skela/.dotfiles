@@ -29,6 +29,10 @@ Item {
   // ── Window expansion ───────────────────────────────────────────────────
   property bool titleExpanded: false
   property bool overlayHovered: false
+  property bool magicWorkspaceOpen: false
+  property int magicWorkspaceId: -98
+  signal calendarWorkspaceToggleRequested()
+  signal magicWorkspaceToggleRequested()
   onOverlayHoveredChanged: { if (overlayHovered) collapseTimer.stop() }
 
   Timer {
@@ -388,11 +392,22 @@ Item {
   // ── Workspace helpers ─────────────────────────────────────────────────
   readonly property var wsIcons: ({
     1: "", 2: "", 3: "", 4: "", 5: "",
-    6: "", 7: "", 8: "", 9: "", 10: ""
+    6: "", 7: "", 8: "", 9: "", 10: "", 11: "\uf073"
   })
 
   readonly property var wsIds: {
     var ids = [1,2,3,4,5,6,7,8,9,10]
+    var calendar = workspaceById(11)
+    var calendarActive = Hyprland.focusedWorkspace && Hyprland.focusedWorkspace.id === 11
+    var calendarOccupied = calendar && calendar.toplevels !== undefined
+      && calendar.toplevels.values.length > 0
+    if (calendarActive || calendarOccupied) ids.push(11)
+
+    var magic = workspaceByName("special:magic")
+    var magicOccupied = magic && magic.toplevels !== undefined
+      && magic.toplevels.values.length > 0
+    var magicId = magic ? magic.id : root.magicWorkspaceId
+    if (root.magicWorkspaceOpen || magicOccupied) ids.push(magicId)
     return ids
   }
 
@@ -400,6 +415,14 @@ Item {
     var vals = Hyprland.workspaces.values
     for (var i = 0; i < vals.length; i++) {
       if (vals[i].id === id) return vals[i]
+    }
+    return null
+  }
+
+  function workspaceByName(name) {
+    var vals = Hyprland.workspaces.values
+    for (var i = 0; i < vals.length; i++) {
+      if (vals[i].name === name) return vals[i]
     }
     return null
   }
@@ -431,8 +454,12 @@ Item {
         delegate: Item {
           required property int modelData
 
-          readonly property bool focused: Hyprland.focusedWorkspace !== null
-            && Hyprland.focusedWorkspace.id === modelData
+          readonly property var magicWs: root.workspaceByName("special:magic")
+          readonly property bool magicWorkspace:
+            (magicWs ? magicWs.id : root.magicWorkspaceId) === modelData
+          readonly property bool focused: magicWorkspace
+            ? root.magicWorkspaceOpen
+            : (Hyprland.focusedWorkspace !== null && Hyprland.focusedWorkspace.id === modelData)
           readonly property var ws: root.workspaceById(modelData)
           readonly property bool occupied: ws !== null
             && ws.toplevels !== undefined
@@ -442,7 +469,8 @@ Item {
 
           Text {
             anchors.centerIn: parent
-            text: root.wsIcons[parent.modelData] || String(parent.modelData)
+            text: parent.magicWorkspace ? "\uf005"
+              : (root.wsIcons[parent.modelData] || String(parent.modelData))
             color: parent.focused ? root.clrAccent : root.clrChipFg
             font.family: root.wsFont
             font.pixelSize: 14
@@ -454,7 +482,10 @@ Item {
             anchors.fill: parent
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
-            onClicked: root.switchWorkspace(parent.modelData)
+            onClicked: {
+              if (parent.magicWorkspace) root.magicWorkspaceToggleRequested()
+              else root.switchWorkspace(parent.modelData)
+            }
           }
         }
       }
@@ -491,6 +522,7 @@ Item {
         cursorShape: Qt.PointingHandCursor
         onEntered: root.hoverEnter()
         onExited: root.hoverExit()
+        onClicked: root.calendarWorkspaceToggleRequested()
       }
     }
 
