@@ -355,6 +355,10 @@ hl.bind(main_mod .. " + SHIFT + V", hl.dsp.exec_cmd(home .. "/.dotfiles/config/h
 hl.bind("F9", hl.dsp.exec_cmd("voxtype record start"))
 hl.bind("F9", hl.dsp.exec_cmd("voxtype record stop"), { release = true })
 
+-- Keychron Circle button: replace KEY_FROM_WEV after checking its symbol with `wev`.
+-- hl.bind("KEY_FROM_WEV", hl.dsp.exec_cmd("voxtype record start"))
+-- hl.bind("KEY_FROM_WEV", hl.dsp.exec_cmd("voxtype record stop"), { release = true })
+
 -- Focus movement
 hl.bind(main_mod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(main_mod .. " + right", hl.dsp.focus({ direction = "right" }))
