@@ -19,6 +19,9 @@
 - wl-clipboard — `wl-copy` for clipboard integration
 - gpu-screen-recorder — screen recording
 - tensaku — screenshot annotation (`tensaku-bin` on AUR)
+- voxtype-bin — push-to-talk voice dictation (AUR; installed by `setup.py`, requires `paru` or `yay`)
+- wtype — types dictated text into the focused Wayland app
+- gtk4-layer-shell — Voxtype's microphone waveform OSD
 
 # QT6 (for Dolphin theming)
 

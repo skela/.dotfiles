@@ -1,0 +1,20 @@
+# Voxtype configuration for the Hyprland F9 push-to-talk bindings.
+state_file = "auto"
+
+[hotkey]
+# Hyprland handles F9 press/release; don't also listen for a hardware hotkey.
+enabled = false
+
+[audio]
+device = "default"
+sample_rate = 16000
+
+[whisper]
+model = "base.en"
+language = "en"
+translate = false
+
+[output]
+mode = "type"
+fallback_to_clipboard = true
+type_delay_ms = 1

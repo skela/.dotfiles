@@ -351,6 +351,10 @@ hl.bind(
 -- Screen recording
 hl.bind(main_mod .. " + SHIFT + V", hl.dsp.exec_cmd(home .. "/.dotfiles/config/hypr/scripts/toggle-recording.sh"))
 
+-- Voice dictation (Voxtype push-to-talk)
+hl.bind("F9", hl.dsp.exec_cmd("voxtype record start"))
+hl.bind("F9", hl.dsp.exec_cmd("voxtype record stop"), { release = true })
+
 -- Focus movement
 hl.bind(main_mod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(main_mod .. " + right", hl.dsp.focus({ direction = "right" }))

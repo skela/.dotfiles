@@ -1,44 +1,53 @@
 import os
+import shutil
+import subprocess
 
-import socket
-
-machine = socket.gethostname()
+# import socket
+# machine = socket.gethostname()
 
 config = os.path.expanduser("~/.config/")
 hypr = os.path.expanduser("~/.dotfiles/config/hypr")
 
-chypr = os.path.join(config, "hypr")
-cmonitors = os.path.join(config, "hypr-monitors.conf")
-cwaybar = os.path.join(config, "waybar")
+# Voxtype push-to-talk dictation
+aur_helper = shutil.which("paru") or shutil.which("yay")
+if not aur_helper:
+	raise SystemExit("Install paru or yay first; setup.py uses it to install Voxtype and its Wayland dependencies.")
 
-if os.path.exists(cmonitors):
-	os.remove(cmonitors)
-if os.path.exists(cwaybar):
-	os.remove(cwaybar)
+subprocess.run(
+	[aur_helper, "-S", "--needed", "voxtype-bin", "wtype", "wl-clipboard", "gtk4-layer-shell"],
+	check=True,
+)
+
+voxtype_config_dir = os.path.expanduser("~/.config/voxtype")
+voxtype_config_source_dir = os.path.expanduser("~/.dotfiles/config/voxtype")
+is_voxtype_config_link = (
+	os.path.islink(voxtype_config_dir)
+	and os.path.realpath(voxtype_config_dir) == os.path.realpath(voxtype_config_source_dir)
+)
+if not is_voxtype_config_link and not os.path.lexists(voxtype_config_dir):
+	os.symlink(voxtype_config_source_dir, voxtype_config_dir)
+elif not is_voxtype_config_link:
+	print(f"Keeping existing Voxtype config directory: {voxtype_config_dir}")
+
+subprocess.run(["voxtype", "setup", "--download", "--no-post-install"], check=True)
+subprocess.run(["voxtype", "setup", "systemd"], check=True)
+
+chypr = os.path.join(config, "hypr")
+# cmonitors = os.path.join(config, "hypr-monitors.conf")
+# cwaybar = os.path.join(config, "waybar")
+
+# Machine-specific monitor and Waybar links are disabled.
+# if os.path.exists(cmonitors):
+# 	os.remove(cmonitors)
+# if os.path.exists(cwaybar):
+# 	os.remove(cwaybar)
 if os.path.exists(chypr):
 	os.remove(chypr)
 
-dmonitors = os.path.join(hypr, "machines", machine, "hypr-monitors.conf")
-dwaybar = os.path.join(hypr, "machines", machine, "waybar")
+# dmonitors = os.path.join(hypr, "machines", machine, "hypr-monitors.conf")
+# dwaybar = os.path.join(hypr, "machines", machine, "waybar")
 
 os.system(f"ln -s {hypr} {chypr}")
-os.system(f"ln -s {dmonitors} {cmonitors}")
-os.system(f"ln -s {dwaybar} {cwaybar}")
-
-# Qt/Dolphin theming
-dotfiles_config = os.path.expanduser("~/.dotfiles/config")
-
-symlinks = [
-	(os.path.join(chypr, "hyprqt6engine.conf"), os.path.join(config, "hyprqt6engine.conf")),
-	(os.path.join(dotfiles_config, "kdeglobals"), os.path.join(config, "kdeglobals")),
-	(os.path.join(dotfiles_config, "dolphinrc"), os.path.join(config, "dolphinrc")),
-	(os.path.join(dotfiles_config, "Kvantum"), os.path.join(config, "Kvantum")),
-]
-
-for src, dst in symlinks:
-	if os.path.exists(dst) or os.path.islink(dst):
-		os.remove(dst)
-	os.system(f"ln -s {src} {dst}")
 
 # Ghostty "Open Terminal Here" wrapper
 local_bin = os.path.expanduser("~/.local/bin")
