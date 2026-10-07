@@ -1,15 +1,8 @@
 # A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
-"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+# "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
 [mgr]
-
-[[mgr.prepend_keymap]]
-on = "y"
-run = [
-    'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list',
-    "yank"
-]
 
 keymap = [
 	{ on = "<Esc>", run = "escape",             desc = "Exit visual mode, clear selected, or cancel search" },
@@ -66,7 +59,7 @@ keymap = [
 	{ on = "<Tab>", run = "spot", desc = "Spot hovered file" },
 
 	# Operation
-	{ on = "o",         run = "open",                        desc = "Open selected files" },
+	{ on = "o",         run = "open --interactive",          desc = "Choose a program to open selected files" },
 	{ on = "O",         run = "open --interactive",          desc = "Open selected files interactively" },
 	{ on = "<Enter>",   run = "open",                        desc = "Open selected files" },
 	{ on = "<S-Enter>", run = "open --interactive",          desc = "Open selected files interactively" },
@@ -162,6 +155,38 @@ keymap = [
 	{ on = "~",    run = "help", desc = "Open help" },
 	{ on = "<F1>", run = "help", desc = "Open help" },
 ]
+
+[[mgr.prepend_keymap]]
+on = "y"
+run = [
+    'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list',
+    "yank"
+]
+
+[[mgr.prepend_keymap]]
+on = "<C-t>"
+run = "tab_create --current"
+desc = "New tab in current directory"
+
+[[mgr.prepend_keymap]]
+on = "<C-l>"
+run = "cd --interactive"
+desc = "Enter a path to jump to"
+
+[[mgr.prepend_keymap]]
+on = "<C-w>"
+run = "close"
+desc = "Close current tab"
+
+[[mgr.prepend_keymap]]
+on = "e"
+run = '''shell --orphan -- for file in %s; do
+    case "$file" in
+        *.[sS][vV][gG]) inkscape "$file" & ;;
+        *.[pP][nN][gG]|*.[jJ][pP][gG]|*.[jJ][pP][eE][gG]) gimp "$file" & ;;
+    esac
+done'''
+desc = "Edit PNG/JPEG in GIMP or SVG in Inkscape"
 
 [tasks]
 
@@ -360,4 +385,3 @@ keymap = [
 	# Filtering
 	{ on = "f", run = "filter", desc = "Apply a filter for the help items" },
 ]
-

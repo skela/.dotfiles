@@ -245,9 +245,10 @@ hl.config({
 local main_mod = "SUPER"
 local menu = "tofi-drun --drun-launch=true"
 local browser = "firefox"
-local files = "cosmic-files"
-local magic_workspace_toggle =
-	"quickshell msg -p " .. home .. "/.dotfiles/config/quickshell/skela-bar magicWorkspace toggle"
+local files = "ghostty -e yazi"
+local magic_workspace_toggle = "quickshell msg -p "
+	.. home
+	.. "/.dotfiles/config/quickshell/skela-bar magicWorkspace toggle"
 
 -- General binds
 hl.bind(main_mod .. " + return", hl.dsp.exec_cmd("ghostty --gtk-single-instance=true"))
@@ -280,11 +281,7 @@ hl.bind(main_mod .. " + A", hl.dsp.exec_cmd(magic_workspace_toggle))
 hl.bind(main_mod .. " + SHIFT + A", hl.dsp.window.move({ workspace = "special:magic" }))
 hl.bind(
 	main_mod .. " + SHIFT + C",
-	hl.dsp.exec_cmd(
-		"quickshell msg -p "
-			.. home
-			.. "/.dotfiles/config/quickshell/skela-bar calendarWorkspace toggle"
-	)
+	hl.dsp.exec_cmd("quickshell msg -p " .. home .. "/.dotfiles/config/quickshell/skela-bar calendarWorkspace toggle")
 )
 
 -- Waybar
