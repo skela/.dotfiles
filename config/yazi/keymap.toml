@@ -158,10 +158,8 @@ keymap = [
 
 [[mgr.prepend_keymap]]
 on = "y"
-run = [
-    'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list',
-    "yank"
-]
+run = [ "yank", "plugin clipboard -- --action=copy" ]
+desc = "Copy selected files to system clipboard"
 
 [[mgr.prepend_keymap]]
 on = "<C-t>"
