@@ -76,6 +76,35 @@ local function open_repo_in_github()
 	vim.notify("Opening: " .. github_url)
 end
 
+---@param emulator boolean
+local function viewdroid(emulator)
+	local devices = {}
+	for _, line in ipairs(vim.fn.systemlist("adb devices -l")) do
+		local serial, state = line:match("^(%S+)%s+(%S+)")
+		if serial and state == "device" and (serial:match("^emulator%-") ~= nil) == emulator then
+			local model = line:match("model:(%S+)") or serial
+			table.insert(devices, { serial = serial, label = model:gsub("_", " ") .. " (" .. serial .. ")" })
+		end
+	end
+
+	local function launch(device)
+		vim.cmd("TermExec cmd='~/.dotfiles/scripts/viewdroid.sh " .. device.serial .. "' open=0")
+	end
+
+	if #devices == 0 then
+		vim.notify("No " .. (emulator and "emulators" or "devices") .. " found", vim.log.levels.WARN)
+	elseif #devices == 1 then
+		launch(devices[1])
+	else
+		vim.ui.select(devices, {
+			prompt = "Select device for scrcpy",
+			format_item = function(item) return item.label end,
+		}, function(choice)
+			if choice then launch(choice) end
+		end)
+	end
+end
+
 keymaps.flutter = function(_, _) -- client,buffer
 	map_normal("<leader>cO", cmd(":FlutterOutlineToggle"), { desc = "Property/Function [O]utline", remap = true })
 	map_normal("<leader>cD", cmd(":FlutterDevices"), { desc = "[D]evices (Flutter)", remap = true })
@@ -86,9 +115,9 @@ keymaps.flutter = function(_, _) -- client,buffer
 	map_normal("<leader>R", cmd(":FlutterRestart"), { desc = "[R]estart (Flutter)", remap = true })
 	map_normal("<leader>cL", cmd(":FlutterRun"), { desc = "[L]aunch (Flutter)", remap = true })
 	map_normal("<leader>cQ", cmd(":FlutterQuit"), { desc = "[Q]uit (Flutter)", remap = true })
-	map_normal("<leader>cv", cmd(":TermExec cmd='viewdroid -d' open=0"), { desc = "[v]iewdroid device (scrcpy)", remap = true })
-	map_normal("<leader>cVd", cmd(":TermExec cmd='viewdroid -d' open=0"), { desc = "Viewdroid device (scrcpy)", remap = true })
-	map_normal("<leader>cVe", cmd(":TermExec cmd='viewdroid -e' open=0"), { desc = "Viewdroid emulator (scrcpy)", remap = true })
+	map_normal("<leader>cv", function() viewdroid(false) end, { desc = "[v]iewdroid device (scrcpy)", remap = true })
+	map_normal("<leader>cVd", function() viewdroid(false) end, { desc = "Viewdroid device (scrcpy)", remap = true })
+	map_normal("<leader>cVe", function() viewdroid(true) end, { desc = "Viewdroid emulator (scrcpy)", remap = true })
 	map_normal("<leader>cVq", cmd(":2TermExec cmd='killall scrcpy' open=0"), { desc = "Viewdroid quit (scrcpy)", remap = true })
 	map_normal("<leader>cVt", cmd(":ToggleTerm"), { desc = "Viewdroid terminal", remap = true })
 end
