@@ -1,8 +1,8 @@
-# Voxtype configuration for the Hyprland F9 push-to-talk bindings.
+# Voxtype configuration for the Hyprland push-to-talk bindings (Keychron Circle button).
 state_file = "auto"
 
 [hotkey]
-# Hyprland handles F9 press/release; don't also listen for a hardware hotkey.
+# Hyprland handles press/release; don't also listen for a hardware hotkey.
 enabled = false
 
 [audio]

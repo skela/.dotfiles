@@ -348,11 +348,7 @@ hl.bind(
 -- Screen recording
 hl.bind(main_mod .. " + SHIFT + V", hl.dsp.exec_cmd(home .. "/.dotfiles/config/hypr/scripts/toggle-recording.sh"))
 
--- Voice dictation (Voxtype push-to-talk)
-hl.bind("F9", hl.dsp.exec_cmd("voxtype record start"))
-hl.bind("F9", hl.dsp.exec_cmd("voxtype record stop"), { release = true })
-
--- Keychron Circle button
+-- Voice dictation (Voxtype push-to-talk) - Keychron Circle button
 hl.bind("XF86Tools", hl.dsp.exec_cmd("voxtype record start"))
 hl.bind("XF86Tools", hl.dsp.exec_cmd("voxtype record stop"), { release = true })
 
