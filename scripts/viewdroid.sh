@@ -9,6 +9,22 @@ shift
 scrcpy --turn-screen-off --stay-awake -s "$serial" "$@" &
 pid=$!
 
+# New tiles open on the right (dwindle force_split = 2), so shuffle the window left
+# until no other tiled window on its workspace sits further left. Checking against
+# the workspace (rather than just moving) avoids spilling onto a monitor to the left.
+move_leftmost() {
+	local x min
+	for _ in 1 2 3 4 5 6; do
+		read -r x min < <(hyprctl clients -j | jq -r "
+			(.[] | select(.pid == $pid)) as \$w
+			| [.[] | select(.workspace.id == \$w.workspace.id and .floating == false) | .at[0]] | min
+			| \"\(\$w.at[0]) \(.)\"")
+		[ -n "$x" ] && ((x > min)) || return
+		hyprctl dispatch "hl.dsp.window.move({direction=\"left\", window=\"pid:$pid\"})" >/dev/null
+		sleep 0.15
+	done
+}
+
 fit_window() {
 	command -v hyprctl >/dev/null && [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ] || return
 
@@ -28,6 +44,7 @@ fit_window() {
 	done
 	[ -n "$w" ] || return
 	sleep 0.3 # let the layout settle
+	[ "$floating" = "true" ] || move_leftmost
 	read -r w h floating < <(window_size)
 
 	local target=$((h * dw / dh))

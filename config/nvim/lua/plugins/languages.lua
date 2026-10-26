@@ -30,16 +30,14 @@ return {
 								detached = false,
 							},
 						}
-						dap.configurations.dart = {
+						local launchjs = vim.tbl_filter(function(c) return c.type == "dart" end, require("dap.ext.vscode").getconfigs())
+						dap.configurations.dart = #launchjs > 0 and launchjs or {
 							{
 								type = "dart",
 								request = "launch",
 								name = "Launch flutter",
 							},
 						}
-						-- require("dap.ext.vscode").load_launchjs((vim.fn.getcwd() .. "/.nvim/dap.json"))
-						require("dap.ext.vscode").load_launchjs()
-						if require("utils.tables").length(dap.configurations["dart"]) > 1 then table.remove(dap.configurations["dart"], 1) end
 
 						vim.keymap.set("n", "<F5>", function()
 							local commands = require("flutter-tools.commands")

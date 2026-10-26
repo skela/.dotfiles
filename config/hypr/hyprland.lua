@@ -277,7 +277,6 @@ hl.bind(
 	"CONTROL + ALT + T",
 	hl.dsp.exec_cmd("[float;size 2304 1296;center] kitty --class floating --title btop --os-window-tag btop -e btop")
 )
-hl.bind(main_mod .. " + A", hl.dsp.exec_cmd(magic_workspace_toggle))
 hl.bind(main_mod .. " + SHIFT + A", hl.dsp.window.move({ workspace = "special:magic" }))
 hl.bind(
 	main_mod .. " + SHIFT + C",
