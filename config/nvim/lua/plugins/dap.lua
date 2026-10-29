@@ -36,6 +36,12 @@ return {
 			require("nvim-dap-projects").search_project_config()
 			require("nvim-dap-virtual-text").setup({})
 			dap.defaults.dart.on_output = function(_, _) end
+
+			-- VSCode Swift launch configs depend on preLaunchTask/target, which nvim-dap can't run
+			local launch_json = dap.providers.configs["dap.launch.json"]
+			dap.providers.configs["dap.launch.json"] = function(bufnr)
+				return vim.tbl_filter(function(c) return c.type ~= "swift" and c.type ~= "lldb" end, launch_json(bufnr))
+			end
 			-- require("dap").set_log_level("TRACE")
 			-- local dap = require("dap")
 			-- dap.listeners.before["event_progress_start"]["skela"] = function(id, title) print("event progress start", vim.inspect(id), vim.inspect(title)) end
@@ -49,10 +55,23 @@ return {
 				command = "/usr/bin/lldb",
 				name = "lldb",
 			}
+			-- swift-bin's lldb-dap links against libpython3.12; borrow uv's copy
+			local py312 = vim.fn.glob(vim.fn.expand("~/.local/share/uv/python/cpython-3.12*-linux-x86_64-gnu"), false, true)[1]
+			local swift_env = nil
+			if py312 then
+				local env = vim.fn.environ()
+				env.LD_LIBRARY_PATH = py312 .. "/lib"
+				env.PYTHONHOME = py312
+				swift_env = {}
+				for k, v in pairs(env) do
+					table.insert(swift_env, k .. "=" .. v)
+				end
+			end
 			dap.adapters.swift = {
 				type = "executable",
-				command = "/usr/lib/swift/bin/lldb-dap",
+				command = "/usr/lib/swift/usr/bin/lldb-dap",
 				name = "swift",
+				options = { env = swift_env },
 			}
 
 			dap.adapters.codelldb = {
@@ -69,16 +88,38 @@ return {
 					type = "swift",
 					request = "launch",
 					program = function()
-						local has_package = vim.fn.filereadable(vim.fn.getcwd() .. "/Package.swift") == 1
-						if has_package then
-							vim.fn.system("swift build")
-							return "${workspaceFolder}/.build/debug/" .. vim.fn.substitute(vim.fn.getcwd(), "^.*/", "", "")
-						else
-							local file = vim.fn.expand("%:p")
-							local out = "/tmp/" .. vim.fn.expand("%:t:r")
-							vim.fn.system("swiftc -g " .. vim.fn.shellescape(file) .. " -o " .. vim.fn.shellescape(out))
-							return out
-						end
+						return coroutine.create(function(dap_co)
+							local function sh(cmd)
+								local co = coroutine.running()
+								vim.system(cmd, { text = true }, function(r) vim.schedule(function() coroutine.resume(co, r) end) end)
+								return coroutine.yield()
+							end
+							local function build()
+								if vim.fn.filereadable(vim.fn.getcwd() .. "/Package.swift") == 0 then
+									local out = "/tmp/" .. vim.fn.expand("%:t:r")
+									sh({ "swiftc", "-g", vim.fn.expand("%:p"), "-o", out })
+									return out
+								end
+								local ok, desc = pcall(vim.json.decode, sh({ "swift", "package", "describe", "--type", "json" }).stdout)
+								local products = {}
+								for _, p in ipairs(ok and desc.products or {}) do
+									if p.type.executable then table.insert(products, p.name) end
+								end
+								local product = products[1]
+								if #products > 1 then
+									product = products[vim.fn.inputlist(vim.list_extend({ "Product:" }, products))] or product
+								end
+								if not product then return dap.ABORT end
+								vim.notify("Building " .. product .. "…")
+								local r = sh({ "swift", "build", "--product", product })
+								if r.code ~= 0 then
+									vim.notify(r.stdout .. r.stderr, vim.log.levels.ERROR)
+									return dap.ABORT
+								end
+								return vim.trim(sh({ "swift", "build", "--show-bin-path" }).stdout) .. "/" .. product
+							end
+							coroutine.resume(dap_co, build())
+						end)
 					end,
 					cwd = "${workspaceFolder}",
 					stopOnEntry = false,
