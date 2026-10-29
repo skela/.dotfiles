@@ -179,8 +179,10 @@ if [[ "$OSTYPE" == darwin* ]]; then
     printf '%s' "$REMOTE_PATH" | pbcopy
 elif [[ -n "${WAYLAND_DISPLAY:-}" ]] && command -v wl-copy >/dev/null 2>&1; then
     printf '%s' "$REMOTE_PATH" | wl-copy
+    printf '%s' "$REMOTE_PATH" | wl-copy --primary
 elif command -v xclip >/dev/null 2>&1; then
     printf '%s' "$REMOTE_PATH" | xclip -selection clipboard
+    printf '%s' "$REMOTE_PATH" | xclip -selection primary
 fi
 
 success "Uploaded: $REMOTE_PATH"

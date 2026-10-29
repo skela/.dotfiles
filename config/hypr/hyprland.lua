@@ -293,7 +293,7 @@ hl.bind(main_mod .. " + L", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/toggl
 hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
 hl.bind(main_mod .. " + J", hl.dsp.layout("togglesplit"))
 
--- Universal copy/paste: uses Ctrl+Insert / Shift+Insert in terminals to avoid
+-- Universal copy/paste: uses Ctrl+Insert / Ctrl+Shift+V in terminals to avoid
 -- conflicting with Ctrl+C (SIGINT). Uses send_key_state down/up split to avoid
 -- synthetic key state getting stuck when Super is physically held.
 local function send_shortcut_once(mods, key)
@@ -330,7 +330,7 @@ local function universal_clipboard(default_mods, default_key, term_mods, term_ke
 end
 
 hl.bind(main_mod .. " + C", universal_clipboard("CTRL", "C", "CTRL", "Insert"))
-hl.bind(main_mod .. " + V", universal_clipboard("CTRL", "V", "SHIFT", "Insert"))
+hl.bind(main_mod .. " + V", universal_clipboard("CTRL", "V", "CTRL + SHIFT", "V"))
 
 -- Screenshots
 hl.bind(main_mod .. " + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screenshot.sh smart"))
