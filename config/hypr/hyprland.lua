@@ -22,9 +22,9 @@ if hostname == "aurora" then
 elseif hostname == "sparky" then
 	hl.monitor({ output = "eDP-1", mode = "1920x1080", position = "0x0", scale = 1 })
 elseif hostname == "dark" then
-	hl.monitor({ output = "DP-1", mode = "2560x1440", position = "0x0", scale = 1 })
-	hl.monitor({ output = "DP-4", mode = "2560x1440", position = "2560x0", scale = 1 })
-	hl.monitor({ output = "DP-3", mode = "2560x1440", position = "5120x0", scale = 1 })
+	hl.monitor({ output = "desc:Philips Consumer Electronics Company PHL 279P1 UK82103004407", mode = "3840x2160@60", position = "0x0", scale = 1.5 })
+	hl.monitor({ output = "desc:Dell Inc. DELL U2719D CXSTB23", mode = "2560x1440", position = "2560x0", scale = 1 })
+	hl.monitor({ output = "desc:Dell Inc. DELL U2719D 6XSTB23", mode = "2560x1440", position = "5120x0", scale = 1 })
 else
 	hl.monitor({
 		output = "",
