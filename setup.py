@@ -50,6 +50,7 @@ folder_links = [
 	FolderLink("config/yazi"),
 	FolderLink("config/tofi"),
 	FolderLink("config/xkb"),
+	FolderLink("config/opencode"),
 ]
 
 file_links = [
